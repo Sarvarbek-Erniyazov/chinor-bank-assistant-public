@@ -1,0 +1,14 @@
+{
+  "name": "judge-validate-v1",
+  "commit": "0f9f30c437b44d72ffc279ab4a39d79462cf5445",
+  "config_hash": "4a6c191fca7d040a",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "<workspace>/chinor/venv-gen/bin/python data/entail_judge.py --audit data/sft/_provisional/judge_audit_50.jsonl --prompt-version 1 --revision 842da3794eaa0b77d5f08bae87a17459d91ff475 --out <workspace>/chinor/results/judge-validate-v1",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T15:24:27+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T15:59:48+00:00"
+}

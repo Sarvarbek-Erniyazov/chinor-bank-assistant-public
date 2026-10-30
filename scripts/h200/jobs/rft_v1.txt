@@ -1,0 +1,2 @@
+# ADR-033 RFT (exploratory, seed 0): Tier-L rsLoRA v1.2 config on data/sft/v1.2_rft. Run name l14b_sft_rslora_tok-s0-v1.2_rft.
+train/configs/l14b_sft_rslora_tok.yaml 0 35 data/sft/v1.2_rft

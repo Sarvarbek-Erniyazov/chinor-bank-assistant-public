@@ -1,0 +1,2 @@
+# Stage 3: Qwen3-14B-Base full FT seed 1, after rerun_tok.txt. Launch with JOB_WRITE_GB=60 (ADR-027).
+train/configs/l14b_full.yaml 1 115

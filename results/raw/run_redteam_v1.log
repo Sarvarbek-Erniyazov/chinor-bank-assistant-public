@@ -1,0 +1,609 @@
+frozen queue redteam_v1-20261029T191239 at 2026-10-29 19:12:41: queue.sh from <local-repo>/runs/_queues/redteam_v1-20261029T191239
+  local copy: <local-repo>/runs/_queues/redteam_v1-20261029T191239/scripts/h200 (git f14d9e9)
+  server copy: <workspace>/chinor/runs/_queues/redteam_v1-20261029T191239/scripts/h200
+  list: <local-repo>/runs/_queues/redteam_v1-20261029T191239/redteam_v1.txt (job commands point at the server copy)
+yield before rt-ref-1.7B-instruct-A: lock held: chinor 129943 2026-10-29T09:44:24Z; re-check in 1 min
+yield before rt-ref-1.7B-instruct-A: lock held: chinor 129943 2026-10-29T09:44:24Z; re-check in 1 min
+yield before rt-ref-1.7B-instruct-A: lock held: chinor 129943 2026-10-29T09:44:24Z; re-check in 1 min
+yield before rt-ref-1.7B-instruct-A: lock held: chinor 129943 2026-10-29T09:44:24Z; re-check in 1 min
+yield before rt-ref-1.7B-instruct-A: lock held: chinor 129943 2026-10-29T09:44:24Z; re-check in 1 min
+yield before rt-ref-1.7B-instruct-A: lock held: chinor 129943 2026-10-29T09:44:24Z; re-check in 1 min
+yield before rt-ref-1.7B-instruct-A: lock held: chinor 129943 2026-10-29T09:44:24Z; re-check in 1 min
+yield before rt-ref-1.7B-instruct-A: lock held: chinor 129943 2026-10-29T09:44:24Z; re-check in 1 min
+yield before rt-ref-1.7B-instruct-A: lock held: chinor 129943 2026-10-29T09:44:24Z; re-check in 1 min
+START rt-ref-1.7B-instruct-A (estimate 2 min) at 19:22 unless its weights are not ready
+started rt-ref-1.7B-instruct-A pid 133066; log <workspace>/chinor/runs/rt-ref-1.7B-instruct-A/log.txt
+END rt-ref-1.7B-instruct-A exit 1 after 2 min at 19:23
+synced rt-ref-1.7B-instruct-A -> eval/outputs/ and results/raw/rt-ref-1.7B-instruct-A/
+START rt-ref-14B-instruct-A (estimate 3 min) at 19:23 unless its weights are not ready
+started rt-ref-14B-instruct-A pid 133933; log <workspace>/chinor/runs/rt-ref-14B-instruct-A/log.txt
+END rt-ref-14B-instruct-A exit 1 after 6 min at 19:28
+synced rt-ref-14B-instruct-A -> eval/outputs/ and results/raw/rt-ref-14B-instruct-A/
+START rt-base-0.6B-0shot-A (estimate 2 min) at 19:28 unless its weights are not ready
+started rt-base-0.6B-0shot-A pid 134866; log <workspace>/chinor/runs/rt-base-0.6B-0shot-A/log.txt
+END rt-base-0.6B-0shot-A exit 0 after 1 min at 19:28
+synced rt-base-0.6B-0shot-A -> eval/outputs/ and results/raw/rt-base-0.6B-0shot-A/
+START rt-base-1.7B-0shot-A (estimate 2 min) at 19:29 unless its weights are not ready
+started rt-base-1.7B-0shot-A pid 135501; log <workspace>/chinor/runs/rt-base-1.7B-0shot-A/log.txt
+END rt-base-1.7B-0shot-A exit 0 after 1 min at 19:29
+synced rt-base-1.7B-0shot-A -> eval/outputs/ and results/raw/rt-base-1.7B-0shot-A/
+START rt-base-1.7B-3shot-A (estimate 2 min) at 19:29 unless its weights are not ready
+started rt-base-1.7B-3shot-A pid 135929; log <workspace>/chinor/runs/rt-base-1.7B-3shot-A/log.txt
+END rt-base-1.7B-3shot-A exit 0 after 2 min at 19:30
+synced rt-base-1.7B-3shot-A -> eval/outputs/ and results/raw/rt-base-1.7B-3shot-A/
+START rt-base-14B-0shot-A (estimate 3 min) at 19:30 unless its weights are not ready
+started rt-base-14B-0shot-A pid 136639; log <workspace>/chinor/runs/rt-base-14B-0shot-A/log.txt
+END rt-base-14B-0shot-A exit 0 after 2 min at 19:31
+synced rt-base-14B-0shot-A -> eval/outputs/ and results/raw/rt-base-14B-0shot-A/
+START rt-base-14B-3shot-A (estimate 3 min) at 19:31 unless its weights are not ready
+started rt-base-14B-3shot-A pid 137105; log <workspace>/chinor/runs/rt-base-14B-3shot-A/log.txt
+END rt-base-14B-3shot-A exit 0 after 2 min at 19:33
+synced rt-base-14B-3shot-A -> eval/outputs/ and results/raw/rt-base-14B-3shot-A/
+START rt-base-4B-0shot-A (estimate 2 min) at 19:33 unless its weights are not ready
+started rt-base-4B-0shot-A pid 137571; log <workspace>/chinor/runs/rt-base-4B-0shot-A/log.txt
+END rt-base-4B-0shot-A exit 0 after 2 min at 19:34
+synced rt-base-4B-0shot-A -> eval/outputs/ and results/raw/rt-base-4B-0shot-A/
+START rt-base-8B-0shot-A (estimate 2 min) at 19:34 unless its weights are not ready
+started rt-base-8B-0shot-A pid 138018; log <workspace>/chinor/runs/rt-base-8B-0shot-A/log.txt
+END rt-base-8B-0shot-A exit 0 after 2 min at 19:35
+synced rt-base-8B-0shot-A -> eval/outputs/ and results/raw/rt-base-8B-0shot-A/
+START rt-l14b_sft_rslora_tok-s0-v1.2 (estimate 3 min) at 19:35 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s0-v1.2 pid 138510; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s0-v1.2/log.txt
+END rt-l14b_sft_rslora_tok-s0-v1.2 exit 0 after 2 min at 19:36
+synced rt-l14b_sft_rslora_tok-s0-v1.2 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s0-v1.2/
+START rt-l14b_sft_rslora_tok-s1-v1.2 (estimate 3 min) at 19:36 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s1-v1.2 pid 139062; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s1-v1.2/log.txt
+END rt-l14b_sft_rslora_tok-s1-v1.2 exit 0 after 2 min at 19:38
+synced rt-l14b_sft_rslora_tok-s1-v1.2 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s1-v1.2/
+START rt-l14b_sft_rslora_tok-s2-v1.2 (estimate 3 min) at 19:38 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s2-v1.2 pid 139656; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s2-v1.2/log.txt
+END rt-l14b_sft_rslora_tok-s2-v1.2 exit 0 after 2 min at 19:39
+synced rt-l14b_sft_rslora_tok-s2-v1.2 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s2-v1.2/
+START rt-l14b_sft_rslora_tok-s3-v1.2 (estimate 3 min) at 19:39 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s3-v1.2 pid 140233; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s3-v1.2/log.txt
+END rt-l14b_sft_rslora_tok-s3-v1.2 exit 0 after 2 min at 19:40
+synced rt-l14b_sft_rslora_tok-s3-v1.2 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s3-v1.2/
+START rt-l14b_sft_rslora_tok-s4-v1.2 (estimate 3 min) at 19:40 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s4-v1.2 pid 140785; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s4-v1.2/log.txt
+END rt-l14b_sft_rslora_tok-s4-v1.2 exit 0 after 2 min at 19:41
+synced rt-l14b_sft_rslora_tok-s4-v1.2 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s4-v1.2/
+START rt-tier_s_main_rslora_tok-s0-v1.2 (estimate 2 min) at 19:41 unless its weights are not ready
+started rt-tier_s_main_rslora_tok-s0-v1.2 pid 141337; log <workspace>/chinor/runs/rt-tier_s_main_rslora_tok-s0-v1.2/log.txt
+END rt-tier_s_main_rslora_tok-s0-v1.2 exit 0 after 1 min at 19:42
+synced rt-tier_s_main_rslora_tok-s0-v1.2 -> eval/outputs/ and results/raw/rt-tier_s_main_rslora_tok-s0-v1.2/
+START rt-tier_s_main_rslora_tok-s1-v1.2 (estimate 2 min) at 19:42 unless its weights are not ready
+started rt-tier_s_main_rslora_tok-s1-v1.2 pid 141870; log <workspace>/chinor/runs/rt-tier_s_main_rslora_tok-s1-v1.2/log.txt
+END rt-tier_s_main_rslora_tok-s1-v1.2 exit 0 after 1 min at 19:43
+synced rt-tier_s_main_rslora_tok-s1-v1.2 -> eval/outputs/ and results/raw/rt-tier_s_main_rslora_tok-s1-v1.2/
+START rt-tier_s_main_rslora_tok-s2-v1.2 (estimate 2 min) at 19:43 unless its weights are not ready
+started rt-tier_s_main_rslora_tok-s2-v1.2 pid 142403; log <workspace>/chinor/runs/rt-tier_s_main_rslora_tok-s2-v1.2/log.txt
+END rt-tier_s_main_rslora_tok-s2-v1.2 exit 0 after 1 min at 19:43
+synced rt-tier_s_main_rslora_tok-s2-v1.2 -> eval/outputs/ and results/raw/rt-tier_s_main_rslora_tok-s2-v1.2/
+START rt-l14b_full-s0 (estimate 3 min) at 19:43 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 19:43 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 19:43 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+START rt-l14b_sft_rslora_tok-s0 (estimate 3 min) at 19:44 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s0 pid 143461; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s0/log.txt
+END rt-l14b_sft_rslora_tok-s0 exit 0 after 2 min at 19:45
+synced rt-l14b_sft_rslora_tok-s0 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s0/
+START rt-l14b_sft_rslora_tok-s0-v1.1 (estimate 3 min) at 19:45 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s0-v1.1 pid 144013; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s0-v1.1/log.txt
+END rt-l14b_sft_rslora_tok-s0-v1.1 exit 0 after 2 min at 19:46
+synced rt-l14b_sft_rslora_tok-s0-v1.1 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s0-v1.1/
+START rt-l14b_sft_rslora_tok-s0-v1_rewrite (estimate 3 min) at 19:46 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s0-v1_rewrite pid 144565; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s0-v1_rewrite/log.txt
+END rt-l14b_sft_rslora_tok-s0-v1_rewrite exit 0 after 2 min at 19:47
+synced rt-l14b_sft_rslora_tok-s0-v1_rewrite -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s0-v1_rewrite/
+START rt-l14b_sft_rslora_tok-s1 (estimate 3 min) at 19:47 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s1 pid 145120; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s1/log.txt
+END rt-l14b_sft_rslora_tok-s1 exit 0 after 2 min at 19:48
+synced rt-l14b_sft_rslora_tok-s1 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s1/
+START rt-l14b_sft_rslora_tok-s1-v1.1 (estimate 3 min) at 19:48 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s1-v1.1 pid 145672; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s1-v1.1/log.txt
+END rt-l14b_sft_rslora_tok-s1-v1.1 exit 0 after 2 min at 19:49
+synced rt-l14b_sft_rslora_tok-s1-v1.1 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s1-v1.1/
+START rt-l14b_sft_rslora_tok-s2 (estimate 3 min) at 19:49 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s2 pid 146224; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s2/log.txt
+END rt-l14b_sft_rslora_tok-s2 exit 0 after 2 min at 19:50
+synced rt-l14b_sft_rslora_tok-s2 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s2/
+START rt-l14b_sft_rslora_tok-s2-v1.1 (estimate 3 min) at 19:50 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s2-v1.1 pid 146779; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s2-v1.1/log.txt
+END rt-l14b_sft_rslora_tok-s2-v1.1 exit 0 after 2 min at 19:51
+synced rt-l14b_sft_rslora_tok-s2-v1.1 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s2-v1.1/
+START rt-l14b_qlora_rslora_tok-s0 (estimate 4 min) at 19:51 unless its weights are not ready
+started rt-l14b_qlora_rslora_tok-s0 pid 147331; log <workspace>/chinor/runs/rt-l14b_qlora_rslora_tok-s0/log.txt
+END rt-l14b_qlora_rslora_tok-s0 exit 0 after 2 min at 19:53
+synced rt-l14b_qlora_rslora_tok-s0 -> eval/outputs/ and results/raw/rt-l14b_qlora_rslora_tok-s0/
+START rt-l14b_qlora_rslora_tok-s1 (estimate 4 min) at 19:53 unless its weights are not ready
+started rt-l14b_qlora_rslora_tok-s1 pid 147879; log <workspace>/chinor/runs/rt-l14b_qlora_rslora_tok-s1/log.txt
+END rt-l14b_qlora_rslora_tok-s1 exit 0 after 2 min at 19:54
+synced rt-l14b_qlora_rslora_tok-s1 -> eval/outputs/ and results/raw/rt-l14b_qlora_rslora_tok-s1/
+START rt-l14b_qlora_rslora_tok-s2 (estimate 4 min) at 19:54 unless its weights are not ready
+started rt-l14b_qlora_rslora_tok-s2 pid 148427; log <workspace>/chinor/runs/rt-l14b_qlora_rslora_tok-s2/log.txt
+END rt-l14b_qlora_rslora_tok-s2 exit 0 after 2 min at 19:55
+synced rt-l14b_qlora_rslora_tok-s2 -> eval/outputs/ and results/raw/rt-l14b_qlora_rslora_tok-s2/
+START rt-l14b_sft_rslora-s0 (estimate 3 min) at 19:55 unless its weights are not ready
+started rt-l14b_sft_rslora-s0 pid 148975; log <workspace>/chinor/runs/rt-l14b_sft_rslora-s0/log.txt
+END rt-l14b_sft_rslora-s0 exit 0 after 2 min at 19:56
+synced rt-l14b_sft_rslora-s0 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora-s0/
+START rt-l14b_sft_rslora-s1 (estimate 3 min) at 19:56 unless its weights are not ready
+started rt-l14b_sft_rslora-s1 pid 149527; log <workspace>/chinor/runs/rt-l14b_sft_rslora-s1/log.txt
+END rt-l14b_sft_rslora-s1 exit 0 after 2 min at 19:57
+synced rt-l14b_sft_rslora-s1 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora-s1/
+START rt-l14b_sft_rslora-s2 (estimate 3 min) at 19:57 unless its weights are not ready
+started rt-l14b_sft_rslora-s2 pid 150079; log <workspace>/chinor/runs/rt-l14b_sft_rslora-s2/log.txt
+END rt-l14b_sft_rslora-s2 exit 0 after 2 min at 19:58
+synced rt-l14b_sft_rslora-s2 -> eval/outputs/ and results/raw/rt-l14b_sft_rslora-s2/
+START rt-size_4b_rslora_tok-s0 (estimate 2 min) at 19:58 unless its weights are not ready
+started rt-size_4b_rslora_tok-s0 pid 150631; log <workspace>/chinor/runs/rt-size_4b_rslora_tok-s0/log.txt
+END rt-size_4b_rslora_tok-s0 exit 0 after 2 min at 19:59
+synced rt-size_4b_rslora_tok-s0 -> eval/outputs/ and results/raw/rt-size_4b_rslora_tok-s0/
+START rt-size_4b_rslora_tok-s1 (estimate 2 min) at 19:59 unless its weights are not ready
+started rt-size_4b_rslora_tok-s1 pid 151183; log <workspace>/chinor/runs/rt-size_4b_rslora_tok-s1/log.txt
+END rt-size_4b_rslora_tok-s1 exit 0 after 2 min at 20:01
+synced rt-size_4b_rslora_tok-s1 -> eval/outputs/ and results/raw/rt-size_4b_rslora_tok-s1/
+START rt-size_4b_rslora_tok-s2 (estimate 2 min) at 20:01 unless its weights are not ready
+started rt-size_4b_rslora_tok-s2 pid 151735; log <workspace>/chinor/runs/rt-size_4b_rslora_tok-s2/log.txt
+END rt-size_4b_rslora_tok-s2 exit 0 after 2 min at 20:02
+synced rt-size_4b_rslora_tok-s2 -> eval/outputs/ and results/raw/rt-size_4b_rslora_tok-s2/
+START rt-size_8b_rslora_tok-s0 (estimate 2 min) at 20:02 unless its weights are not ready
+started rt-size_8b_rslora_tok-s0 pid 152287; log <workspace>/chinor/runs/rt-size_8b_rslora_tok-s0/log.txt
+END rt-size_8b_rslora_tok-s0 exit 0 after 2 min at 20:03
+synced rt-size_8b_rslora_tok-s0 -> eval/outputs/ and results/raw/rt-size_8b_rslora_tok-s0/
+START rt-size_8b_rslora_tok-s1 (estimate 2 min) at 20:03 unless its weights are not ready
+started rt-size_8b_rslora_tok-s1 pid 152841; log <workspace>/chinor/runs/rt-size_8b_rslora_tok-s1/log.txt
+END rt-size_8b_rslora_tok-s1 exit 0 after 2 min at 20:04
+synced rt-size_8b_rslora_tok-s1 -> eval/outputs/ and results/raw/rt-size_8b_rslora_tok-s1/
+START rt-size_8b_rslora_tok-s2 (estimate 2 min) at 20:04 unless its weights are not ready
+started rt-size_8b_rslora_tok-s2 pid 153393; log <workspace>/chinor/runs/rt-size_8b_rslora_tok-s2/log.txt
+END rt-size_8b_rslora_tok-s2 exit 0 after 2 min at 20:05
+synced rt-size_8b_rslora_tok-s2 -> eval/outputs/ and results/raw/rt-size_8b_rslora_tok-s2/
+START rt-tier_s_main_rslora-s0 (estimate 2 min) at 20:05 unless its weights are not ready
+started rt-tier_s_main_rslora-s0 pid 153945; log <workspace>/chinor/runs/rt-tier_s_main_rslora-s0/log.txt
+END rt-tier_s_main_rslora-s0 exit 0 after 2 min at 20:06
+synced rt-tier_s_main_rslora-s0 -> eval/outputs/ and results/raw/rt-tier_s_main_rslora-s0/
+START rt-tier_s_main_rslora-s1 (estimate 2 min) at 20:06 unless its weights are not ready
+started rt-tier_s_main_rslora-s1 pid 154497; log <workspace>/chinor/runs/rt-tier_s_main_rslora-s1/log.txt
+END rt-tier_s_main_rslora-s1 exit 0 after 2 min at 20:07
+synced rt-tier_s_main_rslora-s1 -> eval/outputs/ and results/raw/rt-tier_s_main_rslora-s1/
+START rt-tier_s_main_rslora-s2 (estimate 2 min) at 20:07 unless its weights are not ready
+started rt-tier_s_main_rslora-s2 pid 155049; log <workspace>/chinor/runs/rt-tier_s_main_rslora-s2/log.txt
+END rt-tier_s_main_rslora-s2 exit 0 after 2 min at 20:08
+synced rt-tier_s_main_rslora-s2 -> eval/outputs/ and results/raw/rt-tier_s_main_rslora-s2/
+START rt-tier_s_main_rslora_tok-s0 (estimate 2 min) at 20:08 unless its weights are not ready
+started rt-tier_s_main_rslora_tok-s0 pid 155601; log <workspace>/chinor/runs/rt-tier_s_main_rslora_tok-s0/log.txt
+END rt-tier_s_main_rslora_tok-s0 exit 0 after 1 min at 20:09
+synced rt-tier_s_main_rslora_tok-s0 -> eval/outputs/ and results/raw/rt-tier_s_main_rslora_tok-s0/
+START rt-tier_s_main_rslora_tok-s1 (estimate 2 min) at 20:09 unless its weights are not ready
+started rt-tier_s_main_rslora_tok-s1 pid 156134; log <workspace>/chinor/runs/rt-tier_s_main_rslora_tok-s1/log.txt
+END rt-tier_s_main_rslora_tok-s1 exit 0 after 1 min at 20:10
+synced rt-tier_s_main_rslora_tok-s1 -> eval/outputs/ and results/raw/rt-tier_s_main_rslora_tok-s1/
+START rt-tier_s_main_rslora_tok-s2 (estimate 2 min) at 20:10 unless its weights are not ready
+started rt-tier_s_main_rslora_tok-s2 pid 156670; log <workspace>/chinor/runs/rt-tier_s_main_rslora_tok-s2/log.txt
+END rt-tier_s_main_rslora_tok-s2 exit 0 after 1 min at 20:10
+synced rt-tier_s_main_rslora_tok-s2 -> eval/outputs/ and results/raw/rt-tier_s_main_rslora_tok-s2/
+START rt-tier_s_pilot_dora-s0 (estimate 2 min) at 20:10 unless its weights are not ready
+started rt-tier_s_pilot_dora-s0 pid 157203; log <workspace>/chinor/runs/rt-tier_s_pilot_dora-s0/log.txt
+END rt-tier_s_pilot_dora-s0 exit 0 after 2 min at 20:11
+synced rt-tier_s_pilot_dora-s0 -> eval/outputs/ and results/raw/rt-tier_s_pilot_dora-s0/
+START rt-tier_s_pilot_dora-s1 (estimate 2 min) at 20:11 unless its weights are not ready
+started rt-tier_s_pilot_dora-s1 pid 157755; log <workspace>/chinor/runs/rt-tier_s_pilot_dora-s1/log.txt
+END rt-tier_s_pilot_dora-s1 exit 0 after 2 min at 20:13
+synced rt-tier_s_pilot_dora-s1 -> eval/outputs/ and results/raw/rt-tier_s_pilot_dora-s1/
+START rt-tier_s_pilot_dora-s2 (estimate 2 min) at 20:13 unless its weights are not ready
+started rt-tier_s_pilot_dora-s2 pid 158307; log <workspace>/chinor/runs/rt-tier_s_pilot_dora-s2/log.txt
+END rt-tier_s_pilot_dora-s2 exit 0 after 2 min at 20:14
+synced rt-tier_s_pilot_dora-s2 -> eval/outputs/ and results/raw/rt-tier_s_pilot_dora-s2/
+START rt-tier_s_pilot_lora-s0 (estimate 2 min) at 20:14 unless its weights are not ready
+started rt-tier_s_pilot_lora-s0 pid 158859; log <workspace>/chinor/runs/rt-tier_s_pilot_lora-s0/log.txt
+END rt-tier_s_pilot_lora-s0 exit 0 after 2 min at 20:15
+synced rt-tier_s_pilot_lora-s0 -> eval/outputs/ and results/raw/rt-tier_s_pilot_lora-s0/
+START rt-tier_s_pilot_lora-s1 (estimate 2 min) at 20:15 unless its weights are not ready
+started rt-tier_s_pilot_lora-s1 pid 159411; log <workspace>/chinor/runs/rt-tier_s_pilot_lora-s1/log.txt
+END rt-tier_s_pilot_lora-s1 exit 0 after 2 min at 20:16
+synced rt-tier_s_pilot_lora-s1 -> eval/outputs/ and results/raw/rt-tier_s_pilot_lora-s1/
+START rt-tier_s_pilot_lora-s2 (estimate 2 min) at 20:16 unless its weights are not ready
+started rt-tier_s_pilot_lora-s2 pid 159966; log <workspace>/chinor/runs/rt-tier_s_pilot_lora-s2/log.txt
+END rt-tier_s_pilot_lora-s2 exit 0 after 2 min at 20:17
+synced rt-tier_s_pilot_lora-s2 -> eval/outputs/ and results/raw/rt-tier_s_pilot_lora-s2/
+START rt-tier_s_pilot_lora_nogroup-s0 (estimate 2 min) at 20:17 unless its weights are not ready
+started rt-tier_s_pilot_lora_nogroup-s0 pid 160518; log <workspace>/chinor/runs/rt-tier_s_pilot_lora_nogroup-s0/log.txt
+END rt-tier_s_pilot_lora_nogroup-s0 exit 0 after 2 min at 20:18
+synced rt-tier_s_pilot_lora_nogroup-s0 -> eval/outputs/ and results/raw/rt-tier_s_pilot_lora_nogroup-s0/
+START rt-tier_s_pilot_lora_paged8-s0 (estimate 2 min) at 20:18 unless its weights are not ready
+started rt-tier_s_pilot_lora_paged8-s0 pid 161070; log <workspace>/chinor/runs/rt-tier_s_pilot_lora_paged8-s0/log.txt
+END rt-tier_s_pilot_lora_paged8-s0 exit 0 after 2 min at 20:19
+synced rt-tier_s_pilot_lora_paged8-s0 -> eval/outputs/ and results/raw/rt-tier_s_pilot_lora_paged8-s0/
+START rt-tier_s_pilot_lora_paged8-s1 (estimate 2 min) at 20:19 unless its weights are not ready
+started rt-tier_s_pilot_lora_paged8-s1 pid 161622; log <workspace>/chinor/runs/rt-tier_s_pilot_lora_paged8-s1/log.txt
+END rt-tier_s_pilot_lora_paged8-s1 exit 0 after 2 min at 20:20
+synced rt-tier_s_pilot_lora_paged8-s1 -> eval/outputs/ and results/raw/rt-tier_s_pilot_lora_paged8-s1/
+START rt-tier_s_pilot_lora_paged8-s2 (estimate 2 min) at 20:21 unless its weights are not ready
+started rt-tier_s_pilot_lora_paged8-s2 pid 162174; log <workspace>/chinor/runs/rt-tier_s_pilot_lora_paged8-s2/log.txt
+END rt-tier_s_pilot_lora_paged8-s2 exit 0 after 2 min at 20:22
+synced rt-tier_s_pilot_lora_paged8-s2 -> eval/outputs/ and results/raw/rt-tier_s_pilot_lora_paged8-s2/
+START rt-tier_s_pilot_rslora-s0 (estimate 2 min) at 20:22 unless its weights are not ready
+started rt-tier_s_pilot_rslora-s0 pid 162726; log <workspace>/chinor/runs/rt-tier_s_pilot_rslora-s0/log.txt
+END rt-tier_s_pilot_rslora-s0 exit 0 after 2 min at 20:23
+synced rt-tier_s_pilot_rslora-s0 -> eval/outputs/ and results/raw/rt-tier_s_pilot_rslora-s0/
+START rt-tier_s_pilot_rslora-s1 (estimate 2 min) at 20:23 unless its weights are not ready
+started rt-tier_s_pilot_rslora-s1 pid 163278; log <workspace>/chinor/runs/rt-tier_s_pilot_rslora-s1/log.txt
+END rt-tier_s_pilot_rslora-s1 exit 0 after 2 min at 20:24
+synced rt-tier_s_pilot_rslora-s1 -> eval/outputs/ and results/raw/rt-tier_s_pilot_rslora-s1/
+START rt-tier_s_pilot_rslora-s2 (estimate 2 min) at 20:24 unless its weights are not ready
+started rt-tier_s_pilot_rslora-s2 pid 163830; log <workspace>/chinor/runs/rt-tier_s_pilot_rslora-s2/log.txt
+END rt-tier_s_pilot_rslora-s2 exit 0 after 2 min at 20:25
+synced rt-tier_s_pilot_rslora-s2 -> eval/outputs/ and results/raw/rt-tier_s_pilot_rslora-s2/
+START rt-l14b_full-s0 (estimate 3 min) at 20:25 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:25 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:25 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:26 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:26 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:26 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:27 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:27 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:28 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:29 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:29 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:29 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:30 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:30 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:30 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:31 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:31 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:31 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:32 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:32 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:32 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:33 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:33 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:33 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:34 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:35 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:35 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:36 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:36 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:36 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:37 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:37 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:37 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:38 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:38 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:38 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:39 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:39 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:39 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:40 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:40 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:40 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:42 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:42 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:42 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:43 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:43 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:43 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:44 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:44 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:44 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:45 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:45 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:45 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:46 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:46 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:46 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:47 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:47 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:47 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:49 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:49 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:49 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:50 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:50 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:50 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:51 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:51 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:51 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:52 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:52 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:52 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:53 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:53 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:53 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:54 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:54 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:54 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:56 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:56 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:56 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min
+START rt-l14b_full-s0 (estimate 3 min) at 20:57 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full-s0/train/model@main: not in the cache
+not starting rt-l14b_full-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:57 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s0/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s0: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s0: weights not ready (lock not taken)
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 20:57 unless its weights are not ready
+waiting for weights: <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model@main: not in the cache
+not starting rt-l14b_full_lr2e5-s1: weights not ready (GPU lock not taken)
+WAIT rt-l14b_full_lr2e5-s1: weights not ready (lock not taken)
+waiting for weights: 3 job(s); re-check in 1 min

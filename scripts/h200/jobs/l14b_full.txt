@@ -1,0 +1,5 @@
+# Stage 3: Qwen3-14B-Base full fine-tuning (all parameters, lr 1e-5, 8-bit AdamW, final weights only), seeds 0-1.
+# Estimate: 3 x 1.45M / 802 tokens/s (probe-14b-full-3) = 90 min + val evals + Protocol-A eval ~20 min.
+# Disk: ~30 GB of final weights per run on the server (results/<run>/train/model); not copied down.
+train/configs/l14b_full.yaml 0 115
+train/configs/l14b_full.yaml 1 115

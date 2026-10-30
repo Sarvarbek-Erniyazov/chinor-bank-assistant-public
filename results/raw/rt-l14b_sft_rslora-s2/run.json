@@ -1,0 +1,14 @@
+{
+  "name": "rt-l14b_sft_rslora-s2",
+  "commit": "56cd6f9fd684a1e8dfdd615bde0ff7fb0d05385f-dirty",
+  "config_hash": "1bcf463deb1a5289",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "cmd": "<workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B-Base --arm rt-l14b_sft_rslora-s2 --eval-set eval/redteam_set.jsonl --protocol A --dtype bf16 --batch-size 32 --adapter <workspace>/chinor/results/l14b_sft_rslora-s2/train/adapter --out-dir <workspace>/chinor/results/rt-l14b_sft_rslora-s2/rt-l14b_sft_rslora-s2",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T10:57:40+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T10:58:41+00:00"
+}

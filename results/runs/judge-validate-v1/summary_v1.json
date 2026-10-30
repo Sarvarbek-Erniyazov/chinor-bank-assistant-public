@@ -1,0 +1,19 @@
+{
+  "judge": "google/gemma-4-31B-it",
+  "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+  "model_class": "Gemma4ForConditionalGeneration",
+  "prompt_version": 1,
+  "rows": 50,
+  "sentences": 125,
+  "unparsed": 0,
+  "confusion": {
+    "marked_flagged": 7,
+    "marked_passed": 1,
+    "unmarked_flagged": 3,
+    "unmarked_passed": 39
+  },
+  "pass": true,
+  "thresholds": "flag >= 7 of 8 marked, <= 4 of 42 unmarked",
+  "load_s": 2088,
+  "generate_s": 32
+}

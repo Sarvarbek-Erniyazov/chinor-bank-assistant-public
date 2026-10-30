@@ -1,0 +1,11 @@
+# Protocol-A baselines (plan v3 §4), one launch per arm (GPU lock released between arms). Order per the
+# 2026-10-28 run order: small arms first, both 14B arms last and only within the cutoff.
+# <run> <estimate_min> <cmd>; estimates are conservative first-of-kind guesses incl. weight loading.
+# Evaluation uses venv-gen (NumPy-1 bridge intact; same transformers/peft pins as venv).
+pA-base-0.6B-0shot 10 <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-0.6B-Base --arm base-0.6B-0shot-A --shots 0 --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/pA-base-0.6B-0shot/base-0.6B-0shot-A
+pA-base-1.7B-0shot 10 <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-1.7B-Base --arm base-1.7B-0shot-A --shots 0 --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/pA-base-1.7B-0shot/base-1.7B-0shot-A
+pA-base-4B-0shot 15 <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-4B-Base --arm base-4B-0shot-A --shots 0 --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/pA-base-4B-0shot/base-4B-0shot-A
+pA-base-8B-0shot 20 <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-8B-Base --arm base-8B-0shot-A --shots 0 --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/pA-base-8B-0shot/base-8B-0shot-A
+pA-base-1.7B-3shot 15 <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-1.7B-Base --arm base-1.7B-3shot-A --shots 3 --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/pA-base-1.7B-3shot/base-1.7B-3shot-A
+pA-base-14B-0shot 30 <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B-Base --arm base-14B-0shot-A --shots 0 --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/pA-base-14B-0shot/base-14B-0shot-A
+pA-base-14B-3shot 35 <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B-Base --arm base-14B-3shot-A --shots 3 --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/pA-base-14B-3shot/base-14B-3shot-A

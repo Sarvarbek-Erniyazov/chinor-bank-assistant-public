@@ -1,0 +1,17 @@
+# ADR-032 DPO v2 (exploratory, seed 0 only; runs only if triggered: not triggered 2026-10-29). Levers: lr 5e-6, sft_alpha 0.2, pairs_v2.
+model: <workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model
+pairs: data/pref/v1/pairs_v2.jsonl
+loss: dpo
+beta: 0.1
+sft_alpha: 0.2
+max_length: 1024
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 5.0e-6
+warmup_ratio: 0.1
+num_train_epochs: 2
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]

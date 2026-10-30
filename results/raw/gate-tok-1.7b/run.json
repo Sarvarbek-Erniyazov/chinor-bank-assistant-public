@@ -1,0 +1,14 @@
+{
+  "name": "gate-tok-1.7b",
+  "commit": "526f002d93451ee56b373fabe296e9fe8b82ef6f-dirty",
+  "config_hash": "353585d87847576d",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash <workspace>/chinor/runs/_queues/gate_tokens-20261029T060127/scripts/h200/gate_tokens.sh gate-tok-1.7b",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T21:32:25+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T21:34:05+00:00"
+}

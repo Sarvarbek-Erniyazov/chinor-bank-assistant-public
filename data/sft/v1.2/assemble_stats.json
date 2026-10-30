@@ -1,0 +1,26 @@
+{
+  "source": "data/sft/v1.1 + data/drafts/handoff_candidates.md",
+  "seed": 20261029,
+  "handoff_items": 60,
+  "handoff_train": 57,
+  "handoff_val": 3,
+  "val_topics": [
+    "bereavement",
+    "business_account",
+    "pension"
+  ],
+  "train": 2951,
+  "val": 147,
+  "by_category_train": {
+    "B1": 152,
+    "B1-dialogue": 112,
+    "B2": 33,
+    "B3-direct": 9,
+    "B3-indirect": 9,
+    "B3-unsafe": 14,
+    "B4": 19,
+    "handoff": 57,
+    "task": 2546
+  },
+  "handoff_share_of_train": 0.0193
+}

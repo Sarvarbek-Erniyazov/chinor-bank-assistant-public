@@ -1,0 +1,14 @@
+{
+  "name": "l14b_sft_rslora_tok-s2-v1.1",
+  "commit": "415ba601c5caf545b2ae5113df5615da7ac40699-dirty",
+  "config_hash": "cb7855abceecb692",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash scripts/h200/train_eval.sh l14b_sft_rslora_tok-s2-v1.1 train/configs/l14b_sft_rslora_tok.yaml 2 data/sft/v1.1",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T03:10:50+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T03:35:41+00:00"
+}

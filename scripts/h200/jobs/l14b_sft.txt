@@ -1,0 +1,5 @@
+# Stage 2b: Qwen3-14B-Base SFT rsLoRA (adopted Tier-S config, lr 1e-4; ADR-025/026), seeds 0-2. run_matrix.sh.
+# Estimate: 3 x 1.45M tokens / 3,328 tokens/s (probe-14b-lora-3) = 22 min + val eval + Protocol-A eval ~10 min.
+train/configs/l14b_sft_rslora.yaml 0 40
+train/configs/l14b_sft_rslora.yaml 1 40
+train/configs/l14b_sft_rslora.yaml 2 40

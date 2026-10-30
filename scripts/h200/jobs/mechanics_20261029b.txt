@@ -1,0 +1,7 @@
+# Rerun of the mechanics jobs after the HfFolder import fix (0f9f30c) and the lm_head freeze (full FT, untied
+# 14B); new run names (names are never reused). probe-14b-qlora already succeeded in the first file.
+# Provisional assembly only: never scored.
+c2a-dryrun-tier-s-2 10 <workspace>/chinor/venv-gen/bin/python train/dryrun.py --config train/configs/tier_s_pilot_lora.yaml --steps 20 --data-dir data/sft/_provisional --out <workspace>/chinor/results/c2a-dryrun-tier-s-2
+probe-1.7b-lora-2 8 bash scripts/h200/probe.sh probe-1.7b-lora-2 train/configs/probe_1.7b_lora.yaml
+probe-14b-lora-2 10 bash scripts/h200/probe.sh probe-14b-lora-2 train/configs/probe_14b_lora.yaml
+probe-14b-full-2 15 bash scripts/h200/probe.sh probe-14b-full-2 train/configs/probe_14b_full.yaml

@@ -1,0 +1,44 @@
+{
+  "arm": "pref_simpo_rules-s2",
+  "git_commit": "005ece31dfce3cff9496c41b73c1997c771363c1-dirty",
+  "model": "<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model",
+  "revision": null,
+  "adapter": "<workspace>/chinor/results/pref_simpo_rules-s2/train/adapter",
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "train/chat_template.jinja",
+  "reference_not_pipeline": false,
+  "system_prompt": {
+    "path": "handbook/system_prompt.txt",
+    "sha256": "c93c104d11983aca2371732a58bd53436180e1ea99e4cdf6dff40dcb32837a83"
+  },
+  "eval_set": "eval/eval_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 220,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 36.588,
+  "wall_clock_s": 68.0,
+  "mean_latency_ms": 308.3,
+  "timestamp": "2026-10-29T13:23:12+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}

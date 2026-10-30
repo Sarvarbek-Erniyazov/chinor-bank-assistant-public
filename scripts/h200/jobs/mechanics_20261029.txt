@@ -1,0 +1,9 @@
+# Mechanics-only GPU jobs, night of 2026-10-28/29 (provisional assembly data/sft/_provisional: never scored).
+# Order: dry run -> throughput probes -> 50-row judge validation (prompt v1; v2 only if v1 fails, launched by hand).
+# Estimates (min) from the measured baselines (0.6B arm 1.2, 14B arm 7 incl. weight loading) plus training.
+c2a-dryrun-tier-s 10 <workspace>/chinor/venv-gen/bin/python train/dryrun.py --config train/configs/tier_s_pilot_lora.yaml --steps 20 --data-dir data/sft/_provisional --out <workspace>/chinor/results/c2a-dryrun-tier-s
+probe-1.7b-lora 8 bash scripts/h200/probe.sh probe-1.7b-lora train/configs/probe_1.7b_lora.yaml
+probe-14b-lora 15 bash scripts/h200/probe.sh probe-14b-lora train/configs/probe_14b_lora.yaml
+probe-14b-qlora 15 bash scripts/h200/probe.sh probe-14b-qlora train/configs/probe_14b_qlora.yaml
+probe-14b-full 15 bash scripts/h200/probe.sh probe-14b-full train/configs/probe_14b_full.yaml
+judge-validate-v1 25 <workspace>/chinor/venv-gen/bin/python data/entail_judge.py --audit data/sft/_provisional/judge_audit_50.jsonl --prompt-version 1 --revision 842da3794eaa0b77d5f08bae87a17459d91ff475 --out <workspace>/chinor/results/judge-validate-v1

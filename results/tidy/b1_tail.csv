@@ -1,0 +1,7 @@
+arm,run,seed,official,survive_cut,tail_only,cut_only,fixed_counterpart
+1.7B rsLoRA (Tier-S main),tier_s_main_rslora-s0,0,15,0,15,0,0
+1.7B rsLoRA (Tier-S main),tier_s_main_rslora-s1,1,0,0,0,0,0
+1.7B rsLoRA (Tier-S main),tier_s_main_rslora-s2,2,1,0,1,0,0
+14B rsLoRA lr 1e-4,l14b_sft_rslora-s0,0,16,0,16,0,1
+14B rsLoRA lr 1e-4,l14b_sft_rslora-s1,1,14,2,12,0,1
+14B rsLoRA lr 1e-4,l14b_sft_rslora-s2,2,11,0,11,0,1

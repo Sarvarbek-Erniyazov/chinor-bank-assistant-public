@@ -1,0 +1,9 @@
+frozen queue pref_v1_dpo0-20261029T214002 at 2026-10-29 21:40:03: queue.sh from <local-repo>/runs/_queues/pref_v1_dpo0-20261029T214002
+  local copy: <local-repo>/runs/_queues/pref_v1_dpo0-20261029T214002/scripts/h200 (git 1399d03)
+  server copy: <workspace>/chinor/runs/_queues/pref_v1_dpo0-20261029T214002/scripts/h200
+  list: <local-repo>/runs/_queues/pref_v1_dpo0-20261029T214002/pref_v1_dpo0.txt (job commands point at the server copy)
+START pref_dpo_rules-s0 (estimate 40 min) at 21:40 unless its weights are not ready
+started pref_dpo_rules-s0 pid 183816; log <workspace>/chinor/runs/pref_dpo_rules-s0/log.txt
+END pref_dpo_rules-s0 exit 0 after 8 min at 21:47
+synced pref_dpo_rules-s0 -> results/runs/pref_dpo_rules-s0/ and results/raw/pref_dpo_rules-s0/
+queue <local-repo>/runs/_queues/pref_v1_dpo0-20261029T214002/pref_v1_dpo0.txt done

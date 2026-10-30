@@ -1,0 +1,9 @@
+frozen queue rft_v1_redteam-20261029T231127 at 2026-10-29 23:11:27: queue.sh from <local-repo>/runs/_queues/rft_v1_redteam-20261029T231127
+  local copy: <local-repo>/runs/_queues/rft_v1_redteam-20261029T231127/scripts/h200 (git c6fbdea)
+  server copy: <workspace>/chinor/runs/_queues/rft_v1_redteam-20261029T231127/scripts/h200
+  list: <local-repo>/runs/_queues/rft_v1_redteam-20261029T231127/rft_v1_redteam.txt (job commands point at the server copy)
+START rt-l14b_sft_rslora_tok-s0-v1.2_rft (estimate 3 min) at 23:11 unless its weights are not ready
+started rt-l14b_sft_rslora_tok-s0-v1.2_rft pid 193478; log <workspace>/chinor/runs/rt-l14b_sft_rslora_tok-s0-v1.2_rft/log.txt
+END rt-l14b_sft_rslora_tok-s0-v1.2_rft exit 0 after 2 min at 23:12
+synced rt-l14b_sft_rslora_tok-s0-v1.2_rft -> eval/outputs/ and results/raw/rt-l14b_sft_rslora_tok-s0-v1.2_rft/
+queue <local-repo>/runs/_queues/rft_v1_redteam-20261029T231127/rft_v1_redteam.txt done

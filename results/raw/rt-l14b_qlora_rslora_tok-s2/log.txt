@@ -1,0 +1,89 @@
+
+=== rt-l14b_qlora_rslora_tok-s2 start 2026-10-29T10:54:16Z (commit 56cd6f9fd684a1e8dfdd615bde0ff7fb0d05385f-dirty)
+$ <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B-Base --arm rt-l14b_qlora_rslora_tok-s2 --eval-set eval/redteam_set.jsonl --protocol A --dtype bf16 --batch-size 32 --adapter <workspace>/chinor/results/l14b_qlora_rslora_tok-s2/train/adapter --quant 4bit --out-dir <workspace>/chinor/results/rt-l14b_qlora_rslora_tok-s2/rt-l14b_qlora_rslora_tok-s2 
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/443 [00:00<01:32,  4.76it/s]
+Loading weights:   0%|          | 2/443 [00:00<01:37,  4.52it/s]
+Loading weights:   1%|          | 5/443 [00:00<00:38, 11.51it/s]
+Loading weights:   4%|▍         | 17/443 [00:00<00:10, 39.38it/s]
+Loading weights:   7%|▋         | 31/443 [00:00<00:06, 66.86it/s]
+Loading weights:  10%|▉         | 43/443 [00:00<00:04, 80.56it/s]
+Loading weights:  13%|█▎        | 56/443 [00:00<00:04, 93.05it/s]
+Loading weights:  16%|█▌        | 70/443 [00:01<00:03, 99.41it/s]
+Loading weights:  19%|█▊        | 82/443 [00:01<00:03, 99.22it/s]
+Loading weights:  21%|██        | 94/443 [00:01<00:03, 99.23it/s]
+Loading weights:  25%|██▍       | 109/443 [00:01<00:03, 111.15it/s]
+Loading weights:  28%|██▊       | 122/443 [00:01<00:02, 115.32it/s]
+Loading weights:  31%|███       | 136/443 [00:01<00:02, 114.99it/s]
+Loading weights:  33%|███▎      | 148/443 [00:01<00:02, 110.15it/s]
+Loading weights:  36%|███▌      | 160/443 [00:01<00:02, 106.88it/s]
+Loading weights:  40%|███▉      | 175/443 [00:02<00:02, 116.78it/s]
+Loading weights:  42%|████▏     | 188/443 [00:02<00:02, 119.39it/s]
+Loading weights:  46%|████▌     | 202/443 [00:02<00:02, 117.85it/s]
+Loading weights:  48%|████▊     | 214/443 [00:02<00:02, 112.19it/s]
+Loading weights:  51%|█████     | 226/443 [00:02<00:02, 108.49it/s]
+Loading weights:  54%|█████▍    | 241/443 [00:02<00:01, 118.05it/s]
+Loading weights:  57%|█████▋    | 254/443 [00:02<00:01, 120.28it/s]
+Loading weights:  60%|██████    | 268/443 [00:02<00:01, 118.55it/s]
+Loading weights:  63%|██████▎   | 280/443 [00:02<00:01, 112.72it/s]
+Loading weights:  66%|██████▌   | 292/443 [00:03<00:01, 108.84it/s]
+Loading weights:  69%|██████▉   | 307/443 [00:03<00:01, 118.28it/s]
+Loading weights:  72%|███████▏  | 320/443 [00:03<00:01, 120.55it/s]
+Loading weights:  75%|███████▌  | 334/443 [00:03<00:00, 118.68it/s]
+Loading weights:  78%|███████▊  | 346/443 [00:03<00:00, 112.92it/s]
+Loading weights:  81%|████████  | 358/443 [00:03<00:00, 108.97it/s]
+Loading weights:  84%|████████▍ | 373/443 [00:03<00:00, 118.52it/s]
+Loading weights:  87%|████████▋ | 386/443 [00:03<00:00, 120.78it/s]
+Loading weights:  90%|█████████ | 400/443 [00:03<00:00, 118.95it/s]
+Loading weights:  93%|█████████▎| 412/443 [00:04<00:00, 113.11it/s]
+Loading weights:  96%|█████████▌| 424/443 [00:04<00:00, 109.06it/s]
+Loading weights:  99%|█████████▉| 439/443 [00:04<00:00, 118.45it/s]
+Loading weights: 100%|██████████| 443/443 [00:04<00:00, 102.80it/s]
+[32/60] batch 32 x 509 tokens, 436 ms/item
+[60/60] batch 28 x 565 tokens, 456 ms/item
+{
+  "arm": "rt-l14b_qlora_rslora_tok-s2",
+  "git_commit": "56cd6f9fd684a1e8dfdd615bde0ff7fb0d05385f-dirty",
+  "model": "Qwen/Qwen3-14B-Base",
+  "revision": null,
+  "adapter": "<workspace>/chinor/results/l14b_qlora_rslora_tok-s2/train/adapter",
+  "dtype": "bf16",
+  "quant": "4bit",
+  "shots": 0,
+  "protocol": "A",
+  "template": "train/chat_template.jinja",
+  "reference_not_pipeline": false,
+  "system_prompt": {
+    "path": "handbook/system_prompt.txt",
+    "sha256": "c93c104d11983aca2371732a58bd53436180e1ea99e4cdf6dff40dcb32837a83"
+  },
+  "eval_set": "eval/redteam_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 60,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 17.357,
+  "wall_clock_s": 26.8,
+  "mean_latency_ms": 445.2,
+  "timestamp": "2026-10-29T10:55:06+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}
+=== end 2026-10-29T10:55:07Z exit 0

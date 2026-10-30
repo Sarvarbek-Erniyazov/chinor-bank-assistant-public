@@ -1,0 +1,21 @@
+# Tier-L: Qwen3-14B-Base full fine-tuning, bf16, every parameter trainable (ADR-023), 8-bit AdamW, lr 1e-5
+# Effective batch 16, cosine schedule, 3 % warmup, 3 epochs, gradient checkpointing (train/sft.py).
+# One rolling weights-only checkpoint (save_total_limit 1, save_only_model: no optimizer state); final weights in
+# results/<run>/train/model (~30 GB); the checkpoint is deleted once the final weights are hashed (run_matrix.sh).
+model: Qwen/Qwen3-14B-Base
+max_length: 1024
+per_device_train_batch_size: 4
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 1.0e-5
+warmup_ratio: 0.03
+num_train_epochs: 3
+weight_decay: 0.0
+optim: adamw_bnb_8bit
+group_by_length: true
+eval_steps: 50
+save_steps: 100
+save_total_limit: 1
+save_only_model: true
+logging_steps: 10
+full_ft: true

@@ -1,0 +1,11 @@
+size,token,token_id,status,matrix,nearest_id,nearest_cos,n_rows_cos_gt_0.99,n_rows_identical,ref_median_nearest_cos,ref_rows
+0.6B,<|im_start|>,151644,computed,embed_tokens (tied),151554,1.0,2352,290,0.6,500
+0.6B,<|im_end|>,151645,computed,embed_tokens (tied),151554,1.0,2352,290,0.6,500
+1.7B,<|im_start|>,151644,computed,embed_tokens (tied),124,1.0,2263,93,0.5566,500
+1.7B,<|im_end|>,151645,computed,embed_tokens (tied),124,1.0,2263,93,0.5566,500
+4B,<|im_start|>,151644,pending: checkpoint not cached locally,,,,,,,
+4B,<|im_end|>,151645,pending: checkpoint not cached locally,,,,,,,
+8B,<|im_start|>,151644,pending: checkpoint not cached locally,,,,,,,
+8B,<|im_end|>,151645,pending: checkpoint not cached locally,,,,,,,
+14B,<|im_start|>,151644,pending: checkpoint not cached locally,,,,,,,
+14B,<|im_end|>,151645,pending: checkpoint not cached locally,,,,,,,

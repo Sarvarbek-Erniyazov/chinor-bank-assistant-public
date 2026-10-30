@@ -1,0 +1,3 @@
+# Stage 3: Qwen3-14B-Base full FT seed 0 (author 2026-10-29: launched alone; seed 1 at the end of the rerun queue).
+# Disk (ADR-027): 29.5 GB rolling weights-only checkpoint + 29.5 GB final weights; launched with JOB_WRITE_GB=60.
+train/configs/l14b_full.yaml 0 115

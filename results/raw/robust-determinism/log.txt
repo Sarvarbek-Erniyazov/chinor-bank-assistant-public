@@ -1,0 +1,57 @@
+
+=== robust-determinism start 2026-10-28T17:11:12Z (commit d152fe3017540c6e0fb04d8e23e20f58a3181529)
+$ bash <workspace>/chinor/runs/_queues/ungated_20261029-20261029T020341/scripts/h200/determinism.sh robust-determinism 
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 310/310 [00:00<00:00, 9200.38it/s]
+trainable parameters: 10,092,544 of 606,142,464 (1.665 %)
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 151643}.
+
+  0%|          | 0/20 [00:00<?, ?it/s]
+  5%|▌         | 1/20 [00:00<00:18,  1.01it/s]
+ 10%|█         | 2/20 [00:01<00:11,  1.53it/s]
+ 15%|█▌        | 3/20 [00:01<00:09,  1.83it/s]
+ 20%|██        | 4/20 [00:02<00:07,  2.02it/s]
+ 25%|██▌       | 5/20 [00:02<00:06,  2.16it/s]
+ 30%|███       | 6/20 [00:03<00:06,  2.27it/s]
+ 35%|███▌      | 7/20 [00:03<00:05,  2.33it/s]
+ 40%|████      | 8/20 [00:03<00:05,  2.39it/s]
+ 45%|████▌     | 9/20 [00:04<00:04,  2.42it/s]
+ 50%|█████     | 10/20 [00:04<00:04,  2.44it/s]
+                                               
+{'loss': '2.186', 'grad_norm': '1.737', 'learning_rate': '0.0001245', 'epoch': '0.05917'}
+
+ 50%|█████     | 10/20 [00:04<00:04,  2.44it/s]
+ 55%|█████▌    | 11/20 [00:05<00:03,  2.46it/s]
+ 60%|██████    | 12/20 [00:05<00:03,  2.47it/s]
+ 65%|██████▌   | 13/20 [00:05<00:02,  2.50it/s]
+ 70%|███████   | 14/20 [00:06<00:02,  2.51it/s]
+ 75%|███████▌  | 15/20 [00:06<00:01,  2.53it/s]
+ 80%|████████  | 16/20 [00:07<00:01,  2.51it/s]
+ 85%|████████▌ | 17/20 [00:07<00:01,  2.51it/s]
+ 90%|█████████ | 18/20 [00:07<00:00,  2.53it/s]
+ 95%|█████████▌| 19/20 [00:08<00:00,  2.53it/s]
+100%|██████████| 20/20 [00:08<00:00,  2.55it/s]
+                                               
+{'loss': '1.958', 'grad_norm': '2.486', 'learning_rate': '1.364e-06', 'epoch': '0.1183'}
+
+100%|██████████| 20/20 [00:08<00:00,  2.55it/s]
+                                               
+{'train_runtime': '9.64', 'train_samples_per_second': '33.2', 'train_steps_per_second': '2.075', 'train_loss': '2.072', 'epoch': '0.1183'}
+
+100%|██████████| 20/20 [00:09<00:00,  2.55it/s]
+100%|██████████| 20/20 [00:09<00:00,  2.08it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[WARNING  | huggingface_hub.utils._http]: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+{
+  "global_step": 20,
+  "peak_vram_gb": 18.77,
+  "tokens_per_s": 17379.4,
+  "supervised_tokens_per_s": 1972.9,
+  "wall_clock_s": 9.8,
+  "final_train_loss": 1.9581127166748047,
+  "final_val_loss": null
+}
+[main1:53280:0:53463] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x79a9a6d19c77)
+<workspace>/chinor/runs/_queues/ungated_20261029-20261029T020341/scripts/h200/determinism.sh: line 13: 53280 Segmentation fault      (core dumped) "$PYX" train/sft.py --config "$config" --seed 0 --out "$out/$k" --max-steps 20 --save-steps 100000 --no-eval --data-dir data/sft/_provisional
+=== end 2026-10-28T17:11:49Z exit 139

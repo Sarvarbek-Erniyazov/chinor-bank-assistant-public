@@ -1,0 +1,14 @@
+{
+  "name": "pA-base-0.6B-0shot",
+  "commit": "72b4891b7660382bef7cdc95b7762402ba780bcf",
+  "config_hash": "1aaba5546f7ddf35",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "cmd": "<workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-0.6B-Base --arm base-0.6B-0shot-A --shots 0 --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/pA-base-0.6B-0shot/base-0.6B-0shot-A",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T14:25:20+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T14:26:29+00:00"
+}

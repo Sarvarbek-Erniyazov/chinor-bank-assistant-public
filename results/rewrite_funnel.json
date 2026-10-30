@@ -1,0 +1,48 @@
+{
+  "generator": "Qwen/Qwen3-32B",
+  "prompts": 2680,
+  "stages": [
+    {
+      "stage": "generated candidates",
+      "n": 5360
+    },
+    {
+      "stage": "verifier v1 accept",
+      "n": 5311
+    },
+    {
+      "stage": "verifier v2 accept",
+      "n": 5048
+    },
+    {
+      "stage": "entailment judge: all sentences entailed",
+      "n": 4322
+    },
+    {
+      "stage": "used in SFT v1_rewrite (train + val)",
+      "n": 2325
+    }
+  ],
+  "audits": [
+    {
+      "audit": 1,
+      "filter": "verifier v2",
+      "k_unsupported": 8,
+      "n": 50,
+      "rate": 0.16,
+      "ci_lo": 0.0834,
+      "ci_hi": 0.2851
+    },
+    {
+      "audit": 2,
+      "filter": "verifier v2 + entailment",
+      "k_unsupported": 5,
+      "n": 30,
+      "rate": 0.1667,
+      "ci_lo": 0.0734,
+      "ci_hi": 0.3356
+    }
+  ],
+  "target_rate": 0.05,
+  "decision": "SFT v1 uses canonical answers only (ADR-024)"
+}

@@ -1,0 +1,25 @@
+frozen queue pref_v1_rest-20261029T214825 at 2026-10-29 21:48:25: queue.sh from <local-repo>/runs/_queues/pref_v1_rest-20261029T214825
+  local copy: <local-repo>/runs/_queues/pref_v1_rest-20261029T214825/scripts/h200 (git 005ece3)
+  server copy: <workspace>/chinor/runs/_queues/pref_v1_rest-20261029T214825/scripts/h200
+  list: <local-repo>/runs/_queues/pref_v1_rest-20261029T214825/pref_v1_rest.txt (job commands point at the server copy)
+START pref_dpo_rules-s1 (estimate 40 min) at 21:48 unless its weights are not ready
+started pref_dpo_rules-s1 pid 185147; log <workspace>/chinor/runs/pref_dpo_rules-s1/log.txt
+END pref_dpo_rules-s1 exit 0 after 8 min at 21:56
+synced pref_dpo_rules-s1 -> results/runs/pref_dpo_rules-s1/ and results/raw/pref_dpo_rules-s1/
+START pref_dpo_rules-s2 (estimate 40 min) at 21:56 unless its weights are not ready
+started pref_dpo_rules-s2 pid 186298; log <workspace>/chinor/runs/pref_dpo_rules-s2/log.txt
+END pref_dpo_rules-s2 exit 0 after 8 min at 22:03
+synced pref_dpo_rules-s2 -> results/runs/pref_dpo_rules-s2/ and results/raw/pref_dpo_rules-s2/
+START pref_simpo_rules-s0 (estimate 35 min) at 22:03 unless its weights are not ready
+started pref_simpo_rules-s0 pid 187449; log <workspace>/chinor/runs/pref_simpo_rules-s0/log.txt
+END pref_simpo_rules-s0 exit 0 after 7 min at 22:10
+synced pref_simpo_rules-s0 -> results/runs/pref_simpo_rules-s0/ and results/raw/pref_simpo_rules-s0/
+START pref_simpo_rules-s1 (estimate 35 min) at 22:10 unless its weights are not ready
+started pref_simpo_rules-s1 pid 188562; log <workspace>/chinor/runs/pref_simpo_rules-s1/log.txt
+END pref_simpo_rules-s1 exit 0 after 7 min at 22:17
+synced pref_simpo_rules-s1 -> results/runs/pref_simpo_rules-s1/ and results/raw/pref_simpo_rules-s1/
+START pref_simpo_rules-s2 (estimate 35 min) at 22:17 unless its weights are not ready
+started pref_simpo_rules-s2 pid 189675; log <workspace>/chinor/runs/pref_simpo_rules-s2/log.txt
+END pref_simpo_rules-s2 exit 0 after 7 min at 22:24
+synced pref_simpo_rules-s2 -> results/runs/pref_simpo_rules-s2/ and results/raw/pref_simpo_rules-s2/
+queue <local-repo>/runs/_queues/pref_v1_rest-20261029T214825/pref_v1_rest.txt done

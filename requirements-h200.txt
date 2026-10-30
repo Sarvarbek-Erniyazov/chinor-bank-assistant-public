@@ -1,0 +1,21 @@
+# H200 (Tier L) environment, installed into <workspace>/chinor/venv (--system-site-packages,
+# never --user) by scripts/h200/install.sh; vllm and the generation subset go to chinor/venv-gen (install_gen.sh).
+# torch / torchvision / torchaudio are NOT listed: the server's own torch is used, and install.sh
+# aborts if the resolver plan would reinstall them (or triton / nvidia-* CUDA wheels).
+# Versions match requirements-gpu.txt so Tier S and Tier L run the same library code.
+transformers==5.21.0
+trl==1.16.0
+peft==0.21.2
+datasets==5.1.0
+accelerate==1.15.0
+bitsandbytes==0.50.2
+huggingface_hub==2.3.0
+pyyaml==6.0.3
+rapidfuzz==3.14.6
+scipy==1.17.1
+jinja2==3.1.6
+# NumPy stays at the image's 1.26.4 (its torch is built for NumPy 1): venv_lib.sh pins it in the constraint file.
+# Data generation only (never evaluation). Installed separately with --no-deps, then import-tested.
+# 0.30.0 is the newest release without an upper bound on transformers; every 0.28-0.32 release
+# pins torch==2.13.0, so the import test decides whether it works with the server's torch.
+vllm==0.30.0

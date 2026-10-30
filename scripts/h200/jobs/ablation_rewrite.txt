@@ -1,0 +1,3 @@
+# Ablation: 14B SFT rsLoRA seed 0 on data/sft/v1_rewrite (task turns = selection-v3 rewrites; ADR-024).
+# Run name l14b_sft_rslora-s0-v1_rewrite; compare with l14b_sft_rslora-s0 (same seed, same config).
+train/configs/l14b_sft_rslora.yaml 0 40 data/sft/v1_rewrite

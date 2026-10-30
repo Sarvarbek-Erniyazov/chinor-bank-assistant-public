@@ -1,0 +1,83 @@
+{
+  "examples": 2840,
+  "train": 2696,
+  "val": 144,
+  "assistant_turns": 2870,
+  "by_source": {
+    "train": {
+      "behaviour": 150,
+      "canonical": 335,
+      "rewrite": 2211
+    },
+    "val": {
+      "behaviour": 10,
+      "canonical": 20,
+      "rewrite": 114
+    }
+  },
+  "by_category": {
+    "train": {
+      "B1": 38,
+      "B1-dialogue": 28,
+      "B2": 33,
+      "B3-direct": 9,
+      "B3-indirect": 9,
+      "B3-unsafe": 14,
+      "B4": 19,
+      "task": 2546
+    },
+    "val": {
+      "B1": 2,
+      "B1-dialogue": 2,
+      "B2": 2,
+      "B3-direct": 1,
+      "B3-indirect": 1,
+      "B3-unsafe": 1,
+      "B4": 1,
+      "task": 134
+    }
+  },
+  "task_examples_per_intent": {
+    "intents": 67,
+    "min": 40,
+    "median": 40,
+    "max": 40
+  },
+  "tokens": {
+    "tokenizer": "Qwen/Qwen3-0.6B-Base",
+    "max": 626,
+    "p99": 585,
+    "median": 532,
+    "min": 489,
+    "share_le_1024": 1.0,
+    "histogram": {
+      "0-384": 0,
+      "384-448": 0,
+      "448-512": 284,
+      "512-576": 2479,
+      "576-640": 77,
+      "640-768": 0,
+      "768-1024": 0,
+      ">1024": 0
+    },
+    "max_id": "task-2268"
+  },
+  "contamination": {
+    "train": {
+      "exact": 0,
+      "fuzzy_ge_90": 0,
+      "ngram8_rate": 0.0101
+    },
+    "val": {
+      "exact": 0,
+      "fuzzy_ge_90": 0,
+      "ngram8_rate": 0.0
+    }
+  },
+  "held_out_intents_present": [],
+  "masking_examples": [
+    "task-2616",
+    "sft-B3I-008",
+    "sft-D-009"
+  ]
+}

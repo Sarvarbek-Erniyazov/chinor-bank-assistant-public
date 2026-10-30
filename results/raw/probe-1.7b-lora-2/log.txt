@@ -1,0 +1,22 @@
+
+=== probe-1.7b-lora-2 start 2026-10-28T16:03:14Z (commit d152fe3017540c6e0fb04d8e23e20f58a3181529)
+$ bash scripts/h200/probe.sh probe-1.7b-lora-2 train/configs/probe_1.7b_lora.yaml 
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 8781.21it/s]
+trainable parameters: 17,432,576 of 1,738,007,552 (1.003 %)
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 151643}.
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:01<00:20,  1.09s/it] 10%|█         | 2/20 [00:01<00:14,  1.25it/s] 15%|█▌        | 3/20 [00:02<00:11,  1.42it/s] 20%|██        | 4/20 [00:02<00:10,  1.52it/s] 25%|██▌       | 5/20 [00:03<00:09,  1.58it/s] 30%|███       | 6/20 [00:04<00:08,  1.63it/s] 35%|███▌      | 7/20 [00:04<00:07,  1.67it/s] 40%|████      | 8/20 [00:05<00:07,  1.69it/s] 45%|████▌     | 9/20 [00:05<00:06,  1.71it/s] 50%|█████     | 10/20 [00:06<00:05,  1.72it/s]                                               {'loss': '2.024', 'grad_norm': '0.9961', 'learning_rate': '0.0001245', 'epoch': '0.05917'}
+ 50%|█████     | 10/20 [00:06<00:05,  1.72it/s] 55%|█████▌    | 11/20 [00:06<00:05,  1.73it/s] 60%|██████    | 12/20 [00:07<00:04,  1.74it/s] 65%|██████▌   | 13/20 [00:08<00:03,  1.75it/s] 70%|███████   | 14/20 [00:08<00:03,  1.76it/s] 75%|███████▌  | 15/20 [00:09<00:02,  1.77it/s] 80%|████████  | 16/20 [00:09<00:02,  1.77it/s] 85%|████████▌ | 17/20 [00:10<00:01,  1.77it/s] 90%|█████████ | 18/20 [00:10<00:01,  1.78it/s] 95%|█████████▌| 19/20 [00:11<00:00,  1.78it/s]100%|██████████| 20/20 [00:11<00:00,  1.78it/s]                                               {'loss': '1.825', 'grad_norm': '1.162', 'learning_rate': '1.364e-06', 'epoch': '0.1183'}
+100%|██████████| 20/20 [00:11<00:00,  1.78it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[WARNING  | huggingface_hub.utils._http]: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+                                               {'train_runtime': '13.19', 'train_samples_per_second': '24.25', 'train_steps_per_second': '1.516', 'train_loss': '1.925', 'epoch': '0.1183'}
+100%|██████████| 20/20 [00:13<00:00,  1.78it/s]100%|██████████| 20/20 [00:13<00:00,  1.52it/s]
+{
+  "global_step": 20,
+  "peak_vram_gb": 21.47,
+  "tokens_per_s": 12766.0,
+  "supervised_tokens_per_s": 1449.2,
+  "wall_clock_s": 13.4,
+  "final_train_loss": 1.8249603271484376,
+  "final_val_loss": null
+}
+=== end 2026-10-28T16:03:49Z exit 0

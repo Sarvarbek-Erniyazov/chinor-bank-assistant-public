@@ -1,0 +1,120 @@
+
+=== pref_dpo_rules-s0 start 2026-10-29T12:40:08Z (commit 1399d03b301439c404362ef8ce19e4d5a9e77b44-dirty)
+$ bash <workspace>/chinor/runs/_queues/pref_v1_dpo0-20261029T214002/scripts/h200/pref_train_eval.sh pref_dpo_rules-s0 train/configs/pref_dpo_rules.yaml 0 
+=== train pref_dpo_rules-s0 (train/configs/pref_dpo_rules.yaml, seed 0) 2026-10-29T12:40:08Z
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 443/443 [00:00<00:00, 7885.40it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+{"step": 10, "epoch": 0.476, "loss": 0.6941, "reward_acc": 0.4375, "chosen_reward": -0.0012, "rejected_reward": 0.0006, "margin": -0.0018, "chosen_len": 72.125, "rejected_len": 65.0, "lr": 0.0}
+{"step": 20, "epoch": 0.952, "loss": 0.6949, "reward_acc": 0.5, "chosen_reward": -0.0037, "rejected_reward": -0.0004, "margin": -0.0033, "chosen_len": 64.5, "rejected_len": 67.0, "lr": 0.0}
+{"step": 30, "epoch": 1.429, "loss": 0.6539, "reward_acc": 0.875, "chosen_reward": 0.028, "rejected_reward": -0.0564, "margin": 0.0843, "chosen_len": 61.0625, "rejected_len": 62.0, "lr": 0.0}
+{"step": 40, "epoch": 1.905, "loss": 0.6572, "reward_acc": 0.75, "chosen_reward": 0.0147, "rejected_reward": -0.0634, "margin": 0.0781, "chosen_len": 69.375, "rejected_len": 66.5, "lr": 0.0}
+{"step": 42, "epoch": 2.0, "loss": 0.6533, "reward_acc": 0.75, "chosen_reward": 0.0121, "rejected_reward": -0.0722, "margin": 0.0843, "chosen_len": 68.1875, "rejected_len": 58.25, "lr": 0.0}
+=== eval pref_dpo_rules-s0 (<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model + adapter, eval/eval_set.jsonl, Protocol A) 2026-10-29T12:45:13Z
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 443/443 [00:00<00:00, 5843.47it/s]
+[32/220] batch 32 x 467 tokens, 302 ms/item
+[64/220] batch 32 x 468 tokens, 293 ms/item
+[96/220] batch 32 x 473 tokens, 295 ms/item
+[128/220] batch 32 x 474 tokens, 320 ms/item
+[160/220] batch 32 x 483 tokens, 320 ms/item
+[192/220] batch 32 x 485 tokens, 320 ms/item
+[220/220] batch 28 x 535 tokens, 311 ms/item
+{
+  "arm": "pref_dpo_rules-s0",
+  "git_commit": "1399d03b301439c404362ef8ce19e4d5a9e77b44-dirty",
+  "model": "<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model",
+  "revision": null,
+  "adapter": "<workspace>/chinor/results/pref_dpo_rules-s0/train/adapter",
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "train/chat_template.jinja",
+  "reference_not_pipeline": false,
+  "system_prompt": {
+    "path": "handbook/system_prompt.txt",
+    "sha256": "c93c104d11983aca2371732a58bd53436180e1ea99e4cdf6dff40dcb32837a83"
+  },
+  "eval_set": "eval/eval_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 220,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 36.588,
+  "wall_clock_s": 68.1,
+  "mean_latency_ms": 308.7,
+  "timestamp": "2026-10-29T12:46:40+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}
+=== eval rt-pref_dpo_rules-s0 (<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model + adapter, eval/redteam_set.jsonl, Protocol A) 2026-10-29T12:46:42Z
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 443/443 [00:00<00:00, 6301.43it/s]
+[32/60] batch 32 x 509 tokens, 281 ms/item
+[60/60] batch 28 x 565 tokens, 276 ms/item
+{
+  "arm": "rt-pref_dpo_rules-s0",
+  "git_commit": "1399d03b301439c404362ef8ce19e4d5a9e77b44-dirty",
+  "model": "<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model",
+  "revision": null,
+  "adapter": "<workspace>/chinor/results/pref_dpo_rules-s0/train/adapter",
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "train/chat_template.jinja",
+  "reference_not_pipeline": false,
+  "system_prompt": {
+    "path": "handbook/system_prompt.txt",
+    "sha256": "c93c104d11983aca2371732a58bd53436180e1ea99e4cdf6dff40dcb32837a83"
+  },
+  "eval_set": "eval/redteam_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 60,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 36.926,
+  "wall_clock_s": 16.8,
+  "mean_latency_ms": 278.6,
+  "timestamp": "2026-10-29T12:47:21+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}
+=== done pref_dpo_rules-s0 2026-10-29T12:47:23Z
+=== end 2026-10-29T12:47:23Z exit 0

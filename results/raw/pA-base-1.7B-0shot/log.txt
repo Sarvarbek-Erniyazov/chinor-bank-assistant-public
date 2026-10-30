@@ -1,0 +1,53 @@
+
+=== pA-base-1.7B-0shot start 2026-10-28T14:45:05Z (commit 72b4891b7660382bef7cdc95b7762402ba780bcf)
+$ <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-1.7B-Base --arm base-1.7B-0shot-A --shots 0 --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/pA-base-1.7B-0shot/base-1.7B-0shot-A 
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 310/310 [00:00<00:00, 10805.84it/s]
+[32/220] batch 32 x 467 tokens, 201 ms/item
+[64/220] batch 32 x 468 tokens, 191 ms/item
+[96/220] batch 32 x 473 tokens, 191 ms/item
+[128/220] batch 32 x 474 tokens, 185 ms/item
+[160/220] batch 32 x 483 tokens, 122 ms/item
+[192/220] batch 32 x 485 tokens, 139 ms/item
+[220/220] batch 28 x 535 tokens, 220 ms/item
+{
+  "arm": "base-1.7B-0shot-A",
+  "git_commit": "72b4891b7660382bef7cdc95b7762402ba780bcf",
+  "model": "Qwen/Qwen3-1.7B-Base",
+  "revision": null,
+  "adapter": null,
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "train/chat_template.jinja",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 220,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 6.139,
+  "wall_clock_s": 39.3,
+  "mean_latency_ms": 177.7,
+  "timestamp": "2026-10-28T14:45:56+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}
+=== end 2026-10-28T14:45:57Z exit 0

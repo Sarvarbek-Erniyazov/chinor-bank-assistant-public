@@ -1,0 +1,68 @@
+{
+  "config": "train/configs/l14b_full_lr2e5.yaml",
+  "config_hash": "9850d7d39bf1bf89",
+  "config_values": {
+    "model": "Qwen/Qwen3-14B-Base",
+    "max_length": 1024,
+    "per_device_train_batch_size": 4,
+    "per_device_eval_batch_size": 4,
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 2e-05,
+    "warmup_ratio": 0.03,
+    "num_train_epochs": 3,
+    "weight_decay": 0.0,
+    "optim": "adamw_bnb_8bit",
+    "group_by_length": true,
+    "eval_steps": 50,
+    "save_steps": 100,
+    "save_total_limit": 1,
+    "save_only_model": true,
+    "logging_steps": 10,
+    "full_ft": true
+  },
+  "seed": 0,
+  "COMMIT": "ecd785e1167551e2cf8c42bbc002e543b28d8363-dirty",
+  "data_dir": "data/sft/v1",
+  "data": {
+    "manifest_sha256": "944e398c084676d1fc1d2a5ae7c87341a1087f083a6c3ded741b164e897031c1",
+    "train.jsonl": "0e72aebe94967b1b4a465f467cacd532326e3bfbab2f1484613f4e580844cf44",
+    "val.jsonl": "2df6e448857313ccf196d706a7a1d02673130de052d6358d3b2bf9b8bfca486d"
+  },
+  "data_stats": {
+    "train": {
+      "examples": 2696,
+      "tokens": 1455052,
+      "supervised_tokens": 178812,
+      "truncated": 0
+    },
+    "val": {
+      "examples": 144,
+      "tokens": 77768,
+      "supervised_tokens": 9580,
+      "truncated": 0
+    }
+  },
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+  "python": "3.12.3",
+  "trainable_parameters": {
+    "trainable": 14768307200,
+    "total": 14768307200,
+    "percent": 100.0
+  },
+  "mode": "full_ft",
+  "tie_word_embeddings": false,
+  "resumed_from": null,
+  "global_step": 507,
+  "max_steps": 507,
+  "steps_this_process": 507,
+  "peak_vram_gb": 92.7,
+  "wall_clock_s": 1768.0,
+  "tokens_per_s": 2469.0,
+  "supervised_tokens_per_s": 303.4,
+  "train_runtime_s": 1767.7693,
+  "final_train_loss": 0.006892210245132447,
+  "mean_train_loss": 0.1617014527952765,
+  "final_val_loss": 0.09284104406833649
+}

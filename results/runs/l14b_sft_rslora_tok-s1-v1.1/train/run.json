@@ -1,0 +1,93 @@
+{
+  "config": "train/configs/l14b_sft_rslora_tok.yaml",
+  "config_hash": "18033b3ec135dd38",
+  "config_values": {
+    "model": "Qwen/Qwen3-14B-Base",
+    "max_length": 1024,
+    "per_device_train_batch_size": 8,
+    "per_device_eval_batch_size": 8,
+    "gradient_accumulation_steps": 2,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.03,
+    "num_train_epochs": 3,
+    "weight_decay": 0.0,
+    "optim": "adamw_torch",
+    "group_by_length": true,
+    "eval_steps": 50,
+    "save_steps": 100,
+    "logging_steps": 10,
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "use_rslora": true,
+      "use_dora": false,
+      "trainable_token_rows": [
+        151644,
+        151645
+      ]
+    }
+  },
+  "seed": 1,
+  "COMMIT": "415ba601c5caf545b2ae5113df5615da7ac40699-dirty",
+  "data_dir": "data/sft/v1.1",
+  "data": {
+    "manifest_sha256": "3b53f8192795f302c8efb71420662b33aba829354ccabed642c6c3842a10df59",
+    "train.jsonl": "7c958b29b0fd4dfc92eef93506f324ac4a24580e04295c30eb3a2462594ae320",
+    "val.jsonl": "2df6e448857313ccf196d706a7a1d02673130de052d6358d3b2bf9b8bfca486d"
+  },
+  "data_stats": {
+    "train": {
+      "examples": 2894,
+      "tokens": 1559866,
+      "supervised_tokens": 189018,
+      "truncated": 0
+    },
+    "val": {
+      "examples": 144,
+      "tokens": 77768,
+      "supervised_tokens": 9580,
+      "truncated": 0
+    }
+  },
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+  "python": "3.12.3",
+  "trainable_parameters": {
+    "trainable": 64245760,
+    "total": 14832552960,
+    "percent": 0.4331,
+    "token_rows": {
+      "ids": [
+        151644,
+        151645
+      ],
+      "parameters": 20480,
+      "tied": false
+    }
+  },
+  "mode": "lora",
+  "tie_word_embeddings": false,
+  "resumed_from": null,
+  "global_step": 543,
+  "max_steps": 543,
+  "steps_this_process": 543,
+  "peak_vram_gb": 40.31,
+  "wall_clock_s": 1365.3,
+  "tokens_per_s": 3427.5,
+  "supervised_tokens_per_s": 415.3,
+  "train_runtime_s": 1365.006,
+  "final_train_loss": 0.018474355340003967,
+  "mean_train_loss": 0.1720501354880096,
+  "final_val_loss": 0.10504692792892456
+}

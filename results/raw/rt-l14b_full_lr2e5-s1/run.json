@@ -1,0 +1,14 @@
+{
+  "name": "rt-l14b_full_lr2e5-s1",
+  "commit": "aba9153fe1fd6f8737520d8e03ba3e24d91b93dc-dirty",
+  "config_hash": "296d9a2b47b3e99a",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "cmd": "<workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model <workspace>/chinor/results/l14b_full_lr2e5-s1/train/model --arm rt-l14b_full_lr2e5-s1 --eval-set eval/redteam_set.jsonl --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/rt-l14b_full_lr2e5-s1/rt-l14b_full_lr2e5-s1",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T12:00:36+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T12:01:00+00:00"
+}

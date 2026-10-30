@@ -1,0 +1,9 @@
+Host <host>
+    HostName CHINOR_SSH_HOST
+    User CHINOR_SSH_USER
+    Port 22
+    IdentityFile ~/.ssh/id_container
+    IdentitiesOnly yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 6
+    StrictHostKeyChecking accept-new

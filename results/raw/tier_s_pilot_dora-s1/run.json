@@ -1,0 +1,14 @@
+{
+  "name": "tier_s_pilot_dora-s1",
+  "commit": "a2c9e519b3659b6ad2710fcc261284ab614e4e90-dirty",
+  "config_hash": "5a6426f3980f93a0",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash scripts/h200/train_eval.sh tier_s_pilot_dora-s1 train/configs/tier_s_pilot_dora.yaml 1",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T18:06:44+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T18:15:57+00:00"
+}

@@ -1,0 +1,267 @@
+
+=== robust-evalbatch-14B start 2026-10-28T17:12:23Z (commit d152fe3017540c6e0fb04d8e23e20f58a3181529)
+$ <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B-Base --arm base-14B-0shot-A-bs1 --shots 0 --protocol A --dtype bf16 --batch-size 1 --out-dir <workspace>/chinor/results/robust-evalbatch-14B/base-14B-0shot-A-bs1 
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 443/443 [00:00<00:00, 9107.91it/s]
+[1/220] batch 1 x 17 tokens, 815 ms/item
+[2/220] batch 1 x 14 tokens, 2350 ms/item
+[3/220] batch 1 x 15 tokens, 304 ms/item
+[4/220] batch 1 x 18 tokens, 453 ms/item
+[5/220] batch 1 x 16 tokens, 415 ms/item
+[6/220] batch 1 x 15 tokens, 7425 ms/item
+[7/220] batch 1 x 16 tokens, 7409 ms/item
+[8/220] batch 1 x 16 tokens, 2913 ms/item
+[9/220] batch 1 x 19 tokens, 3468 ms/item
+[10/220] batch 1 x 18 tokens, 2726 ms/item
+[11/220] batch 1 x 16 tokens, 3352 ms/item
+[12/220] batch 1 x 17 tokens, 3281 ms/item
+[13/220] batch 1 x 22 tokens, 4023 ms/item
+[14/220] batch 1 x 20 tokens, 7410 ms/item
+[15/220] batch 1 x 26 tokens, 273 ms/item
+[16/220] batch 1 x 24 tokens, 3265 ms/item
+[17/220] batch 1 x 21 tokens, 411 ms/item
+[18/220] batch 1 x 23 tokens, 925 ms/item
+[19/220] batch 1 x 21 tokens, 7388 ms/item
+[20/220] batch 1 x 21 tokens, 519 ms/item
+[21/220] batch 1 x 465 tokens, 1819 ms/item
+[22/220] batch 1 x 465 tokens, 1275 ms/item
+[23/220] batch 1 x 464 tokens, 1613 ms/item
+[24/220] batch 1 x 466 tokens, 5192 ms/item
+[25/220] batch 1 x 465 tokens, 1797 ms/item
+[26/220] batch 1 x 466 tokens, 1311 ms/item
+[27/220] batch 1 x 465 tokens, 2797 ms/item
+[28/220] batch 1 x 467 tokens, 1653 ms/item
+[29/220] batch 1 x 465 tokens, 1422 ms/item
+[30/220] batch 1 x 465 tokens, 3508 ms/item
+[31/220] batch 1 x 466 tokens, 1460 ms/item
+[32/220] batch 1 x 466 tokens, 2692 ms/item
+[33/220] batch 1 x 465 tokens, 1794 ms/item
+[34/220] batch 1 x 466 tokens, 2021 ms/item
+[35/220] batch 1 x 466 tokens, 2657 ms/item
+[36/220] batch 1 x 467 tokens, 2205 ms/item
+[37/220] batch 1 x 467 tokens, 7317 ms/item
+[38/220] batch 1 x 464 tokens, 1348 ms/item
+[39/220] batch 1 x 467 tokens, 2095 ms/item
+[40/220] batch 1 x 466 tokens, 1462 ms/item
+[41/220] batch 1 x 465 tokens, 3548 ms/item
+[42/220] batch 1 x 466 tokens, 2726 ms/item
+[43/220] batch 1 x 466 tokens, 1833 ms/item
+[44/220] batch 1 x 468 tokens, 2510 ms/item
+[45/220] batch 1 x 467 tokens, 2283 ms/item
+[46/220] batch 1 x 467 tokens, 6079 ms/item
+[47/220] batch 1 x 467 tokens, 1833 ms/item
+[48/220] batch 1 x 467 tokens, 1649 ms/item
+[49/220] batch 1 x 466 tokens, 2021 ms/item
+[50/220] batch 1 x 467 tokens, 2841 ms/item
+[51/220] batch 1 x 465 tokens, 1800 ms/item
+[52/220] batch 1 x 467 tokens, 1430 ms/item
+[53/220] batch 1 x 466 tokens, 2182 ms/item
+[54/220] batch 1 x 468 tokens, 3003 ms/item
+[55/220] batch 1 x 468 tokens, 2140 ms/item
+[56/220] batch 1 x 468 tokens, 2405 ms/item
+[57/220] batch 1 x 466 tokens, 1498 ms/item
+[58/220] batch 1 x 465 tokens, 3587 ms/item
+[59/220] batch 1 x 465 tokens, 1797 ms/item
+[60/220] batch 1 x 466 tokens, 5967 ms/item
+[61/220] batch 1 x 467 tokens, 4259 ms/item
+[62/220] batch 1 x 466 tokens, 3809 ms/item
+[63/220] batch 1 x 466 tokens, 2881 ms/item
+[64/220] batch 1 x 468 tokens, 2248 ms/item
+[65/220] batch 1 x 465 tokens, 1798 ms/item
+[66/220] batch 1 x 467 tokens, 2170 ms/item
+[67/220] batch 1 x 470 tokens, 1950 ms/item
+[68/220] batch 1 x 467 tokens, 1946 ms/item
+[69/220] batch 1 x 467 tokens, 2621 ms/item
+[70/220] batch 1 x 467 tokens, 1575 ms/item
+[71/220] batch 1 x 466 tokens, 2212 ms/item
+[72/220] batch 1 x 472 tokens, 3113 ms/item
+[73/220] batch 1 x 468 tokens, 6958 ms/item
+[74/220] batch 1 x 468 tokens, 2328 ms/item
+[75/220] batch 1 x 468 tokens, 2319 ms/item
+[76/220] batch 1 x 468 tokens, 1611 ms/item
+[77/220] batch 1 x 466 tokens, 2358 ms/item
+[78/220] batch 1 x 467 tokens, 2882 ms/item
+[79/220] batch 1 x 468 tokens, 1657 ms/item
+[80/220] batch 1 x 467 tokens, 1836 ms/item
+[81/220] batch 1 x 469 tokens, 2547 ms/item
+[82/220] batch 1 x 471 tokens, 2026 ms/item
+[83/220] batch 1 x 469 tokens, 1948 ms/item
+[84/220] batch 1 x 471 tokens, 2099 ms/item
+[85/220] batch 1 x 473 tokens, 4907 ms/item
+[86/220] batch 1 x 468 tokens, 2099 ms/item
+[87/220] batch 1 x 468 tokens, 2433 ms/item
+[88/220] batch 1 x 468 tokens, 3657 ms/item
+[89/220] batch 1 x 470 tokens, 1876 ms/item
+[90/220] batch 1 x 469 tokens, 1838 ms/item
+[91/220] batch 1 x 470 tokens, 2552 ms/item
+[92/220] batch 1 x 471 tokens, 2401 ms/item
+[93/220] batch 1 x 468 tokens, 1619 ms/item
+[94/220] batch 1 x 468 tokens, 2520 ms/item
+[95/220] batch 1 x 470 tokens, 1694 ms/item
+[96/220] batch 1 x 469 tokens, 4016 ms/item
+[97/220] batch 1 x 469 tokens, 2917 ms/item
+[98/220] batch 1 x 467 tokens, 1984 ms/item
+[99/220] batch 1 x 469 tokens, 3481 ms/item
+[100/220] batch 1 x 469 tokens, 2619 ms/item
+[101/220] batch 1 x 470 tokens, 3899 ms/item
+[102/220] batch 1 x 469 tokens, 1950 ms/item
+[103/220] batch 1 x 471 tokens, 1464 ms/item
+[104/220] batch 1 x 469 tokens, 2588 ms/item
+[105/220] batch 1 x 471 tokens, 3404 ms/item
+[106/220] batch 1 x 470 tokens, 3851 ms/item
+[107/220] batch 1 x 470 tokens, 2050 ms/item
+[108/220] batch 1 x 470 tokens, 3601 ms/item
+[109/220] batch 1 x 469 tokens, 1935 ms/item
+[110/220] batch 1 x 470 tokens, 3599 ms/item
+[111/220] batch 1 x 471 tokens, 2006 ms/item
+[112/220] batch 1 x 474 tokens, 5118 ms/item
+[113/220] batch 1 x 471 tokens, 1571 ms/item
+[114/220] batch 1 x 471 tokens, 2431 ms/item
+[115/220] batch 1 x 471 tokens, 2474 ms/item
+[116/220] batch 1 x 469 tokens, 2247 ms/item
+[117/220] batch 1 x 470 tokens, 1576 ms/item
+[118/220] batch 1 x 466 tokens, 1617 ms/item
+[119/220] batch 1 x 471 tokens, 3509 ms/item
+[120/220] batch 1 x 469 tokens, 3553 ms/item
+[121/220] batch 1 x 471 tokens, 2510 ms/item
+[122/220] batch 1 x 469 tokens, 1352 ms/item
+[123/220] batch 1 x 471 tokens, 3632 ms/item
+[124/220] batch 1 x 471 tokens, 3856 ms/item
+[125/220] batch 1 x 470 tokens, 1918 ms/item
+[126/220] batch 1 x 468 tokens, 1988 ms/item
+[127/220] batch 1 x 471 tokens, 2732 ms/item
+[128/220] batch 1 x 472 tokens, 2771 ms/item
+[129/220] batch 1 x 471 tokens, 1907 ms/item
+[130/220] batch 1 x 472 tokens, 1614 ms/item
+[131/220] batch 1 x 473 tokens, 2179 ms/item
+[132/220] batch 1 x 473 tokens, 1689 ms/item
+[133/220] batch 1 x 471 tokens, 1985 ms/item
+[134/220] batch 1 x 472 tokens, 2251 ms/item
+[135/220] batch 1 x 471 tokens, 1281 ms/item
+[136/220] batch 1 x 470 tokens, 2586 ms/item
+[137/220] batch 1 x 473 tokens, 2173 ms/item
+[138/220] batch 1 x 472 tokens, 2324 ms/item
+[139/220] batch 1 x 470 tokens, 2735 ms/item
+[140/220] batch 1 x 472 tokens, 2467 ms/item
+[141/220] batch 1 x 471 tokens, 2135 ms/item
+[142/220] batch 1 x 483 tokens, 2105 ms/item
+[143/220] batch 1 x 474 tokens, 2023 ms/item
+[144/220] batch 1 x 471 tokens, 1958 ms/item
+[145/220] batch 1 x 474 tokens, 2816 ms/item
+[146/220] batch 1 x 472 tokens, 1586 ms/item
+[147/220] batch 1 x 474 tokens, 2100 ms/item
+[148/220] batch 1 x 475 tokens, 1542 ms/item
+[149/220] batch 1 x 472 tokens, 3292 ms/item
+[150/220] batch 1 x 471 tokens, 1687 ms/item
+[151/220] batch 1 x 472 tokens, 2173 ms/item
+[152/220] batch 1 x 472 tokens, 2913 ms/item
+[153/220] batch 1 x 471 tokens, 1694 ms/item
+[154/220] batch 1 x 471 tokens, 1880 ms/item
+[155/220] batch 1 x 475 tokens, 2599 ms/item
+[156/220] batch 1 x 473 tokens, 2403 ms/item
+[157/220] batch 1 x 474 tokens, 2290 ms/item
+[158/220] batch 1 x 473 tokens, 1799 ms/item
+[159/220] batch 1 x 473 tokens, 2029 ms/item
+[160/220] batch 1 x 469 tokens, 1799 ms/item
+[161/220] batch 1 x 473 tokens, 1655 ms/item
+[162/220] batch 1 x 475 tokens, 1577 ms/item
+[163/220] batch 1 x 473 tokens, 2745 ms/item
+[164/220] batch 1 x 472 tokens, 2666 ms/item
+[165/220] batch 1 x 476 tokens, 1806 ms/item
+[166/220] batch 1 x 470 tokens, 1654 ms/item
+[167/220] batch 1 x 485 tokens, 1656 ms/item
+[168/220] batch 1 x 476 tokens, 1426 ms/item
+[169/220] batch 1 x 476 tokens, 2435 ms/item
+[170/220] batch 1 x 475 tokens, 3589 ms/item
+[171/220] batch 1 x 473 tokens, 2139 ms/item
+[172/220] batch 1 x 472 tokens, 1764 ms/item
+[173/220] batch 1 x 475 tokens, 1876 ms/item
+[174/220] batch 1 x 477 tokens, 4011 ms/item
+[175/220] batch 1 x 474 tokens, 2513 ms/item
+[176/220] batch 1 x 475 tokens, 2996 ms/item
+[177/220] batch 1 x 474 tokens, 1470 ms/item
+[178/220] batch 1 x 474 tokens, 3078 ms/item
+[179/220] batch 1 x 474 tokens, 2620 ms/item
+[180/220] batch 1 x 473 tokens, 2922 ms/item
+[181/220] batch 1 x 474 tokens, 2089 ms/item
+[182/220] batch 1 x 475 tokens, 1863 ms/item
+[183/220] batch 1 x 478 tokens, 1974 ms/item
+[184/220] batch 1 x 473 tokens, 4531 ms/item
+[185/220] batch 1 x 476 tokens, 2713 ms/item
+[186/220] batch 1 x 477 tokens, 2305 ms/item
+[187/220] batch 1 x 476 tokens, 2785 ms/item
+[188/220] batch 1 x 478 tokens, 7420 ms/item
+[189/220] batch 1 x 476 tokens, 2007 ms/item
+[190/220] batch 1 x 478 tokens, 2532 ms/item
+[191/220] batch 1 x 478 tokens, 3342 ms/item
+[192/220] batch 1 x 483 tokens, 2200 ms/item
+[193/220] batch 1 x 474 tokens, 2306 ms/item
+[194/220] batch 1 x 479 tokens, 2644 ms/item
+[195/220] batch 1 x 485 tokens, 1377 ms/item
+[196/220] batch 1 x 480 tokens, 3809 ms/item
+[197/220] batch 1 x 483 tokens, 2573 ms/item
+[198/220] batch 1 x 479 tokens, 2166 ms/item
+[199/220] batch 1 x 478 tokens, 3120 ms/item
+[200/220] batch 1 x 484 tokens, 2576 ms/item
+[201/220] batch 1 x 479 tokens, 2203 ms/item
+[202/220] batch 1 x 480 tokens, 2202 ms/item
+[203/220] batch 1 x 495 tokens, 2205 ms/item
+[204/220] batch 1 x 483 tokens, 970 ms/item
+[205/220] batch 1 x 479 tokens, 2528 ms/item
+[206/220] batch 1 x 485 tokens, 2675 ms/item
+[207/220] batch 1 x 482 tokens, 2828 ms/item
+[208/220] batch 1 x 484 tokens, 2386 ms/item
+[209/220] batch 1 x 483 tokens, 3362 ms/item
+[210/220] batch 1 x 486 tokens, 2135 ms/item
+[211/220] batch 1 x 500 tokens, 1721 ms/item
+[212/220] batch 1 x 491 tokens, 3402 ms/item
+[213/220] batch 1 x 489 tokens, 3860 ms/item
+[214/220] batch 1 x 519 tokens, 2624 ms/item
+[215/220] batch 1 x 508 tokens, 3133 ms/item
+[216/220] batch 1 x 519 tokens, 1867 ms/item
+[217/220] batch 1 x 498 tokens, 1500 ms/item
+[218/220] batch 1 x 523 tokens, 2804 ms/item
+[219/220] batch 1 x 513 tokens, 3136 ms/item
+[220/220] batch 1 x 535 tokens, 2550 ms/item
+{
+  "arm": "base-14B-0shot-A-bs1",
+  "git_commit": "a2c9e519b3659b6ad2710fcc261284ab614e4e90-dirty",
+  "model": "Qwen/Qwen3-14B-Base",
+  "revision": null,
+  "adapter": null,
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "train/chat_template.jinja",
+  "reference_not_pipeline": false,
+  "eval_set": "eval/eval_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 220,
+  "batch_size": 1,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 29.739,
+  "wall_clock_s": 560.0,
+  "mean_latency_ms": 2544.1,
+  "timestamp": "2026-10-28T17:21:58+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}
+=== end 2026-10-28T17:21:59Z exit 0

@@ -1,0 +1,25 @@
+
+=== rt-ref-14B-instruct-A start 2026-10-29T10:23:13Z (commit e9c2d04ac1bae2be0dccc842adf5dbc5a1606c47-dirty)
+$ <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B --arm rt-ref-14B-instruct-A --eval-set eval/redteam_set.jsonl --protocol A --dtype bf16 --batch-size 32 --native-template --out-dir <workspace>/chinor/results/rt-ref-14B-instruct-A/rt-ref-14B-instruct-A 
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights:  14%|█▍        | 62/443 [00:00<00:00, 619.75it/s]
+Loading weights:  28%|██▊       | 124/443 [00:00<00:00, 348.26it/s]
+Loading weights:  37%|███▋      | 166/443 [00:00<00:00, 324.58it/s]
+Loading weights:  46%|████▌     | 202/443 [00:00<00:00, 299.85it/s]
+Loading weights:  53%|█████▎    | 234/443 [00:00<00:00, 281.59it/s]
+Loading weights:  61%|██████    | 271/443 [00:00<00:00, 303.30it/s]
+Loading weights:  68%|██████▊   | 303/443 [00:00<00:00, 297.79it/s]
+Loading weights: 100%|██████████| 443/443 [00:01<00:00, 427.80it/s]
+[32/60] batch 32 x 513 tokens, 168 ms/item
+[60/60] batch 28 x 569 tokens, 359 ms/item
+Traceback (most recent call last):
+  File "<workspace>/chinor/repo/eval/run_eval.py", line 203, in <module>
+    main()
+  File "<workspace>/chinor/repo/eval/run_eval.py", line 190, in main
+    "eval_set": str(Path(args.eval_set).resolve().relative_to(ROOT)) if Path(args.eval_set).resolve().is_relative_to(ROOT) else args.eval_set,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 682, in relative_to
+    raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+ValueError: 'eval/redteam_set.jsonl' is not in the subpath of '<workspace>/chinor/repo'
+=== end 2026-10-29T10:27:54Z exit 1

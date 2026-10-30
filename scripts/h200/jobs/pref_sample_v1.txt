@@ -1,0 +1,2 @@
+# C4 §2 on-policy sampling and §4 judge (queue.sh format; dest data/pref/v1/samples, data/pref/v1/judge).
+pref-samples-v1 40 <workspace>/chinor/venv-gen/bin/python data/pref/sample.py --model <workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model --batch-prompts 32 --out <workspace>/chinor/results/pref-samples-v1

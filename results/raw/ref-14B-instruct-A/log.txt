@@ -1,0 +1,63 @@
+
+=== ref-14B-instruct-A start 2026-10-28T16:55:37Z (commit d152fe3017540c6e0fb04d8e23e20f58a3181529)
+$ <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B --arm ref-14B-instruct-A --native-template --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/ref-14B-instruct-A/ref-14B-instruct-A 
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights:   6%|▌         | 26/443 [00:00<00:01, 257.95it/s]
+Loading weights:  13%|█▎        | 58/443 [00:00<00:01, 294.26it/s]
+Loading weights:  22%|██▏       | 99/443 [00:00<00:00, 345.03it/s]
+Loading weights:  30%|███       | 134/443 [00:00<00:00, 310.88it/s]
+Loading weights:  37%|███▋      | 166/443 [00:00<00:01, 250.83it/s]
+Loading weights:  44%|████▎     | 193/443 [00:00<00:00, 253.51it/s]
+Loading weights:  50%|████▉     | 220/443 [00:00<00:00, 252.22it/s]
+Loading weights:  56%|█████▌    | 246/443 [00:00<00:00, 247.29it/s]
+Loading weights: 100%|██████████| 443/443 [00:00<00:00, 448.94it/s]
+[32/220] batch 32 x 471 tokens, 319 ms/item
+[64/220] batch 32 x 472 tokens, 126 ms/item
+[96/220] batch 32 x 477 tokens, 120 ms/item
+[128/220] batch 32 x 478 tokens, 152 ms/item
+[160/220] batch 32 x 487 tokens, 123 ms/item
+[192/220] batch 32 x 489 tokens, 133 ms/item
+[220/220] batch 28 x 539 tokens, 164 ms/item
+{
+  "arm": "ref-14B-instruct-A",
+  "git_commit": "d152fe3017540c6e0fb04d8e23e20f58a3181529",
+  "model": "Qwen/Qwen3-14B",
+  "revision": null,
+  "adapter": null,
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "native (enable_thinking=False)",
+  "reference_not_pipeline": true,
+  "eval_set": "eval/eval_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 220,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 34.428,
+  "wall_clock_s": 35.9,
+  "mean_latency_ms": 162.5,
+  "timestamp": "2026-10-28T17:01:39+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}
+=== end 2026-10-28T17:01:40Z exit 0

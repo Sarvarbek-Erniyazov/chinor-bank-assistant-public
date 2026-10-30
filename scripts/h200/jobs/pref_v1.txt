@@ -1,0 +1,9 @@
+# C4 §6 preference runs (queue.sh format), run 2026-10-29/30 overnight (GTD starts ~11:00; hard end 05:00 KST).
+# Order: DPO-rules s0 alone first; eval/pref_acceptance.py on it (>= 95 % <|im_end|>, hard violations <= SFT s0).
+# If it fails, DPO s1/s2 are skipped (reason recorded) and the SimPO lines run. Judge arm dropped for this session.
+pref_dpo_rules-s0 40 bash scripts/h200/pref_train_eval.sh pref_dpo_rules-s0 train/configs/pref_dpo_rules.yaml 0
+pref_dpo_rules-s1 40 bash scripts/h200/pref_train_eval.sh pref_dpo_rules-s1 train/configs/pref_dpo_rules.yaml 1
+pref_dpo_rules-s2 40 bash scripts/h200/pref_train_eval.sh pref_dpo_rules-s2 train/configs/pref_dpo_rules.yaml 2
+pref_simpo_rules-s0 35 bash scripts/h200/pref_train_eval.sh pref_simpo_rules-s0 train/configs/pref_simpo_rules.yaml 0
+pref_simpo_rules-s1 35 bash scripts/h200/pref_train_eval.sh pref_simpo_rules-s1 train/configs/pref_simpo_rules.yaml 1
+pref_simpo_rules-s2 35 bash scripts/h200/pref_train_eval.sh pref_simpo_rules-s2 train/configs/pref_simpo_rules.yaml 2

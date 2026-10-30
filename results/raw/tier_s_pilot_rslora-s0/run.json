@@ -1,0 +1,14 @@
+{
+  "name": "tier_s_pilot_rslora-s0",
+  "commit": "a2c9e519b3659b6ad2710fcc261284ab614e4e90-dirty",
+  "config_hash": "73d88d46d4f4da54",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash scripts/h200/train_eval.sh tier_s_pilot_rslora-s0 train/configs/tier_s_pilot_rslora.yaml 0",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T17:39:31+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T17:45:03+00:00"
+}

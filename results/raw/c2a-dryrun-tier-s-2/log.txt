@@ -1,0 +1,131 @@
+
+=== c2a-dryrun-tier-s-2 start 2026-10-28T16:01:36Z (commit d152fe3017540c6e0fb04d8e23e20f58a3181529)
+$ <workspace>/chinor/venv-gen/bin/python train/dryrun.py --config train/configs/tier_s_pilot_lora.yaml --steps 20 --data-dir data/sft/_provisional --out <workspace>/chinor/results/c2a-dryrun-tier-s-2 
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 310/310 [00:00<00:00, 9235.27it/s]
+masking: ok
+$ <workspace>/chinor/venv-gen/bin/python <workspace>/chinor/repo/train/sft.py --config train/configs/tier_s_pilot_lora.yaml --seed 0 --out <workspace>/chinor/results/c2a-dryrun-tier-s-2/train --max-steps 20 --save-steps 10 --data-dir data/sft/_provisional --stop-at 10
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 310/310 [00:00<00:00, 9556.61it/s]
+trainable parameters: 10,092,544 of 606,142,464 (1.665 %)
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 151643}.
+
+  0%|          | 0/20 [00:00<?, ?it/s]
+  5%|▌         | 1/20 [00:00<00:18,  1.04it/s]
+ 10%|█         | 2/20 [00:01<00:11,  1.55it/s]
+ 15%|█▌        | 3/20 [00:01<00:09,  1.85it/s]
+ 20%|██        | 4/20 [00:02<00:07,  2.02it/s]
+ 25%|██▌       | 5/20 [00:02<00:06,  2.17it/s]
+ 30%|███       | 6/20 [00:03<00:06,  2.27it/s]
+ 35%|███▌      | 7/20 [00:03<00:05,  2.34it/s]
+ 40%|████      | 8/20 [00:03<00:05,  2.40it/s]
+ 45%|████▌     | 9/20 [00:04<00:04,  2.42it/s]
+ 50%|█████     | 10/20 [00:04<00:04,  2.45it/s]
+                                               
+{'loss': '2.186', 'grad_norm': '1.726', 'learning_rate': '0.0001245', 'epoch': '0.05917'}
+
+ 50%|█████     | 10/20 [00:04<00:04,  2.45it/s]
+                                               
+{'train_runtime': '5.68', 'train_samples_per_second': '28.17', 'train_steps_per_second': '1.76', 'train_loss': '2.186', 'epoch': '0.05917'}
+
+ 50%|█████     | 10/20 [00:05<00:04,  2.45it/s]
+ 50%|█████     | 10/20 [00:05<00:05,  1.76it/s]
+
+  0%|          | 0/9 [00:00<?, ?it/s]
+ 22%|██▏       | 2/9 [00:00<00:00, 17.28it/s]
+ 44%|████▍     | 4/9 [00:00<00:00, 11.61it/s]
+ 67%|██████▋   | 6/9 [00:00<00:00, 10.16it/s]
+ 89%|████████▉ | 8/9 [00:00<00:00,  9.61it/s]
+100%|██████████| 9/9 [00:00<00:00,  9.62it/s]
+{
+  "global_step": 10,
+  "peak_vram_gb": 18.77,
+  "tokens_per_s": 14613.2,
+  "supervised_tokens_per_s": 1658.9,
+  "wall_clock_s": 5.8,
+  "final_train_loss": 2.1864397048950197,
+  "final_val_loss": 2.16204833984375
+}
+$ <workspace>/chinor/venv-gen/bin/python <workspace>/chinor/repo/train/sft.py --config train/configs/tier_s_pilot_lora.yaml --seed 0 --out <workspace>/chinor/results/c2a-dryrun-tier-s-2/train --max-steps 20 --save-steps 10 --data-dir data/sft/_provisional
+
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 310/310 [00:00<00:00, 10135.75it/s]
+trainable parameters: 10,092,544 of 606,142,464 (1.665 %)
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 151643}.
+
+  0%|          | 0/20 [00:00<?, ?it/s]
+ 55%|█████▌    | 11/20 [00:00<00:00, 11.83it/s]
+ 65%|██████▌   | 13/20 [00:01<00:01,  6.69it/s]
+ 70%|███████   | 14/20 [00:02<00:01,  5.53it/s]
+ 75%|███████▌  | 15/20 [00:02<00:01,  4.70it/s]
+ 80%|████████  | 16/20 [00:02<00:00,  4.02it/s]
+ 85%|████████▌ | 17/20 [00:03<00:00,  3.58it/s]
+ 90%|█████████ | 18/20 [00:03<00:00,  3.29it/s]
+ 95%|█████████▌| 19/20 [00:04<00:00,  3.02it/s]
+100%|██████████| 20/20 [00:04<00:00,  2.89it/s]
+                                               
+{'loss': '1.958', 'grad_norm': '2.51', 'learning_rate': '1.364e-06', 'epoch': '0.1183'}
+
+100%|██████████| 20/20 [00:04<00:00,  2.89it/s]
+
+  0%|          | 0/9 [00:00<?, ?it/s][A
+
+ 22%|██▏       | 2/9 [00:00<00:00, 17.57it/s][A
+
+ 44%|████▍     | 4/9 [00:00<00:00, 11.53it/s][A
+
+ 67%|██████▋   | 6/9 [00:00<00:00, 10.12it/s][A
+
+ 89%|████████▉ | 8/9 [00:00<00:00,  9.58it/s][A
+                                               
+
+                                             
+[A{'eval_loss': '2.053', 'eval_runtime': '1.024', 'eval_samples_per_second': '140.7', 'eval_steps_per_second': '8.792', 'epoch': '0.1183'}
+
+100%|██████████| 20/20 [00:05<00:00,  2.89it/s]
+
+100%|██████████| 9/9 [00:00<00:00,  9.58it/s][A
+
+                                             [AWarning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[WARNING  | huggingface_hub.utils._http]: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+                                               
+{'train_runtime': '6.594', 'train_samples_per_second': '24.26', 'train_steps_per_second': '1.517', 'train_loss': '1.958', 'epoch': '0.1183'}
+
+100%|██████████| 20/20 [00:06<00:00,  2.89it/s]
+100%|██████████| 20/20 [00:06<00:00,  3.03it/s]
+
+  0%|          | 0/9 [00:00<?, ?it/s]
+ 22%|██▏       | 2/9 [00:00<00:00, 18.04it/s]
+ 44%|████▍     | 4/9 [00:00<00:00, 11.76it/s]
+ 67%|██████▋   | 6/9 [00:00<00:00, 10.51it/s]
+ 89%|████████▉ | 8/9 [00:00<00:00, 10.00it/s]
+100%|██████████| 9/9 [00:00<00:00, 10.01it/s]
+{
+  "global_step": 20,
+  "peak_vram_gb": 16.6,
+  "tokens_per_s": 11517.5,
+  "supervised_tokens_per_s": 1307.5,
+  "wall_clock_s": 7.4,
+  "final_train_loss": 1.9577011108398437,
+  "final_val_loss": 2.053496837615967
+}
+# Dry run — Tier S pilot (Qwen3-0.6B-Base, plain LoRA)
+
+`train/dryrun.py` on NVIDIA H200, bf16, config `tier_s_pilot_lora.yaml` (hash `53cc82b4ac4c139e`), commit `d152fe3017540c6e0fb04d8e23e20f58a3181529`, data `data/sft/_provisional` (manifest `4713b92666273406`) — **provisional assembly: mechanics only, not the committed SFT v1 data**.
+
+| Check | Result | Detail |
+|---|---|---|
+| Assistant-only masking on a real batch | PASS | 86 of 626 tokens supervised |
+| Peak VRAM ≤ 40 GB | PASS | 18.77 GB (torch.cuda.max_memory_allocated) |
+| Resume from checkpoint | PASS | stopped at step 10, resumed from `checkpoint-10`, reached step 20 of 20 |
+
+| Phase | Steps | Wall-clock (s) | Tokens/s | Supervised tokens/s | Peak VRAM (GB) | Last train loss | Val loss |
+|---|---|---|---|---|---|---|---|
+| 1: start → stop | 10 | 5.8 | 14613.2 | 1658.9 | 18.77 | 2.1864397048950197 | 2.16204833984375 |
+| 2: resume → end | 10 | 7.4 | 11517.5 | 1307.5 | 16.6 | 1.9577011108398437 | 2.053496837615967 |
+
+Trainable parameters: 10,092,544 of 606,142,464 (1.665 %); embeddings and lm_head frozen (asserted).
+=== end 2026-10-28T16:02:47Z exit 0

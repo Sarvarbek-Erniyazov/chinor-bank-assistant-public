@@ -1,0 +1,14 @@
+{
+  "name": "l14b_full_lr2e5-s0",
+  "commit": "ecd785e1167551e2cf8c42bbc002e543b28d8363-dirty",
+  "config_hash": "7cc259bf9e315e88",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash scripts/h200/train_eval.sh l14b_full_lr2e5-s0 train/configs/l14b_full_lr2e5.yaml 0",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T06:39:40+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T07:15:49+00:00"
+}

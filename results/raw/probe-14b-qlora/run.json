@@ -1,0 +1,14 @@
+{
+  "name": "probe-14b-qlora",
+  "commit": "0f9f30c437b44d72ffc279ab4a39d79462cf5445",
+  "config_hash": "665ec8b85bfde24c",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash scripts/h200/probe.sh probe-14b-qlora train/configs/probe_14b_qlora.yaml",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T15:22:14+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T15:23:44+00:00"
+}

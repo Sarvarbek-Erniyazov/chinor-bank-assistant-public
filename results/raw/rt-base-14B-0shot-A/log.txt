@@ -1,0 +1,53 @@
+
+=== rt-base-14B-0shot-A start 2026-10-29T10:30:48Z (commit 56cd6f9fd684a1e8dfdd615bde0ff7fb0d05385f-dirty)
+$ <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B-Base --arm rt-base-14B-0shot-A --eval-set eval/redteam_set.jsonl --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/rt-base-14B-0shot-A/rt-base-14B-0shot-A 
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 443/443 [00:00<00:00, 17504.91it/s]
+[32/60] batch 32 x 509 tokens, 342 ms/item
+[60/60] batch 28 x 565 tokens, 360 ms/item
+{
+  "arm": "rt-base-14B-0shot-A",
+  "git_commit": "56cd6f9fd684a1e8dfdd615bde0ff7fb0d05385f-dirty",
+  "model": "Qwen/Qwen3-14B-Base",
+  "revision": null,
+  "adapter": null,
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "train/chat_template.jinja",
+  "reference_not_pipeline": false,
+  "system_prompt": {
+    "path": "handbook/system_prompt.txt",
+    "sha256": "c93c104d11983aca2371732a58bd53436180e1ea99e4cdf6dff40dcb32837a83"
+  },
+  "eval_set": "eval/redteam_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 60,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 34.626,
+  "wall_clock_s": 21.1,
+  "mean_latency_ms": 350.4,
+  "timestamp": "2026-10-29T10:31:24+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}
+=== end 2026-10-29T10:31:24Z exit 0

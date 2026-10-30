@@ -1,0 +1,4 @@
+# Entailment judge, full pass over every verifier-v2-accepted candidate (C1, ADR-022). Launch only after the 50-row
+# validation passed; set --prompt-version to the validated attempt. Estimate: re-estimated from the validation
+# throughput (sentences/s) before launch: validation 125 sentences in 32 s (3.9/s) -> 12,297 sentences ~53 min + load ~ 60 min; scheduled as 70.
+judge-full-v1 70 <workspace>/chinor/venv-gen/bin/python data/entail_judge.py --candidates results/c1-rewrites --prompt-version 1 --revision 842da3794eaa0b77d5f08bae87a17459d91ff475 --out <workspace>/chinor/results/judge-full-v1

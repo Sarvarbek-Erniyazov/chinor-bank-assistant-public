@@ -1,0 +1,14 @@
+{
+  "name": "probe-1.7b-lora-2",
+  "commit": "d152fe3017540c6e0fb04d8e23e20f58a3181529",
+  "config_hash": "3d33983311a28f91",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash scripts/h200/probe.sh probe-1.7b-lora-2 train/configs/probe_1.7b_lora.yaml",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T16:03:14+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T16:03:49+00:00"
+}

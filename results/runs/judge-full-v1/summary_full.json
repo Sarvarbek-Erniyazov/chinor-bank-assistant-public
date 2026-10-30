@@ -1,0 +1,13 @@
+{
+  "judge": "google/gemma-4-31B-it",
+  "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+  "model_class": "Gemma4ForConditionalGeneration",
+  "prompt_version": 1,
+  "candidates": 5048,
+  "entailed": 4322,
+  "sentences": 12297,
+  "unparsed": 0,
+  "load_s": 28,
+  "generate_s": 2900,
+  "sentences_per_s": 4.24
+}

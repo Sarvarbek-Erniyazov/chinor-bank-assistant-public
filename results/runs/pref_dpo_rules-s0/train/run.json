@@ -1,0 +1,51 @@
+{
+  "config": "train/configs/pref_dpo_rules.yaml",
+  "config_values": {
+    "model": "<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model",
+    "pairs": "data/pref/v1/pairs_rules.jsonl",
+    "loss": "dpo",
+    "beta": 0.1,
+    "max_length": 1024,
+    "per_device_train_batch_size": 4,
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 1e-05,
+    "warmup_ratio": 0.1,
+    "num_train_epochs": 2,
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ]
+    }
+  },
+  "seed": 0,
+  "pairs": "data/pref/v1/pairs_rules.jsonl",
+  "pairs_sha256": "9634cdb61a3111b89ecf736dc8d0d84226cab2636639ddf371760ab26d4d39b8",
+  "pairs_used": 348,
+  "steps": 42,
+  "sft_merged_manifest_sha256": "e4d24cc5e588182a0142bfca68f14aae5027a664b1caa994c5394d4a923003b0",
+  "adapter_sha256": "b2ae8a783c2ba5f87bfd465d643515bdeca5190fea1bf99f7bda42b2ee8bb12b",
+  "wall_clock_s": 281.8,
+  "peak_vram_gb": 42.12,
+  "gpu": "NVIDIA H200",
+  "final": {
+    "step": 42,
+    "epoch": 2.0,
+    "loss": 0.653312087059021,
+    "reward_acc": 0.75,
+    "chosen_reward": 0.012093751691281796,
+    "rejected_reward": -0.07219085842370987,
+    "margin": 0.08428461104631424,
+    "chosen_len": 68.1875,
+    "rejected_len": 58.25,
+    "lr": 1.7077534966650767e-08
+  }
+}

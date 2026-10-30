@@ -1,0 +1,5 @@
+# ADR-029: 14B SFT rsLoRA + trainable token rows on SFT v1.2 (v1.1 + 60 handoff examples), seeds 0-2.
+# Run names l14b_sft_rslora_tok-s<seed>-v1.2; compare with -s<seed> (v1) and -s<seed>-v1.1.
+train/configs/l14b_sft_rslora_tok.yaml 0 30 data/sft/v1.2
+train/configs/l14b_sft_rslora_tok.yaml 1 30 data/sft/v1.2
+train/configs/l14b_sft_rslora_tok.yaml 2 30 data/sft/v1.2

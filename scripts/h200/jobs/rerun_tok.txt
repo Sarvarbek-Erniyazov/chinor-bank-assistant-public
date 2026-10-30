@@ -1,0 +1,15 @@
+# Rerun with trainable <|im_start|>/<|im_end|> rows (ADR-023 amendment), author order 2026-10-29. run_matrix.sh.
+# Acceptance per arm: >= 95 % of answers stop on <|im_end|> (eval/results_tables.py). Full FT seed 1 follows as its
+# own launch (l14b_full_s1.txt, JOB_WRITE_GB=60), so the disk margin applies to it only.
+train/configs/l14b_sft_rslora_tok.yaml 0 30
+train/configs/l14b_sft_rslora_tok.yaml 1 30
+train/configs/l14b_sft_rslora_tok.yaml 2 30
+train/configs/tier_s_main_rslora_tok.yaml 0 10
+train/configs/tier_s_main_rslora_tok.yaml 1 10
+train/configs/tier_s_main_rslora_tok.yaml 2 10
+train/configs/l14b_qlora_rslora_tok.yaml 0 45
+train/configs/l14b_qlora_rslora_tok.yaml 1 45
+train/configs/l14b_qlora_rslora_tok.yaml 2 45
+train/configs/size_4b_rslora_tok.yaml 0 20
+train/configs/size_8b_rslora_tok.yaml 0 30
+train/configs/l14b_sft_rslora_tok.yaml 0 30 data/sft/v1_rewrite

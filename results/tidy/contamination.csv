@@ -1,0 +1,2 @@
+corpus,corpus_size,exact,fuzzy_ge_90,ngram8_overlap_pct
+banking77_train,10003,0,23,3.02

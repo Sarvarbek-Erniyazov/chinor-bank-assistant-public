@@ -1,0 +1,20 @@
+# Colab / Kaggle (CUDA) environment.
+# torch (and torchvision/torchaudio) are deliberately NOT listed: the Colab
+# runtime image provides a matched set, and pinning torch here made pip replace
+# it and break the preinstalled torchvision. The notebook uninstalls torchvision
+# and torchaudio; run.json records the torch version actually used.
+transformers==5.21.0
+trl==1.16.0
+peft==0.21.2
+bitsandbytes==0.50.2
+datasets==5.1.0
+accelerate==1.15.0
+gradio==6.30.0
+huggingface_hub==2.3.0
+pyyaml==6.0.3
+rapidfuzz==3.14.6
+scipy==1.17.1
+numpy==2.4.6
+jinja2==3.1.6
+# optional: fast batched inference for larger evals
+# vllm==0.32.0

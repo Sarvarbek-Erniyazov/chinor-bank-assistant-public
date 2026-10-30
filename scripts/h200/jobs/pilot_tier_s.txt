@@ -1,0 +1,15 @@
+# C2a §3 Tier-S pilot matrix (Qwen3-0.6B-Base), run with run_matrix.sh: "<config> <seed> <estimate_min>".
+# Plain LoRA seeds first. Estimates: re-estimated from the dry run's measured tokens/s before launch.
+train/configs/tier_s_pilot_lora.yaml 0 20
+train/configs/tier_s_pilot_lora.yaml 1 20
+train/configs/tier_s_pilot_lora.yaml 2 20
+train/configs/tier_s_pilot_rslora.yaml 0 20
+train/configs/tier_s_pilot_rslora.yaml 1 20
+train/configs/tier_s_pilot_rslora.yaml 2 20
+train/configs/tier_s_pilot_dora.yaml 0 25
+train/configs/tier_s_pilot_dora.yaml 1 25
+train/configs/tier_s_pilot_dora.yaml 2 25
+train/configs/tier_s_pilot_lora_paged8.yaml 0 20
+train/configs/tier_s_pilot_lora_paged8.yaml 1 20
+train/configs/tier_s_pilot_lora_paged8.yaml 2 20
+train/configs/tier_s_pilot_lora_nogroup.yaml 0 20

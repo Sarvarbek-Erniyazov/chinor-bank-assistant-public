@@ -1,0 +1,5 @@
+# Step 5 (plan 2026-10-29): 14B v1.2 adapters re-evaluated with eval/system_prompt_paraphrase.txt (queue.sh format).
+# Robustness arms only: same items, Protocol A; compared with the same adapters under handbook/system_prompt.txt.
+l14b_sft_rslora_tok-s0-v1.2-paraphrase 6 bash scripts/h200/eval_adapter.sh l14b_sft_rslora_tok-s0-v1.2-paraphrase l14b_sft_rslora_tok-s0-v1.2 train/configs/l14b_sft_rslora_tok.yaml eval/system_prompt_paraphrase.txt
+l14b_sft_rslora_tok-s1-v1.2-paraphrase 6 bash scripts/h200/eval_adapter.sh l14b_sft_rslora_tok-s1-v1.2-paraphrase l14b_sft_rslora_tok-s1-v1.2 train/configs/l14b_sft_rslora_tok.yaml eval/system_prompt_paraphrase.txt
+l14b_sft_rslora_tok-s2-v1.2-paraphrase 6 bash scripts/h200/eval_adapter.sh l14b_sft_rslora_tok-s2-v1.2-paraphrase l14b_sft_rslora_tok-s2-v1.2 train/configs/l14b_sft_rslora_tok.yaml eval/system_prompt_paraphrase.txt

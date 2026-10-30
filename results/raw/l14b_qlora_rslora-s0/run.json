@@ -1,0 +1,17 @@
+{
+  "name": "l14b_qlora_rslora-s0",
+  "commit": "1221505bd952e11174af309a9dc5f536efd9cc54-dirty",
+  "config_hash": "2f4eac0e305fc19f",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash scripts/h200/train_eval.sh l14b_qlora_rslora-s0 train/configs/l14b_qlora_rslora.yaml 0",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T20:33:46+00:00",
+  "exit_code": 143,
+  "end_time": "2026-10-28T20:53:28+00:00",
+  "status": "aborted",
+  "aborted_at": "2026-10-29T05:53+09:00",
+  "abort_reason": "author decision: LoRA/QLoRA arms without trainable special-token rows never emit <|im_end|>; rerun with trainable_token_indices (ADR-023 amended)"
+}

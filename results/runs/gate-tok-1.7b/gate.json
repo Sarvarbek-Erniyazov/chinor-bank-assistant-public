@@ -1,0 +1,9 @@
+{
+  "items": 10,
+  "stop_reasons": {
+    "im_end": 10
+  },
+  "im_end": 10,
+  "pass": true,
+  "rule": ">= 9 / 10 stop on <|im_end|>"
+}

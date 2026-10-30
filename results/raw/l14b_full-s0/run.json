@@ -1,0 +1,14 @@
+{
+  "name": "l14b_full-s0",
+  "commit": "13d9d1a9b7d8ebc733e30634a87a1a3ea6d84691-dirty",
+  "config_hash": "bee49c79aa5b40e3",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash scripts/h200/train_eval.sh l14b_full-s0 train/configs/l14b_full.yaml 0",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T20:54:28+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T21:31:36+00:00"
+}

@@ -1,0 +1,103 @@
+arm,arm_group,method,token_rows,stop_reason,count
+base-0.6B-0shot,base-0.6B-0shot,base,n/a,endoftext,151
+base-0.6B-0shot,base-0.6B-0shot,base,n/a,length,69
+base-0.6B-0shot-A,base-0.6B-0shot-A,base,n/a,endoftext,149
+base-0.6B-0shot-A,base-0.6B-0shot-A,base,n/a,length,71
+base-1.7B-0shot,base-1.7B-0shot,base,n/a,endoftext,189
+base-1.7B-0shot,base-1.7B-0shot,base,n/a,length,31
+base-1.7B-0shot-A,base-1.7B-0shot-A,base,n/a,endoftext,198
+base-1.7B-0shot-A,base-1.7B-0shot-A,base,n/a,length,22
+base-1.7B-3shot,base-1.7B-3shot,base,n/a,endoftext,36
+base-1.7B-3shot,base-1.7B-3shot,base,n/a,length,184
+base-1.7B-3shot-A,base-1.7B-3shot-A,base,n/a,endoftext,35
+base-1.7B-3shot-A,base-1.7B-3shot-A,base,n/a,length,185
+base-14B-0shot-A,base-14B-0shot-A,base,n/a,endoftext,216
+base-14B-0shot-A,base-14B-0shot-A,base,n/a,length,4
+base-14B-0shot-A-bs1,base-14B-0shot-A-bs1,base,n/a,endoftext,215
+base-14B-0shot-A-bs1,base-14B-0shot-A-bs1,base,n/a,length,5
+base-14B-3shot-A,base-14B-3shot-A,base,n/a,endoftext,205
+base-14B-3shot-A,base-14B-3shot-A,base,n/a,length,15
+base-4B-0shot-A,base-4B-0shot-A,base,n/a,endoftext,201
+base-4B-0shot-A,base-4B-0shot-A,base,n/a,length,19
+base-8B-0shot-A,base-8B-0shot-A,base,n/a,endoftext,209
+base-8B-0shot-A,base-8B-0shot-A,base,n/a,length,11
+l14b_full-s0,l14b_full,full FT,n/a,endoftext,5
+l14b_full-s0,l14b_full,full FT,n/a,im_end,203
+l14b_full-s0,l14b_full,full FT,n/a,length,12
+l14b_full-s1,l14b_full,full FT,n/a,endoftext,3
+l14b_full-s1,l14b_full,full FT,n/a,im_end,205
+l14b_full-s1,l14b_full,full FT,n/a,length,12
+l14b_full_lr2e5-s0,l14b_full_lr2e5,full FT,n/a,im_end,220
+l14b_full_lr2e5-s1,l14b_full_lr2e5,full FT,n/a,im_end,219
+l14b_full_lr2e5-s1,l14b_full_lr2e5,full FT,n/a,length,1
+l14b_qlora_rslora_tok-s0,l14b_qlora_rslora_tok,QLoRA,yes,im_end,220
+l14b_qlora_rslora_tok-s1,l14b_qlora_rslora_tok,QLoRA,yes,im_end,220
+l14b_qlora_rslora_tok-s2,l14b_qlora_rslora_tok,QLoRA,yes,im_end,220
+l14b_sft_rslora-s0,l14b_sft_rslora,rsLoRA,no,endoftext,1
+l14b_sft_rslora-s0,l14b_sft_rslora,rsLoRA,no,length,219
+l14b_sft_rslora-s1,l14b_sft_rslora,rsLoRA,no,length,220
+l14b_sft_rslora-s2,l14b_sft_rslora,rsLoRA,no,length,220
+l14b_sft_rslora_tok-s0,l14b_sft_rslora_tok,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s1,l14b_sft_rslora_tok,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s2,l14b_sft_rslora_tok,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s0-v1.1,l14b_sft_rslora_tok-v1.1,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s1-v1.1,l14b_sft_rslora_tok-v1.1,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s2-v1.1,l14b_sft_rslora_tok-v1.1,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s0-v1.2,l14b_sft_rslora_tok-v1.2,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s1-v1.2,l14b_sft_rslora_tok-v1.2,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s2-v1.2,l14b_sft_rslora_tok-v1.2,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s3-v1.2,l14b_sft_rslora_tok-v1.2,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s4-v1.2,l14b_sft_rslora_tok-v1.2,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s0-v1.2-paraphrase,l14b_sft_rslora_tok-v1.2-paraphrase,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s1-v1.2-paraphrase,l14b_sft_rslora_tok-v1.2-paraphrase,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s2-v1.2-paraphrase,l14b_sft_rslora_tok-v1.2-paraphrase,rsLoRA,yes,im_end,220
+l14b_sft_rslora_tok-s0-v1.2_rft,l14b_sft_rslora_tok-v1.2_rft,rsLoRA,yes,im_end,208
+l14b_sft_rslora_tok-s0-v1.2_rft,l14b_sft_rslora_tok-v1.2_rft,rsLoRA,yes,length,12
+l14b_sft_rslora_tok-s0-v1_rewrite,l14b_sft_rslora_tok-v1_rewrite,rsLoRA,yes,im_end,220
+pref_dpo_rules-s0,pref_dpo_rules,DPO,yes,im_end,220
+pref_dpo_rules-s1,pref_dpo_rules,DPO,yes,im_end,220
+pref_dpo_rules-s2,pref_dpo_rules,DPO,yes,im_end,220
+pref_simpo_rules-s0,pref_simpo_rules,SimPO,yes,im_end,220
+pref_simpo_rules-s1,pref_simpo_rules,SimPO,yes,im_end,220
+pref_simpo_rules-s2,pref_simpo_rules,SimPO,yes,im_end,220
+ref-1.7B-instruct-A,ref-1.7B-instruct-A,instruct (reference),n/a,im_end,219
+ref-1.7B-instruct-A,ref-1.7B-instruct-A,instruct (reference),n/a,length,1
+ref-14B-instruct-A,ref-14B-instruct-A,instruct (reference),n/a,im_end,219
+ref-14B-instruct-A,ref-14B-instruct-A,instruct (reference),n/a,length,1
+size_4b_rslora_tok-s0,size_4b_rslora_tok,rsLoRA,yes,endoftext,2
+size_4b_rslora_tok-s0,size_4b_rslora_tok,rsLoRA,yes,im_end,218
+size_4b_rslora_tok-s1,size_4b_rslora_tok,rsLoRA,yes,im_end,220
+size_4b_rslora_tok-s2,size_4b_rslora_tok,rsLoRA,yes,im_end,220
+size_8b_rslora_tok-s0,size_8b_rslora_tok,rsLoRA,yes,im_end,220
+size_8b_rslora_tok-s1,size_8b_rslora_tok,rsLoRA,yes,im_end,220
+size_8b_rslora_tok-s2,size_8b_rslora_tok,rsLoRA,yes,im_end,220
+tier_s_main_rslora-s0,tier_s_main_rslora,rsLoRA,no,length,220
+tier_s_main_rslora-s1,tier_s_main_rslora,rsLoRA,no,length,220
+tier_s_main_rslora-s2,tier_s_main_rslora,rsLoRA,no,length,220
+tier_s_main_rslora_tok-s0,tier_s_main_rslora_tok,rsLoRA,yes,im_end,220
+tier_s_main_rslora_tok-s1,tier_s_main_rslora_tok,rsLoRA,yes,im_end,220
+tier_s_main_rslora_tok-s2,tier_s_main_rslora_tok,rsLoRA,yes,im_end,220
+tier_s_main_rslora_tok-s0-v1.2,tier_s_main_rslora_tok-v1.2,rsLoRA,yes,im_end,220
+tier_s_main_rslora_tok-s1-v1.2,tier_s_main_rslora_tok-v1.2,rsLoRA,yes,im_end,220
+tier_s_main_rslora_tok-s2-v1.2,tier_s_main_rslora_tok-v1.2,rsLoRA,yes,im_end,220
+tier_s_pilot_dora-s0,tier_s_pilot_dora,DoRA,no,endoftext,1
+tier_s_pilot_dora-s0,tier_s_pilot_dora,DoRA,no,length,219
+tier_s_pilot_dora-s1,tier_s_pilot_dora,DoRA,no,endoftext,14
+tier_s_pilot_dora-s1,tier_s_pilot_dora,DoRA,no,length,206
+tier_s_pilot_dora-s2,tier_s_pilot_dora,DoRA,no,length,220
+tier_s_pilot_lora-s0,tier_s_pilot_lora,SFT-LoRA,no,endoftext,1
+tier_s_pilot_lora-s0,tier_s_pilot_lora,SFT-LoRA,no,length,219
+tier_s_pilot_lora-s1,tier_s_pilot_lora,SFT-LoRA,no,endoftext,8
+tier_s_pilot_lora-s1,tier_s_pilot_lora,SFT-LoRA,no,length,212
+tier_s_pilot_lora-s2,tier_s_pilot_lora,SFT-LoRA,no,length,220
+tier_s_pilot_lora_nogroup-s0,tier_s_pilot_lora_nogroup,SFT-LoRA,no,endoftext,2
+tier_s_pilot_lora_nogroup-s0,tier_s_pilot_lora_nogroup,SFT-LoRA,no,length,218
+tier_s_pilot_lora_paged8-s0,tier_s_pilot_lora_paged8,SFT-LoRA,no,endoftext,4
+tier_s_pilot_lora_paged8-s0,tier_s_pilot_lora_paged8,SFT-LoRA,no,length,216
+tier_s_pilot_lora_paged8-s1,tier_s_pilot_lora_paged8,SFT-LoRA,no,endoftext,3
+tier_s_pilot_lora_paged8-s1,tier_s_pilot_lora_paged8,SFT-LoRA,no,length,217
+tier_s_pilot_lora_paged8-s2,tier_s_pilot_lora_paged8,SFT-LoRA,no,endoftext,1
+tier_s_pilot_lora_paged8-s2,tier_s_pilot_lora_paged8,SFT-LoRA,no,length,219
+tier_s_pilot_rslora-s0,tier_s_pilot_rslora,rsLoRA,no,length,220
+tier_s_pilot_rslora-s1,tier_s_pilot_rslora,rsLoRA,no,length,220
+tier_s_pilot_rslora-s2,tier_s_pilot_rslora,rsLoRA,no,length,220

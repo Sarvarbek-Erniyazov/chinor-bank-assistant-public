@@ -1,0 +1,14 @@
+{
+  "name": "rt-base-4B-0shot-A",
+  "commit": "56cd6f9fd684a1e8dfdd615bde0ff7fb0d05385f-dirty",
+  "config_hash": "bb9642db28e89e58",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "cmd": "<workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-4B-Base --arm rt-base-4B-0shot-A --eval-set eval/redteam_set.jsonl --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/rt-base-4B-0shot-A/rt-base-4B-0shot-A",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T10:33:35+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T10:34:13+00:00"
+}

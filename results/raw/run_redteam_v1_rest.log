@@ -1,0 +1,25 @@
+frozen queue redteam_v1_rest-20261029T205917 at 2026-10-29 20:59:18: queue.sh from <local-repo>/runs/_queues/redteam_v1_rest-20261029T205917
+  local copy: <local-repo>/runs/_queues/redteam_v1_rest-20261029T205917/scripts/h200 (git aba9153)
+  server copy: <workspace>/chinor/runs/_queues/redteam_v1_rest-20261029T205917/scripts/h200
+  list: <local-repo>/runs/_queues/redteam_v1_rest-20261029T205917/redteam_v1_rest.txt (job commands point at the server copy)
+START rt-l14b_full-s0 (estimate 3 min) at 20:59 unless its weights are not ready
+started rt-l14b_full-s0 pid 179756; log <workspace>/chinor/runs/rt-l14b_full-s0/log.txt
+END rt-l14b_full-s0 exit 0 after 1 min at 20:59
+synced rt-l14b_full-s0 -> eval/outputs/ and results/raw/rt-l14b_full-s0/
+START rt-l14b_full_lr2e5-s0 (estimate 3 min) at 20:59 unless its weights are not ready
+started rt-l14b_full_lr2e5-s0 pid 180181; log <workspace>/chinor/runs/rt-l14b_full_lr2e5-s0/log.txt
+END rt-l14b_full_lr2e5-s0 exit 0 after 1 min at 21:00
+synced rt-l14b_full_lr2e5-s0 -> eval/outputs/ and results/raw/rt-l14b_full_lr2e5-s0/
+START rt-l14b_full_lr2e5-s1 (estimate 3 min) at 21:00 unless its weights are not ready
+started rt-l14b_full_lr2e5-s1 pid 180606; log <workspace>/chinor/runs/rt-l14b_full_lr2e5-s1/log.txt
+END rt-l14b_full_lr2e5-s1 exit 0 after 1 min at 21:01
+synced rt-l14b_full_lr2e5-s1 -> eval/outputs/ and results/raw/rt-l14b_full_lr2e5-s1/
+START rt-ref-1.7B-instruct-A-2 (estimate 2 min) at 21:01 unless its weights are not ready
+started rt-ref-1.7B-instruct-A-2 pid 181031; log <workspace>/chinor/runs/rt-ref-1.7B-instruct-A-2/log.txt
+END rt-ref-1.7B-instruct-A-2 exit 0 after 1 min at 21:01
+synced rt-ref-1.7B-instruct-A-2 -> eval/outputs/ and results/raw/rt-ref-1.7B-instruct-A-2/
+START rt-ref-14B-instruct-A-2 (estimate 3 min) at 21:01 unless its weights are not ready
+started rt-ref-14B-instruct-A-2 pid 181479; log <workspace>/chinor/runs/rt-ref-14B-instruct-A-2/log.txt
+END rt-ref-14B-instruct-A-2 exit 0 after 2 min at 21:02
+synced rt-ref-14B-instruct-A-2 -> eval/outputs/ and results/raw/rt-ref-14B-instruct-A-2/
+queue <local-repo>/runs/_queues/redteam_v1_rest-20261029T205917/redteam_v1_rest.txt done

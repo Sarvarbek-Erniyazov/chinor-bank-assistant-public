@@ -1,0 +1,14 @@
+{
+  "name": "size_4b_rslora_tok-s1",
+  "commit": "1365fc11f4060847966daf6b578669594635037b-dirty",
+  "config_hash": "7c8a12ad6914d3b5",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash scripts/h200/train_eval.sh size_4b_rslora_tok-s1 train/configs/size_4b_rslora_tok.yaml 1",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T05:02:45+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T05:14:25+00:00"
+}

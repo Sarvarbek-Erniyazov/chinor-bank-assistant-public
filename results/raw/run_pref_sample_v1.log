@@ -1,0 +1,9 @@
+frozen queue pref_sample_v1-20261029T210253 at 2026-10-29 21:02:54: queue.sh from <local-repo>/runs/_queues/pref_sample_v1-20261029T210253
+  local copy: <local-repo>/runs/_queues/pref_sample_v1-20261029T210253/scripts/h200 (git 7ea956e)
+  server copy: <workspace>/chinor/runs/_queues/pref_sample_v1-20261029T210253/scripts/h200
+  list: <local-repo>/runs/_queues/pref_sample_v1-20261029T210253/pref_sample_v1.txt (job commands point at the server copy)
+START pref-samples-v1 (estimate 40 min) at 21:02 unless its weights are not ready
+started pref-samples-v1 pid 181942; log <workspace>/chinor/runs/pref-samples-v1/log.txt
+END pref-samples-v1 exit 0 after 36 min at 21:38
+synced pref-samples-v1 -> data/pref/v1/samples/ and results/raw/pref-samples-v1/
+queue <local-repo>/runs/_queues/pref_sample_v1-20261029T210253/pref_sample_v1.txt done

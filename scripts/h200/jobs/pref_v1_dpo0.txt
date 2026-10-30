@@ -1,0 +1,1 @@
+pref_dpo_rules-s0 40 bash scripts/h200/pref_train_eval.sh pref_dpo_rules-s0 train/configs/pref_dpo_rules.yaml 0

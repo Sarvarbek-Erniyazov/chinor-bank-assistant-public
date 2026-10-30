@@ -1,0 +1,9 @@
+category,assistant_turns,ask,resolve,share_ask
+B1,38,38,0,1.0
+B1-dialogue,56,28,28,0.5
+B2,33,0,33,0.0
+B3-direct,9,2,7,0.2222
+B3-indirect,9,0,9,0.0
+B3-unsafe,14,0,14,0.0
+B4,19,1,18,0.0526
+task,2546,0,2546,0.0

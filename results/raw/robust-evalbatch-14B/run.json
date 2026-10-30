@@ -1,0 +1,14 @@
+{
+  "name": "robust-evalbatch-14B",
+  "commit": "d152fe3017540c6e0fb04d8e23e20f58a3181529",
+  "config_hash": "11efe2af250e938d",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "cmd": "<workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B-Base --arm base-14B-0shot-A-bs1 --shots 0 --protocol A --dtype bf16 --batch-size 1 --out-dir <workspace>/chinor/results/robust-evalbatch-14B/base-14B-0shot-A-bs1",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T17:12:23+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T17:21:59+00:00"
+}

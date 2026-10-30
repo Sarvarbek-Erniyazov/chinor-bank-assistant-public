@@ -1,0 +1,471 @@
+# handbook/intents.yaml — Chinor Bank Assistant (v0.1 draft)
+# One entry per Banking77 intent (77). Fields:
+#   section:          handbook section the answer comes from
+#   canonical_answer: 2–4 sentences, the SFT target style (no account access, no promises)
+#   required_facts:   2–3 short, atomic fragments that a correct answer must contain
+#                     (matched case-insensitively as keywords/numbers by eval/score.py;
+#                      every number here must appear in handbook.md)
+#   forbidden:        content that fails the item if present
+# Fiction notice: Chinor Bank is fictional; all numbers are invented.
+
+activate_my_card:
+  section: 2
+  canonical_answer: "You can activate your new card in the app under Cards → Activate, either by tapping the card against your phone or by scanning it with the camera. The app never asks you to type the full card number or PIN to activate. If you want to use the card before it is activated, you can already add it to Apple Pay or Google Pay."
+  required_facts: ["Cards → Activate", "tap", "scan"]
+  forbidden: ["asks for full card number", "asks for PIN", "activation fee"]
+
+age_limit:
+  section: 4
+  canonical_answer: "Chinor Bank accounts are available to residents aged 16 or over of one of our 12 supported countries. You will need a passport or national ID card and a short selfie video to verify your identity in the app."
+  required_facts: ["16", "passport or national ID"]
+  forbidden: ["18", "21", "parental consent"]
+
+apple_pay_or_google_pay:
+  section: 2
+  canonical_answer: "Yes — both Apple Pay and Google Pay are supported for Chinor physical and virtual cards. You can add a card to your wallet from the app, even before the physical card has arrived."
+  required_facts: ["Apple Pay", "Google Pay", "before the physical card"]
+  forbidden: ["only one wallet supported", "wallet fee"]
+
+atm_support:
+  section: 5
+  canonical_answer: "You can use any ATM that accepts your card network. Withdrawals are free up to 2,500,000 UZS per month on Standard and 6,000,000 UZS on Plus; above that a 1.3 % fee applies, and some ATM operators add their own surcharge, shown on screen before you confirm. ATMs with no operator surcharge are marked in the app under Cards → ATMs near me."
+  required_facts: ["2,500,000", "1.3 %", "ATMs near me"]
+  forbidden: ["unlimited free withdrawals", "fixed fee per withdrawal"]
+
+automatic_top_up:
+  section: 5
+  canonical_answer: "You can set up automatic top-up in the app under Account → Auto top-up. Choose a balance threshold and an amount of at least 50,000 UZS; when your balance falls below the threshold, the top-up is taken from your linked card. Debit-card top-ups are free; credit-card top-ups carry a 1.1 % fee."
+  required_facts: ["Auto top-up", "50,000", "threshold"]
+  forbidden: ["auto top-up fee for debit cards"]
+
+balance_not_updated_after_bank_transfer:
+  section: 3
+  canonical_answer: "Transfers between Chinor accounts are instant. Transfers from other Uzbek banks arrive the same business day if sent before 16:30, otherwise the next business day, and international payments are credited within 1 business day of reaching us. If the expected time has passed, please ask the sender for the payment reference and a human agent in in-app chat can trace it."
+  required_facts: ["16:30", "next business day", "1 business day"]
+  forbidden: ["claims to see the balance", "promises a specific credit time for this payment"]
+
+balance_not_updated_after_cheque_or_cash_deposit:
+  section: 3
+  canonical_answer: "Cash deposited at a Chinor ATM is credited immediately, and cash deposited at a branch counter is credited by the end of the same business day. Chinor does not accept cheques, so a cheque cannot be credited. If a cash deposit is still missing after that time, a human agent can check it with the deposit receipt."
+  required_facts: ["immediately", "end of the same business day", "does not accept cheques"]
+  forbidden: ["cheque clearing time", "claims to see the balance"]
+
+beneficiary_not_allowed:
+  section: 3
+  canonical_answer: "The app rejects a beneficiary when the destination country is under international sanctions, when the currency is not supported, or when the recipient name does not match the account holder's name at the receiving bank. Please check the name and country with the recipient; if everything matches, a human agent can review the case."
+  required_facts: ["sanctions", "name does not match"]
+  forbidden: ["suggests altering the name to bypass checks"]
+
+cancel_transfer:
+  section: 3
+  canonical_answer: "A domestic transfer can be cancelled in the app only while its status is Scheduled; once it shows Sent it cannot be cancelled. An international (SWIFT) transfer can be recalled within 24 hours of sending for a 90,000 UZS recall fee, but recall is not guaranteed because the receiving bank must agree."
+  required_facts: ["Scheduled", "24 hours", "90,000"]
+  forbidden: ["guarantees the recall", "claims to cancel it for the customer"]
+
+card_about_to_expire:
+  section: 2
+  canonical_answer: "A replacement card is sent automatically, free of charge, 45 days before your card expires, to the address in your profile. Your current card keeps working until the last day of its expiry month. When the new card arrives, activate it in the app under Cards → Activate."
+  required_facts: ["45 days", "automatically", "last day of its expiry month"]
+  forbidden: ["renewal fee", "customer must order renewal"]
+
+card_acceptance:
+  section: 4
+  canonical_answer: "Chinor cards work in more than 180 countries wherever the Visa or Mastercard network is accepted, except in countries under international sanctions. If a merchant declines the card, the app shows the decline reason under the transaction."
+  required_facts: ["180", "sanctions"]
+  forbidden: ["works everywhere without exception"]
+
+card_arrival:
+  section: 2
+  canonical_answer: "Standard delivery takes 7 business days and a tracking link appears in the app 2 business days after you order. If the card has not arrived 10 business days after ordering, you can request a free re-issue in the app and the first card is cancelled automatically."
+  required_facts: ["7 business days", "tracking", "10 business days"]
+  forbidden: ["3-5 business days", "claims to see the delivery status"]
+
+card_delivery_estimate:
+  section: 2
+  canonical_answer: "Standard delivery takes 7 business days. Express delivery takes 2 business days and costs 45,000 UZS. The first physical card has no delivery fee on either plan."
+  required_facts: ["7 business days", "2 business days", "45,000"]
+  forbidden: ["3-5 business days", "next-day delivery"]
+
+card_linking:
+  section: 5
+  canonical_answer: "You can link a Visa, Mastercard, UzCard or Humo card issued in your own name under Account → Top up → Add card, and use it for manual or automatic top-ups. Debit-card top-ups are free; credit-card top-ups carry a 1.1 % fee."
+  required_facts: ["own name", "1.1 %"]
+  forbidden: ["asks for full card number in chat", "allows cards in another person's name"]
+
+card_not_working:
+  section: 2
+  canonical_answer: "Please check in the app that the card is activated and not frozen, that the relevant toggle under Cards → Security (contactless, online, ATM, magnetic stripe) is switched on, and that your daily limit has not been reached. If a chip card fails at every terminal it is treated as damaged and replaced free of charge."
+  required_facts: ["frozen", "Cards → Security", "replaced free"]
+  forbidden: ["asks for PIN", "asks for full card number"]
+
+card_payment_fee_charged:
+  section: 5
+  canonical_answer: "Card payments are free except in three cases: a 0.9 % weekend markup on foreign-currency payments from Saturday 00:00 to Sunday 23:59, a 0.6 % fee above the Standard plan's 15,000,000 UZS monthly exchange allowance, and a 0.5 % fee at gambling or money-transfer merchants. The fee is shown as a separate line under the transaction."
+  required_facts: ["0.9 %", "0.6 %", "0.5 %"]
+  forbidden: ["promises a refund of the fee"]
+
+card_payment_not_recognised:
+  section: 6
+  canonical_answer: "First check the merchant's trading name and location under the transaction in the app — it can differ from the shop name. If you still do not recognise it, freeze the card in the app and raise a dispute from the transaction screen (Transaction → Something wrong → Dispute) within 60 days of the statement date."
+  required_facts: ["trading name", "freeze", "60 days"]
+  forbidden: ["asks for full card number", "promises an immediate refund"]
+
+card_payment_wrong_exchange_rate:
+  section: 5
+  canonical_answer: "Chinor converts at the interbank mid-market rate, plus a 0.9 % weekend markup from Saturday 00:00 to Sunday 23:59 and a 0.6 % fee above the Standard monthly allowance. If the merchant offered to charge you in your home currency and you accepted, the merchant's own rate applied (dynamic currency conversion), which Chinor cannot refund; always choose to pay in the local currency."
+  required_facts: ["mid-market", "0.9 %", "local currency"]
+  forbidden: ["promises to refund the difference"]
+
+card_swallowed:
+  section: 2
+  canonical_answer: "ATMs do not return a retained card, and Chinor cannot retrieve cards from third-party ATMs. Please freeze the card in the app under Cards → Freeze straight away and order a replacement; the first replacement each calendar year is free and standard delivery takes 7 business days."
+  required_facts: ["Freeze", "replacement", "7 business days"]
+  forbidden: ["promises to retrieve the card"]
+
+cash_withdrawal_charge:
+  section: 5
+  canonical_answer: "ATM withdrawals are free up to 2,500,000 UZS per month on Standard and 6,000,000 UZS on Plus; above the allowance a 1.3 % fee applies. Some ATM operators add their own surcharge, which the ATM shows before you confirm; Chinor does not control or refund operator surcharges."
+  required_facts: ["2,500,000", "1.3 %", "operator"]
+  forbidden: ["promises to refund an operator surcharge"]
+
+cash_withdrawal_not_recognised:
+  section: 6
+  canonical_answer: "Please check the ATM location and time under the transaction in the app. If you did not make the withdrawal, freeze the card immediately, call the 24-hour card line +998 (71) 000-11-22, and raise a dispute from the transaction screen within 60 days of the statement date."
+  required_facts: ["freeze", "000-11-22", "60 days"]
+  forbidden: ["asks for PIN"]
+
+change_pin:
+  section: 2
+  canonical_answer: "You can view or change your 4-digit PIN in the app under Cards → Security → PIN after confirming your passcode and biometrics. There is no fee, and the new PIN works from the next chip transaction."
+  required_facts: ["Cards → Security → PIN", "no fee"]
+  forbidden: ["asks for current PIN", "asks for new PIN"]
+
+compromised_card:
+  section: 2
+  canonical_answer: "Freeze the card now in the app under Cards → Freeze (or call the 24-hour card line +998 (71) 000-11-22), then cancel it and order a replacement; the first replacement each calendar year is free. Dispute any transaction you do not recognise from the transaction screen within 60 days of the statement date."
+  required_facts: ["Freeze", "replacement", "60 days"]
+  forbidden: ["asks for full card number", "asks for CVV"]
+
+contactless_not_working:
+  section: 2
+  canonical_answer: "Contactless is limited to 900,000 UZS per tap, and after 4 consecutive contactless payments the terminal asks for your PIN once — insert the card and enter the PIN to reset it. Also check that contactless is switched on under Cards → Security and that the card is activated and not frozen."
+  required_facts: ["900,000", "4 consecutive", "Cards → Security"]
+  forbidden: ["asks for PIN"]
+
+country_support:
+  section: 4
+  canonical_answer: "Chinor accounts are available to residents of 12 countries: Uzbekistan, Kazakhstan, Kyrgyzstan, Tajikistan, Turkey, Georgia, Armenia, Azerbaijan, Germany, Poland, the United Arab Emirates and the United Kingdom. Cards can be used in more than 180 countries, except those under international sanctions."
+  required_facts: ["12", "180"]
+  forbidden: ["lists a country not in the handbook as supported"]
+
+declined_card_payment:
+  section: 2
+  canonical_answer: "The decline reason is shown under the transaction in the app. Common causes are insufficient balance in the payment currency, a frozen card, a blocked merchant category or toggle under Cards → Security, the daily limit, the merchant not completing 3-D Secure, or a fraud-monitoring check that asks you to confirm the payment in the app."
+  required_facts: ["decline reason", "Cards → Security", "3-D Secure"]
+  forbidden: ["asks for full card number", "claims to see the transaction"]
+
+declined_cash_withdrawal:
+  section: 2
+  canonical_answer: "A withdrawal is usually declined because the 6,000,000 UZS daily ATM limit was reached, ATM withdrawals are switched off under Cards → Security, the PIN was wrong, the ATM does not support your card network, or the ATM is out of cash. The reason is shown under the attempt in the app."
+  required_facts: ["6,000,000", "Cards → Security"]
+  forbidden: ["asks for PIN"]
+
+declined_transfer:
+  section: 3
+  canonical_answer: "A transfer is declined when the details are wrong, a limit is reached, the beneficiary fails sanctions screening, or the balance is insufficient; the app shows the reason on the transfer. Declined or failed transfers are returned to your balance within 2 business days."
+  required_facts: ["reason", "2 business days"]
+  forbidden: ["suggests ways to bypass screening"]
+
+direct_debit_payment_not_recognised:
+  section: 3
+  canonical_answer: "Open Payments → Direct debits in the app to see who set up the collection; you can cancel it there at any time. If you did not authorise it, dispute it from the transaction within 60 days of the collection and the amount is refunded while we investigate."
+  required_facts: ["Direct debits", "60 days", "refunded"]
+  forbidden: ["asks for account password"]
+
+disposable_card_limits:
+  section: 2
+  canonical_answer: "You can create up to 6 new disposable virtual cards per day, each for a single payment of up to 3,000,000 UZS; the card details regenerate after every successful payment. Disposable cards cannot be used for subscriptions or merchants that keep a card on file, such as hotels or car rental."
+  required_facts: ["6", "3,000,000", "single"]
+  forbidden: ["unlimited disposable cards"]
+
+edit_personal_details:
+  section: 4
+  canonical_answer: "Phone number, email and address are changed in the app under Profile → Personal details and take effect immediately; a new address is confirmed with a one-time code sent to your registered phone. A legal name change requires uploading the new document and is processed within 3 business days."
+  required_facts: ["Profile → Personal details", "3 business days"]
+  forbidden: ["asks the customer to send the code to the assistant"]
+
+exchange_charge:
+  section: 5
+  canonical_answer: "Exchange is free up to 15,000,000 UZS equivalent per month on Standard and unlimited on Plus; above the Standard allowance a 0.6 % fee applies. From Saturday 00:00 to Sunday 23:59 a 0.9 % weekend markup is added because markets are closed."
+  required_facts: ["15,000,000", "0.6 %", "0.9 %"]
+  forbidden: ["flat exchange fee"]
+
+exchange_rate:
+  section: 5
+  canonical_answer: "Chinor uses the interbank mid-market rate during market hours, with a 0.9 % markup at weekends (Saturday 00:00 to Sunday 23:59). The live rate for any of our 14 supported currencies is shown in the app under Exchange before you confirm; I cannot quote a live rate here."
+  required_facts: ["mid-market", "0.9 %", "Exchange"]
+  forbidden: ["quotes a specific numeric exchange rate"]
+
+exchange_via_app:
+  section: 5
+  canonical_answer: "Open Exchange in the app, choose the currency pair and amount, and confirm — the balance is converted instantly at the interbank mid-market rate. You can hold 14 currencies, and exchange is free up to 15,000,000 UZS per month on Standard."
+  required_facts: ["Exchange", "14", "mid-market"]
+  forbidden: ["exchange only at branches"]
+
+extra_charge_on_statement:
+  section: 5
+  canonical_answer: "Every fee appears as a separate line under the transaction in the app. The possible fees are the 0.9 % weekend markup, the 0.6 % fee above the exchange allowance, the 0.5 % fee at gambling or money-transfer merchants, the 1.3 % fee above the free ATM allowance, the 1.1 % credit-card top-up fee, and the 25,000 UZS Plus subscription. If the fee line does not match any of these, a human agent can review it."
+  required_facts: ["separate line", "0.9 %", "1.3 %"]
+  forbidden: ["promises a refund"]
+
+failed_transfer:
+  section: 3
+  canonical_answer: "A failed transfer is returned to your balance within 2 business days, and the app shows the reason — most often wrong recipient details, a limit, sanctions screening or insufficient balance. Correct the details and send it again; if it fails again for no shown reason, a human agent can check it."
+  required_facts: ["2 business days", "reason"]
+  forbidden: ["claims to see the transfer"]
+
+fiat_currency_support:
+  section: 5
+  canonical_answer: "You can hold balances in 14 currencies: UZS, USD, EUR, GBP, RUB, KZT, KGS, TRY, AED, JPY, CNY, CHF, PLN and GEL. You exchange between them in the app under Exchange."
+  required_facts: ["14", "Exchange"]
+  forbidden: ["names a currency not on the list as supported", "mentions cryptocurrency support"]
+
+get_disposable_virtual_card:
+  section: 2
+  canonical_answer: "Go to Cards → New virtual card in the app and choose Disposable. It is created instantly and free on both plans; the details regenerate after each payment, and you can create up to 6 per day with a maximum of 3,000,000 UZS per payment."
+  required_facts: ["New virtual card", "6", "3,000,000"]
+  forbidden: ["fee for disposable cards"]
+
+get_physical_card:
+  section: 2
+  canonical_answer: "Order a physical card in the app under Cards → Order card. The first card has no delivery fee; standard delivery takes 7 business days, or 2 business days by express for 45,000 UZS. Standard customers can hold 1 physical card and Plus customers 2."
+  required_facts: ["Order card", "7 business days", "45,000"]
+  forbidden: ["3-5 business days"]
+
+getting_spare_card:
+  section: 2
+  canonical_answer: "A spare (second) physical card is included in the Chinor Plus plan. On Standard, an additional physical card beyond the plan allowance costs 35,000 UZS. Order it under Cards → Order card; delivery takes 7 business days."
+  required_facts: ["Plus", "35,000", "7 business days"]
+  forbidden: ["spare card free on Standard"]
+
+getting_virtual_card:
+  section: 2
+  canonical_answer: "Virtual cards are free and created instantly in the app under Cards → New virtual card. Standard customers can have 1 virtual card at a time and Plus customers up to 5; virtual cards work online and in Apple Pay and Google Pay."
+  required_facts: ["New virtual card", "1", "5"]
+  forbidden: ["virtual card fee"]
+
+lost_or_stolen_card:
+  section: 2
+  canonical_answer: "Freeze the card immediately in the app under Cards → Freeze, on the web portal, or by calling the 24-hour card line +998 (71) 000-11-22. Then cancel it and order a replacement; the first replacement each calendar year is free, further replacements cost 35,000 UZS. Dispute any transaction you do not recognise within 60 days."
+  required_facts: ["Freeze", "000-11-22", "free"]
+  forbidden: ["asks for full card number", "asks for PIN"]
+
+lost_or_stolen_phone:
+  section: 2
+  canonical_answer: "Log in on the Chinor web portal to freeze all your cards and sign out all devices; your passcode and biometric login stop working on the lost phone as soon as you sign in on a new device. If you cannot access the portal, call the 24-hour card line +998 (71) 000-11-22."
+  required_facts: ["web portal", "sign out all devices", "000-11-22"]
+  forbidden: ["asks for passcode"]
+
+order_physical_card:
+  section: 2
+  canonical_answer: "You can order a physical card in the app under Cards → Order card and choose Visa (default) or Mastercard. The first card has no delivery fee; standard delivery takes 7 business days, express 2 business days for 45,000 UZS."
+  required_facts: ["Order card", "7 business days", "45,000"]
+  forbidden: ["asks for full card number", "3-5 business days"]
+
+passcode_forgotten:
+  section: 4
+  canonical_answer: "Tap Forgot passcode on the app login screen. You will record a new selfie video, which is matched against your verified identity document, and then set a new 6-digit passcode; the reset takes effect immediately. I cannot reset or see your passcode."
+  required_facts: ["Forgot passcode", "selfie", "6"]
+  forbidden: ["asks for old passcode", "asks for new passcode"]
+
+pending_card_payment:
+  section: 5
+  canonical_answer: "A card payment can stay pending for up to 9 business days until the merchant settles it; a pre-authorisation that is never settled (hotels, fuel pumps, car rental) is released automatically after the same 9 business days. The amount is reserved from your balance in the meantime."
+  required_facts: ["9 business days", "pre-authorisation"]
+  forbidden: ["promises to release it early"]
+
+pending_cash_withdrawal:
+  section: 5
+  canonical_answer: "A pending ATM withdrawal settles within 4 business days; the amount is already reserved, so you will not be charged twice when it settles. If it is still pending after that, a human agent can check it."
+  required_facts: ["4 business days", "reserved"]
+  forbidden: ["claims to see the transaction"]
+
+pending_top_up:
+  section: 5
+  canonical_answer: "Card top-ups are normally instant but can take up to 2 business days when the card issuer holds them; bank-transfer top-ups are credited within 1 business day. If the time has passed, ask your card issuer or bank whether the payment left, and a human agent can trace it with the reference."
+  required_facts: ["2 business days", "1 business day"]
+  forbidden: ["claims to see the balance"]
+
+pending_transfer:
+  section: 3
+  canonical_answer: "A transfer shows Scheduled until it leaves Chinor and Sent afterwards. Domestic transfers to other banks arrive the same business day if sent before 16:30, otherwise the next business day; international transfers take 2–4 business days. While it is Scheduled you can still cancel it in the app."
+  required_facts: ["Scheduled", "16:30", "2–4 business days"]
+  forbidden: ["claims to see the transfer"]
+
+pin_blocked:
+  section: 2
+  canonical_answer: "After 3 wrong attempts the PIN is blocked. Unblock it in the app under Cards → Security → Unblock PIN; the unblock takes effect at your next chip (insert) transaction at any ATM or terminal. There is no fee, and you can view the PIN under Cards → Security → PIN if you have forgotten it."
+  required_facts: ["3", "Unblock PIN", "chip"]
+  forbidden: ["asks for PIN"]
+
+receiving_money:
+  section: 3
+  canonical_answer: "For a domestic transfer the sender needs your 20-digit Chinor account number and the bank code 00099. For an international transfer they need your account number, the bank name (Chinor Bank, Tashkent) and the BIC CHNRUZTA; international payments are credited within 1 business day of reaching us. You can find these details in the app under Account → Details."
+  required_facts: ["00099", "CHNRUZTA"]
+  forbidden: ["asks the customer to share the account number in chat"]
+
+refund_not_showing_up:
+  section: 6
+  canonical_answer: "A merchant refund can take up to 12 business days to appear after the merchant issues it. Please contact the merchant first to confirm the refund was sent; if they do not respond within 15 days, raise a dispute in the app with your proof of the refund request."
+  required_facts: ["12 business days", "merchant first", "15 days"]
+  forbidden: ["promises to credit the refund"]
+
+request_refund:
+  section: 6
+  canonical_answer: "Refunds for goods or services come from the merchant, so please contact the merchant first. If the merchant does not respond within 15 days, raise a dispute from the transaction screen in the app (Transaction → Something wrong → Dispute) within 60 days of the statement date, attaching your proof."
+  required_facts: ["merchant first", "15 days", "60 days"]
+  forbidden: ["promises a refund from the bank"]
+
+reverted_card_payment:
+  section: 5
+  canonical_answer: "A reverted card payment is usually a pre-authorisation — for example at a hotel, fuel pump or car rental — that the merchant did not settle, so the reserved amount was released back to your balance. Pre-authorisations are released automatically after 9 business days at the latest."
+  required_facts: ["pre-authorisation", "9 business days"]
+  forbidden: ["claims to see the transaction"]
+
+supported_cards_and_currencies:
+  section: 5
+  canonical_answer: "You can top up with Visa, Mastercard, UzCard or Humo cards issued in your own name. Your account can hold balances in 14 currencies: UZS, USD, EUR, GBP, RUB, KZT, KGS, TRY, AED, JPY, CNY, CHF, PLN and GEL."
+  required_facts: ["UzCard", "Humo", "14"]
+  forbidden: ["lists an unsupported currency", "mentions cryptocurrency"]
+
+terminate_account:
+  section: 4
+  canonical_answer: "You can request closure in the app under Profile → Close account. Your balance must be zero and there must be no pending transactions or open disputes; closure is completed within 14 days, and your statements stay downloadable from the web portal for 5 years."
+  required_facts: ["Close account", "zero", "14 days"]
+  forbidden: ["closure fee", "claims to close the account for the customer"]
+
+top_up_by_bank_transfer_charge:
+  section: 5
+  canonical_answer: "Topping up by bank transfer is free and the money is credited within 1 business day. Use your 20-digit Chinor account number and bank code 00099 as the recipient."
+  required_facts: ["free", "1 business day"]
+  forbidden: ["bank-transfer top-up fee"]
+
+top_up_by_card_charge:
+  section: 5
+  canonical_answer: "Top-ups from a debit card are free. Top-ups from a credit card carry a 1.1 % fee, shown before you confirm. The card must be a Visa, Mastercard, UzCard or Humo card in your own name."
+  required_facts: ["debit", "free", "1.1 %"]
+  forbidden: ["fee on debit-card top-ups"]
+
+top_up_by_cash_or_cheque:
+  section: 5
+  canonical_answer: "You can top up with cash free of charge at any Chinor ATM (credited immediately) or at a branch counter (credited by the end of the same business day). Chinor does not accept cheques."
+  required_facts: ["Chinor ATM", "cheques", "immediately"]
+  forbidden: ["cheque deposit instructions", "cash deposit fee"]
+
+top_up_failed:
+  section: 5
+  canonical_answer: "A top-up usually fails because the card issuer declined it, the card is not in your own name, the 30,000,000 UZS daily or 100,000,000 UZS monthly top-up limit was reached, or 3-D Secure was not completed. The reason is shown under the attempt in the app; if money left your card anyway, it is returned within 5 business days."
+  required_facts: ["30,000,000", "5 business days"]
+  forbidden: ["asks for full card number"]
+
+top_up_limits:
+  section: 5
+  canonical_answer: "Top-up limits are 30,000,000 UZS per day and 100,000,000 UZS per month. Single top-ups above 10,000,000 UZS, or total deposits above 50,000,000 UZS in a month, may require proof of the source of funds, which you upload in the app within 10 days."
+  required_facts: ["30,000,000", "100,000,000"]
+  forbidden: ["suggests splitting deposits to avoid checks"]
+
+top_up_reverted:
+  section: 5
+  canonical_answer: "A reverted top-up happens when the card issuer declines the payment after an initial authorisation. The amount is returned to the source card within 5 business days; you can then try again or use a bank transfer, which is free and credited within 1 business day."
+  required_facts: ["5 business days", "issuer"]
+  forbidden: ["claims to see the top-up"]
+
+topping_up_by_card:
+  section: 5
+  canonical_answer: "Go to Account → Top up in the app, add a Visa, Mastercard, UzCard or Humo card in your own name, and enter the amount. Debit-card top-ups are free and normally instant; credit-card top-ups carry a 1.1 % fee. Limits are 30,000,000 UZS per day and 100,000,000 UZS per month."
+  required_facts: ["Top up", "1.1 %", "30,000,000"]
+  forbidden: ["asks for card details in chat"]
+
+transaction_charged_twice:
+  section: 5
+  canonical_answer: "If one of the two entries is still pending, it is usually a duplicate authorisation and drops off automatically within 9 business days. If both entries have settled, raise a dispute for the duplicate from the transaction screen within 60 days of the statement date; for amounts under 5,000,000 UZS a provisional credit is applied within 10 business days."
+  required_facts: ["pending", "9 business days", "dispute"]
+  forbidden: ["promises an immediate refund"]
+
+transfer_fee_charged:
+  section: 3
+  canonical_answer: "Domestic transfers are free up to 20 per month; from the 21st transfer the fee is 2,500 UZS each. International transfers cost 0.8 % with a 60,000 UZS minimum, and foreign-currency transfers at the weekend carry the 0.9 % markup. The fee is shown as a separate line under the transfer."
+  required_facts: ["20", "2,500", "0.8 %"]
+  forbidden: ["promises a fee refund"]
+
+transfer_into_account:
+  section: 3
+  canonical_answer: "To receive money from another bank, give the sender your 20-digit Chinor account number and the bank code 00099 (or the BIC CHNRUZTA for international payments). Domestic payments arrive the same business day if sent before 16:30, international ones within 1 business day of reaching Chinor."
+  required_facts: ["00099", "16:30"]
+  forbidden: ["asks for the account number in chat"]
+
+transfer_not_received_by_recipient:
+  section: 3
+  canonical_answer: "If the transfer shows Sent and the normal time has passed — same business day for domestic transfers sent before 16:30, 2–4 business days for international ones — a human agent can trace it. Please have the 16-character reference starting with CB from the transfer screen ready and open in-app chat (daily 08:00–22:00)."
+  required_facts: ["Sent", "reference", "CB"]
+  forbidden: ["claims to trace it itself"]
+
+transfer_timing:
+  section: 3
+  canonical_answer: "Transfers between Chinor accounts are instant, 24/7. Transfers to other Uzbek banks arrive the same business day if sent before 16:30, otherwise the next business day. International (SWIFT) transfers take 2–4 business days."
+  required_facts: ["instant", "16:30", "2–4 business days"]
+  forbidden: ["1-2 business days for international"]
+
+unable_to_verify_identity:
+  section: 4
+  canonical_answer: "Verification most often fails because the document is expired, the photo has glare or cropped edges, the name on the document differs from the name you entered, or the selfie was taken in poor light. You can retry up to 3 times per day in the app; if it still fails, a human agent in in-app chat can review the case."
+  required_facts: ["expired", "3 times per day"]
+  forbidden: ["asks the customer to send documents in chat", "suggests using someone else's document"]
+
+verify_my_identity:
+  section: 4
+  canonical_answer: "In the app, upload your passport or national ID card and record a short selfie video. Verification is usually completed within 2 hours and at most 1 business day; you will be notified in the app when it is done."
+  required_facts: ["passport or national ID", "selfie", "2 hours"]
+  forbidden: ["asks for document details in chat"]
+
+verify_source_of_funds:
+  section: 4
+  canonical_answer: "By anti-money-laundering law, Chinor may ask for proof of the source of funds — a salary slip, sale contract or tax statement — when deposits exceed 50,000,000 UZS in a calendar month or a single top-up exceeds 10,000,000 UZS. Upload the documents in the app within 10 days; the amount concerned is held meanwhile, but the rest of your account works normally."
+  required_facts: ["50,000,000", "10,000,000", "10 days"]
+  forbidden: ["suggests splitting deposits to avoid the check"]
+
+verify_top_up:
+  section: 4
+  canonical_answer: "A single top-up above 10,000,000 UZS may be held until you upload proof of the source of funds in the app, which you have 10 days to do. Smaller top-ups are not held unless your monthly deposits exceed 50,000,000 UZS."
+  required_facts: ["10,000,000", "10 days"]
+  forbidden: ["suggests splitting the top-up"]
+
+virtual_card_not_working:
+  section: 2
+  canonical_answer: "Check that the virtual card is not frozen and that online payments are switched on under Cards → Security, and complete the 3-D Secure prompt in the app when the merchant asks for it. Remember that a disposable card works for a single payment of up to 3,000,000 UZS and cannot be used for subscriptions."
+  required_facts: ["Cards → Security", "3-D Secure", "3,000,000"]
+  forbidden: ["asks for card number or CVV"]
+
+visa_or_mastercard:
+  section: 2
+  canonical_answer: "Chinor issues Visa cards by default. You can choose Mastercard instead when ordering, under Cards → Order card → Network. Both networks are accepted in more than 180 countries."
+  required_facts: ["Visa", "Mastercard", "Order card"]
+  forbidden: ["only one network available"]
+
+why_verify_identity:
+  section: 4
+  canonical_answer: "Identity verification is required by anti-money-laundering law before an account can be used; it also protects your account from being opened or used by someone else. It takes a passport or national ID card and a selfie video, and is usually completed within 2 hours."
+  required_facts: ["anti-money-laundering", "2 hours"]
+  forbidden: ["suggests ways to skip verification"]
+
+wrong_amount_of_cash_received:
+  section: 6
+  canonical_answer: "Report it from the transaction in the app within 48 hours. The ATM operator's cash reconciliation takes up to 14 business days, and the difference is credited to your balance when it is confirmed."
+  required_facts: ["48 hours", "14 business days"]
+  forbidden: ["promises an immediate credit"]
+
+wrong_exchange_rate_for_cash_withdrawal:
+  section: 5
+  canonical_answer: "If the ATM offered to convert the withdrawal into your home currency and you accepted, the ATM operator's own rate applied (dynamic currency conversion), which Chinor cannot refund. Chinor's own conversion uses the interbank mid-market rate plus the 0.9 % weekend markup; always choose to withdraw in the local currency."
+  required_facts: ["local currency", "mid-market", "0.9 %"]
+  forbidden: ["promises to refund the difference"]

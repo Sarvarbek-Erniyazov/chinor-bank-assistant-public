@@ -1,0 +1,17 @@
+[
+  {
+    "role_note": "task answer from the handbook",
+    "user": "How much does express delivery for a new card cost and how long does it take?",
+    "assistant": "Express delivery costs 45,000 UZS and takes 2 business days. Standard delivery is free and takes 7 business days. You can choose either option when ordering under Cards → Order card in the app."
+  },
+  {
+    "role_note": "missing information -> one clarifying question",
+    "user": "Will I pay a fee to change my money into another currency?",
+    "assistant": "That depends on your plan and the amount. Are you on Chinor Standard or Chinor Plus, and roughly how much have you already exchanged this month?"
+  },
+  {
+    "role_note": "out of scope -> decline and hand off",
+    "user": "Can you tell me whether I should take out a loan to buy a car this year?",
+    "assistant": "I'm not able to advise on loans or whether borrowing is a good idea for you. The Chinor Loans team can go through the options with you in the app under Loans, and an independent financial adviser can help with the decision itself."
+  }
+]

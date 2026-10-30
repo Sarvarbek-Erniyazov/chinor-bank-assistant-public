@@ -1,0 +1,8 @@
+# Items 4-5 of the 2026-10-29 window plan, after the 14B probes and the reference rows.
+# 4a determinism (dry-run config twice, seed 0, provisional data); 4b eval batching (base-14B 0-shot, batch 1 vs the
+# committed batch-32 arm); 5 throughput probes 4B and 8B LoRA. Estimates from measured runs: 0.6B 20 steps ~1 min,
+# base-14B batch 32 eval 7 min (batch 1 is sequential: ~220 x 200 tokens), 1.7B/14B probes 1-2 min + load.
+robust-determinism 6 bash scripts/h200/determinism.sh robust-determinism
+robust-evalbatch-14B 30 <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B-Base --arm base-14B-0shot-A-bs1 --shots 0 --protocol A --dtype bf16 --batch-size 1 --out-dir <workspace>/chinor/results/robust-evalbatch-14B/base-14B-0shot-A-bs1
+probe-4b-lora 6 bash scripts/h200/probe.sh probe-4b-lora train/configs/probe_4b_lora.yaml
+probe-8b-lora 8 bash scripts/h200/probe.sh probe-8b-lora train/configs/probe_8b_lora.yaml

@@ -1,0 +1,14 @@
+arm,class,count,n
+14B rsLoRA v1,a,29,60
+14B rsLoRA v1,asks (pass),3,60
+14B rsLoRA v1,b,18,60
+14B rsLoRA v1,c,1,60
+14B rsLoRA v1,d,9,60
+14B rsLoRA v1.1,a,25,60
+14B rsLoRA v1.1,asks (pass),4,60
+14B rsLoRA v1.1,b,17,60
+14B rsLoRA v1.1,c,2,60
+14B rsLoRA v1.1,d,12,60
+14B full FT (lr 1e-5),a,16,40
+14B full FT (lr 1e-5),b,17,40
+14B full FT (lr 1e-5),d,7,40

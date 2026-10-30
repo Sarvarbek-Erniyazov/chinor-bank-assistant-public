@@ -1,0 +1,15 @@
+.git
+.venv
+.env
+.pytest_cache
+__pycache__
+*.pyc
+eval/outputs
+results/raw
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+data/raw
+notebooks/*.ipynb

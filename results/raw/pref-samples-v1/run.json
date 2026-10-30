@@ -1,0 +1,14 @@
+{
+  "name": "pref-samples-v1",
+  "commit": "aba9153fe1fd6f8737520d8e03ba3e24d91b93dc-dirty",
+  "config_hash": "96dfc5a9e4d72b49",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "<workspace>/chinor/venv-gen/bin/python data/pref/sample.py --model <workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model --batch-prompts 32 --out <workspace>/chinor/results/pref-samples-v1",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T12:02:59+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T12:38:18+00:00"
+}

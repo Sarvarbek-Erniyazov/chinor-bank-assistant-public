@@ -1,0 +1,14 @@
+{
+  "name": "tier_s_pilot_lora-s0",
+  "commit": "a2c9e519b3659b6ad2710fcc261284ab614e4e90-dirty",
+  "config_hash": "56f1dd8129d85ef1",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash scripts/h200/train_eval.sh tier_s_pilot_lora-s0 train/configs/tier_s_pilot_lora.yaml 0",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T17:22:09+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T17:27:42+00:00"
+}

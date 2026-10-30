@@ -1,0 +1,5 @@
+# Reference rows (reference, not pipeline): official Qwen3 instruct models, Protocol A, rubric v1.3, the same
+# system prompt and decoding as every arm, the model's own chat template with enable_thinking=False.
+# Estimates from the measured base arms (1.7B 2 min, 14B 7 min incl. loading).
+ref-1.7B-instruct-A 5 <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-1.7B --arm ref-1.7B-instruct-A --native-template --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/ref-1.7B-instruct-A/ref-1.7B-instruct-A
+ref-14B-instruct-A 10 <workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-14B --arm ref-14B-instruct-A --native-template --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/ref-14B-instruct-A/ref-14B-instruct-A

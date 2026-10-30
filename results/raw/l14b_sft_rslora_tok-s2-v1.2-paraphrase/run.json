@@ -1,0 +1,14 @@
+{
+  "name": "l14b_sft_rslora_tok-s2-v1.2-paraphrase",
+  "commit": "ecd785e1167551e2cf8c42bbc002e543b28d8363-dirty",
+  "config_hash": "d436784e977cebd0",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash <workspace>/chinor/runs/_queues/robust_sysprompt-20261029T153408/scripts/h200/eval_adapter.sh l14b_sft_rslora_tok-s2-v1.2-paraphrase l14b_sft_rslora_tok-s2-v1.2 train/configs/l14b_sft_rslora_tok.yaml eval/system_prompt_paraphrase.txt",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T06:37:28+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T06:39:00+00:00"
+}

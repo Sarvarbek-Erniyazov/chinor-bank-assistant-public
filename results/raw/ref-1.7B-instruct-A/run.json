@@ -1,0 +1,14 @@
+{
+  "name": "ref-1.7B-instruct-A",
+  "commit": "d152fe3017540c6e0fb04d8e23e20f58a3181529",
+  "config_hash": "b39fdbaf25b17257",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "cmd": "<workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-1.7B --arm ref-1.7B-instruct-A --native-template --protocol A --dtype bf16 --batch-size 32 --out-dir <workspace>/chinor/results/ref-1.7B-instruct-A/ref-1.7B-instruct-A",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T16:53:59+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T16:55:07+00:00"
+}

@@ -1,0 +1,3 @@
+# Step 7 (plan 2026-10-29): filler, 14B rsLoRA + token rows seeds 3 and 4 on v1.2.
+train/configs/l14b_sft_rslora_tok.yaml 3 30 data/sft/v1.2
+train/configs/l14b_sft_rslora_tok.yaml 4 30 data/sft/v1.2

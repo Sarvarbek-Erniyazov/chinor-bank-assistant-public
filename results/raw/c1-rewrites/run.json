@@ -1,0 +1,14 @@
+{
+  "name": "c1-rewrites",
+  "commit": "62b0eaa3c8adc3665ecc7c0948874bbda13150cc",
+  "config_hash": "84be936e75e892ae",
+  "seed": 20261027,
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "cmd": "<workspace>/chinor/venv-gen/bin/python data/rewrite_generate.py --engine hf --dtype bf16 --seed 20261027 --batch_size 32 --out <workspace>/chinor/results/c1-rewrites",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T13:43:27+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T14:24:58+00:00"
+}

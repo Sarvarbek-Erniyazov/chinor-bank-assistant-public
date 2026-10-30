@@ -1,0 +1,81 @@
+{
+  "config": "train/configs/probe_14b_lora.yaml",
+  "config_hash": "1f5fd5974f7338d6",
+  "config_values": {
+    "model": "Qwen/Qwen3-14B-Base",
+    "max_length": 1024,
+    "per_device_train_batch_size": 8,
+    "per_device_eval_batch_size": 8,
+    "gradient_accumulation_steps": 2,
+    "learning_rate": 0.0002,
+    "warmup_ratio": 0.03,
+    "num_train_epochs": 3,
+    "weight_decay": 0.0,
+    "optim": "adamw_torch",
+    "group_by_length": true,
+    "eval_steps": 50,
+    "save_steps": 100,
+    "logging_steps": 10,
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "use_rslora": false,
+      "use_dora": false
+    }
+  },
+  "seed": 0,
+  "COMMIT": "d152fe3017540c6e0fb04d8e23e20f58a3181529",
+  "data_dir": "data/sft/_provisional",
+  "data": {
+    "manifest_sha256": "4713b92666273406c9ee165a148bef4b50a27473f352831bb02df2749c2d7c50",
+    "train.jsonl": "6605febd7fa4418e2bcac62d71642f20cfba755e64d2c83fed66e2305033edd7",
+    "val.jsonl": "eed476372cc98a2539a29dec1737d311c33c25f855d1daff82496ffc2801cc52"
+  },
+  "data_stats": {
+    "train": {
+      "examples": 2696,
+      "tokens": 1439671,
+      "supervised_tokens": 163431,
+      "truncated": 0
+    },
+    "val": {
+      "examples": 144,
+      "tokens": 77018,
+      "supervised_tokens": 8830,
+      "truncated": 0
+    }
+  },
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+  "python": "3.12.3",
+  "trainable_parameters": {
+    "trainable": 64225280,
+    "total": 14832532480,
+    "percent": 0.433
+  },
+  "mode": "lora",
+  "tie_word_embeddings": false,
+  "resumed_from": null,
+  "global_step": 20,
+  "max_steps": 20,
+  "steps_this_process": 20,
+  "peak_vram_gb": 38.3,
+  "wall_clock_s": 51.3,
+  "tokens_per_s": 3328.1,
+  "supervised_tokens_per_s": 377.8,
+  "train_runtime_s": 51.0813,
+  "final_train_loss": 1.343597984313965,
+  "mean_train_loss": 1.4957751274108886,
+  "final_val_loss": null
+}

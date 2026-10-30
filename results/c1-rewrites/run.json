@@ -1,0 +1,22 @@
+{
+  "model": "Qwen/Qwen3-32B",
+  "revision": "9216db5781bf21249d130ec9da846c4624c16137",
+  "engine": "hf",
+  "engine_version": "transformers 5.21.0",
+  "dtype": "bf16",
+  "gpu": "NVIDIA H200",
+  "python": "3.12.3",
+  "decoding": {
+    "n": 2,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_tokens": 220,
+    "seed": 20261027,
+    "enable_thinking": false
+  },
+  "n_prompts": 2680,
+  "n_candidates": 5360,
+  "prompt_template_sha256": "6e122096b9b6d8ee564233e7772afa220245cf06abca88fa0ed01ea673cf5b31",
+  "wall_clock_s": 2482.3,
+  "COMMIT": "62b0eaa3c8adc3665ecc7c0948874bbda13150cc"
+}

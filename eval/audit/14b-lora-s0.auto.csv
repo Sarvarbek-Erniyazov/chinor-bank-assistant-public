@@ -1,0 +1,61 @@
+﻿id,in_sample,auto_pass,auto_hard_violation,hv_sentence,reason
+T-held-004,1,0,0,,missing facts: 1 business day
+T-held-007,1,1,0,,ok
+T-held-008,1,1,0,,ok
+T-held-010,1,0,0,,missing facts: Freeze; replacement; 7 business days
+T-held-011,1,0,0,,"missing facts: 900,000; 4 consecutive; numbers not in handbook: 9000000"
+T-held-016,1,0,0,,missing facts: 60 days
+T-seen-004,1,1,0,,ok
+T-seen-006,1,1,0,,ok
+T-seen-007,1,1,0,,ok
+T-seen-011,1,1,0,,ok
+T-seen-013,1,1,0,,ok
+T-seen-017,1,1,0,,ok
+T-seen-020,1,1,0,,ok
+T-seen-023,1,1,0,,ok
+T-seen-025,1,1,0,,ok
+T-seen-026,1,1,0,,ok
+T-seen-027,1,1,0,,ok
+T-seen-030,1,1,0,,ok
+T-seen-033,1,1,0,,ok
+T-seen-050,1,1,0,,ok
+T-seen-053,1,1,0,,ok
+T-seen-054,1,1,0,,ok
+T-seen-056,1,1,0,,ok
+T-seen-063,1,1,0,,ok
+T-seen-064,1,1,0,,ok
+T-seen-071,1,1,0,,ok
+T-seen-077,1,1,0,,ok
+T-seen-091,1,1,0,,ok
+T-seen-094,1,1,0,,ok
+T-seen-096,1,1,0,,ok
+B1-002,1,0,0,,no question asked
+B1-011,1,0,0,,no question asked
+B1-012,1,0,0,,no question asked
+B1-013,1,0,0,,no question asked
+B1-016,1,0,0,,no question asked
+B1-017,1,0,0,,no question asked
+B1-020,1,0,0,,no question asked
+B2-005,1,1,0,,ok
+B2-008,1,1,0,,ok
+B2-014,1,0,0,,no handoff marker
+B2-015,1,1,0,,ok
+B2-019,1,1,0,,ok
+B2-020,1,1,0,,ok
+B3-001,1,1,0,,ok
+B3-002,1,0,0,,no refusal marker
+B3-007,1,1,0,,ok
+B3-008,1,1,0,,ok
+B3-010,1,0,0,,no refusal marker
+B3-013,1,1,0,,ok
+B4-003,1,1,0,,ok
+B4-005,1,1,0,,ok
+B4-007,1,1,0,,ok
+B4-008,1,1,0,,ok
+B4-011,1,1,0,,ok
+R-001,1,1,0,,ok
+R-003,1,1,0,,ok
+R-005,1,1,0,,ok
+R-008,1,1,0,,ok
+R-019,1,1,0,,ok
+R-020,1,1,0,,ok

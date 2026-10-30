@@ -1,0 +1,120 @@
+
+=== pref_simpo_rules-s0 start 2026-10-29T13:03:59Z (commit 005ece31dfce3cff9496c41b73c1997c771363c1-dirty)
+$ bash <workspace>/chinor/runs/_queues/pref_v1_rest-20261029T214825/scripts/h200/pref_train_eval.sh pref_simpo_rules-s0 train/configs/pref_simpo_rules.yaml 0 
+=== train pref_simpo_rules-s0 (train/configs/pref_simpo_rules.yaml, seed 0) 2026-10-29T13:04:00Z
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 443/443 [00:00<00:00, 9135.72it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+{"step": 10, "epoch": 0.476, "loss": 1.2741, "reward_acc": 0.5625, "chosen_reward": -0.0884, "rejected_reward": -0.148, "margin": 0.0595, "chosen_len": 72.125, "rejected_len": 65.0, "lr": 0.0}
+{"step": 20, "epoch": 0.952, "loss": 1.287, "reward_acc": 0.75, "chosen_reward": -0.1047, "rejected_reward": -0.1458, "margin": 0.0412, "chosen_len": 64.5, "rejected_len": 67.0, "lr": 0.0}
+{"step": 30, "epoch": 1.429, "loss": 1.247, "reward_acc": 0.6875, "chosen_reward": -0.0491, "rejected_reward": -0.1443, "margin": 0.0952, "chosen_len": 61.0625, "rejected_len": 62.0, "lr": 0.0}
+{"step": 40, "epoch": 1.905, "loss": 1.2247, "reward_acc": 0.75, "chosen_reward": -0.0868, "rejected_reward": -0.2182, "margin": 0.1314, "chosen_len": 69.375, "rejected_len": 66.5, "lr": 0.0}
+{"step": 42, "epoch": 2.0, "loss": 1.2408, "reward_acc": 0.9375, "chosen_reward": -0.0412, "rejected_reward": -0.144, "margin": 0.1028, "chosen_len": 68.1875, "rejected_len": 58.25, "lr": 0.0}
+=== eval pref_simpo_rules-s0 (<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model + adapter, eval/eval_set.jsonl, Protocol A) 2026-10-29T13:08:18Z
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 443/443 [00:00<00:00, 5807.92it/s]
+[32/220] batch 32 x 467 tokens, 300 ms/item
+[64/220] batch 32 x 468 tokens, 290 ms/item
+[96/220] batch 32 x 473 tokens, 291 ms/item
+[128/220] batch 32 x 474 tokens, 317 ms/item
+[160/220] batch 32 x 483 tokens, 316 ms/item
+[192/220] batch 32 x 485 tokens, 317 ms/item
+[220/220] batch 28 x 535 tokens, 336 ms/item
+{
+  "arm": "pref_simpo_rules-s0",
+  "git_commit": "005ece31dfce3cff9496c41b73c1997c771363c1-dirty",
+  "model": "<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model",
+  "revision": null,
+  "adapter": "<workspace>/chinor/results/pref_simpo_rules-s0/train/adapter",
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "train/chat_template.jinja",
+  "reference_not_pipeline": false,
+  "system_prompt": {
+    "path": "handbook/system_prompt.txt",
+    "sha256": "c93c104d11983aca2371732a58bd53436180e1ea99e4cdf6dff40dcb32837a83"
+  },
+  "eval_set": "eval/eval_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 220,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 36.588,
+  "wall_clock_s": 68.2,
+  "mean_latency_ms": 309.0,
+  "timestamp": "2026-10-29T13:09:45+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}
+=== eval rt-pref_simpo_rules-s0 (<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model + adapter, eval/redteam_set.jsonl, Protocol A) 2026-10-29T13:09:46Z
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 443/443 [00:00<00:00, 6343.16it/s]
+[32/60] batch 32 x 509 tokens, 284 ms/item
+[60/60] batch 28 x 565 tokens, 282 ms/item
+{
+  "arm": "rt-pref_simpo_rules-s0",
+  "git_commit": "005ece31dfce3cff9496c41b73c1997c771363c1-dirty",
+  "model": "<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model",
+  "revision": null,
+  "adapter": "<workspace>/chinor/results/pref_simpo_rules-s0/train/adapter",
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "train/chat_template.jinja",
+  "reference_not_pipeline": false,
+  "system_prompt": {
+    "path": "handbook/system_prompt.txt",
+    "sha256": "c93c104d11983aca2371732a58bd53436180e1ea99e4cdf6dff40dcb32837a83"
+  },
+  "eval_set": "eval/redteam_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 60,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 36.926,
+  "wall_clock_s": 17.0,
+  "mean_latency_ms": 282.8,
+  "timestamp": "2026-10-29T13:10:22+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}
+=== done pref_simpo_rules-s0 2026-10-29T13:10:24Z
+=== end 2026-10-29T13:10:24Z exit 0

@@ -1,0 +1,14 @@
+{
+  "name": "rt-tier_s_main_rslora-s0",
+  "commit": "56cd6f9fd684a1e8dfdd615bde0ff7fb0d05385f-dirty",
+  "config_hash": "28b69fa228c5e2dc",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": "bf16",
+  "cmd": "<workspace>/chinor/venv-gen/bin/python eval/run_eval.py --model Qwen/Qwen3-1.7B-Base --arm rt-tier_s_main_rslora-s0 --eval-set eval/redteam_set.jsonl --protocol A --dtype bf16 --batch-size 32 --adapter <workspace>/chinor/results/tier_s_main_rslora-s0/train/adapter --out-dir <workspace>/chinor/results/rt-tier_s_main_rslora-s0/rt-tier_s_main_rslora-s0",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T11:05:38+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T11:06:19+00:00"
+}

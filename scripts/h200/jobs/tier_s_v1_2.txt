@@ -1,0 +1,4 @@
+# Step 4 (plan 2026-10-29): Tier-S 1.7B rsLoRA + trainable token rows on the winning data version v1.2 (ADR-031).
+train/configs/tier_s_main_rslora_tok.yaml 0 10 data/sft/v1.2
+train/configs/tier_s_main_rslora_tok.yaml 1 10 data/sft/v1.2
+train/configs/tier_s_main_rslora_tok.yaml 2 10 data/sft/v1.2

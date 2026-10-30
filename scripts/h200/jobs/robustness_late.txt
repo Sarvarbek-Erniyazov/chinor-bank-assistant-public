@@ -1,0 +1,5 @@
+# Robustness and remaining probes (window plan items 10-11), queue.sh.
+# robust-determinism-2 reruns the determinism check (robust-determinism ended in a teardown segfault before run b).
+robust-determinism-2 6 bash scripts/h200/determinism.sh robust-determinism-2
+probe-4b-lora 6 bash scripts/h200/probe.sh probe-4b-lora train/configs/probe_4b_lora.yaml
+probe-8b-lora 8 bash scripts/h200/probe.sh probe-8b-lora train/configs/probe_8b_lora.yaml

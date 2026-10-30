@@ -1,0 +1,101 @@
+{
+  "verifier": "v2",
+  "selection": "canonical answers only (ADR-024); rewrites are the v1_rewrite ablation",
+  "prompts": 2680,
+  "rewrite": 0,
+  "rewrite_verbatim_canonical": 0,
+  "canonical_fallback": 2680,
+  "gate_first_candidate_acceptance_v2": 0.941,
+  "gate_passed": true,
+  "v1": {
+    "per_candidate": {
+      "0": {
+        "accepted": 2654,
+        "total": 2680,
+        "rate": 0.9903
+      },
+      "1": {
+        "accepted": 2657,
+        "total": 2680,
+        "rate": 0.9914
+      }
+    },
+    "candidates": {
+      "accepted": 5311,
+      "total": 5360
+    },
+    "prompt_acceptance_rate": 0.9955,
+    "failures_per_rule": {
+      "a": {
+        "candidates": 44,
+        "rate": 0.0082
+      },
+      "b": {
+        "candidates": 7,
+        "rate": 0.0013
+      },
+      "e": {
+        "candidates": 1,
+        "rate": 0.0002
+      }
+    }
+  },
+  "v2": {
+    "per_candidate": {
+      "0": {
+        "accepted": 2522,
+        "total": 2680,
+        "rate": 0.941
+      },
+      "1": {
+        "accepted": 2526,
+        "total": 2680,
+        "rate": 0.9425
+      }
+    },
+    "candidates": {
+      "accepted": 5048,
+      "total": 5360
+    },
+    "prompt_acceptance_rate": 0.9638,
+    "failures_per_rule": {
+      "a": {
+        "candidates": 44,
+        "rate": 0.0082
+      },
+      "b": {
+        "candidates": 18,
+        "rate": 0.0034
+      },
+      "e": {
+        "candidates": 1,
+        "rate": 0.0002
+      },
+      "f": {
+        "candidates": 208,
+        "rate": 0.0388
+      },
+      "g": {
+        "candidates": 57,
+        "rate": 0.0106
+      }
+    }
+  },
+  "entailment": {
+    "v2_passing_candidates": 5048,
+    "entailed": 4322,
+    "rate": 0.8562,
+    "per_candidate": {
+      "0": {
+        "entailed": 2159,
+        "of_v2_passing": 2522,
+        "rate": 0.8561
+      },
+      "1": {
+        "entailed": 2163,
+        "of_v2_passing": 2526,
+        "rate": 0.8563
+      }
+    }
+  }
+}

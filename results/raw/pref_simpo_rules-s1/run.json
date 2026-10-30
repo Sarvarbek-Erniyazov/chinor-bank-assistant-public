@@ -1,0 +1,14 @@
+{
+  "name": "pref_simpo_rules-s1",
+  "commit": "005ece31dfce3cff9496c41b73c1997c771363c1-dirty",
+  "config_hash": "f388f2b7b2e14d25",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash <workspace>/chinor/runs/_queues/pref_v1_rest-20261029T214825/scripts/h200/pref_train_eval.sh pref_simpo_rules-s1 train/configs/pref_simpo_rules.yaml 1",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T13:10:42+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T13:17:11+00:00"
+}

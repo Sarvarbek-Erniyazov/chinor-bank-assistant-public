@@ -1,0 +1,213 @@
+
+=== c1-rewrites start 2026-10-28T13:43:27Z (commit 62b0eaa3c8adc3665ecc7c0948874bbda13150cc)
+$ <workspace>/chinor/venv-gen/bin/python data/rewrite_generate.py --engine hf --dtype bf16 --seed 20261027 --batch_size 32 --out <workspace>/chinor/results/c1-rewrites 
+
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]
+Fetching 24 files: 100%|██████████| 24/24 [00:00<00:00, 1685.16it/s]
+
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/707 [00:00<01:58,  5.94it/s]
+Loading weights:   0%|          | 2/707 [00:00<02:31,  4.65it/s]
+Loading weights:   1%|          | 6/707 [00:00<00:52, 13.37it/s]
+Loading weights:   2%|▏         | 16/707 [00:00<00:20, 33.43it/s]
+Loading weights:   4%|▎         | 26/707 [00:00<00:14, 47.58it/s]
+Loading weights:   5%|▍         | 32/707 [00:00<00:14, 46.65it/s]
+Loading weights:   5%|▌         | 38/707 [00:01<00:14, 45.97it/s]
+Loading weights:   6%|▋         | 45/707 [00:01<00:13, 50.82it/s]
+Loading weights:   7%|▋         | 51/707 [00:01<00:15, 43.65it/s]
+Loading weights:   8%|▊         | 59/707 [00:01<00:14, 45.54it/s]
+Loading weights:  10%|▉         | 70/707 [00:01<00:13, 46.96it/s]
+Loading weights:  11%|█         | 76/707 [00:01<00:12, 49.17it/s]
+Loading weights:  12%|█▏        | 82/707 [00:01<00:12, 50.21it/s]
+Loading weights:  12%|█▏        | 88/707 [00:02<00:12, 51.47it/s]
+Loading weights:  13%|█▎        | 94/707 [00:02<00:13, 44.85it/s]
+Loading weights:  15%|█▍        | 104/707 [00:02<00:11, 51.29it/s]
+Loading weights:  16%|█▌        | 111/707 [00:02<00:10, 54.97it/s]
+Loading weights:  17%|█▋        | 117/707 [00:02<00:12, 46.90it/s]
+Loading weights:  18%|█▊        | 126/707 [00:02<00:11, 49.99it/s]
+Loading weights:  19%|█▉        | 133/707 [00:02<00:10, 54.08it/s]
+Loading weights:  20%|█▉        | 139/707 [00:03<00:12, 46.75it/s]
+Loading weights:  21%|██        | 148/707 [00:03<00:10, 51.46it/s]
+Loading weights:  22%|██▏       | 155/707 [00:03<00:10, 55.02it/s]
+Loading weights:  23%|██▎       | 161/707 [00:03<00:11, 47.65it/s]
+Loading weights:  24%|██▍       | 170/707 [00:03<00:10, 53.07it/s]
+Loading weights:  25%|██▌       | 180/707 [00:03<00:09, 57.20it/s]
+Loading weights:  26%|██▋       | 186/707 [00:03<00:09, 54.77it/s]
+Loading weights:  27%|██▋       | 192/707 [00:04<00:09, 52.80it/s]
+Loading weights:  29%|██▊       | 202/707 [00:04<00:10, 49.98it/s]
+Loading weights:  30%|██▉       | 210/707 [00:04<00:08, 56.07it/s]
+Loading weights:  31%|███       | 216/707 [00:04<00:10, 46.99it/s]
+Loading weights:  32%|███▏      | 224/707 [00:04<00:08, 53.73it/s]
+Loading weights:  33%|███▎      | 230/707 [00:04<00:09, 51.36it/s]
+Loading weights:  33%|███▎      | 236/707 [00:04<00:09, 47.48it/s]
+Loading weights:  35%|███▍      | 246/707 [00:05<00:08, 54.60it/s]
+Loading weights:  36%|███▌      | 252/707 [00:05<00:08, 51.59it/s]
+Loading weights:  36%|███▋      | 258/707 [00:05<00:09, 49.26it/s]
+Loading weights:  37%|███▋      | 265/707 [00:05<00:08, 54.05it/s]
+Loading weights:  38%|███▊      | 271/707 [00:05<00:09, 45.04it/s]
+Loading weights:  39%|███▉      | 279/707 [00:05<00:08, 52.58it/s]
+Loading weights:  40%|████      | 285/707 [00:05<00:08, 48.54it/s]
+Loading weights:  41%|████      | 291/707 [00:06<00:08, 47.07it/s]
+Loading weights:  43%|████▎     | 301/707 [00:06<00:08, 46.58it/s]
+Loading weights:  44%|████▍     | 311/707 [00:06<00:07, 52.34it/s]
+Loading weights:  45%|████▍     | 317/707 [00:06<00:07, 51.11it/s]
+Loading weights:  46%|████▌     | 323/707 [00:06<00:07, 52.97it/s]
+Loading weights:  47%|████▋     | 329/707 [00:06<00:07, 50.08it/s]
+Loading weights:  47%|████▋     | 335/707 [00:06<00:07, 46.59it/s]
+Loading weights:  49%|████▊     | 343/707 [00:07<00:06, 54.17it/s]
+Loading weights:  49%|████▉     | 349/707 [00:07<00:07, 45.43it/s]
+Loading weights:  50%|█████     | 355/707 [00:07<00:07, 48.52it/s]
+Loading weights:  51%|█████     | 361/707 [00:07<00:07, 48.07it/s]
+Loading weights:  52%|█████▏    | 368/707 [00:07<00:07, 47.28it/s]
+Loading weights:  53%|█████▎    | 374/707 [00:07<00:06, 49.99it/s]
+Loading weights:  54%|█████▎    | 380/707 [00:07<00:07, 44.44it/s]
+Loading weights:  55%|█████▌    | 390/707 [00:08<00:05, 53.98it/s]
+Loading weights:  56%|█████▋    | 399/707 [00:08<00:05, 54.70it/s]
+Loading weights:  57%|█████▋    | 405/707 [00:08<00:05, 54.03it/s]
+Loading weights:  58%|█████▊    | 411/707 [00:08<00:06, 47.80it/s]
+Loading weights:  59%|█████▉    | 419/707 [00:08<00:05, 53.98it/s]
+Loading weights:  60%|██████    | 425/707 [00:08<00:06, 45.97it/s]
+Loading weights:  61%|██████▏   | 434/707 [00:08<00:05, 49.39it/s]
+Loading weights:  62%|██████▏   | 440/707 [00:09<00:05, 51.44it/s]
+Loading weights:  63%|██████▎   | 446/707 [00:09<00:05, 44.36it/s]
+Loading weights:  64%|██████▍   | 456/707 [00:09<00:05, 50.10it/s]
+Loading weights:  66%|██████▌   | 466/707 [00:09<00:04, 54.75it/s]
+Loading weights:  67%|██████▋   | 472/707 [00:09<00:04, 53.64it/s]
+Loading weights:  68%|██████▊   | 478/707 [00:09<00:04, 51.43it/s]
+Loading weights:  69%|██████▊   | 485/707 [00:09<00:04, 55.38it/s]
+Loading weights:  69%|██████▉   | 491/707 [00:10<00:04, 47.77it/s]
+Loading weights:  71%|███████   | 500/707 [00:10<00:03, 53.77it/s]
+Loading weights:  72%|███████▏  | 508/707 [00:10<00:03, 59.91it/s]
+Loading weights:  73%|███████▎  | 515/707 [00:10<00:03, 52.90it/s]
+Loading weights:  74%|███████▍  | 522/707 [00:10<00:03, 50.49it/s]
+Loading weights:  75%|███████▌  | 532/707 [00:10<00:03, 48.82it/s]
+Loading weights:  77%|███████▋  | 543/707 [00:10<00:02, 57.33it/s]
+Loading weights:  78%|███████▊  | 550/707 [00:11<00:02, 54.80it/s]
+Loading weights:  79%|███████▊  | 556/707 [00:11<00:03, 47.62it/s]
+Loading weights:  80%|████████  | 566/707 [00:11<00:02, 54.41it/s]
+Loading weights:  81%|████████▏ | 576/707 [00:11<00:02, 59.70it/s]
+Loading weights:  82%|████████▏ | 583/707 [00:11<00:02, 55.46it/s]
+Loading weights:  83%|████████▎ | 589/707 [00:11<00:02, 50.33it/s]
+Loading weights:  85%|████████▍ | 599/707 [00:12<00:01, 55.12it/s]
+Loading weights:  86%|████████▌ | 605/707 [00:12<00:01, 55.19it/s]
+Loading weights:  86%|████████▋ | 611/707 [00:12<00:01, 48.12it/s]
+Loading weights:  88%|████████▊ | 620/707 [00:12<00:01, 52.00it/s]
+Loading weights:  89%|████████▉ | 630/707 [00:12<00:01, 55.36it/s]
+Loading weights:  90%|████████▉ | 636/707 [00:12<00:01, 53.01it/s]
+Loading weights:  91%|█████████ | 643/707 [00:12<00:01, 51.67it/s]
+Loading weights:  92%|█████████▏| 653/707 [00:13<00:00, 58.28it/s]
+Loading weights:  93%|█████████▎| 659/707 [00:13<00:00, 53.33it/s]
+Loading weights:  94%|█████████▍| 665/707 [00:13<00:00, 50.69it/s]
+Loading weights:  95%|█████████▌| 674/707 [00:13<00:00, 59.90it/s]
+Loading weights:  96%|█████████▋| 681/707 [00:13<00:00, 48.04it/s]
+Loading weights:  97%|█████████▋| 687/707 [00:13<00:00, 50.15it/s]
+Loading weights:  99%|█████████▊| 697/707 [00:13<00:00, 56.87it/s]
+Loading weights: 100%|█████████▉| 704/707 [00:14<00:00, 52.57it/s]
+Loading weights: 100%|██████████| 707/707 [00:14<00:00, 50.37it/s]
+32/2680 prompts
+64/2680 prompts
+96/2680 prompts
+128/2680 prompts
+160/2680 prompts
+192/2680 prompts
+224/2680 prompts
+256/2680 prompts
+288/2680 prompts
+320/2680 prompts
+352/2680 prompts
+384/2680 prompts
+416/2680 prompts
+448/2680 prompts
+480/2680 prompts
+512/2680 prompts
+544/2680 prompts
+576/2680 prompts
+608/2680 prompts
+640/2680 prompts
+672/2680 prompts
+704/2680 prompts
+736/2680 prompts
+768/2680 prompts
+800/2680 prompts
+832/2680 prompts
+864/2680 prompts
+896/2680 prompts
+928/2680 prompts
+960/2680 prompts
+992/2680 prompts
+1024/2680 prompts
+1056/2680 prompts
+1088/2680 prompts
+1120/2680 prompts
+1152/2680 prompts
+1184/2680 prompts
+1216/2680 prompts
+1248/2680 prompts
+1280/2680 prompts
+1312/2680 prompts
+1344/2680 prompts
+1376/2680 prompts
+1408/2680 prompts
+1440/2680 prompts
+1472/2680 prompts
+1504/2680 prompts
+1536/2680 prompts
+1568/2680 prompts
+1600/2680 prompts
+1632/2680 prompts
+1664/2680 prompts
+1696/2680 prompts
+1728/2680 prompts
+1760/2680 prompts
+1792/2680 prompts
+1824/2680 prompts
+1856/2680 prompts
+1888/2680 prompts
+1920/2680 prompts
+1952/2680 prompts
+1984/2680 prompts
+2016/2680 prompts
+2048/2680 prompts
+2080/2680 prompts
+2112/2680 prompts
+2144/2680 prompts
+2176/2680 prompts
+2208/2680 prompts
+2240/2680 prompts
+2272/2680 prompts
+2304/2680 prompts
+2336/2680 prompts
+2368/2680 prompts
+2400/2680 prompts
+2432/2680 prompts
+2464/2680 prompts
+2496/2680 prompts
+2528/2680 prompts
+2560/2680 prompts
+2592/2680 prompts
+2624/2680 prompts
+2656/2680 prompts
+2680/2680 prompts
+{
+  "model": "Qwen/Qwen3-32B",
+  "revision": "9216db5781bf21249d130ec9da846c4624c16137",
+  "engine": "hf",
+  "engine_version": "transformers 5.21.0",
+  "dtype": "bf16",
+  "gpu": "NVIDIA H200",
+  "python": "3.12.3",
+  "decoding": {
+    "n": 2,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_tokens": 220,
+    "seed": 20261027,
+    "enable_thinking": false
+  },
+  "n_prompts": 2680,
+  "n_candidates": 5360,
+  "prompt_template_sha256": "6e122096b9b6d8ee564233e7772afa220245cf06abca88fa0ed01ea673cf5b31",
+  "wall_clock_s": 2482.3,
+  "COMMIT": "62b0eaa3c8adc3665ecc7c0948874bbda13150cc"
+}
+=== end 2026-10-28T14:24:58Z exit 0

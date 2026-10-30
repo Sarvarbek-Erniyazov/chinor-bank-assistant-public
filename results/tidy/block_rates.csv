@@ -1,0 +1,246 @@
+arm_group,method,size,block,k,n,rate,ci_lo,ci_hi
+base-0.6B-0shot,base,0.6B,T-seen,0,100,0.0,0.0,0.037
+base-0.6B-0shot,base,0.6B,T-held,0,20,0.0,0.0,0.1611
+base-0.6B-0shot,base,0.6B,B1,0,20,0.0,0.0,0.1611
+base-0.6B-0shot,base,0.6B,B2,1,20,0.05,0.0089,0.2361
+base-0.6B-0shot,base,0.6B,B3,6,25,0.24,0.115,0.4343
+base-0.6B-0shot,base,0.6B,B4,13,15,0.8667,0.6212,0.9626
+base-0.6B-0shot,base,0.6B,R,0,20,0.0,0.0,0.1611
+base-0.6B-0shot-A,base,0.6B,T-seen,0,100,0.0,0.0,0.037
+base-0.6B-0shot-A,base,0.6B,T-held,0,20,0.0,0.0,0.1611
+base-0.6B-0shot-A,base,0.6B,B1,0,20,0.0,0.0,0.1611
+base-0.6B-0shot-A,base,0.6B,B2,2,20,0.1,0.0279,0.301
+base-0.6B-0shot-A,base,0.6B,B3,5,25,0.2,0.0886,0.3913
+base-0.6B-0shot-A,base,0.6B,B4,13,15,0.8667,0.6212,0.9626
+base-0.6B-0shot-A,base,0.6B,R,0,20,0.0,0.0,0.1611
+base-1.7B-0shot,base,1.7B,T-seen,0,100,0.0,0.0,0.037
+base-1.7B-0shot,base,1.7B,T-held,0,20,0.0,0.0,0.1611
+base-1.7B-0shot,base,1.7B,B1,1,20,0.05,0.0089,0.2361
+base-1.7B-0shot,base,1.7B,B2,5,20,0.25,0.1119,0.4687
+base-1.7B-0shot,base,1.7B,B3,15,25,0.6,0.4074,0.766
+base-1.7B-0shot,base,1.7B,B4,14,15,0.9333,0.7018,0.9881
+base-1.7B-0shot,base,1.7B,R,2,20,0.1,0.0279,0.301
+base-1.7B-0shot-A,base,1.7B,T-seen,0,100,0.0,0.0,0.037
+base-1.7B-0shot-A,base,1.7B,T-held,0,20,0.0,0.0,0.1611
+base-1.7B-0shot-A,base,1.7B,B1,1,20,0.05,0.0089,0.2361
+base-1.7B-0shot-A,base,1.7B,B2,4,20,0.2,0.0807,0.416
+base-1.7B-0shot-A,base,1.7B,B3,16,25,0.64,0.4452,0.7975
+base-1.7B-0shot-A,base,1.7B,B4,15,15,1.0,0.7961,1.0
+base-1.7B-0shot-A,base,1.7B,R,2,20,0.1,0.0279,0.301
+base-1.7B-3shot,base,1.7B,T-seen,1,100,0.01,0.0018,0.0545
+base-1.7B-3shot,base,1.7B,T-held,0,20,0.0,0.0,0.1611
+base-1.7B-3shot,base,1.7B,B1,2,20,0.1,0.0279,0.301
+base-1.7B-3shot,base,1.7B,B2,9,20,0.45,0.2582,0.6579
+base-1.7B-3shot,base,1.7B,B3,14,25,0.56,0.3707,0.7333
+base-1.7B-3shot,base,1.7B,B4,14,15,0.9333,0.7018,0.9881
+base-1.7B-3shot,base,1.7B,R,2,20,0.1,0.0279,0.301
+base-1.7B-3shot-A,base,1.7B,T-seen,1,100,0.01,0.0018,0.0545
+base-1.7B-3shot-A,base,1.7B,T-held,0,20,0.0,0.0,0.1611
+base-1.7B-3shot-A,base,1.7B,B1,5,20,0.25,0.1119,0.4687
+base-1.7B-3shot-A,base,1.7B,B2,9,20,0.45,0.2582,0.6579
+base-1.7B-3shot-A,base,1.7B,B3,15,25,0.6,0.4074,0.766
+base-1.7B-3shot-A,base,1.7B,B4,13,15,0.8667,0.6212,0.9626
+base-1.7B-3shot-A,base,1.7B,R,2,20,0.1,0.0279,0.301
+base-14B-0shot-A,base,14B,T-seen,0,100,0.0,0.0,0.037
+base-14B-0shot-A,base,14B,T-held,0,20,0.0,0.0,0.1611
+base-14B-0shot-A,base,14B,B1,1,20,0.05,0.0089,0.2361
+base-14B-0shot-A,base,14B,B2,10,20,0.5,0.2993,0.7007
+base-14B-0shot-A,base,14B,B3,20,25,0.8,0.6087,0.9114
+base-14B-0shot-A,base,14B,B4,14,15,0.9333,0.7018,0.9881
+base-14B-0shot-A,base,14B,R,20,20,1.0,0.8389,1.0
+base-14B-0shot-A-bs1,base,14B,T-seen,0,100,0.0,0.0,0.037
+base-14B-0shot-A-bs1,base,14B,T-held,0,20,0.0,0.0,0.1611
+base-14B-0shot-A-bs1,base,14B,B1,0,20,0.0,0.0,0.1611
+base-14B-0shot-A-bs1,base,14B,B2,13,20,0.65,0.4329,0.8188
+base-14B-0shot-A-bs1,base,14B,B3,20,25,0.8,0.6087,0.9114
+base-14B-0shot-A-bs1,base,14B,B4,14,15,0.9333,0.7018,0.9881
+base-14B-0shot-A-bs1,base,14B,R,20,20,1.0,0.8389,1.0
+base-14B-3shot-A,base,14B,T-seen,2,100,0.02,0.0055,0.07
+base-14B-3shot-A,base,14B,T-held,1,20,0.05,0.0089,0.2361
+base-14B-3shot-A,base,14B,B1,8,20,0.4,0.2188,0.6134
+base-14B-3shot-A,base,14B,B2,11,20,0.55,0.3421,0.7418
+base-14B-3shot-A,base,14B,B3,19,25,0.76,0.5657,0.885
+base-14B-3shot-A,base,14B,B4,14,15,0.9333,0.7018,0.9881
+base-14B-3shot-A,base,14B,R,20,20,1.0,0.8389,1.0
+base-4B-0shot-A,base,4B,T-seen,1,100,0.01,0.0018,0.0545
+base-4B-0shot-A,base,4B,T-held,0,20,0.0,0.0,0.1611
+base-4B-0shot-A,base,4B,B1,2,20,0.1,0.0279,0.301
+base-4B-0shot-A,base,4B,B2,5,20,0.25,0.1119,0.4687
+base-4B-0shot-A,base,4B,B3,14,25,0.56,0.3707,0.7333
+base-4B-0shot-A,base,4B,B4,13,15,0.8667,0.6212,0.9626
+base-4B-0shot-A,base,4B,R,9,20,0.45,0.2582,0.6579
+base-8B-0shot-A,base,8B,T-seen,0,100,0.0,0.0,0.037
+base-8B-0shot-A,base,8B,T-held,0,20,0.0,0.0,0.1611
+base-8B-0shot-A,base,8B,B1,4,20,0.2,0.0807,0.416
+base-8B-0shot-A,base,8B,B2,5,20,0.25,0.1119,0.4687
+base-8B-0shot-A,base,8B,B3,20,25,0.8,0.6087,0.9114
+base-8B-0shot-A,base,8B,B4,14,15,0.9333,0.7018,0.9881
+base-8B-0shot-A,base,8B,R,20,20,1.0,0.8389,1.0
+l14b_full,full FT,14B,T-seen,163,200,0.815,0.7554,0.8627
+l14b_full,full FT,14B,T-held,0,40,0.0,0.0,0.0876
+l14b_full,full FT,14B,B1,0,40,0.0,0.0,0.0876
+l14b_full,full FT,14B,B2,18,40,0.45,0.3071,0.6017
+l14b_full,full FT,14B,B3,33,50,0.66,0.5215,0.7756
+l14b_full,full FT,14B,B4,28,30,0.9333,0.7868,0.9815
+l14b_full,full FT,14B,R,40,40,1.0,0.9124,1.0
+l14b_full_lr2e5,full FT,14B,T-seen,182,200,0.91,0.8622,0.9423
+l14b_full_lr2e5,full FT,14B,T-held,1,40,0.025,0.0044,0.1288
+l14b_full_lr2e5,full FT,14B,B1,0,40,0.0,0.0,0.0876
+l14b_full_lr2e5,full FT,14B,B2,31,40,0.775,0.625,0.8768
+l14b_full_lr2e5,full FT,14B,B3,41,50,0.82,0.692,0.9023
+l14b_full_lr2e5,full FT,14B,B4,29,30,0.9667,0.8333,0.9941
+l14b_full_lr2e5,full FT,14B,R,40,40,1.0,0.9124,1.0
+l14b_qlora_rslora_tok,QLoRA,14B,T-seen,270,300,0.9,0.8608,0.9291
+l14b_qlora_rslora_tok,QLoRA,14B,T-held,2,60,0.0333,0.0092,0.1136
+l14b_qlora_rslora_tok,QLoRA,14B,B1,1,60,0.0167,0.0029,0.0886
+l14b_qlora_rslora_tok,QLoRA,14B,B2,49,60,0.8167,0.7008,0.8944
+l14b_qlora_rslora_tok,QLoRA,14B,B3,63,75,0.84,0.7408,0.906
+l14b_qlora_rslora_tok,QLoRA,14B,B4,44,45,0.9778,0.8843,0.9961
+l14b_qlora_rslora_tok,QLoRA,14B,R,60,60,1.0,0.9398,1.0
+l14b_sft_rslora,rsLoRA,14B,T-seen,254,300,0.8467,0.8015,0.883
+l14b_sft_rslora,rsLoRA,14B,T-held,6,60,0.1,0.0466,0.2015
+l14b_sft_rslora,rsLoRA,14B,B1,41,60,0.6833,0.5577,0.7869
+l14b_sft_rslora,rsLoRA,14B,B2,53,60,0.8833,0.7782,0.9423
+l14b_sft_rslora,rsLoRA,14B,B3,62,75,0.8267,0.7257,0.8958
+l14b_sft_rslora,rsLoRA,14B,B4,41,45,0.9111,0.7927,0.9649
+l14b_sft_rslora,rsLoRA,14B,R,60,60,1.0,0.9398,1.0
+l14b_sft_rslora_tok,rsLoRA,14B,T-seen,272,300,0.9067,0.8684,0.9346
+l14b_sft_rslora_tok,rsLoRA,14B,T-held,4,60,0.0667,0.0262,0.1593
+l14b_sft_rslora_tok,rsLoRA,14B,B1,3,60,0.05,0.0171,0.137
+l14b_sft_rslora_tok,rsLoRA,14B,B2,44,60,0.7333,0.6099,0.8287
+l14b_sft_rslora_tok,rsLoRA,14B,B3,63,75,0.84,0.7408,0.906
+l14b_sft_rslora_tok,rsLoRA,14B,B4,45,45,1.0,0.9213,1.0
+l14b_sft_rslora_tok,rsLoRA,14B,R,60,60,1.0,0.9398,1.0
+l14b_sft_rslora_tok-v1.1,rsLoRA,14B,T-seen,267,300,0.89,0.8495,0.9206
+l14b_sft_rslora_tok-v1.1,rsLoRA,14B,T-held,0,60,0.0,0.0,0.0602
+l14b_sft_rslora_tok-v1.1,rsLoRA,14B,B1,4,60,0.0667,0.0262,0.1593
+l14b_sft_rslora_tok-v1.1,rsLoRA,14B,B2,47,60,0.7833,0.6638,0.8688
+l14b_sft_rslora_tok-v1.1,rsLoRA,14B,B3,62,75,0.8267,0.7257,0.8958
+l14b_sft_rslora_tok-v1.1,rsLoRA,14B,B4,45,45,1.0,0.9213,1.0
+l14b_sft_rslora_tok-v1.1,rsLoRA,14B,R,60,60,1.0,0.9398,1.0
+l14b_sft_rslora_tok-v1.2,rsLoRA,14B,T-seen,448,500,0.896,0.8662,0.9198
+l14b_sft_rslora_tok-v1.2,rsLoRA,14B,T-held,6,100,0.06,0.0278,0.1248
+l14b_sft_rslora_tok-v1.2,rsLoRA,14B,B1,11,100,0.11,0.0625,0.1863
+l14b_sft_rslora_tok-v1.2,rsLoRA,14B,B2,81,100,0.81,0.7222,0.8749
+l14b_sft_rslora_tok-v1.2,rsLoRA,14B,B3,105,125,0.84,0.7658,0.894
+l14b_sft_rslora_tok-v1.2,rsLoRA,14B,B4,74,75,0.9867,0.9283,0.9976
+l14b_sft_rslora_tok-v1.2,rsLoRA,14B,R,100,100,1.0,0.963,1.0
+l14b_sft_rslora_tok-v1.2-paraphrase,rsLoRA,14B,T-seen,264,300,0.88,0.8383,0.912
+l14b_sft_rslora_tok-v1.2-paraphrase,rsLoRA,14B,T-held,3,60,0.05,0.0171,0.137
+l14b_sft_rslora_tok-v1.2-paraphrase,rsLoRA,14B,B1,7,60,0.1167,0.0577,0.2218
+l14b_sft_rslora_tok-v1.2-paraphrase,rsLoRA,14B,B2,44,60,0.7333,0.6099,0.8287
+l14b_sft_rslora_tok-v1.2-paraphrase,rsLoRA,14B,B3,63,75,0.84,0.7408,0.906
+l14b_sft_rslora_tok-v1.2-paraphrase,rsLoRA,14B,B4,44,45,0.9778,0.8843,0.9961
+l14b_sft_rslora_tok-v1.2-paraphrase,rsLoRA,14B,R,60,60,1.0,0.9398,1.0
+l14b_sft_rslora_tok-v1.2_rft,rsLoRA,14B,T-seen,94,100,0.94,0.8752,0.9722
+l14b_sft_rslora_tok-v1.2_rft,rsLoRA,14B,T-held,1,20,0.05,0.0089,0.2361
+l14b_sft_rslora_tok-v1.2_rft,rsLoRA,14B,B1,1,20,0.05,0.0089,0.2361
+l14b_sft_rslora_tok-v1.2_rft,rsLoRA,14B,B2,16,20,0.8,0.584,0.9193
+l14b_sft_rslora_tok-v1.2_rft,rsLoRA,14B,B3,22,25,0.88,0.7004,0.9583
+l14b_sft_rslora_tok-v1.2_rft,rsLoRA,14B,B4,15,15,1.0,0.7961,1.0
+l14b_sft_rslora_tok-v1.2_rft,rsLoRA,14B,R,7,20,0.35,0.1812,0.5671
+l14b_sft_rslora_tok-v1_rewrite,rsLoRA,14B,T-seen,89,100,0.89,0.8137,0.9375
+l14b_sft_rslora_tok-v1_rewrite,rsLoRA,14B,T-held,0,20,0.0,0.0,0.1611
+l14b_sft_rslora_tok-v1_rewrite,rsLoRA,14B,B1,1,20,0.05,0.0089,0.2361
+l14b_sft_rslora_tok-v1_rewrite,rsLoRA,14B,B2,17,20,0.85,0.6396,0.9476
+l14b_sft_rslora_tok-v1_rewrite,rsLoRA,14B,B3,18,25,0.72,0.5242,0.8572
+l14b_sft_rslora_tok-v1_rewrite,rsLoRA,14B,B4,15,15,1.0,0.7961,1.0
+l14b_sft_rslora_tok-v1_rewrite,rsLoRA,14B,R,20,20,1.0,0.8389,1.0
+pref_dpo_rules,DPO,14B,T-seen,277,300,0.9233,0.8876,0.9484
+pref_dpo_rules,DPO,14B,T-held,3,60,0.05,0.0171,0.137
+pref_dpo_rules,DPO,14B,B1,4,60,0.0667,0.0262,0.1593
+pref_dpo_rules,DPO,14B,B2,45,60,0.75,0.6277,0.8422
+pref_dpo_rules,DPO,14B,B3,61,75,0.8133,0.7107,0.8854
+pref_dpo_rules,DPO,14B,B4,45,45,1.0,0.9213,1.0
+pref_dpo_rules,DPO,14B,R,60,60,1.0,0.9398,1.0
+pref_simpo_rules,SimPO,14B,T-seen,274,300,0.9133,0.876,0.9402
+pref_simpo_rules,SimPO,14B,T-held,3,60,0.05,0.0171,0.137
+pref_simpo_rules,SimPO,14B,B1,3,60,0.05,0.0171,0.137
+pref_simpo_rules,SimPO,14B,B2,46,60,0.7667,0.6456,0.8556
+pref_simpo_rules,SimPO,14B,B3,60,75,0.8,0.6959,0.8749
+pref_simpo_rules,SimPO,14B,B4,45,45,1.0,0.9213,1.0
+pref_simpo_rules,SimPO,14B,R,60,60,1.0,0.9398,1.0
+ref-1.7B-instruct-A,instruct (reference),1.7B,T-seen,0,100,0.0,0.0,0.037
+ref-1.7B-instruct-A,instruct (reference),1.7B,T-held,0,20,0.0,0.0,0.1611
+ref-1.7B-instruct-A,instruct (reference),1.7B,B1,1,20,0.05,0.0089,0.2361
+ref-1.7B-instruct-A,instruct (reference),1.7B,B2,10,20,0.5,0.2993,0.7007
+ref-1.7B-instruct-A,instruct (reference),1.7B,B3,19,25,0.76,0.5657,0.885
+ref-1.7B-instruct-A,instruct (reference),1.7B,B4,14,15,0.9333,0.7018,0.9881
+ref-1.7B-instruct-A,instruct (reference),1.7B,R,20,20,1.0,0.8389,1.0
+ref-14B-instruct-A,instruct (reference),14B,T-seen,1,100,0.01,0.0018,0.0545
+ref-14B-instruct-A,instruct (reference),14B,T-held,0,20,0.0,0.0,0.1611
+ref-14B-instruct-A,instruct (reference),14B,B1,12,20,0.6,0.3866,0.7812
+ref-14B-instruct-A,instruct (reference),14B,B2,11,20,0.55,0.3421,0.7418
+ref-14B-instruct-A,instruct (reference),14B,B3,20,25,0.8,0.6087,0.9114
+ref-14B-instruct-A,instruct (reference),14B,B4,14,15,0.9333,0.7018,0.9881
+ref-14B-instruct-A,instruct (reference),14B,R,20,20,1.0,0.8389,1.0
+size_4b_rslora_tok,rsLoRA,4B,T-seen,271,300,0.9033,0.8646,0.9318
+size_4b_rslora_tok,rsLoRA,4B,T-held,4,60,0.0667,0.0262,0.1593
+size_4b_rslora_tok,rsLoRA,4B,B1,0,60,0.0,0.0,0.0602
+size_4b_rslora_tok,rsLoRA,4B,B2,46,60,0.7667,0.6456,0.8556
+size_4b_rslora_tok,rsLoRA,4B,B3,62,75,0.8267,0.7257,0.8958
+size_4b_rslora_tok,rsLoRA,4B,B4,45,45,1.0,0.9213,1.0
+size_4b_rslora_tok,rsLoRA,4B,R,59,60,0.9833,0.9114,0.9971
+size_8b_rslora_tok,rsLoRA,8B,T-seen,270,300,0.9,0.8608,0.9291
+size_8b_rslora_tok,rsLoRA,8B,T-held,6,60,0.1,0.0466,0.2015
+size_8b_rslora_tok,rsLoRA,8B,B1,1,60,0.0167,0.0029,0.0886
+size_8b_rslora_tok,rsLoRA,8B,B2,50,60,0.8333,0.7197,0.9069
+size_8b_rslora_tok,rsLoRA,8B,B3,54,75,0.72,0.6096,0.809
+size_8b_rslora_tok,rsLoRA,8B,B4,42,45,0.9333,0.8214,0.9771
+size_8b_rslora_tok,rsLoRA,8B,R,60,60,1.0,0.9398,1.0
+tier_s_main_rslora,rsLoRA,1.7B,T-seen,261,300,0.87,0.8272,0.9034
+tier_s_main_rslora,rsLoRA,1.7B,T-held,4,60,0.0667,0.0262,0.1593
+tier_s_main_rslora,rsLoRA,1.7B,B1,16,60,0.2667,0.1713,0.3901
+tier_s_main_rslora,rsLoRA,1.7B,B2,41,60,0.6833,0.5577,0.7869
+tier_s_main_rslora,rsLoRA,1.7B,B3,54,75,0.72,0.6096,0.809
+tier_s_main_rslora,rsLoRA,1.7B,B4,45,45,1.0,0.9213,1.0
+tier_s_main_rslora,rsLoRA,1.7B,R,59,60,0.9833,0.9114,0.9971
+tier_s_main_rslora_tok,rsLoRA,1.7B,T-seen,260,300,0.8667,0.8235,0.9005
+tier_s_main_rslora_tok,rsLoRA,1.7B,T-held,6,60,0.1,0.0466,0.2015
+tier_s_main_rslora_tok,rsLoRA,1.7B,B1,0,60,0.0,0.0,0.0602
+tier_s_main_rslora_tok,rsLoRA,1.7B,B2,35,60,0.5833,0.4573,0.6994
+tier_s_main_rslora_tok,rsLoRA,1.7B,B3,53,75,0.7067,0.5956,0.7976
+tier_s_main_rslora_tok,rsLoRA,1.7B,B4,45,45,1.0,0.9213,1.0
+tier_s_main_rslora_tok,rsLoRA,1.7B,R,56,60,0.9333,0.8407,0.9738
+tier_s_main_rslora_tok-v1.2,rsLoRA,1.7B,T-seen,261,300,0.87,0.8272,0.9034
+tier_s_main_rslora_tok-v1.2,rsLoRA,1.7B,T-held,5,60,0.0833,0.0361,0.1807
+tier_s_main_rslora_tok-v1.2,rsLoRA,1.7B,B1,4,60,0.0667,0.0262,0.1593
+tier_s_main_rslora_tok-v1.2,rsLoRA,1.7B,B2,45,60,0.75,0.6277,0.8422
+tier_s_main_rslora_tok-v1.2,rsLoRA,1.7B,B3,55,75,0.7333,0.6237,0.8202
+tier_s_main_rslora_tok-v1.2,rsLoRA,1.7B,B4,44,45,0.9778,0.8843,0.9961
+tier_s_main_rslora_tok-v1.2,rsLoRA,1.7B,R,57,60,0.95,0.863,0.9829
+tier_s_pilot_dora,DoRA,0.6B,T-seen,200,300,0.6667,0.6115,0.7176
+tier_s_pilot_dora,DoRA,0.6B,T-held,1,60,0.0167,0.0029,0.0886
+tier_s_pilot_dora,DoRA,0.6B,B1,31,60,0.5167,0.3931,0.6382
+tier_s_pilot_dora,DoRA,0.6B,B2,32,60,0.5333,0.4089,0.6537
+tier_s_pilot_dora,DoRA,0.6B,B3,43,75,0.5733,0.4605,0.679
+tier_s_pilot_dora,DoRA,0.6B,B4,42,45,0.9333,0.8214,0.9771
+tier_s_pilot_dora,DoRA,0.6B,R,50,60,0.8333,0.7197,0.9069
+tier_s_pilot_lora,SFT-LoRA,0.6B,T-seen,219,300,0.73,0.6771,0.7771
+tier_s_pilot_lora,SFT-LoRA,0.6B,T-held,0,60,0.0,0.0,0.0602
+tier_s_pilot_lora,SFT-LoRA,0.6B,B1,31,60,0.5167,0.3931,0.6382
+tier_s_pilot_lora,SFT-LoRA,0.6B,B2,39,60,0.65,0.5236,0.7583
+tier_s_pilot_lora,SFT-LoRA,0.6B,B3,41,75,0.5467,0.4345,0.6543
+tier_s_pilot_lora,SFT-LoRA,0.6B,B4,44,45,0.9778,0.8843,0.9961
+tier_s_pilot_lora,SFT-LoRA,0.6B,R,47,60,0.7833,0.6638,0.8688
+tier_s_pilot_lora_nogroup,SFT-LoRA,0.6B,T-seen,68,100,0.68,0.5834,0.7633
+tier_s_pilot_lora_nogroup,SFT-LoRA,0.6B,T-held,0,20,0.0,0.0,0.1611
+tier_s_pilot_lora_nogroup,SFT-LoRA,0.6B,B1,9,20,0.45,0.2582,0.6579
+tier_s_pilot_lora_nogroup,SFT-LoRA,0.6B,B2,13,20,0.65,0.4329,0.8188
+tier_s_pilot_lora_nogroup,SFT-LoRA,0.6B,B3,16,25,0.64,0.4452,0.7975
+tier_s_pilot_lora_nogroup,SFT-LoRA,0.6B,B4,15,15,1.0,0.7961,1.0
+tier_s_pilot_lora_nogroup,SFT-LoRA,0.6B,R,20,20,1.0,0.8389,1.0
+tier_s_pilot_lora_paged8,SFT-LoRA,0.6B,T-seen,211,300,0.7033,0.6493,0.7522
+tier_s_pilot_lora_paged8,SFT-LoRA,0.6B,T-held,1,60,0.0167,0.0029,0.0886
+tier_s_pilot_lora_paged8,SFT-LoRA,0.6B,B1,23,60,0.3833,0.2709,0.5098
+tier_s_pilot_lora_paged8,SFT-LoRA,0.6B,B2,36,60,0.6,0.4737,0.7143
+tier_s_pilot_lora_paged8,SFT-LoRA,0.6B,B3,43,75,0.5733,0.4605,0.679
+tier_s_pilot_lora_paged8,SFT-LoRA,0.6B,B4,44,45,0.9778,0.8843,0.9961
+tier_s_pilot_lora_paged8,SFT-LoRA,0.6B,R,47,60,0.7833,0.6638,0.8688
+tier_s_pilot_rslora,rsLoRA,0.6B,T-seen,243,300,0.81,0.7618,0.8504
+tier_s_pilot_rslora,rsLoRA,0.6B,T-held,1,60,0.0167,0.0029,0.0886
+tier_s_pilot_rslora,rsLoRA,0.6B,B1,21,60,0.35,0.2417,0.4764
+tier_s_pilot_rslora,rsLoRA,0.6B,B2,46,60,0.7667,0.6456,0.8556
+tier_s_pilot_rslora,rsLoRA,0.6B,B3,53,75,0.7067,0.5956,0.7976
+tier_s_pilot_rslora,rsLoRA,0.6B,B4,44,45,0.9778,0.8843,0.9961
+tier_s_pilot_rslora,rsLoRA,0.6B,R,34,60,0.5667,0.441,0.6843

@@ -1,0 +1,4 @@
+# Size curve: adopted Tier-S config at 4B (lr 2e-4) and 8B (lr 1e-4, ADR-026), seed 0.
+# Estimates: 4B ~ 15 min, 8B ~ 25 min including evals (no 4B/8B probe yet: from the 1.7B and 14B probes).
+train/configs/size_4b_rslora.yaml 0 20
+train/configs/size_8b_rslora.yaml 0 30

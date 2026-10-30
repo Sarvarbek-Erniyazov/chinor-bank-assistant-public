@@ -1,0 +1,2 @@
+# C4 §4 judge of the rule pairs (after §3; queue.sh format, dest data/pref/v1/judge).
+pref-judge-v1 45 <workspace>/chinor/venv-gen/bin/python data/pref/judge_pairs.py --pairs data/pref/v1/pairs_rules.jsonl --batch-size 16 --out <workspace>/chinor/results/pref-judge-v1

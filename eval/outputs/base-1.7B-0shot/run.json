@@ -1,0 +1,38 @@
+{
+  "arm": "base-1.7B-0shot",
+  "git_commit": "2c8d00100b4b973472baccc9dc9211f602f5f6e7",
+  "model": "Qwen/Qwen3-1.7B-Base",
+  "revision": null,
+  "adapter": null,
+  "dtype": "fp16",
+  "quant": "none",
+  "shots": 0,
+  "template": "train/chat_template.jinja",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 220,
+  "batch_size": 8,
+  "device": "cuda",
+  "gpu": "Tesla T4",
+  "peak_vram_gb": 4.153,
+  "wall_clock_s": 219.7,
+  "mean_latency_ms": 997.3,
+  "timestamp": "2026-10-28T09:51:40+00:00",
+  "python": "3.13.16",
+  "packages": {
+    "torch": "2.14.1",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.50.2",
+    "accelerate": "1.15.0",
+    "datasets": "5.1.0",
+    "trl": "1.16.0"
+  }
+}

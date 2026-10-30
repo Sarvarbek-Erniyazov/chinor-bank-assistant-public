@@ -1,0 +1,2 @@
+# Step 6 (plan 2026-10-29): 14B full FT lr 2e-5 seed 1, only if seed 0 scored >= 135/200. JOB_WRITE_GB=60 (ADR-027).
+train/configs/l14b_full_lr2e5.yaml 1 45

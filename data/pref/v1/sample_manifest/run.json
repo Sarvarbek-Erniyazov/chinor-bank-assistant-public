@@ -1,0 +1,26 @@
+{
+  "model": "<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model",
+  "model_manifest_sha256": "e4d24cc5e588182a0142bfca68f14aae5027a664b1caa994c5394d4a923003b0",
+  "prompts": "<workspace>/chinor/repo/data/pref/v1/prompts.jsonl",
+  "n_prompts": 2188,
+  "n_samples": 17504,
+  "k": 8,
+  "temperature": 0.8,
+  "top_p": 0.95,
+  "max_new_tokens": 200,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "seed": 20261029,
+  "dtype": "bf16",
+  "gpu": "NVIDIA H200",
+  "batch_prompts": 32,
+  "wall_clock_s": 2103.5,
+  "stop_reasons": {
+    "im_end": 17504
+  },
+  "verbatim_reference": 14189,
+  "verbatim_reference_share": 0.8106,
+  "timestamp": "2026-10-29T12:38:17+00:00"
+}

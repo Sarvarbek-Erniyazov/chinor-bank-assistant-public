@@ -1,0 +1,14 @@
+{
+  "name": "pref_dpo_rules-s2",
+  "commit": "005ece31dfce3cff9496c41b73c1997c771363c1-dirty",
+  "config_hash": "56d520f322eb2180",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "bash <workspace>/chinor/runs/_queues/pref_v1_rest-20261029T214825/scripts/h200/pref_train_eval.sh pref_dpo_rules-s2 train/configs/pref_dpo_rules.yaml 2",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-29T12:56:16+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-29T13:03:28+00:00"
+}

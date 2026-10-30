@@ -1,0 +1,3 @@
+# Gate before the special-token reruns (ADR-023 amendment): 1.7B rsLoRA + trainable rows, 100 steps, 10 greedy items.
+# Pass: >= 9 / 10 stop on <|im_end|> (results/<run>/gate.json). queue.sh.
+gate-tok-1.7b 10 bash scripts/h200/gate_tokens.sh gate-tok-1.7b

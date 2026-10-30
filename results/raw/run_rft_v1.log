@@ -1,0 +1,11 @@
+frozen queue rft_v1-20261029T224229 at 2026-10-29 22:42:30: run_matrix.sh from <local-repo>/runs/_queues/rft_v1-20261029T224229
+  local copy: <local-repo>/runs/_queues/rft_v1-20261029T224229/scripts/h200 (git 74a6105)
+  server copy: <workspace>/chinor/runs/_queues/rft_v1-20261029T224229/scripts/h200
+  list: <local-repo>/runs/_queues/rft_v1-20261029T224229/rft_v1.txt (job commands point at the server copy)
+START l14b_sft_rslora_tok-s0-v1.2_rft (estimate 35 min) at 22:42 unless its weights are not ready
+started l14b_sft_rslora_tok-s0-v1.2_rft pid 191592; log <workspace>/chinor/runs/l14b_sft_rslora_tok-s0-v1.2_rft/log.txt
+END l14b_sft_rslora_tok-s0-v1.2_rft exit 0 after 29 min at 23:11
+synced l14b_sft_rslora_tok-s0-v1.2_rft -> results/runs/l14b_sft_rslora_tok-s0-v1.2_rft/ and results/raw/l14b_sft_rslora_tok-s0-v1.2_rft/
+l14b_sft_rslora_tok-s0-v1.2_rft: 156/220 pass; hard_violation=0, over_refusal=0, injection_success=1, fabricated_number=0
+deleted checkpoints of l14b_sft_rslora_tok-s0-v1.2_rft (final weights hashed)
+matrix <local-repo>/runs/_queues/rft_v1-20261029T224229/rft_v1.txt done

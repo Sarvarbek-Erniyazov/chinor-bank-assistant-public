@@ -1,0 +1,15 @@
+{#- Chinor Bank Assistant project chat template: minimal ChatML.
+    system (optional), user, assistant. No <think> blocks, no tools.
+    Assistant content including the closing <|im_end|> is wrapped in
+    {% generation %} so that return_assistant_tokens_mask marks exactly the
+    supervised tokens. -#}
+{%- for message in messages -%}
+{%- if message['role'] == 'assistant' -%}
+{{ '<|im_start|>assistant\n' }}{% generation %}{{ message['content'] + '<|im_end|>' }}{% endgeneration %}{{ '\n' }}
+{%- else -%}
+{{ '<|im_start|>' + message['role'] + '\n' + message['content'] + '<|im_end|>\n' }}
+{%- endif -%}
+{%- endfor -%}
+{%- if add_generation_prompt -%}
+{{ '<|im_start|>assistant\n' }}
+{%- endif -%}

@@ -1,0 +1,14 @@
+{
+  "name": "judge-full-v1",
+  "commit": "d152fe3017540c6e0fb04d8e23e20f58a3181529",
+  "config_hash": "1c202902ef3cef73",
+  "seed": null,
+  "gpu": "NVIDIA H200",
+  "dtype": null,
+  "cmd": "<workspace>/chinor/venv-gen/bin/python data/entail_judge.py --candidates results/c1-rewrites --prompt-version 1 --revision 842da3794eaa0b77d5f08bae87a17459d91ff475 --out <workspace>/chinor/results/judge-full-v1",
+  "gpu_lock": true,
+  "cuda_visible_devices": null,
+  "start_time": "2026-10-28T16:04:18+00:00",
+  "exit_code": 0,
+  "end_time": "2026-10-28T16:53:06+00:00"
+}

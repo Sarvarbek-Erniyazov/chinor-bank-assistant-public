@@ -1,0 +1,5 @@
+# Step 2 (plan 2026-10-29): size curve seeds 1 and 2, SFT v1, same configs as seed 0.
+train/configs/size_4b_rslora_tok.yaml 1 15
+train/configs/size_4b_rslora_tok.yaml 2 15
+train/configs/size_8b_rslora_tok.yaml 1 20
+train/configs/size_8b_rslora_tok.yaml 2 20

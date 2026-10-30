@@ -1,0 +1,24 @@
+# Tier-S pilot: plain LoRA (reference arm)
+# Shared hyperparameters (C2a §1): effective batch 16, cosine schedule, 3 % warmup, 3 epochs, LoRA on all
+# linear projections; embeddings and lm_head are never trained. train/sft.py asserts these.
+model: Qwen/Qwen3-0.6B-Base
+max_length: 1024
+per_device_train_batch_size: 16
+per_device_eval_batch_size: 16
+gradient_accumulation_steps: 1
+learning_rate: 2.0e-4
+warmup_ratio: 0.03
+num_train_epochs: 3
+weight_decay: 0.0
+optim: adamw_torch
+group_by_length: true
+eval_steps: 50
+save_steps: 100
+logging_steps: 10
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  use_rslora: false
+  use_dora: false

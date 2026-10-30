@@ -1,0 +1,11 @@
+l14b_full-s0	model.safetensors	6977f132b2a0398fd7673308117346f9f1241e25bfc7c860fa244666469f5a3a	server, 2026-10-29
+l14b_full-s1	model.safetensors	79e46019edbbb343c723e85f0193932c7216ebc44fbe0b873da71efdcbea2e5e	server, 2026-10-29
+l14b_full_lr2e5-s0	model.safetensors	e7162f5d7ca937d6b4016117486f6368efc3cf9b62581434dc42b51cb9a4967b	server, 2026-10-29
+l14b_full_lr2e5-s1	model.safetensors	0442eb8b3bbc0dbf4c1ad865bd09f698bbd8a976e700239e69264bb5e92c8cd7	server, 2026-10-29
+pref_dpo_rules-s0	adapter_model.safetensors	b2ae8a783c2ba5f87bfd465d643515bdeca5190fea1bf99f7bda42b2ee8bb12b	server, 2026-10-29
+pref_dpo_rules-s1	adapter_model.safetensors	1d7b0094162a870c2482089071525378511f1640ca68910c988a4d7ddda0bfb4	server, 2026-10-29
+pref_dpo_rules-s2	adapter_model.safetensors	bc5d9b183cec7fb932c3cee4300ebff4de6aa41f651d0a4520e7c67a3247fb40	server, 2026-10-29
+pref_simpo_rules-s0	adapter_model.safetensors	7a0b887794a94b3de19cee3131acb580fc3800cc33cdae7667b0b966dbb942b8	server, 2026-10-29
+pref_simpo_rules-s1	adapter_model.safetensors	d6cc4f159112d82a7cb48af76f8a375b09c98b8254294b279efb6411b78ff51e	server, 2026-10-29
+pref_simpo_rules-s2	adapter_model.safetensors	a1ab6e10e9e5c1f543fdfa779c1c6733cf260d21c283b0c8bcf7b509f49d2ec1	server, 2026-10-29
+sft-merged-l14b-v1.2-s0	manifest (merge.json)	e4d24cc5e588182a0142bfca68f14aae5027a664b1caa994c5394d4a923003b0	server, 2026-10-29 (deleted)

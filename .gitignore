@@ -1,0 +1,61 @@
+# environments
+.venv/
+venv/
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# editor files (not part of the project)
+.cursor/
+.vscode/
+.idea/
+
+# data caches and model weights
+data/raw/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+models/
+adapters/
+checkpoints/
+wandb/
+
+# large artefacts (anything over 50 MB is never committed)
+*.zip
+*.tar.gz
+*.parquet
+*.arrow
+
+# commit marker written by scripts/h200/sync_up.sh
+COMMIT
+
+# provisional SFT assembly for mechanics-only GPU runs (never committed, never scored)
+data/sft/_provisional/
+
+# scratch eval inputs/outputs (red-team draft scorability checks): never committed, never reported as results
+eval/_scratch/
+
+# frozen queue copies (queue isolation)
+/runs/
+
+# SFT ablation data (v1 with selection-v3 rewrites): data git-ignored, manifest committed
+data/sft/v1_rewrite/*
+!data/sft/v1_rewrite/manifest.sha256
+!data/sft/v1_rewrite/task_stats.json
+!data/sft/v1_rewrite/assemble_stats.json
+data/sft/v1.1/*
+!data/sft/v1.1/manifest.sha256
+!data/sft/v1.1/assemble_stats.json
+!data/sft/v1.1/DATA_CARD.md
+data/sft/v1.2/*
+!data/sft/v1.2/manifest.sha256
+!data/sft/v1.2/assemble_stats.json
+!data/sft/v1.2/DATA_CARD.md
+
+# preference-stage samples (on-policy generations; manifest committed instead)
+data/pref/v1/samples/
+data/pref/v1/labels.jsonl

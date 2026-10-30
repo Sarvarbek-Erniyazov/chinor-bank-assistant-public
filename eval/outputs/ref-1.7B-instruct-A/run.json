@@ -1,0 +1,40 @@
+{
+  "arm": "ref-1.7B-instruct-A",
+  "git_commit": "d152fe3017540c6e0fb04d8e23e20f58a3181529",
+  "model": "Qwen/Qwen3-1.7B",
+  "revision": null,
+  "adapter": null,
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "native (enable_thinking=False)",
+  "reference_not_pipeline": true,
+  "eval_set": "eval/eval_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 220,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 6.131,
+  "wall_clock_s": 19.0,
+  "mean_latency_ms": 85.7,
+  "timestamp": "2026-10-28T16:55:06+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}

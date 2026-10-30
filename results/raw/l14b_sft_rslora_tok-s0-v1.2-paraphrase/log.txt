@@ -1,0 +1,60 @@
+
+=== l14b_sft_rslora_tok-s0-v1.2-paraphrase start 2026-10-29T06:34:12Z (commit ecd785e1167551e2cf8c42bbc002e543b28d8363-dirty)
+$ bash <workspace>/chinor/runs/_queues/robust_sysprompt-20261029T153408/scripts/h200/eval_adapter.sh l14b_sft_rslora_tok-s0-v1.2-paraphrase l14b_sft_rslora_tok-s0-v1.2 train/configs/l14b_sft_rslora_tok.yaml eval/system_prompt_paraphrase.txt 
+=== eval l14b_sft_rslora_tok-s0-v1.2-paraphrase (Qwen/Qwen3-14B-Base + l14b_sft_rslora_tok-s0-v1.2 adapter, system prompt eval/system_prompt_paraphrase.txt, Protocol A) 2026-10-29T06:34:12Z
+
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 443/443 [00:00<00:00, 7829.15it/s]
+[32/220] batch 32 x 467 tokens, 304 ms/item
+[64/220] batch 32 x 468 tokens, 294 ms/item
+[96/220] batch 32 x 473 tokens, 296 ms/item
+[128/220] batch 32 x 474 tokens, 321 ms/item
+[160/220] batch 32 x 483 tokens, 321 ms/item
+[192/220] batch 32 x 485 tokens, 322 ms/item
+[220/220] batch 28 x 535 tokens, 285 ms/item
+{
+  "arm": "l14b_sft_rslora_tok-s0-v1.2-paraphrase",
+  "git_commit": "ecd785e1167551e2cf8c42bbc002e543b28d8363-dirty",
+  "model": "Qwen/Qwen3-14B-Base",
+  "revision": null,
+  "adapter": "<workspace>/chinor/results/l14b_sft_rslora_tok-s0-v1.2/train/adapter",
+  "dtype": "bf16",
+  "quant": "none",
+  "shots": 0,
+  "protocol": "A",
+  "template": "train/chat_template.jinja",
+  "reference_not_pipeline": false,
+  "system_prompt": {
+    "path": "eval/system_prompt_paraphrase.txt",
+    "sha256": "ee42b6302ac1dbbec4d52ca553c730456bd13bcba80aff512e0c9cf8d2fb0617"
+  },
+  "eval_set": "eval/eval_set.jsonl",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 200,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "padding_side": "left"
+  },
+  "n_items": 220,
+  "batch_size": 32,
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "peak_vram_gb": 36.588,
+  "wall_clock_s": 67.7,
+  "mean_latency_ms": 306.7,
+  "timestamp": "2026-10-29T06:35:41+00:00",
+  "python": "3.12.3",
+  "packages": {
+    "torch": "2.7.0a0+7c8ec84dab.nv25.3",
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.48.0.dev0",
+    "accelerate": "1.15.0",
+    "datasets": "2.2.1"
+  }
+}
+=== done l14b_sft_rslora_tok-s0-v1.2-paraphrase 2026-10-29T06:35:43Z
+=== end 2026-10-29T06:35:43Z exit 0

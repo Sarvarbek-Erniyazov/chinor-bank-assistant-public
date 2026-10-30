@@ -1,0 +1,52 @@
+{
+  "config": "train/configs/pref_simpo_rules.yaml",
+  "config_values": {
+    "model": "<workspace>/chinor/results/sft-merged-l14b-v1.2-s0/model",
+    "pairs": "data/pref/v1/pairs_rules.jsonl",
+    "loss": "simpo",
+    "beta": 2.0,
+    "gamma": 1.0,
+    "max_length": 1024,
+    "per_device_train_batch_size": 4,
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 1e-05,
+    "warmup_ratio": 0.1,
+    "num_train_epochs": 2,
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ]
+    }
+  },
+  "seed": 0,
+  "pairs": "data/pref/v1/pairs_rules.jsonl",
+  "pairs_sha256": "9634cdb61a3111b89ecf736dc8d0d84226cab2636639ddf371760ab26d4d39b8",
+  "pairs_used": 348,
+  "steps": 42,
+  "sft_merged_manifest_sha256": "e4d24cc5e588182a0142bfca68f14aae5027a664b1caa994c5394d4a923003b0",
+  "adapter_sha256": "7a0b887794a94b3de19cee3131acb580fc3800cc33cdae7667b0b966dbb942b8",
+  "wall_clock_s": 234.1,
+  "peak_vram_gb": 42.027,
+  "gpu": "NVIDIA H200",
+  "final": {
+    "step": 42,
+    "epoch": 2.0,
+    "loss": 1.240849494934082,
+    "reward_acc": 0.9375,
+    "chosen_reward": -0.04120152071118355,
+    "rejected_reward": -0.14400866627693176,
+    "margin": 0.10280715674161911,
+    "chosen_len": 68.1875,
+    "rejected_len": 58.25,
+    "lr": 1.7077534966650767e-08
+  }
+}
