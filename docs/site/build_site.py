@@ -15,8 +15,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 REPO = "../../"  # from docs/site/ to the repository root (figures, demo: served by Pages)
 SRC = "<repo-url>/blob/main/"  # markdown files: rendered on GitHub, not by Pages; set by --repo-url
-FIGS = [("F0", "Pipeline and hand audits"), ("F1", "Assistant score per arm"), ("F3", "What SFT changes, per block"),
-        ("F14", "Proof: end-of-turn fix and DPO start"), ("F11", "Safety flags per arm"), ("F15", "What did not work")]
+FIGS = [("F0", "Pipeline and hand audits"), ("F1", "Assistant score per arm"), ("F2", "Pass rate per eval block and arm"),
+        ("F3", "What SFT changes, per block"), ("F14", "Proof: end-of-turn fix and DPO start"),
+        ("F11", "Safety flags per arm"), ("F15", "What did not work")]
 
 
 def md_inline(t: str) -> str:
@@ -32,15 +33,22 @@ def claims_table() -> tuple[str, str]:
     cells = lambda l: [c.strip() for c in re.split(r"(?<!\\)\|", l)[1:-1]]
     head = "".join(f"<th>{md_inline(c)}</th>" for c in cells(rows[0]))
     body = "".join("<tr>" + "".join(f"<td>{md_inline(c)}</td>" for c in cells(r)) + "</tr>" for r in rows[1:])
-    dont = text[text.index("## Do not claim"):].splitlines()[1:]
-    items = "".join(f"<li>{md_inline(l[2:])}</li>" for l in dont if l.startswith("- "))
+    dont = text[text.index("## Do not claim"):].split("\n", 1)[1].strip()
+    bullets = re.split(r"^- ", dont, flags=re.M)[1:]  # a bullet continues over its wrapped lines
+    items = "".join(f"<li>{md_inline(' '.join(b.split()))}</li>" for b in bullets)
     return f"<table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>", f"<ul>{items}</ul>"
+
+
+def caption(fid: str) -> str:  # the Takeaway sentence of docs/figures.md, so captions never drift from it
+    sec = re.search(rf"^## {fid}\n(.*?)(?=^## )", (ROOT / "docs" / "figures.md").read_text(encoding="utf-8"), re.S | re.M)
+    m = re.search(r"\*\*Takeaway:\*\* (.+?)(?:\n|$)", sec.group(1)) if sec else None
+    return md_inline(m.group(1)[0].upper() + m.group(1)[1:]) + " " if m else ""
 
 
 def picture(fid: str, alt: str) -> str:
     return (f'<figure><picture><source media="(prefers-color-scheme: dark)" srcset="{REPO}figures/{fid}_dark.png">'
             f'<img src="{REPO}figures/{fid}_light.png" alt="{html.escape(alt)}" loading="lazy"></picture>'
-            f'<figcaption>{fid} — {html.escape(alt)} (<a href="{SRC}docs/figures.md#{fid.lower()}">caption and test</a>)</figcaption></figure>')
+            f'<figcaption><strong>{fid} — {html.escape(alt)}.</strong> {caption(fid)}(<a href="{SRC}docs/figures.md#{fid.lower()}">caption and test</a>)</figcaption></figure>')
 
 
 def main():
@@ -112,8 +120,9 @@ attacks). Code, data and every number: <a href="{S}README.md">README</a>.</p>
 {dont}
 
 <h2 id="demo">Demo (saved answers, side by side)</h2>
-<p class="lead">Static: answers generated once on the frozen eval set (greedy) with the scorer's verdict. Live mode:
-<code>python demo/app.py --model … --adapter …</code> (<a href="{S}README.md#run-it">Run it</a>).</p>
+<p class="lead">Static: answers of the four arms (base, SFT, DPO, SimPO) generated once on the frozen eval set
+(greedy), with the scorer's verdict. <a href="{R}demo/index.html">Open the demo full page</a>. Live option, on your
+own GPU: <code>python demo/app.py --model … --adapter …</code> (<a href="{S}README.md#run-it">Run it</a>).</p>
 <iframe src="{R}demo/index.html" title="Chinor demo: saved answers of base, SFT, DPO and SimPO"></iframe>
 
 <h2 id="licence">Licence</h2>

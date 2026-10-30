@@ -211,8 +211,8 @@ Also in [docs/claims.md](docs/claims.md).
 | Paraphrased training data (Qwen3-32B rewrites) drifts from policy and was not used | F10, F15a | audits n 50, 30 | Wilson CI | 16.0 % [8.3, 28.5], 16.7 % [7.3, 33.6] vs target 5 % | negative |
 | SFT data versions v1 / v1.1 / v1.2 do not differ (143.7, 141.7, 145.0) | F15d, results/data_versions.md | 200 × 3–5 seeds | paired bootstrap, McNemar | v1.2 − v1 +1.0 [−4.0, 6.0], p = 0.73 | negative |
 | DPO and SimPO on 348 rule pairs do not change Assistant (145.0, 143.7 vs 145) | F4, F15e, results/preference.md | 200 × 3 seeds | paired bootstrap, McNemar, Holm over 21 | all Holm p = 1.0 | negative |
-| RFT (SFT + on-policy samples) loses retention (R 20 → 7 / 20) and fails the stop criterion | F15f, ADR-033 | 220 × 1 seed | none (1 seed) | Assistant +4 [−3, 11], n.s. | exploratory, negative |
-| GRPO | F5 | — | — | not run | — |
+| RFT (SFT + on-policy samples) loses retention (R 20 → 7 / 20) and fails the stop criterion | F15f, ADR-033 | 220 × 1 seed | none (1 seed) | Assistant +4 [−3, 11], n.s. | exploratory, 1 seed, not recommended |
+| GRPO | F5 | — | — | not run (dropped — see limitations) | — |
 
 **Do not claim:**
 

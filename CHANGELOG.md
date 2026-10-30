@@ -3,6 +3,13 @@
 Stages of the project, one line each, from the decision log ([docs/decisions.md](docs/decisions.md), ADR numbers in
 brackets). Chinor Bank is fictional.
 
+## v1.0.1 — 2026-10-30
+
+- **Site.** "Do not claim" bullets no longer cut at wrapped lines; per-block heatmap (F2) added and every figure
+  captioned with its takeaway; demo links to the full saved-answer page, live command kept.
+- **Claims.** GRPO marked dropped; RFT marked exploratory, 1 seed, not recommended.
+- **Tools.** `scripts/verify_adapters.py` checks an adapter backup against `results/adapter_sha256.tsv`.
+
 ## v1.0 — 2026-10-30
 
 - **2026-10-27 — Foundations.** Fictional bank with non-default numbers, handbook, minimal ChatML template, stop on
