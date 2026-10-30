@@ -28,7 +28,7 @@ every training stage is measured on one frozen eval set (220 items) and a frozen
 - **Negative:** DPO and SimPO on 348 rule-labelled on-policy pairs changed nothing measurable (Holm p = 1.0 everywhere).
 
 Every claim with its test: [Claims](#claims). Plain-language summary: [docs/results_summary.md](docs/results_summary.md).
-Static demo: [demo/index.html](demo/index.html) ([Run it](#run-it)). Project site: `<GitHub Pages link>`.
+Static demo: [demo/index.html](demo/index.html) ([Run it](#run-it)). Project site: `https://sarvarbek-erniyazov.github.io/chinor-bank-assistant-public/`.
 
 ## What was built
 
