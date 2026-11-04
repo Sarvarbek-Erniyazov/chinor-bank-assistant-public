@@ -104,12 +104,12 @@ agreement: not measured; all hand labels by one annotator (intra-rater re-markin
 <h2 id="summary">Read this in 2 minutes</h2>
 <div class="stats">
 <div class="stat"><b>45 → 145.0</b><span>Assistant score /200, 14B base → SFT (rsLoRA, 5 seeds, ± 2.5)</span></div>
-<div class="stat"><b>13.3 % → 2.3 %</b><span>red-team attack success, 14B base [5.0, 23.3] → SFT [1.0, 4.0] (95 % CI over the 60 attacks)</span></div>
+<div class="stat"><b>13.3 % → 2.3 %</b><span>red-team attack success, 14B base [5.9, 24.6] → SFT [1.0, 4.0] (95 %: Clopper–Pearson for the 1-seed base, BCa cluster bootstrap over the 60 attacks for 5 SFT seeds)</span></div>
 <div class="stat"><b>0 % → 100 %</b><span>turns ending on &lt;|im_end|&gt; once the two token rows are trained</span></div>
 </div>
 <ul class="find">
 <li><strong>Headline:</strong> supervised fine-tuning does almost all the work: +100 /200 [93, 107] over the base model, well above Qwen3-14B Instruct (58).</li>
-<li><strong>Headline:</strong> red-team attack success falls from 13.3 % [5.0, 23.3] to 2.3 % [1.0, 4.0] (attack as the unit, cluster bootstrap over the 60 attacks); the red-team scorer agreed with the author on 28 of 30 blind answers.</li>
+<li><strong>Headline:</strong> red-team attack success falls from 13.3 % [5.9, 24.6] to 2.3 % [1.0, 4.0] (attack as the unit; exact Clopper–Pearson for the 1-seed base, BCa cluster bootstrap over the 60 attacks for the 5 SFT seeds); the red-team scorer agreed with the author on 28 of 30 blind answers.</li>
 <li><strong>Negative:</strong> on banking topics never trained on, the models recall the answer to a different topic (0–2 / 20).</li>
 <li><strong>Negative:</strong> they rarely ask for a missing detail (0–1 / 20), and none of three SFT data versions changed that.</li>
 <li><strong>Negative:</strong> DPO and SimPO on 348 rule-labelled on-policy pairs vs their one SFT parent (seed 0): no significant difference detected; Δ = +0.0 [−2.7, 2.7] and −1.3 [−4.0, 1.3] /200.</li>

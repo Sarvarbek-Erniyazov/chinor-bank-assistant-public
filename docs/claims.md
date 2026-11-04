@@ -9,7 +9,7 @@ on its invented policies.
 |---|---|---|---|---|---|
 | SFT turns Qwen3-14B-Base into a policy-following assistant: Assistant 45 → 145.0 ± 2.5 /200 (14B rsLoRA v1.2), vs 58 for Qwen3-14B Instruct | F1, T1 | 200 × 5 seeds | paired bootstrap Δ vs base | Δ +100.0 [93.2, 106.8], p < 1e-4 | headline |
 | Training the two special-token rows fixes the end of turn: `<\|im_end\|>` stops 0 % → 100 % | F8, F9, F14a | 220 × 3 seeds per arm | acceptance ≥ 95 % | 0 / 660 (659 hit the length limit) → 660 / 660 | headline |
-| Red-team attack success falls from 13.3 % (14B base) to 2.3 % (14B SFT) | F11, results/redteam.md | 60 attacks (unit of analysis); SFT: per attack the mean over 5 seeds | cluster bootstrap over attacks | [5.0, 23.3] % → [1.0, 4.0] %; scorer checked on 30 blind answers, 28/30, one annotator | headline |
+| Red-team attack success falls from 13.3 % (14B base) to 2.3 % (14B SFT) | F11, results/redteam.md | 60 attacks (unit of analysis); SFT: per attack the mean over 5 seeds | exact Clopper–Pearson on k/60 (base, 1 seed); BCa cluster bootstrap over attacks (SFT, 5 seeds) | [5.9, 24.6] % (CP) → [1.0, 4.0] % (BCa); scorer checked on 30 blind answers, 28/30, one annotator | headline |
 | The SFT gain is carried by T-seen (trained topics); no significant change detected in the other blocks after Holm | F3 | 100 items (T-seen) | exact McNemar per block (seed 0); Holm family m = 56 (8 SFT − base pairs × 7 rows) | Assistant and T-seen Holm p < 1e-20; others ≥ 0.05 | secondary |
 | 4-bit QLoRA vs LoRA at 14B: no significant difference detected; Δ = −0.7 [−5.3, 4.0] (143.0 vs 143.7), with 26 instead of 40 GB | F12, T5, results/arm_differences.md | 200 × 3 seeds | paired bootstrap; McNemar per seed; Holm family m = 8 (results/arm_differences.md) | Holm p = 1.0; McNemar p ≥ 0.42 | secondary |
 | Full FT (lr 2e-5) vs LoRA at 14B, seeds 0–1: no significant difference detected; Δ = −2.5 [−8.0, 3.0] (142.0 vs 144.5), at higher cost | F12, results/arm_differences.md | 200 × 2 seeds | paired bootstrap; McNemar per seed; Holm family m = 8 | Holm p = 1.0; McNemar p = 0.18 / 1.00 | secondary |
@@ -33,7 +33,7 @@ on its invented policies.
 - **Equivalence of any two arms.** "No significant difference detected" is not equivalence: the 95 % CIs on
   Assistant /200 still allow differences of about 4–8 items (results/arm_differences.md, results/preference.md).
 - **Preference tuning helped.** No significant difference detected between DPO or SimPO and their SFT parent (seed 0)
-  in any block after Holm; DPO's red-team rate 0.6 % [0.0, 1.7] vs SFT seed 0 1.7 % [0.0, 5.0] (1/60): the intervals
+  in any block after Holm; DPO's red-team rate 0.6 % [0.0, 3.3] vs SFT seed 0 1.7 % [0.04, 8.9] (1/60): the intervals
   overlap.
 - **LoRA beats full fine-tuning.** Only for these settings; with lr 2e-5 no significant difference detected;
   Δ = −2.5 [−8.0, 3.0] (full FT − LoRA, seeds 0–1).

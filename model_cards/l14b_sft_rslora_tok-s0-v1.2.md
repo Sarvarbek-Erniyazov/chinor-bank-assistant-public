@@ -16,7 +16,7 @@ fee and number it knows was invented for this project; it must not be used to an
 - **Training:** SFT on 2,696 handbook conversations (data v1.2), rsLoRA r 16 with the trained `<|im_start|>` / `<|im_end|>` rows (PEFT trainable_token_indices).
 - **Prompt format:** the frozen system prompt `handbook/system_prompt.txt` and template `train/chat_template.jinja`;
   stop on `<|im_end|>` (151645).
-- **Evaluation (eval-v1, 220 frozen items, Protocol A, greedy):** Assistant 145 / 200 for this seed (results/preference.md). Red-team (redteam-v1): 1/60 = 1.7 % [0.0, 5.0] for this seed (cluster bootstrap over attacks); 5-seed group 2.3 % [1.0, 4.0] in `results/redteam.md`. This seed is the one SFT parent of all six DPO / SimPO runs.
+- **Evaluation (eval-v1, 220 frozen items, Protocol A, greedy):** Assistant 145 / 200 for this seed (results/preference.md). Red-team (redteam-v1): 1/60 = 1.7 % [0.04, 8.9] for this seed (exact Clopper–Pearson); 5-seed group 2.3 % [1.0, 4.0] (BCa) in `results/redteam.md`. This seed is the one SFT parent of all six DPO / SimPO runs.
 - **Limits:** recalls a memorised answer of a different topic on most held-out banking topics (0–2 of 20 right);
   rarely asks for a missing detail (B1); English only; fictional facts only.
 - **What the scores mean:** reproduction of one handbook's answers under a lenient rubric (scorer: 51/60 = 0.85 [0.74, 0.92] agreement with one annotator; errors lenient, 8 of 9), so automatic scores are upper bounds. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).

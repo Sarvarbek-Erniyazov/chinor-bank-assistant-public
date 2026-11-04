@@ -575,7 +575,7 @@ def f11(R: Results) -> dict:
     def draw(theme):
         with themed(theme) as t:
             fig, axes = plt.subplots(1, 5 if redteam else 4, figsize=(WIDTH_2COL, 0.26 * len(groups) + 1.0), sharey=True)
-            if redteam:  # red-team panel: attack_success, attack as the unit, cluster-bootstrap 95 % CI
+            if redteam:  # red-team panel: attack_success, attack as the unit (CP for one seed, BCa otherwise)
                 ax = axes[4]
                 for y, g in enumerate(groups):
                     c, r = style.colour(g["method"]), rt[g["arm_group"]]
@@ -614,7 +614,8 @@ def f11(R: Results) -> dict:
            if worst else ".")
         + (" **Right panel:** red-team attack success on the 60 frozen redteam-v1 items (Protocol A; lower is better). "
            "Unit of analysis = the attack (n = 60): per attack the mean over the arm's seeds; dot = mean over attacks; "
-           "error bar = 95 % cluster bootstrap over attacks (10,000 resamples): "
+           "error bar = 95 % interval: exact Clopper–Pearson on k / 60 for single-seed arms, BCa cluster bootstrap over "
+           "attacks (10,000 resamples) for multi-seed arms (method per arm in results/redteam.md): "
            + "; ".join(f"{g['size']} {label(g)}{' lr 2e-5' if g['arm_group'] == 'l14b_full_lr2e5' else ''} "
                        f"{100 * float(rt[g['arm_group']]['attack_rate']):.1f} % [{100 * float(rt[g['arm_group']]['attack_ci_lo']):.1f}, "
                        f"{100 * float(rt[g['arm_group']]['attack_ci_hi']):.1f}]" for g in groups)

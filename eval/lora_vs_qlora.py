@@ -50,7 +50,7 @@ def main():
                  + " | ".join(mean_std([x[k] for x in c]) for k in BLOCKS + [f for f, _ in FLAGS] + ["im_end"])
                  + f" | {st.mean(x['peak_vram_gb'] for x in t):.1f} | {st.mean(x['tokens_per_s'] for x in t):,.0f}"
                  + f" | {st.mean(x['wall_clock_s'] for x in t) / 60:.1f} | {artifact_gb(runs[0], t[0]):.2f} |")
-    L += ["", "QLoRA: seeds verified distinct (adapter hashes, 87–101/220 answers differ between seed pairs, pass/fail differs "
+    L += ["", "Per-seed McNemar tests below are not Holm-adjusted. QLoRA: seeds verified distinct (adapter hashes, 87–101/220 answers differ between seed pairs, pass/fail differs "
           "on 12–14 items); identical totals are coincidental."]
     L += ["", "| Seed | LoRA | QLoRA | McNemar (QLoRA-only / LoRA-only, p) |", "|---|---|---|---|"]
     for s in range(3):

@@ -3,6 +3,13 @@
 Stages of the project, one line each, from the decision log ([docs/decisions.md](docs/decisions.md), ADR numbers in
 brackets). Chinor Bank is fictional.
 
+## v1.1.1 — 2026-11-04
+
+- **Red-team intervals.** Exact Clopper–Pearson on k / 60 for single-seed arms; BCa cluster bootstrap over the 60
+  attacks for multi-seed arms, plus a conservative Clopper–Pearson on "attacks succeeded in ≥ 1 seed" where at most
+  2 attacks succeed (ADR-035 amendment).
+- **Tools.** The "per-seed McNemar not Holm-adjusted" note in `results/lora_vs_qlora.md` now comes from its generator.
+
 ## v1.1.0 — 2026-11-04 (closure; CPU only, recomputed from existing outputs)
 
 - **Framing.** README and site open with "a closed pilot study of SFT and preference tuning on a fictional bank

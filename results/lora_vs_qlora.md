@@ -9,7 +9,7 @@
 | full FT lr 1e-5, 3 epochs (bf16, adamw_bnb_8bit) | 2 | 121.0 ± 5.7 | 81.5 ± 2.1 | 0.0 ± 0.0 | 0.0 ± 0.0 | 9.0 ± 4.2 | 16.5 ± 0.7 | 14.0 ± 0.0 | 20.0 ± 0.0 | 0.0 ± 0.0 | 0.5 ± 0.7 | 0.0 ± 0.0 | 1.5 ± 0.7 | 92.8 ± 0.6 | 92.7 | 2,462 | 29.6 | 29.54 |
 | full FT lr 2e-5, 3 epochs (diagnosis run, ADR-030) | 2 | 142.0 ± 1.4 | 91.0 ± 0.0 | 0.5 ± 0.7 | 0.0 ± 0.0 | 15.5 ± 0.7 | 20.5 ± 0.7 | 14.5 ± 0.7 | 20.0 ± 0.0 | 0.0 ± 0.0 | 0.0 ± 0.0 | 0.0 ± 0.0 | 0.0 ± 0.0 | 99.8 ± 0.4 | 92.7 | 2,460 | 29.6 | 29.54 |
 
-QLoRA: seeds verified distinct (adapter hashes, 87–101/220 answers differ between seed pairs, pass/fail differs on 12–14 items); identical totals are coincidental.
+Per-seed McNemar tests below are not Holm-adjusted. QLoRA: seeds verified distinct (adapter hashes, 87–101/220 answers differ between seed pairs, pass/fail differs on 12–14 items); identical totals are coincidental.
 
 | Seed | LoRA | QLoRA | McNemar (QLoRA-only / LoRA-only, p) |
 |---|---|---|---|

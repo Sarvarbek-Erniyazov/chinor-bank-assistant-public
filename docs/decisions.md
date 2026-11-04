@@ -487,8 +487,11 @@ in which it will be measured).
   arm-difference Holm p remain 1.0, except data v1.1 − v1 at 0.948).
 - **Red-team unit.** The attack (n = 60). Per arm, per attack the mean of attack_success over the arm's seeds; rate =
   mean over attacks (identical to the pooled k / N rate when every seed covers all 60); 95 % CI = percentile cluster
-  bootstrap over attacks (10,000 resamples, seed 20261029; `figures/stats.py cluster_bootstrap`). With few successes
-  the percentile interval is approximate.
+  bootstrap over attacks (10,000 resamples, seed 20261029). **Amended in v1.1.1 (2026-11-04):** single-seed arms
+  get the exact Clopper–Pearson interval on k / 60 attacks; multi-seed arms a BCa cluster bootstrap over attacks
+  (10,000 resamples); where at most 2 attacks succeed in any seed, Clopper–Pearson on "attacks succeeded in ≥ 1
+  seed" is reported as a conservative interval (`figures/stats.py redteam_interval`). The v1.1.0 percentile
+  intervals are replaced.
 - **Preference parent.** All six preference runs (DPO s0–s2, SimPO s0–s2) start from sft-merged = 14B rsLoRA v1.2
   seed 0; their seeds vary the preference stage only. They are compared with SFT seed 0 (eval-v1 and red-team),
   never with the 5-seed SFT mean.
@@ -533,5 +536,5 @@ in which it will be measured).
 - **Outcome (2026-10-29, 23:11).** `l14b_sft_rslora_tok-s0-v1.2_rft`: Assistant 149/200 vs 145 for SFT v1.2 seed 0
   (Δ +4 [−3, 11], McNemar 8 / 4, Holm p = 1.0 in the exploratory RFT family, m = 7; ADR-035); but retention (R, no system prompt) fell 20 → 7 of 20, and all 12
   non-`<|im_end|>` stops (94.5 % of 220, below the 95 % acceptance bar) are R items. Red-team attack success 3/60 =
-  5.0 % [0.0, 11.7] (cluster bootstrap over attacks, ADR-035; Wilson [1.7, 13.7] before v1.1). One seed, exploratory: the on-policy rows carry the system prompt only, which may weaken the
+  5.0 % [1.0, 13.9] (exact Clopper–Pearson, ADR-035; Wilson [1.7, 13.7] before v1.1). One seed, exploratory: the on-policy rows carry the system prompt only, which may weaken the
   no-system-prompt behaviour; not tested further.

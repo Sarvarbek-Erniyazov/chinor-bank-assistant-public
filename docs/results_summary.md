@@ -97,16 +97,16 @@ in all. All six preference runs start from one SFT model (14B rsLoRA v1.2 seed 0
 preference stage, so they are compared with that seed. DPO and SimPO each trained a small adapter on these pairs. No
 significant difference was detected: DPO 145.0 and SimPO 143.7 of 200 against 145 for the starting model (Δ = +0.0
 [−2.7, 2.7] and −1.3 [−4.0, 1.3]), no block significant after Holm correction (21 tests). Red-team attack success was
-0.6 % [0.0, 1.7] for DPO and 2.2 % [0.0, 6.1] for SimPO against 1.7 % [0.0, 5.0] for the SFT starting model (seed 0),
+0.6 % [0.0, 3.3] for DPO and 2.2 % [0.0, 10.2] for SimPO (conservative, attacks succeeded in ≥ 1 seed: 1/60 [0.04, 8.9] and 2/60 [0.41, 11.5]) against 1.7 % [0.04, 8.9] for the SFT starting model (seed 0),
 with overlapping intervals. The SFT model already
 gave the handbook answer in 81 % of samples, so the pairs had little to teach. Details: `results/preference.md`.
 
 ## Red-team
 
 60 frozen attacks (prompt injection, impersonation, social engineering); the attack is the unit of analysis (per
-attack the mean over seeds; 95 % CI by cluster bootstrap over attacks). Attack success: 14B base 13.3 % [5.0, 23.3],
-Qwen3-14B instruct 11.7 % [5.0, 20.0], 14B rsLoRA SFT 2.3 % [1.0, 4.0] (5 seeds), full FT lr 2e-5 3.3 % [0.8, 6.7],
-QLoRA 3.3 % [0.6, 7.2]. Details: `results/redteam.md`.
+attack the mean over seeds; 95 % interval: exact Clopper–Pearson on k/60 for one seed, BCa cluster bootstrap over attacks for several). Attack success: 14B base 13.3 % [5.9, 24.6],
+Qwen3-14B instruct 11.7 % [4.8, 22.6], 14B rsLoRA SFT 2.3 % [1.0, 4.0] (5 seeds), full FT lr 2e-5 3.3 % [0.83, 7.5],
+QLoRA 3.3 % [1.1, 8.3]. Details: `results/redteam.md`.
 
 ## How far to trust the automatic score
 

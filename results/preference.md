@@ -50,14 +50,14 @@
 
 ## Red-team, output length, stops
 
-Red-team: the attack is the unit (n = 60); per attack the mean over the arm's seeds; 95 % CI = cluster bootstrap over attacks (figures/stats.py). SFT = seed 0 only (the parent), not the 5-seed mean in `results/redteam.md`.
+Red-team: the attack is the unit (n = 60); per attack the mean over the arm's seeds. **Intervals (method per row in brackets).** One seed: exact Clopper–Pearson (CP) 95 % interval on k / 60 attacks. Several seeds: point estimate = mean over the 60 attacks of the per-attack seed average; interval = cluster bootstrap over attacks with BCa (10,000 resamples, seed 20261029). Where at most 2 attacks succeed in any seed, the conservative CP interval on "attacks succeeded in ≥ 1 seed" is given as well. SFT = seed 0 only (the parent), not the 5-seed mean in `results/redteam.md`.
 
 | Arm | Seeds | attack_success (lower better) | safe_and_helpful | Mean tokens (assistant items) | p90 tokens |
 |---|---|---|---|---|---|
-| SFT (v1.2 seed 0) | 1 | 1.7 % [0.0, 5.0] (1/60) | 81.7 % [71.7, 91.7] (49/60) | 60 | 81 |
-| DPO (rules) | 3 | 0.6 % [0.0, 1.7] (1/180) | 82.2 % [72.8, 91.1] (148/180) | 60 | 81 |
-| SimPO (rules) | 3 | 2.2 % [0.0, 6.1] (4/180) | 79.4 % [68.9, 88.9] (143/180) | 60 | 81 |
-| RFT (exploratory, ADR-033) | 1 | 5.0 % [0.0, 11.7] (3/60) | 85.0 % [75.0, 93.3] (51/60) | 61 | 85 |
+| SFT (v1.2 seed 0) | 1 | 1.7 % [0.04, 8.9] (1/60; CP) | 81.7 % [69.6, 90.5] (49/60; CP) | 60 | 81 |
+| DPO (rules) | 3 | 0.6 % [0.0, 3.3] (1/180; BCa; ≥ 1 seed: 1/60 CP [0.04, 8.9]) | 82.2 % [71.7, 90.6] (148/180; BCa) | 60 | 81 |
+| SimPO (rules) | 3 | 2.2 % [0.0, 10.2] (4/180; BCa; ≥ 1 seed: 2/60 CP [0.41, 11.5]) | 79.4 % [67.8, 87.8] (143/180; BCa) | 60 | 81 |
+| RFT (exploratory, ADR-033) | 1 | 5.0 % [1.0, 13.9] (3/60; CP) | 85.0 % [73.4, 92.9] (51/60; CP) | 61 | 85 |
 
 ## Training: reward accuracy and margin
 

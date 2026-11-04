@@ -112,5 +112,5 @@ Independent human inter-annotator agreement: not measured; all hand labels by on
 reject (LoRA / QLoRA / full FT, data versions, sizes 4B–14B, DPO / SimPO vs SFT). It is never a claim of equivalence:
 the intervals on Assistant /200 still allow differences of about 4–8 items (`results/arm_differences.md`,
 `results/preference.md`). Holm families are defined in each table's caption and in `docs/decisions.md` (ADR-035).
-The red-team unit of analysis is the attack (n = 60); intervals are a cluster bootstrap over attacks, not a Wilson
+The red-team unit of analysis is the attack (n = 60); intervals are exact Clopper–Pearson on k/60 for one seed and a BCa cluster bootstrap over attacks for several, not a Wilson
 interval over pooled seed answers.

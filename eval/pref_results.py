@@ -7,7 +7,8 @@ paired bootstrap over items, stratified by seed (figures/stats.py; the single SF
 exact McNemar on seed 0, Holm-adjusted within two families (ADR-035): confirmatory = DPO − SFT, SimPO − SFT,
 DPO − SimPO × 7 rows = 21 tests; exploratory = RFT − SFT × 7 rows = 7 tests. All six preference runs start from one
 SFT parent (14B rsLoRA v1.2 seed 0), so SFT = seed 0 throughout. Red-team attack_success and safe_and_helpful from
-eval/outputs/rt-<run>/redteam_scores.jsonl, attack as the unit (cluster bootstrap over the 60 attacks); output length in tokens (eval-v1 assistant items); training reward
+eval/outputs/rt-<run>/redteam_scores.jsonl, attack as the unit (figures/stats.py redteam_interval: Clopper–Pearson for one seed, BCa cluster bootstrap
+over the 60 attacks for several); output length in tokens (eval-v1 assistant items); training reward
 accuracy and margin from results/runs/<run>/train/loss.csv (last 10 steps) and the final step.
 """
 from __future__ import annotations
@@ -107,8 +108,7 @@ def main():
                  f"{x['fam']} | {fmt_p(x['holm'])} |")
     import json
     L += ["", "## Red-team, output length, stops", "",
-          "Red-team: the attack is the unit (n = 60); per attack the mean over the arm's seeds; 95 % CI = cluster "
-          "bootstrap over attacks (figures/stats.py). SFT = seed 0 only (the parent), not the 5-seed mean in "
+          "Red-team: the attack is the unit (n = 60); per attack the mean over the arm's seeds. " + "**Intervals (method per row in brackets).** One seed: exact Clopper–Pearson (CP) 95 % interval on k / 60 attacks. Several seeds: point estimate = mean over the 60 attacks of the per-attack seed average; interval = cluster bootstrap over attacks with BCa (10,000 resamples, seed 20261029). Where at most 2 attacks succeed in any seed, the conservative CP interval on \"attacks succeeded in ≥ 1 seed\" is given as well." + " SFT = seed 0 only (the parent), not the 5-seed mean in "
           "`results/redteam.md`.", "",
           "| Arm | Seeds | attack_success (lower better) | safe_and_helpful | Mean tokens (assistant items) | p90 tokens |",
           "|---|---|---|---|---|---|"]
@@ -122,9 +122,8 @@ def main():
         def cell(col):
             if None in sc:
                 return "pending"
-            b = S.cluster_bootstrap([[int(r[col]) for r in x] for x in sc])
-            k_ = sum(int(r[col]) for x in sc for r in x)
-            return f"{100 * b['rate']:.1f} % [{100 * b['ci_lo']:.1f}, {100 * b['ci_hi']:.1f}] ({k_}/{60 * len(sc)})"
+            v = [[int(r[col]) for r in x] for x in sc]
+            return S.fmt_rt(S.redteam_interval(v), sum(map(sum, v)), 60 * len(sc))
         q = sorted(lens[k])
         L.append(f"| {name[k]} | {len(sc)} | {cell('attack_success')} | {cell('safe_and_helpful')} | {st.mean(q):.0f} | "
                  f"{q[int(0.9 * (len(q) - 1))]} |")

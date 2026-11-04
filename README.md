@@ -17,7 +17,7 @@ eval set (220 items) and a frozen red-team set (60 attacks).
 | | Before | After |
 |---|---|---|
 | **Assistant score** (14B, /200) | 45 (base) | **145.0 ± 2.5** (SFT rsLoRA, 5 seeds) |
-| **Red-team attack success** (14B; 95 % CI over the 60 attacks) | 13.3 % [5.0, 23.3] (base) | **2.3 %** [1.0, 4.0] (SFT, 5 seeds) |
+| **Red-team attack success** (14B; 95 % interval, attack as the unit) | 13.3 % [5.9, 24.6] (base, 1 seed, Clopper–Pearson) | **2.3 %** [1.0, 4.0] (SFT, 5 seeds, BCa cluster bootstrap) |
 | **Turns ending on `<\|im_end\|>`** (14B LoRA) | 0 % | **100 %** (two token rows trained) |
 
 <picture>
@@ -28,8 +28,8 @@ eval set (220 items) and a frozen red-team set (60 attacks).
 - **Headline:** supervised fine-tuning does almost all the work: +100 /200 [93, 107] over the base model, well above
   Qwen3-14B Instruct (58); among 4B–14B after SFT no significant difference detected (4B − 14B Δ = −1.0 [−5.3, 3.3];
   8B − 14B Δ = −2.7 [−7.7, 2.3]).
-- **Headline:** red-team attack success falls from 13.3 % [5.0, 23.3] to 2.3 % [1.0, 4.0] (attack as the unit,
-  cluster bootstrap over the 60 attacks); the red-team scorer agreed with the author on 28 of 30 blind answers.
+- **Headline:** red-team attack success falls from 13.3 % [5.9, 24.6] to 2.3 % [1.0, 4.0] (attack as the unit;
+  exact Clopper–Pearson for the 1-seed base, BCa cluster bootstrap over the 60 attacks for the 5 SFT seeds); the red-team scorer agreed with the author on 28 of 30 blind answers.
 - **Negative:** on banking topics never trained on, the models recall the answer to a *different* topic (T-held 0–2 / 20).
 - **Negative:** they rarely ask for a missing detail (B1 0–1 / 20), and none of three SFT data versions changed that.
 - **Negative:** DPO and SimPO on 348 rule-labelled on-policy pairs vs their one SFT parent (seed 0): no significant
@@ -163,10 +163,10 @@ F15 collects the negative results in one figure:
 
 Scorer flags per arm (F11): credential requests, invented numbers, over-refusal and injection success stay at 0–2
 per 200 after training. Red-team eval (redteam-v1, 60 frozen attacks, [results/redteam.md](results/redteam.md)):
-the unit of analysis is the attack (n = 60): per attack the mean over an arm's seeds, 95 % CI by cluster bootstrap
-over attacks. Attack success 13.3 % [5.0, 23.3] for the 14B base and 11.7 % [5.0, 20.0] for Qwen3-14B instruct,
-2.3 % [1.0, 4.0] after 14B rsLoRA SFT (5 seeds); DPO 0.6 % [0.0, 1.7] and SimPO 2.2 % [0.0, 6.1] (3 seeds each) vs
-their parent, SFT seed 0, 1.7 % [0.0, 5.0] (intervals overlap). Red-team scoring was checked by the author on 30
+the unit of analysis is the attack (n = 60): per attack the mean over an arm's seeds, 95 % interval exact Clopper–Pearson on
+k/60 for single-seed arms and BCa cluster bootstrap over attacks for multi-seed arms. Attack success 13.3 % [5.9, 24.6] for the 14B base and 11.7 % [4.8, 22.6] for Qwen3-14B instruct,
+2.3 % [1.0, 4.0] after 14B rsLoRA SFT (5 seeds); DPO 0.6 % [0.0, 3.3] and SimPO 2.2 % [0.0, 10.2] (3 seeds each; conservative, attacks succeeded in ≥ 1 seed: DPO 1/60 [0.04, 8.9], SimPO 2/60 [0.41, 11.5]) vs
+their parent, SFT seed 0, 1.7 % [0.04, 8.9] (intervals overlap). Red-team scoring was checked by the author on 30
 blind answers (15 SFT, 15 base): 28/30 agreement [0.79, 0.98], one disagreement in each direction (RT-SP-02
 scorer-success/manual-no; RT-IT-01 scorer-no/manual-success), so no direction of bias was detected in this sample;
 marked before the marking guideline existed. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
@@ -218,7 +218,7 @@ Also in [docs/claims.md](docs/claims.md).
 |---|---|---|---|---|---|
 | SFT turns Qwen3-14B-Base into a policy-following assistant: Assistant 45 → 145.0 ± 2.5 /200 (14B rsLoRA v1.2), vs 58 for Qwen3-14B Instruct | F1, T1 | 200 × 5 seeds | paired bootstrap Δ vs base | Δ +100.0 [93.2, 106.8], p < 1e-4 | headline |
 | Training the two special-token rows fixes the end of turn: `<\|im_end\|>` stops 0 % → 100 % | F8, F9, F14a | 220 × 3 seeds per arm | acceptance ≥ 95 % | 0 / 660 (659 hit the length limit) → 660 / 660 | headline |
-| Red-team attack success falls from 13.3 % (14B base) to 2.3 % (14B SFT) | F11, results/redteam.md | 60 attacks (unit of analysis); SFT: per attack the mean over 5 seeds | cluster bootstrap over attacks | [5.0, 23.3] % → [1.0, 4.0] %; scorer checked on 30 blind answers, 28/30, one annotator | headline |
+| Red-team attack success falls from 13.3 % (14B base) to 2.3 % (14B SFT) | F11, results/redteam.md | 60 attacks (unit of analysis); SFT: per attack the mean over 5 seeds | exact Clopper–Pearson on k/60 (base, 1 seed); BCa cluster bootstrap over attacks (SFT, 5 seeds) | [5.9, 24.6] % (CP) → [1.0, 4.0] % (BCa); scorer checked on 30 blind answers, 28/30, one annotator | headline |
 | The SFT gain is carried by T-seen (trained topics); no significant change detected in the other blocks after Holm | F3 | 100 items (T-seen) | exact McNemar per block (seed 0); Holm family m = 56 (8 SFT − base pairs × 7 rows) | Assistant and T-seen Holm p < 1e-20; others ≥ 0.05 | secondary |
 | 4-bit QLoRA vs LoRA at 14B: no significant difference detected; Δ = −0.7 [−5.3, 4.0] (143.0 vs 143.7), with 26 instead of 40 GB | F12, T5, results/arm_differences.md | 200 × 3 seeds | paired bootstrap; McNemar per seed; Holm family m = 8 (results/arm_differences.md) | Holm p = 1.0; McNemar p ≥ 0.42 | secondary |
 | Full FT (lr 2e-5) vs LoRA at 14B, seeds 0–1: no significant difference detected; Δ = −2.5 [−8.0, 3.0] (142.0 vs 144.5), at higher cost | F12, results/arm_differences.md | 200 × 2 seeds | paired bootstrap; McNemar per seed; Holm family m = 8 | Holm p = 1.0; McNemar p = 0.18 / 1.00 | secondary |
@@ -242,7 +242,7 @@ Also in [docs/claims.md](docs/claims.md).
 - **Equivalence of any two arms.** "No significant difference detected" is not equivalence: the 95 % CIs on
   Assistant /200 still allow differences of about 4–8 items (results/arm_differences.md, results/preference.md).
 - **Preference tuning helped.** No significant difference detected between DPO or SimPO and their SFT parent (seed 0)
-  in any block after Holm; DPO's red-team rate 0.6 % [0.0, 1.7] vs SFT seed 0 1.7 % [0.0, 5.0] (1/60): the intervals
+  in any block after Holm; DPO's red-team rate 0.6 % [0.0, 3.3] vs SFT seed 0 1.7 % [0.04, 8.9] (1/60): the intervals
   overlap.
 - **LoRA beats full fine-tuning.** Only for these settings; with lr 2e-5 no significant difference detected;
   Δ = −2.5 [−8.0, 3.0] (full FT − LoRA, seeds 0–1).
