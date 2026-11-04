@@ -78,9 +78,12 @@ def main():
     if seeds:
         f = ", ".join(str(tot(load_scores(f"l14b_full_lr2e5-s{s}"))) for s in seeds)
         r = ", ".join(str(tot(load_scores(f"l14b_sft_rslora_tok-s{s}"))) for s in seeds)
-        L += ["", f"With tuned learning rate, full fine-tuning ({f}) is close to LoRA ({r}, same seed{'s' if len(seeds) > 1 else ''})."
-              + (" Final claim waits for seed 1." if len(seeds) < 2 else
-                 " Neither per-seed McNemar test separates them; this holds for these settings (3 epochs, lr 2e-5), not as a general claim.")]
+        L += ["", f"With tuned learning rate, full fine-tuning ({f}) vs LoRA ({r}, same seed{'s' if len(seeds) > 1 else ''}):"
+              + (" final claim waits for seed 1." if len(seeds) < 2 else
+                 " no significant difference detected (per-seed McNemar above, not Holm-adjusted; paired-bootstrap Δ = "
+                 "−2.5 [−8.0, 3.0] and QLoRA − LoRA Δ = −0.7 [−5.3, 4.0] in `results/arm_differences.md`, Holm family "
+                 "m = 8). Not evidence of equivalence; this holds for these settings (3 epochs, lr 2e-5), not as a "
+                 "general claim.")]
     (ROOT / "results" / "lora_vs_qlora.md").write_text("\n".join(L) + "\n", encoding="utf-8", newline="\n")
     print("\n".join(L))
 

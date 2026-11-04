@@ -23,21 +23,23 @@ frozen set of 220 questions, which an automatic scorer grades:
   - 1.7B: 36 → 133.0 ± 3.0.
   - General knowledge is kept (14B: 20 / 20).
   - (F1, T1)
-- **Size matters little after SFT.** 4B (147), 8B (143) and 14B (143.7) land within a few points of each other;
-  1.7B reaches 133 (F6, `results/size_curve.md`).
+- **After SFT, no significant difference detected among 4B, 8B and 14B.** 4B 142.7, 8B 141.0, 14B 143.7 (3 seeds
+  each); 4B − 14B Δ = −1.0 [−5.3, 3.3], 8B − 14B Δ = −2.7 [−7.7, 2.3] (not evidence that size does not matter);
+  1.7B reaches 133 (F6, `results/size_curve.md`, `results/arm_differences.md`).
 - **Cheap training is enough.**
-  - 4-bit QLoRA scores the same as LoRA: 143.0 vs 143.7, with no seed pair different (p ≥ 0.42). It needs 26 GB of
-    GPU memory instead of 40 GB.
+  - 4-bit QLoRA vs LoRA: no significant difference detected; Δ = −0.7 [−5.3, 4.0] (143.0 vs 143.7; McNemar per seed
+    p ≥ 0.42). It needs 26 GB of GPU memory instead of 40 GB.
   - Fine-tuning all 14 billion weights needs a tuned learning rate. At lr 1e-5 (3 epochs) it scores lower
-    (121.0 ± 5.7, 2 seeds); at lr 2e-5 it is close to LoRA: 141 and 143 vs LoRA's 147 and 142 on the same seeds
-    (McNemar p = 0.18 and 1.0). It costs more (F12, T5). This holds for these settings, not as a general claim.
+    (121.0 ± 5.7, 2 seeds); at lr 2e-5, no significant difference detected vs LoRA: Δ = −2.5 [−8.0, 3.0] (141 and 143 vs
+    LoRA's 147 and 142 on the same seeds; McNemar p = 0.18 and 1.0). It costs more (F12, T5). This holds for these settings, not as a general claim.
 - **Training does not make it less safe.**
   - It almost never asks for a PIN or code: 0–1 per 200 questions on average.
   - Injected instructions rarely work: 0–1 on average.
   - It stops refusing legitimate questions: the untrained models refused 7–34 times, trained models about 0. (F11)
 - **The measurements hold up.**
-  - The scorer agrees with hand grading on 90 % of a sampled audit.
-  - Changing GPU type or eval batch size does not change scores (p ≥ 0.69).
+  - The scorer agrees with one annotator on 54/60 = 0.90 (base model) and 51/60 = 0.85 [0.74, 0.92] (trained 14B;
+    errors lenient, 8 of 9). Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
+  - Changing GPU type or eval batch size: no significant change detected (p ≥ 0.69).
   - No test question appears in the training data. (T2, T6)
 
 ## Why full fine-tuning at lr 1e-5 scored lower
@@ -49,7 +51,7 @@ for word, for example a cancelled-transfer question answered with the reverted-c
 are out-of-scope or safety answers without the required handoff or refusal, and once it invents a product the
 handbook does not have ("Chinor Invest team"). Details: `results/full_ft_analysis.md`. The fix was a *higher*
 learning rate, not a gentler one (ADR-030): at lr 2e-5 the val loss drops to 0.093 / 0.095 (2 seeds) and the score
-rises to 141 / 143, close to LoRA (`results/lora_vs_qlora.md`).
+rises to 141 / 143; no significant difference detected vs LoRA, Δ = −2.5 [−8.0, 3.0] (`results/lora_vs_qlora.md`).
 
 ## What did not work
 
@@ -91,20 +93,25 @@ Terms are explained in [glossary.md](glossary.md).
 
 The 14B SFT model sampled 8 answers to each of 2,188 new prompts. Rules marked each answer as passing or failing
 (wrong topic, missing fact, invented number, broken behaviour rule); a prompt with both kinds gave one pair, 348 pairs
-in all. DPO and SimPO each trained a small adapter on these pairs. Neither changed the Assistant score: DPO 145.0 and
-SimPO 143.7 of 200 against 145 for the starting model, no block different after Holm correction. Red-team attack
-success was 0.6 % for DPO and 2.2 % for SimPO against 2.3 % for SFT, with overlapping intervals. The SFT model already
+in all. All six preference runs start from one SFT model (14B rsLoRA v1.2 seed 0); their seeds vary only the
+preference stage, so they are compared with that seed. DPO and SimPO each trained a small adapter on these pairs. No
+significant difference was detected: DPO 145.0 and SimPO 143.7 of 200 against 145 for the starting model (Δ = +0.0
+[−2.7, 2.7] and −1.3 [−4.0, 1.3]), no block significant after Holm correction (21 tests). Red-team attack success was
+0.6 % [0.0, 1.7] for DPO and 2.2 % [0.0, 6.1] for SimPO against 1.7 % [0.0, 5.0] for the SFT starting model (seed 0),
+with overlapping intervals. The SFT model already
 gave the handbook answer in 81 % of samples, so the pairs had little to teach. Details: `results/preference.md`.
 
 ## Red-team
 
-60 frozen attacks (prompt injection, impersonation, social engineering). Attack success: 14B base 13.3 %, Qwen3-14B
-instruct 11.7 %, 14B rsLoRA SFT 2.3 % (5 seeds), full FT lr 2e-5 3.3 %, QLoRA 3.3 %. Details: `results/redteam.md`.
+60 frozen attacks (prompt injection, impersonation, social engineering); the attack is the unit of analysis (per
+attack the mean over seeds; 95 % CI by cluster bootstrap over attacks). Attack success: 14B base 13.3 % [5.0, 23.3],
+Qwen3-14B instruct 11.7 % [5.0, 20.0], 14B rsLoRA SFT 2.3 % [1.0, 4.0] (5 seeds), full FT lr 2e-5 3.3 % [0.8, 6.7],
+QLoRA 3.3 % [0.6, 7.2]. Details: `results/redteam.md`.
 
 ## How far to trust the automatic score
 
-A hand check of 60 answers of the trained 14B model agreed with the automatic scorer on 51 (0.85, the pre-set bar).
+A hand check of 60 answers of the trained 14B model agreed with the automatic scorer on 51: 51/60 = 0.85 [0.74, 0.92] agreement with one annotator.
 8 of the 9 disagreements were answers the scorer passed and the author failed, so the automatic scores are upper
 bounds. Correcting for that (38 of 46 automatic passes were real passes, 1 of 14 automatic fails was a real pass), the
 five 14B v1.2 seeds would score about 121–126 of 200 instead of 142–148; this is an exploratory estimate from a
-single 60-item audit, with wide intervals (about ±18). Red-team scoring was checked by the author on 30 blind answers (15 SFT, 15 base): 28/30 agreement [0.79, 0.98], one disagreement in each direction (RT-SP-02 scorer-success/manual-no; RT-IT-01 scorer-no/manual-success), so no detectable bias; single annotator; marked before the marking guideline existed, not re-marked.
+single 60-item audit, with wide intervals (about ±18). Red-team scoring was checked by the author on 30 blind answers (15 SFT, 15 base): 28/30 agreement [0.79, 0.98], one disagreement in each direction (RT-SP-02 scorer-success/manual-no; RT-IT-01 scorer-no/manual-success), so no direction of bias was detected in this sample; marked before the marking guideline existed. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).

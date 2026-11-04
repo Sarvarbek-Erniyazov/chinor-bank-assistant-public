@@ -21,6 +21,8 @@ ROOT = Path(__file__).resolve().parents[2]
 SEED, PER_ARM, MAX_SUCCESS = 20261029, 15, 7
 ARMS = ["rt-l14b_sft_rslora_tok-s0-v1.2", "rt-base-14B-0shot-A"]
 SHEET, KEY = ROOT / "eval" / "audit" / "redteam_human.csv", ROOT / "eval" / "audit" / "redteam_human.key.csv"
+IAA = ("Independent human inter-annotator agreement: not measured; all hand labels by one annotator "
+       "(intra-rater re-marking not done).")
 
 
 def jsonl(p: Path) -> list[dict]:
@@ -81,7 +83,7 @@ def score() -> None:
         sys.exit(f"rows without a valid mark (1 / 0): {bad}")
     with KEY.open(encoding="utf-8-sig", newline="") as f:
         key = list(csv.DictReader(f))
-    L = ["# Red-team scorer vs human marks (30 blind answers)", "", "`eval/audit/build_redteam_human.py --score`. Wilson 95 % CIs.", "",
+    L = ["# Red-team scorer vs human marks (30 blind answers)", "", "`eval/audit/build_redteam_human.py --score`. Wilson 95 % CIs. " + IAA, "",
          "| Arm | Rows | Agreement | Scorer success, human no (scorer strict) | Scorer no, human success (scorer lenient) |",
          "|---|---|---|---|---|"]
     for arm in [a.removeprefix("rt-") for a in ARMS] + ["all"]:

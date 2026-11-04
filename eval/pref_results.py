@@ -4,8 +4,10 @@ python eval/pref_results.py          (after results/build_tidy.py and eval/redte
 Arms: SFT = l14b_sft_rslora_tok-s0-v1.2 (the parent: sft-merged is this run merged), DPO = pref_dpo_rules-s*,
 SimPO = pref_simpo_rules-s*. Assistant /200 and pass rate per block (mean ± SD over seeds). Δ vs SFT and DPO vs SimPO:
 paired bootstrap over items, stratified by seed (figures/stats.py; the single SFT seed is paired with every seed),
-exact McNemar on seed 0, Holm-adjusted over all comparisons in the table. Red-team attack_success and
-safe_and_helpful from results/tidy/redteam.csv; output length in tokens (eval-v1 assistant items); training reward
+exact McNemar on seed 0, Holm-adjusted within two families (ADR-035): confirmatory = DPO − SFT, SimPO − SFT,
+DPO − SimPO × 7 rows = 21 tests; exploratory = RFT − SFT × 7 rows = 7 tests. All six preference runs start from one
+SFT parent (14B rsLoRA v1.2 seed 0), so SFT = seed 0 throughout. Red-team attack_success and safe_and_helpful from
+eval/outputs/rt-<run>/redteam_scores.jsonl, attack as the unit (cluster bootstrap over the 60 attacks); output length in tokens (eval-v1 assistant items); training reward
 accuracy and margin from results/runs/<run>/train/loss.csv (last 10 steps) and the final step.
 """
 from __future__ import annotations
@@ -23,6 +25,7 @@ import stats as S  # noqa: E402
 TIDY = ROOT / "results" / "tidy"
 BLOCKS = ["T-seen", "T-held", "B1", "B2", "B3", "B4"]
 SFT = "l14b_sft_rslora_tok-s0-v1.2"
+RFT = "l14b_sft_rslora_tok-v1.2_rft"
 ARMS = {"SFT (v1.2 seed 0)": "sft", "DPO (rules)": "pref_dpo_rules", "SimPO (rules)": "pref_simpo_rules",
         "RFT (exploratory, ADR-033)": "l14b_sft_rslora_tok-v1.2_rft"}
 
@@ -66,6 +69,9 @@ def main():
          "rule-labelled pairs (`data/pref/v1/pairs_rules.jsonl`, DATA_CARD). DPO β 0.1 (reference = sft-merged); SimPO "
          "β 2.0, γ 1.0. Eval-v1 under Protocol A; red-team = redteam-v1 (60 items). Labels were not checked by the judge "
          "(dropped this session); κ(rules, author) on 60 blind pairs follows in `results/judge_calibration.md`.", "",
+         "**One parent.** All six preference runs (DPO s0–s2, SimPO s0–s2) start from the same SFT checkpoint, 14B "
+         "rsLoRA v1.2 seed 0; their seeds vary the preference stage only, not SFT. The reference row is therefore SFT "
+         "seed 0, not the 5-seed SFT mean, and SFT seed-to-seed variation is not part of these comparisons.", "",
          "## Eval-v1 (pass counts; mean ± SD over seeds)", "",
          "| Arm | Seeds | Assistant /200 | " + " | ".join(f"{b} /{len(items[b])}" for b in BLOCKS) + " |",
          "|---|---|---|" + "---|" * len(BLOCKS)]
@@ -81,30 +87,50 @@ def main():
             bt = S.paired_bootstrap(va, vb)
             mc = S.mcnemar_exact(va[0], vb[0])
             res.append({"a": a, "b": b, "blk": blk, "bt": bt, "mc": mc})
-    for x, p in zip(res, S.holm([x["mc"]["p_value"] for x in res])):
-        x["holm"] = p
-    L += ["", f"## Differences (Δ passes; Holm over the {len(res)} comparisons)", "",
-          "| Comparison | Block | Δ [95 % CI] | Bootstrap p | McNemar seed 0 (A only / B only) | Holm p |", "|---|---|---|---|---|---|"]
+    fams = {"confirmatory": [x for x in res if x["a"] != RFT], "exploratory (RFT)": [x for x in res if x["a"] == RFT]}
+    for fam, xs in fams.items():
+        for x, p in zip(xs, S.holm([x["mc"]["p_value"] for x in xs])):
+            x["holm"], x["fam"] = p, f"{fam}, m = {len(xs)}"
+    conf = fams["confirmatory"]
+    pairs = list(dict.fromkeys(f"{name[x['a']]} − {name[x['b']]}" for x in conf))
+    L += ["", "## Differences (Δ passes)", "",
+          f"**Holm families.** Confirmatory: {len(pairs)} comparisons ({'; '.join(pairs)}) × 7 rows (Assistant + 6 "
+          f"blocks) = {len(conf)} tests, adjusted together. Exploratory: RFT − SFT × 7 rows = "
+          f"{len(fams['exploratory (RFT)'])} tests, adjusted separately (one seed, decided after the main runs, ADR-033). "
+          "SFT = seed 0, the shared parent of all six preference runs. \"No significant difference detected\" is not "
+          "equivalence: read Δ and its CI.", "",
+          "| Comparison | Block | Δ [95 % CI] | Bootstrap p | McNemar seed 0 (A only / B only) | Holm family | Holm p |",
+          "|---|---|---|---|---|---|---|"]
     for x in res:
         L.append(f"| {name[x['a']]} − {name[x['b']]} | {x['blk']} | {x['bt']['delta']:+.1f} [{x['bt']['ci_lo']:.1f}, "
-                 f"{x['bt']['ci_hi']:.1f}] | {fmt_p(x['bt']['p_value'])} | {x['mc']['a_only']} / {x['mc']['b_only']} | {fmt_p(x['holm'])} |")
-    rt = {r["arm_group"]: r for r in rows("redteam.csv")}
-    rt_key = {"sft": "l14b_sft_rslora_tok-v1.2"}
+                 f"{x['bt']['ci_hi']:.1f}] | {fmt_p(x['bt']['p_value'])} | {x['mc']['a_only']} / {x['mc']['b_only']} | "
+                 f"{x['fam']} | {fmt_p(x['holm'])} |")
+    import json
     L += ["", "## Red-team, output length, stops", "",
-          "| Arm | attack_success (lower better) | safe_and_helpful | Mean tokens (assistant items) | p90 tokens |", "|---|---|---|---|---|"]
+          "Red-team: the attack is the unit (n = 60); per attack the mean over the arm's seeds; 95 % CI = cluster "
+          "bootstrap over attacks (figures/stats.py). SFT = seed 0 only (the parent), not the 5-seed mean in "
+          "`results/redteam.md`.", "",
+          "| Arm | Seeds | attack_success (lower better) | safe_and_helpful | Mean tokens (assistant items) | p90 tokens |",
+          "|---|---|---|---|---|---|"]
     for k in have:
-        r = rt.get(rt_key.get(k, k))
-        a = (f"{r['attack_k']}/{r['n']} = {float(r['attack_rate']):.1%} [{float(r['attack_ci_lo']):.1%}, {float(r['attack_ci_hi']):.1%}]"
-             if r else "pending")
-        h = f"{r['sh_k']}/{r['n']} = {float(r['sh_rate']):.1%}" if r else "pending"
+        sc = []
+        for run in ([SFT] if k == "sft" else sorted(passes[k])):
+            f = ROOT / "eval" / "outputs" / f"rt-{run}" / "redteam_scores.jsonl"
+            sc.append(sorted((json.loads(l) for l in f.read_text(encoding="utf-8").splitlines() if l.strip()),
+                             key=lambda r: r["id"]) if f.exists() else None)
+
+        def cell(col):
+            if None in sc:
+                return "pending"
+            b = S.cluster_bootstrap([[int(r[col]) for r in x] for x in sc])
+            k_ = sum(int(r[col]) for x in sc for r in x)
+            return f"{100 * b['rate']:.1f} % [{100 * b['ci_lo']:.1f}, {100 * b['ci_hi']:.1f}] ({k_}/{60 * len(sc)})"
         q = sorted(lens[k])
-        L.append(f"| {name[k]} | {a} | {h} | {st.mean(q):.0f} | {q[int(0.9 * (len(q) - 1))]} |")
-    if rt.get("l14b_sft_rslora_tok-v1.2"):
-        L.append("\nThe SFT red-team row pools the 5 seeds of 14B rsLoRA v1.2 (seed 0 alone is in `results/redteam.md` per seed).")
+        L.append(f"| {name[k]} | {len(sc)} | {cell('attack_success')} | {cell('safe_and_helpful')} | {st.mean(q):.0f} | "
+                 f"{q[int(0.9 * (len(q) - 1))]} |")
     L += ["", "## Training: reward accuracy and margin", "",
           "| Run | Pairs | Steps | Final loss | Reward accuracy (last 10 steps) | Margin (last 10 steps) | Chosen / rejected length |",
           "|---|---|---|---|---|---|---|"]
-    import json
     for k in have:
         if k in ("sft", "l14b_sft_rslora_tok-v1.2_rft"):  # no preference loss
             continue

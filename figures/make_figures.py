@@ -298,9 +298,18 @@ def stage_effect(R: Results, pairs: list[tuple[str, str]], fid: str, question: s
     return {"draw": draw, "caption": (
         f"**Question:** {question} **Plotted:** {what} per block and on the 200 assistant items (block sizes in the axis "
         f"labels), seeds paired. **Error bars:** paired bootstrap 95 % CI ({S.BOOT_N:,} resamples over items, stratified "
-        f"by seed, seed {S.BOOT_SEED}). **Test:** exact McNemar per block on seed 0, Holm-adjusted over the "
-        f"{len(rows)} comparisons in this figure (* = Holm p < 0.05). {parts}. **Takeaway:** the gain is concentrated "
-        f"in some blocks; no significant change after Holm in: {', '.join(sorted(set(flat))) or 'none'}.")}
+        f"by seed, seed {S.BOOT_SEED}). **Test:** exact McNemar per block on seed 0. **Holm family:** the "
+        f"{len(rows)} tests in this figure = {len(pairs)} arm − reference pairs "
+        f"({'; '.join(f'`{a}` − `{r}`' for a, r in pairs)}) × {len(rows) // len(pairs)} rows (Assistant + "
+        f"{len(rows) // len(pairs) - 1} blocks), adjusted together (* = Holm p < 0.05). {parts}. **Takeaway:** "
+        f"{takeaway(rows, flat)}")}
+
+
+def takeaway(rows: list[dict], flat: list[str]) -> str:
+    if all(x["holm"] >= 0.05 for x in rows):
+        return ("no significant difference detected in any block or on Assistant after Holm; this is not evidence of "
+                "equivalence (read Δ and its CI above).")
+    return f"the gain is concentrated in some blocks; no significant change detected after Holm in: {', '.join(sorted(set(flat))) or 'none'}."
 
 
 def f3(R: Results) -> dict:
@@ -374,11 +383,18 @@ def f6(R: Results) -> dict:
             return fig
 
     gain = [(s["size"], s["assistant_mean"] - summ[f"base-{s['size']}-0shot-A"]["assistant_mean"]) for s in sfts]
+    items = items_of(R, ASSISTANT)
+    sizes_d = []
+    for x, y in ((sft["4B"], sft["14B"]), (sft["8B"], sft["14B"]), (sft["4B"], sft["8B"])):
+        bt = S.paired_bootstrap(vectors(R, x, items), vectors(R, y, items))
+        sizes_d.append(f"{summ[x]['size']} − {summ[y]['size']} Δ = {bt['delta']:+.1f} [{bt['ci_lo']:.1f}, {bt['ci_hi']:.1f}]")
     return {"draw": draw, "caption": (
         "**Question:** how much does model size matter, before and after SFT? **Plotted:** Assistant /200 against model "
         "size for the base models (0-shot, n = 1) and SFT rsLoRA with trainable token rows (n = 1–3 seeds), Instruct "
-        "references hollow. **Error bars:** Wilson 95 % CI. **Test:** none across sizes (one arm per size). "
-        f"**Takeaway:** SFT gain over base by size: {', '.join(f'{s} {d:+.0f}' for s, d in gain)}.")}
+        "references hollow. **Error bars:** Wilson 95 % CI. **Test:** paired bootstrap Δ between the SFT arms of "
+        "4B, 8B and 14B (results/arm_differences.md, Holm family m = 8 there). "
+        f"**Takeaway:** SFT gain over base by size: {', '.join(f'{s} {d:+.0f}' for s, d in gain)}. Among 4B–14B after "
+        f"SFT, no significant difference detected: {'; '.join(sizes_d)} (not evidence that size does not matter).")}
 
 
 def f7(R: Results) -> dict:
@@ -559,7 +575,7 @@ def f11(R: Results) -> dict:
     def draw(theme):
         with themed(theme) as t:
             fig, axes = plt.subplots(1, 5 if redteam else 4, figsize=(WIDTH_2COL, 0.26 * len(groups) + 1.0), sharey=True)
-            if redteam:  # red-team panel: attack_success rate with Wilson 95 % CI (seeds pooled)
+            if redteam:  # red-team panel: attack_success, attack as the unit, cluster-bootstrap 95 % CI
                 ax = axes[4]
                 for y, g in enumerate(groups):
                     c, r = style.colour(g["method"]), rt[g["arm_group"]]
@@ -596,9 +612,12 @@ def f11(R: Results) -> dict:
         "for LoRA/QLoRA). **Test:** none (counts too small). **Takeaway:** trained arms stay at 0–2 flags of each kind"
         + (f" (highest: `{worst['arm_group']}`, HV {worst['hv_mean']:.1f}, INJ {worst['inj_mean']:.1f}); over-refusal drops from {min(base_or):.0f}–{max(base_or):.0f} in the untrained models to at most {max(g['or_mean'] for g in tr):.1f}."
            if worst else ".")
-        + (" **Right panel:** red-team attack success on the 60 frozen redteam-v1 items (Protocol A; % of answers, seeds "
-           "pooled, Wilson 95 % CI; lower is better): "
-           + "; ".join(f"{g['size']} {label(g)} {100 * float(rt[g['arm_group']]['attack_rate']):.0f} %" for g in groups)
+        + (" **Right panel:** red-team attack success on the 60 frozen redteam-v1 items (Protocol A; lower is better). "
+           "Unit of analysis = the attack (n = 60): per attack the mean over the arm's seeds; dot = mean over attacks; "
+           "error bar = 95 % cluster bootstrap over attacks (10,000 resamples): "
+           + "; ".join(f"{g['size']} {label(g)}{' lr 2e-5' if g['arm_group'] == 'l14b_full_lr2e5' else ''} "
+                       f"{100 * float(rt[g['arm_group']]['attack_rate']):.1f} % [{100 * float(rt[g['arm_group']]['attack_ci_lo']):.1f}, "
+                       f"{100 * float(rt[g['arm_group']]['attack_ci_hi']):.1f}]" for g in groups)
            + ". Full table: `results/redteam.md`."
            if redteam else " The red-team eval (redteam-v1) is pending and will be added as a separate panel."))}
 
@@ -629,11 +648,29 @@ def f12(R: Results) -> dict:
     lora = next((g for g in groups if g["arm_group"] == "l14b_sft_rslora_tok-v1.2"), None) or next((g for g in groups if g["arm_group"] == "l14b_sft_rslora_tok"), None)
     cmp = (f" 14B full FT costs {full['gpu_h_per_seed']:.1f} GPU-h for {full['assistant_mean']:.0f}/200 vs "
            f"{lora['gpu_h_per_seed']:.2f} GPU-h for {lora['assistant_mean']:.0f}/200 with LoRA." if full and lora else "")
+    items = items_of(R, ASSISTANT)
+    diffs = []
+    for a, b, seeds, name in (("l14b_qlora_rslora_tok", "l14b_sft_rslora_tok", None, "QLoRA − LoRA (14B, SFT v1)"),
+                              ("l14b_full_lr2e5", "l14b_sft_rslora_tok", ("0", "1"), "full FT lr 2e-5 − LoRA (14B, seeds 0–1)"),
+                              ("pref_dpo_rules", "l14b_sft_rslora_tok-v1.2@s0", None, "DPO − SFT seed 0"),
+                              ("pref_simpo_rules", "l14b_sft_rslora_tok-v1.2@s0", None, "SimPO − SFT seed 0")):
+        if a not in R.summary() or b.partition("@")[0] not in R.summary():
+            continue
+        va, vb = vectors(R, a, items), vectors(R, b, items)
+        if seeds:
+            keep = [i for i, k in enumerate(sorted(R.passes()[b])) if str(k) in seeds]
+            vb = [vb[i] for i in keep]
+        bt = S.paired_bootstrap(va, vb)
+        diffs.append(f"{name}: Δ = {bt['delta']:+.1f} [{bt['ci_lo']:.1f}, {bt['ci_hi']:.1f}]")
+    nodiff = (" No significant difference detected (paired bootstrap 95 % CI over items, stratified by seed): "
+              + "; ".join(diffs) + "." if diffs else "")
     return {"draw": draw, "caption": (
         "**Question:** what does each training method cost for what it delivers? **Plotted:** H200 GPU-hours per seed "
         "(training wall-clock + eval) against mean Assistant /200 (n = 1–3 seeds). **Error bars:** none (SD in T1). "
-        f"**Test:** none. **Takeaway:**{cmp} With tuned learning rate (2e-5, 3 epochs) full FT is close to LoRA at higher "
-        "cost; this is not a general LoRA-vs-full-FT claim.")}
+        f"**Test:** paired bootstrap Δ for the pairs below (not Holm-adjusted here; results/arm_differences.md and "
+        f"results/preference.md hold the adjusted families). **Takeaway:**{cmp}{nodiff} The preference runs share one SFT "
+        "parent (14B rsLoRA v1.2 seed 0) and are compared with it, not with the 5-seed SFT mean. These hold for these "
+        "settings only; this is not a general LoRA-vs-full-FT claim.")}
 
 
 def f13(R: Results) -> dict:
@@ -716,7 +753,9 @@ def t2(R: Results) -> str:
         if g in summ and summ[g]["assistant_sd"] != "":
             L.append(f"| seed-to-seed spread, `{g}` | SD {summ[g]['assistant_sd']:.1f} /200 over {summ[g]['seeds']} seeds | training seed only; data and eval fixed |")
     return ("**T2 — Can the numbers be trusted?** Scorer vs hand marks, robustness of the score to hardware and eval batch "
-            "size, the entailment judge's validation, and seed spread. Wilson 95 % CIs; McNemar exact.\n\n" + "\n".join(L))
+            "size, the entailment judge's validation, and seed spread. Wilson 95 % CIs; McNemar exact. Independent human "
+            "inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not "
+            "done).\n\n" + "\n".join(L))
 
 
 def t3(R: Results) -> str:
@@ -874,22 +913,23 @@ def f14(R: Results) -> dict:
                 a2.plot(xs, [dpo[s][i] for i in xs], color=style.colour("DPO"), lw=1.2, alpha=[1, 0.7, 0.45][k % 3],
                         label=f"DPO seed {s}")
             a2.axhline(math.log(2), color=t["axis"], lw=0.8, ls="--")
-            a2.text(1, math.log(2) + 0.004, "ln 2 = 0.693 (policy = reference)", fontsize=6.5, color=t["muted"], va="bottom")
+            a2.text(1, math.log(2) + 0.004, "ln 2 = 0.693 (sanity check)", fontsize=6.5, color=t["muted"], va="bottom")
             a2.set_xlabel("optimiser step")
             a2.set_ylabel("DPO loss")
-            a2.set_title("(b) DPO starts at ln 2", fontsize=8, loc="left")
+            a2.set_title("(b) DPO step-0 loss = ln 2", fontsize=8, loc="left")
             a2.legend(fontsize=7, loc="lower left")
             fig.tight_layout()
             return fig
 
     return {"draw": draw, "caption": (
-        "**Question:** do the two mechanics the results rest on work as specified? **Plotted:** (a) share of eval-v1 "
+        "**Question:** do two mechanics behave as specified (sanity checks, not proofs of correctness)? **Plotted:** (a) share of eval-v1 "
         "answers ending on <|im_end|>, 14B rsLoRA without vs with the two trained special-token rows (all seeds pooled); "
         f"(b) DPO loss per optimiser step for the three DPO seeds (all {max(len(v) for v in dpo.values())} steps). "
         "**Error bars:** none (counts; per-seed curves). **Test:** acceptance ≥ 95 % <|im_end|>; step-0 check |loss − ln 2| "
         f"≤ 0.01 (train/pref.py). **Takeaway:** the end-of-turn fix moves {100 * share[pairs[0][0]]:.0f} % → "
-        f"{100 * share[pairs[1][0]]:.0f} %; every DPO run starts at ln 2 "
-        f"({', '.join(f'{v:.4f}' for _, v in sorted(step1.items()))}), so the starting policy is the reference model.")}
+        f"{100 * share[pairs[1][0]]:.0f} %; step-0 loss = ln 2 in every DPO run "
+        f"({', '.join(f'{v:.4f}' for _, v in sorted(step1.items()))}) confirms the reference model equals the starting "
+        "policy (sanity check); it does not show that the training that follows is correct.")}
 
 
 def f15(R: Results) -> dict:
@@ -903,12 +943,17 @@ def f15(R: Results) -> dict:
     if miss:
         raise Pending(", ".join(miss) + " in results/tidy/arm_summary.csv")
     sft, rft = summ["l14b_sft_rslora_tok-v1.2"], summ["l14b_sft_rslora_tok-v1.2_rft"]
+    # the preference and RFT runs all start from SFT v1.2 seed 0: compare with that seed, not the 5-seed mean
+    p0 = next(v for k, v in R.passes()["l14b_sft_rslora_tok-v1.2"].items() if str(k) == "0")
+    blk = R.blocks()
+    sft0 = {"method": sft["method"], "assistant_mean": sum(v for i, v in p0.items() if blk[i] in ASSISTANT),
+            "assistant_sd": "", "rate_R": sum(v for i, v in p0.items() if blk[i] == "R") / sum(blk[i] == "R" for i in p0)}
     thr = [r for r in th if r["arm_group"] == "l14b_sft_rslora_tok"]
     b1r = [r for r in b1 if r["arm"] == "14B rsLoRA v1"]
     if not thr or not b1r:
         raise Pending("14B rsLoRA rows in results/tidy/t_held_classes.csv and b1_classes.csv")
     short = {"l14b_sft_rslora_tok": "v1", "l14b_sft_rslora_tok-v1.1": "v1.1", "l14b_sft_rslora_tok-v1.2": "SFT v1.2",
-             "pref_dpo_rules": "DPO", "pref_simpo_rules": "SimPO", "l14b_sft_rslora_tok-v1.2_rft": "RFT"}
+             "pref_dpo_rules": "DPO", "pref_simpo_rules": "SimPO", "l14b_sft_rslora_tok-v1.2_rft": "RFT", "sft_s0": "SFT s0"}
 
     def draw(theme):
         with themed(theme) as t:
@@ -938,12 +983,12 @@ def f15(R: Results) -> dict:
             ax[2].set_ylabel(f"B1 answers (%, n {n})", fontsize=7)
             ax[2].set_title("(c) missing detail: rarely asks", fontsize=7.5, loc="left")
             panels = [(["l14b_sft_rslora_tok", "l14b_sft_rslora_tok-v1.1", "l14b_sft_rslora_tok-v1.2"], "(d) SFT data version", "assistant_mean"),
-                      (["l14b_sft_rslora_tok-v1.2", "pref_dpo_rules", "pref_simpo_rules"], "(e) preference stage", "assistant_mean"),
-                      (["l14b_sft_rslora_tok-v1.2", "l14b_sft_rslora_tok-v1.2_rft"], "(f) RFT: retention", "rate_R")]
+                      (["sft_s0", "pref_dpo_rules", "pref_simpo_rules"], "(e) preference stage", "assistant_mean"),
+                      (["sft_s0", "l14b_sft_rslora_tok-v1.2_rft"], "(f) RFT: retention", "rate_R")]
             for i, (gs, title, key) in enumerate(panels):
                 a = ax[3 + i]
                 for x, g in enumerate(gs):
-                    r = summ[g]
+                    r = sft0 if g == "sft_s0" else summ[g]
                     v = 100 * r[key] if key == "rate_R" else r[key]
                     sd = r["assistant_sd"] if key == "assistant_mean" and r["assistant_sd"] != "" else None
                     a.bar(x, v, color=style.colour(r["method"]), edgecolor=t["bg"], linewidth=2, width=0.6,
@@ -962,12 +1007,14 @@ def f15(R: Results) -> dict:
         "**Question:** what did not work? **Plotted:** (a) share of Qwen3-32B rewrites with a wrong policy in the hand "
         f"audits ({aud}) vs the 5 % target; (b) T-held answers of "
         f"14B rsLoRA by class (n {len(thr)}, seeds pooled); (c) B1 answers of 14B rsLoRA v1 by diagnostic class (n {b1r[0]['n']}); "
-        f"(d) Assistant /200 by SFT data version (seeds 3, 3, {sft['seeds']}); (e) DPO and SimPO (3 seeds each) next to "
-        f"their SFT parent's group (v1.2, {sft['seeds']} seeds); (f) retention without a system prompt, SFT v1.2 vs RFT "
-        "(1 seed). **Error bars:** (a) Wilson 95 % CI; (d, e) SD over seeds. **Test:** results/data_versions.md and "
-        "results/preference.md (no Assistant or block difference after Holm); ADR-033 for RFT. **Takeaway:** rewrites "
-        "drifted, unseen topics get a memorised wrong answer, B1 rarely asks, neither data versions nor preference tuning "
-        f"moved the score, and RFT lost retention ({100 * sft['rate_R']:.0f} % → {100 * rft['rate_R']:.0f} %).")}
+        f"(d) Assistant /200 by SFT data version (seeds 3, 3, {sft['seeds']}); (e) DPO and SimPO (3 seeds each; seeds "
+        "vary the preference stage only) next to their one SFT parent, 14B rsLoRA v1.2 seed 0; (f) retention without a "
+        "system prompt, SFT v1.2 seed 0 vs RFT (1 seed; same seed and config, v1.2 data plus on-policy rows). **Error bars:** (a) Wilson 95 % CI; "
+        "(d, e) SD over seeds. **Test:** results/data_versions.md, results/arm_differences.md and results/preference.md "
+        "(no significant Assistant or block difference detected after Holm; Δ and CIs there); ADR-033 for RFT. "
+        "**Takeaway:** rewrites drifted, unseen topics get a memorised wrong answer, B1 rarely asks, no significant "
+        "difference was detected between data versions or between preference tuning and SFT seed 0 (not evidence of "
+        f"equivalence), and RFT lost retention ({100 * sft0['rate_R']:.0f} % → {100 * rft['rate_R']:.0f} %).")}
 
 
 INDEX = {

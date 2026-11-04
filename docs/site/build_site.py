@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 REPO = "../../"  # from docs/site/ to the repository root (figures, demo: served by Pages)
 SRC = "<repo-url>/blob/main/"  # markdown files: rendered on GitHub, not by Pages; set by --repo-url
 FIGS = [("F0", "Pipeline and hand audits"), ("F1", "Assistant score per arm"), ("F2", "Pass rate per eval block and arm"),
-        ("F3", "What SFT changes, per block"), ("F14", "Proof: end-of-turn fix and DPO start"),
+        ("F3", "What SFT changes, per block"), ("F14", "Sanity checks: end-of-turn fix and DPO step 0"),
         ("F11", "Safety flags per arm"), ("F15", "What did not work")]
 
 
@@ -59,7 +59,7 @@ def main():
     table, dont = claims_table()
     figs = "".join(picture(f, a) for f, a in FIGS)
     sections = [("what-was-built", "What was built"), ("main-results", "Main results"), ("stage-effects", "Stage effects"),
-                ("proof-figures", "Proof figures"), ("can-the-numbers-be-trusted", "Trust"), ("what-didnt-work", "What didn't work"),
+                ("sanity-checks", "Sanity checks"), ("can-the-numbers-be-trusted", "Trust"), ("what-didnt-work", "What didn't work"),
                 ("safety", "Safety"), ("run-it", "Run it"), ("limitations", "Limitations")]
     links = " · ".join(f'<a href="{SRC}README.md#{a}">{t}</a>' for a, t in sections)
     page = TEMPLATE.format(R=REPO, S=SRC, figs=figs, table=table, dont=dont, links=links)
@@ -70,7 +70,7 @@ def main():
 TEMPLATE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chinor Bank Assistant</title>
-<meta name="description" content="Post-training study: Qwen3 base models turned into the support assistant of a fictional bank, measured on frozen evals.">
+<meta name="description" content="A closed pilot study of SFT and preference tuning on a fictional bank domain, measured on frozen evals.">
 <style>
 :root{{--bg:#fafaf8;--card:#fff;--ink:#1d1d1b;--muted:#5f5f5a;--line:#e3e2dc;--accent:#0072B2;--warn:#fff4d6}}
 @media (prefers-color-scheme:dark){{:root{{--bg:#16181c;--card:#1f2125;--ink:#ecebe6;--muted:#a3a29b;--line:#34363b;--accent:#56B4E9;--warn:#3a3220}}}}
@@ -92,22 +92,27 @@ nav{{font-size:.92rem;color:var(--muted)}}
 <p class="notice"><strong>Fiction notice.</strong> Chinor Bank does not exist. Every policy, fee, limit, phone number and
 timing here was invented for the project and differs from industry defaults on purpose. Nothing here describes, imitates
 or is affiliated with any real bank.</p>
-<p class="lead">A post-training study: Qwen3 <em>base</em> models are turned into the customer-support assistant of a
-fictional bank, and every training stage is measured on one frozen eval set (220 items) and a frozen red-team set (60
-attacks). Code, data and every number: <a href="{S}README.md">README</a>.</p>
+<p class="lead">Chinor is <strong>a closed pilot study of SFT and preference tuning on a fictional bank domain</strong>:
+Qwen3 <em>base</em> models are turned into the customer-support assistant of an invented bank, and every training stage
+is measured on one frozen eval set (220 items) and a frozen red-team set (60 attacks). Code, data and every number:
+<a href="{S}README.md">README</a>.</p>
+<p class="notice"><strong>Main limitation.</strong> The scores measure how well a model reproduces one handbook's
+answers under a lenient rubric (the automatic scorer agreed with one annotator on 51/60 = 0.85 [0.74, 0.92]; 8 of its 9
+errors were lenient). They are not a measure of general banking competence. Independent human inter-annotator
+agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).</p>
 
 <h2 id="summary">Read this in 2 minutes</h2>
 <div class="stats">
 <div class="stat"><b>45 → 145.0</b><span>Assistant score /200, 14B base → SFT (rsLoRA, 5 seeds, ± 2.5)</span></div>
-<div class="stat"><b>13.3 % → 2.3 %</b><span>red-team attack success, 14B base → SFT</span></div>
+<div class="stat"><b>13.3 % → 2.3 %</b><span>red-team attack success, 14B base [5.0, 23.3] → SFT [1.0, 4.0] (95 % CI over the 60 attacks)</span></div>
 <div class="stat"><b>0 % → 100 %</b><span>turns ending on &lt;|im_end|&gt; once the two token rows are trained</span></div>
 </div>
 <ul class="find">
 <li><strong>Headline:</strong> supervised fine-tuning does almost all the work: +100 /200 [93, 107] over the base model, well above Qwen3-14B Instruct (58).</li>
-<li><strong>Headline:</strong> the red-team rate falls from 13.3 % to 2.3 %; the scorer agreed with the author on 28 of 30 blind answers.</li>
+<li><strong>Headline:</strong> red-team attack success falls from 13.3 % [5.0, 23.3] to 2.3 % [1.0, 4.0] (attack as the unit, cluster bootstrap over the 60 attacks); the red-team scorer agreed with the author on 28 of 30 blind answers.</li>
 <li><strong>Negative:</strong> on banking topics never trained on, the models recall the answer to a different topic (0–2 / 20).</li>
-<li><strong>Negative:</strong> they rarely ask for a missing detail (0–1 / 20), and three SFT data versions did not change that.</li>
-<li><strong>Negative:</strong> DPO and SimPO on 348 rule-labelled on-policy pairs changed nothing measurable.</li>
+<li><strong>Negative:</strong> they rarely ask for a missing detail (0–1 / 20), and none of three SFT data versions changed that.</li>
+<li><strong>Negative:</strong> DPO and SimPO on 348 rule-labelled on-policy pairs vs their one SFT parent (seed 0): no significant difference detected; Δ = +0.0 [−2.7, 2.7] and −1.3 [−4.0, 1.3] /200.</li>
 </ul>
 <nav>README sections: {links}</nav>
 

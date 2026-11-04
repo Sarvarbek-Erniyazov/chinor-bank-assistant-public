@@ -237,8 +237,8 @@ def trust(long: list[dict]) -> list[dict]:
         aud = [r for r in csv.DictReader(f) if r["in_sample"] == "1" and r["manual_pass"] != ""]
     k = sum(r["manual_pass"] == r["auto_pass"] for r in aud)
     p, lo, hi = wilson(k, len(aud))
-    rows.append({"check": "scorer pass/fail accuracy vs hand marks (base-1.7B, rubric v1 sheet)", "k": k, "n": len(aud),
-                 "value": r4(p), "ci_lo": r4(lo), "ci_hi": r4(hi), "note": "threshold >= 0.85"})
+    rows.append({"check": "scorer pass/fail agreement with hand marks (one annotator) (base-1.7B, rubric v1 sheet)", "k": k, "n": len(aud),
+                 "value": r4(p), "ci_lo": r4(lo), "ci_hi": r4(hi), "note": "agreement with one annotator"})
     by = defaultdict(dict)
     for r in long:
         by[r["arm"]][r["item_id"]] = r
@@ -279,9 +279,9 @@ def audit_14b(long: list[dict]) -> list[dict]:
     ap = [m for a, m in pairs if a]
     af = [m for a, m in pairs if not a]
     p1, lo1, hi1 = wilson(sum(ap), len(ap))
-    out = [{"check": "scorer pass/fail accuracy vs hand marks (14B rsLoRA seed 0, rubric v1.3)", "k": k, "n": len(pairs),
+    out = [{"check": "scorer pass/fail agreement with hand marks (one annotator) (14B rsLoRA seed 0, rubric v1.3)", "k": k, "n": len(pairs),
             "value": r4(p), "ci_lo": r4(lo), "ci_hi": r4(hi),
-            "note": f"threshold >= 0.85 (met); {sum(a and not m for a, m in pairs)} of {len(pairs) - k} errors lenient "
+            "note": f"agreement with one annotator; {sum(a and not m for a, m in pairs)} of {len(pairs) - k} errors lenient "
                     f"(auto pass, manual fail): automatic scores are upper bounds. Marks made against rubric v1.3 and the "
                     f"handbook before the marking checklist existed; not re-marked."},
            {"check": "manual pass among auto passes (14B audit)", "k": sum(ap), "n": len(ap), "value": r4(p1), "ci_lo": r4(lo1),

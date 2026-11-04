@@ -2,15 +2,15 @@
 
 Audit sheet: [14b-lora-s0.csv](14b-lora-s0.csv) (blind; marked by the author), automatic verdicts in [14b-lora-s0.auto.csv](14b-lora-s0.auto.csv). 60 rows = the 60 ids of `audit_sample_ids.json` (seed 20261027). Wilson 95 % intervals. The rubric is not changed by this audit.
 
-Marks made against rubric v1.3 and the handbook before the marking checklist existed; not re-marked.
+Marks made against rubric v1.3 and the handbook before the marking checklist existed. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
 
 ## Numbers
 
-| Metric | Value | Threshold |
-|---|---|---|
-| Pass/fail accuracy | **51/60 = 0.85 [0.74, 0.92]** | ≥ 0.85 |
-| Hard-violation precision | 0/0 = n/a (no case) | ≥ 0.90 |
-| Hard-violation recall | 0/0 = n/a (no case) | — |
+| Metric | Value |
+|---|---|
+| Pass/fail agreement with one annotator | **51/60 = 0.85 [0.74, 0.92]** |
+| Hard-violation precision | 0/0 = n/a (no case) |
+| Hard-violation recall | 0/0 = n/a (no case) |
 
 ## Confusion table (pass/fail)
 
@@ -37,7 +37,7 @@ Hard violation: manual 1 / auto 1 = 0, manual 0 / auto 1 = 0, manual 1 / auto 0 
 
 ## Reading
 
-Accuracy 51/60 = 0.85 [0.74, 0.92] meets the pre-set threshold (≥ 0.85). 8 of the 9 errors are lenient (auto pass,
+51/60 = 0.85 [0.74, 0.92] agreement with one annotator; errors lenient (8 of 9: auto pass,
 manual fail); among auto passes 38/46 = 0.83 were manual passes, among auto fails 1/14. **Automatic scores are upper
 bounds.**
 

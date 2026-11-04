@@ -6,13 +6,18 @@
 
 ## Read this in 2 minutes
 
-A post-training study: Qwen3 *base* models are turned into the customer-support assistant of a fictional bank, and
-every training stage is measured on one frozen eval set (220 items) and a frozen red-team set (60 attacks).
+Chinor is **a closed pilot study of SFT and preference tuning on a fictional bank domain**: Qwen3 *base* models are
+turned into the customer-support assistant of an invented bank, and every training stage is measured on one frozen
+eval set (220 items) and a frozen red-team set (60 attacks).
+
+> **Main limitation.** The scores measure how well a model reproduces one handbook's answers under a lenient rubric
+> (the automatic scorer agreed with one annotator on 51/60 = 0.85 [0.74, 0.92]; 8 of its 9 errors were lenient). They
+> are not a measure of general banking competence, and no second annotator checked any label.
 
 | | Before | After |
 |---|---|---|
 | **Assistant score** (14B, /200) | 45 (base) | **145.0 ± 2.5** (SFT rsLoRA, 5 seeds) |
-| **Red-team attack success** (14B) | 13.3 % (base) | **2.3 %** (SFT) |
+| **Red-team attack success** (14B; 95 % CI over the 60 attacks) | 13.3 % [5.0, 23.3] (base) | **2.3 %** [1.0, 4.0] (SFT, 5 seeds) |
 | **Turns ending on `<\|im_end\|>`** (14B LoRA) | 0 % | **100 %** (two token rows trained) |
 
 <picture>
@@ -21,11 +26,14 @@ every training stage is measured on one frozen eval set (220 items) and a frozen
 </picture>
 
 - **Headline:** supervised fine-tuning does almost all the work: +100 /200 [93, 107] over the base model, well above
-  Qwen3-14B Instruct (58); 4B–14B end within a few items of each other.
-- **Headline:** the red-team rate falls from 13.3 % to 2.3 %; the scorer agreed with the author on 28 of 30 blind answers.
+  Qwen3-14B Instruct (58); among 4B–14B after SFT no significant difference detected (4B − 14B Δ = −1.0 [−5.3, 3.3];
+  8B − 14B Δ = −2.7 [−7.7, 2.3]).
+- **Headline:** red-team attack success falls from 13.3 % [5.0, 23.3] to 2.3 % [1.0, 4.0] (attack as the unit,
+  cluster bootstrap over the 60 attacks); the red-team scorer agreed with the author on 28 of 30 blind answers.
 - **Negative:** on banking topics never trained on, the models recall the answer to a *different* topic (T-held 0–2 / 20).
 - **Negative:** they rarely ask for a missing detail (B1 0–1 / 20), and none of three SFT data versions changed that.
-- **Negative:** DPO and SimPO on 348 rule-labelled on-policy pairs changed nothing measurable (Holm p = 1.0 everywhere).
+- **Negative:** DPO and SimPO on 348 rule-labelled on-policy pairs vs their one SFT parent (seed 0): no significant
+  difference detected; Δ = +0.0 [−2.7, 2.7] and −1.3 [−4.0, 1.3] /200 (Holm p = 1.0 in the 21-test family).
 
 Every claim with its test: [Claims](#claims). Plain-language summary: [docs/results_summary.md](docs/results_summary.md).
 Static demo: [demo/index.html](demo/index.html) ([Run it](#run-it)). Project site: `https://sarvarbek-erniyazov.github.io/chinor-bank-assistant-public/`.
@@ -90,9 +98,13 @@ bf16, greedy, 200 new tokens), rubric v1.3; Assistant (200 items) and Retention 
 ## Stage effects
 
 SFT vs base, block by block (F3): the gain is carried by the trained topics (T-seen). Preference optimisation on top
-of 14B SFT (F4, [results/preference.md](results/preference.md)): DPO 145.0 ± 1.7 and SimPO 143.7 ± 2.3 vs 145 for the
-SFT parent (3 seeds each, 348 rule-labelled on-policy pairs); no block changes after Holm correction. Model size (F6):
-after SFT, 4B, 8B and 14B are within a few items. GRPO (F5) was not run.
+of 14B SFT (F4, [results/preference.md](results/preference.md)): all six preference runs start from one SFT parent
+(14B rsLoRA v1.2 seed 0) and their seeds vary the preference stage only, so they are compared with SFT seed 0 (145),
+not the 5-seed SFT mean. DPO 145.0 ± 1.7 and SimPO 143.7 ± 2.3 (3 seeds each, 348 rule-labelled on-policy pairs): no
+significant difference detected; Δ = +0.0 [−2.7, 2.7] and −1.3 [−4.0, 1.3], no block significant after Holm (21-test
+family). Model size (F6): after SFT, no significant difference detected among 4B, 8B and 14B (4B − 14B Δ = −1.0
+[−5.3, 3.3]; 8B − 14B Δ = −2.7 [−7.7, 2.3]; [results/arm_differences.md](results/arm_differences.md)). GRPO (F5) was
+not run.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/F3_dark.png">
@@ -104,11 +116,12 @@ after SFT, 4B, 8B and 14B are within a few items. GRPO (F5) was not run.
   <img alt="Pass-rate change of DPO and SimPO vs their SFT parent, per block" src="figures/F4_light.png" width="720">
 </picture>
 
-## Proof figures
+## Sanity checks
 
-F14: the two mechanics the results depend on. (a) Training the `<|im_start|>` / `<|im_end|>` rows takes 14B LoRA from
-0 % to 100 % of turns ending on `<|im_end|>` (F8, F9 explain why the untrained row is never chosen). (b) Every DPO
-run starts at loss ln 2, so the starting policy equals the reference model.
+F14: two mechanics checked as specified. (a) Training the `<|im_start|>` / `<|im_end|>` rows takes 14B LoRA from
+0 % to 100 % of turns ending on `<|im_end|>` (F8, F9 explain why the untrained row is never chosen). (b) Step-0 loss
+= ln 2 in every DPO run confirms the reference model equals the starting policy (sanity check); it does not show that
+the training that follows is correct.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/F14_dark.png">
@@ -117,13 +130,14 @@ run starts at loss ln 2, so the starting policy equals the reference model.
 
 ## Can the numbers be trusted?
 
-- [T2](figures/T2.md): scorer vs hand marks, 54/60 on the base model and 51/60 = 0.85 [0.74, 0.92] on 14B SFT (8 of
-  the 9 errors lenient, so automatic scores are upper bounds; audit-corrected 14B ≈ 121–126 /200, exploratory); score
-  unchanged across GPU type and eval batch size; entailment-judge validation; seed spread.
+- [T2](figures/T2.md): scorer vs hand marks, 54/60 on the base model and 51/60 = 0.85 [0.74, 0.92] agreement with
+  one annotator on 14B SFT (errors lenient, 8 of 9, so automatic scores are upper bounds; audit-corrected 14B ≈ 121–126 /200, exploratory); score
+  no significant change detected across GPU type and eval batch size; entailment-judge validation; seed spread.
 - Red-team scorer vs the author on 30 blind answers: 28/30 ([eval/audit/redteam_human.md](eval/audit/redteam_human.md)).
   Preference-pair rule labels vs the author: κ 0.97 [0.88, 1.00] on 60 blind pairs ([results/judge_calibration.md](results/judge_calibration.md)).
 - [T6](figures/T6.md): contamination check, no exact eval/training overlap.
-- Every arm is evaluated at its last checkpoint (ADR-034); all hand checks are by one annotator.
+- Every arm is evaluated at its last checkpoint (ADR-034). Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
+- Holm families are defined in each table's caption and in [docs/decisions.md](docs/decisions.md) (ADR-035).
 
 ## What didn't work
 
@@ -133,8 +147,10 @@ F15 collects the negative results in one figure:
 - **Asking for a missing detail, B1 ([T4](figures/T4.md)):** 0–1 of 20; the models list every case instead of asking.
 - **Rewritten training data (F10):** about 1 in 6 accepted paraphrases drifts from policy, so SFT uses handbook
   wording only (ADR-024).
-- **SFT data versions:** v1, v1.1 and v1.2 do not differ ([results/data_versions.md](results/data_versions.md)).
-- **Preference stage:** DPO and SimPO did not move any block; RFT (one seed, exploratory) lost retention (20 → 7 / 20).
+- **SFT data versions:** no significant difference detected; v1.2 − v1 Δ = +1.0 [−4.0, 6.0], v1.1 − v1 Δ = −2.0
+  [−6.7, 2.7] ([results/data_versions.md](results/data_versions.md)).
+- **Preference stage:** no significant difference detected between DPO / SimPO and SFT seed 0 in any block; RFT (one
+  seed, exploratory) lost retention (20 → 7 / 20).
 - **End-of-turn token (F8, F9, F13):** the first LoRA runs never emitted `<|im_end|>`; fixed (ADR-023), kept as an
   ablation row.
 
@@ -147,8 +163,13 @@ F15 collects the negative results in one figure:
 
 Scorer flags per arm (F11): credential requests, invented numbers, over-refusal and injection success stay at 0–2
 per 200 after training. Red-team eval (redteam-v1, 60 frozen attacks, [results/redteam.md](results/redteam.md)):
-attack success 13.3 % for the 14B base and 11.7 % for Qwen3-14B instruct, 2.3 % after 14B rsLoRA SFT (5 seeds),
-0.6 % after DPO and 2.2 % after SimPO (3 seeds; intervals overlap). Red-team scoring was checked by the author on 30 blind answers (15 SFT, 15 base): 28/30 agreement [0.79, 0.98], one disagreement in each direction (RT-SP-02 scorer-success/manual-no; RT-IT-01 scorer-no/manual-success), so no detectable bias; single annotator; marked before the marking guideline existed, not re-marked.
+the unit of analysis is the attack (n = 60): per attack the mean over an arm's seeds, 95 % CI by cluster bootstrap
+over attacks. Attack success 13.3 % [5.0, 23.3] for the 14B base and 11.7 % [5.0, 20.0] for Qwen3-14B instruct,
+2.3 % [1.0, 4.0] after 14B rsLoRA SFT (5 seeds); DPO 0.6 % [0.0, 1.7] and SimPO 2.2 % [0.0, 6.1] (3 seeds each) vs
+their parent, SFT seed 0, 1.7 % [0.0, 5.0] (intervals overlap). Red-team scoring was checked by the author on 30
+blind answers (15 SFT, 15 base): 28/30 agreement [0.79, 0.98], one disagreement in each direction (RT-SP-02
+scorer-success/manual-no; RT-IT-01 scorer-no/manual-success), so no direction of bias was detected in this sample;
+marked before the marking guideline existed. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/F11_dark.png">
@@ -197,41 +218,47 @@ Also in [docs/claims.md](docs/claims.md).
 |---|---|---|---|---|---|
 | SFT turns Qwen3-14B-Base into a policy-following assistant: Assistant 45 → 145.0 ± 2.5 /200 (14B rsLoRA v1.2), vs 58 for Qwen3-14B Instruct | F1, T1 | 200 × 5 seeds | paired bootstrap Δ vs base | Δ +100.0 [93.2, 106.8], p < 1e-4 | headline |
 | Training the two special-token rows fixes the end of turn: `<\|im_end\|>` stops 0 % → 100 % | F8, F9, F14a | 220 × 3 seeds per arm | acceptance ≥ 95 % | 0 / 660 (659 hit the length limit) → 660 / 660 | headline |
-| Red-team attack success falls from 13.3 % (14B base) to 2.3 % (14B SFT) | F11, results/redteam.md | 60; 60 × 5 seeds | Wilson CI | [6.9, 24.2] % → [1.1, 4.7] %; scorer checked on 30 blind answers, 28/30 | headline |
-| The SFT gain is carried by T-seen (trained topics); no other block changes significantly after Holm | F3 | 100 items (T-seen) | exact McNemar per block (seed 0), Holm | Assistant and T-seen Holm p < 1e-20; others ≥ 0.05 | secondary |
-| 4-bit QLoRA matches LoRA at 14B (143.0 vs 143.7) with 26 instead of 40 GB | F12, T5, results/lora_vs_qlora.md | 200 × 3 seeds | McNemar per seed | p ≥ 0.42 | secondary |
-| With tuned learning rate (2e-5), full FT is close to LoRA (141 / 143 vs 147 / 142, same seeds) at higher cost | F12, results/lora_vs_qlora.md | 200 × 2 seeds | McNemar per seed | p = 0.18 / 1.00 | secondary |
-| After SFT, 4B–14B score within a few items of each other (142.7, 141.0, 145.0) | F6 | 200 × 3–5 seeds | none across sizes | SD 2–4.5 per arm | secondary |
-| DPO starts from the reference model (step-1 loss = ln 2 in every seed) | F14b | 3 runs | step-0 check \|loss − ln 2\| ≤ 0.01 | 0.6931 × 3 | secondary |
+| Red-team attack success falls from 13.3 % (14B base) to 2.3 % (14B SFT) | F11, results/redteam.md | 60 attacks (unit of analysis); SFT: per attack the mean over 5 seeds | cluster bootstrap over attacks | [5.0, 23.3] % → [1.0, 4.0] %; scorer checked on 30 blind answers, 28/30, one annotator | headline |
+| The SFT gain is carried by T-seen (trained topics); no significant change detected in the other blocks after Holm | F3 | 100 items (T-seen) | exact McNemar per block (seed 0); Holm family m = 56 (8 SFT − base pairs × 7 rows) | Assistant and T-seen Holm p < 1e-20; others ≥ 0.05 | secondary |
+| 4-bit QLoRA vs LoRA at 14B: no significant difference detected; Δ = −0.7 [−5.3, 4.0] (143.0 vs 143.7), with 26 instead of 40 GB | F12, T5, results/arm_differences.md | 200 × 3 seeds | paired bootstrap; McNemar per seed; Holm family m = 8 (results/arm_differences.md) | Holm p = 1.0; McNemar p ≥ 0.42 | secondary |
+| Full FT (lr 2e-5) vs LoRA at 14B, seeds 0–1: no significant difference detected; Δ = −2.5 [−8.0, 3.0] (142.0 vs 144.5), at higher cost | F12, results/arm_differences.md | 200 × 2 seeds | paired bootstrap; McNemar per seed; Holm family m = 8 | Holm p = 1.0; McNemar p = 0.18 / 1.00 | secondary |
+| After SFT, 4B vs 14B and 8B vs 14B: no significant difference detected; Δ = −1.0 [−5.3, 3.3] and −2.7 [−7.7, 2.3] (142.7, 141.0, 143.7) | F6, results/arm_differences.md | 200 × 3 seeds | paired bootstrap; Holm family m = 8 | Holm p = 1.0 | secondary |
+| Step-0 DPO loss = ln 2 confirms the reference model equals the starting policy (sanity check) | F14b | 3 runs | step-0 check \|loss − ln 2\| ≤ 0.01 | 0.6931 × 3 | secondary |
 | Rule labels of the preference pairs agree with the author | results/judge_calibration.md | 60 pairs, 1 annotator | Cohen's κ, bootstrap | κ 0.97 [0.88, 1.00] | secondary |
-| The automatic scorer is accurate enough (≥ 0.85) but lenient: automatic scores are upper bounds | T2, eval/audit/scorer_accuracy_14b.md | 60, 1 annotator | Wilson CI | 51/60 = 0.85 [0.74, 0.92]; 8 of 9 errors lenient | secondary |
+| Scorer: 51/60 = 0.85 [0.74, 0.92] agreement with one annotator; errors lenient (8 of 9), so automatic scores are upper bounds | T2, eval/audit/scorer_accuracy_14b.md | 60, 1 annotator | Wilson CI | 51/60 = 0.85 [0.74, 0.92]; 8 of 9 errors lenient | secondary |
 | Audit-corrected 14B v1.2 Assistant ≈ 121–126 /200 | T2 | 60 audit rows | bootstrap over audit rows | ± ~18 | exploratory |
 | On unseen topics the models answer with a memorised answer to another topic (75–90 % of T-held answers) | F7, F15b | 20 × seeds per arm | none (descriptive) | T-held 0–2 / 20 | negative |
 | The models rarely ask for a missing detail (B1 0–1 / 20) | T4, F15c | 20 × seeds | none (diagnostic classes) | 3 / 60 ask at 14B v1 | negative |
 | Paraphrased training data (Qwen3-32B rewrites) drifts from policy and was not used | F10, F15a | audits n 50, 30 | Wilson CI | 16.0 % [8.3, 28.5], 16.7 % [7.3, 33.6] vs target 5 % | negative |
-| SFT data versions v1 / v1.1 / v1.2 do not differ (143.7, 141.7, 145.0) | F15d, results/data_versions.md | 200 × 3–5 seeds | paired bootstrap, McNemar | v1.2 − v1 +1.0 [−4.0, 6.0], p = 0.73 | negative |
-| DPO and SimPO on 348 rule pairs do not change Assistant (145.0, 143.7 vs 145) | F4, F15e, results/preference.md | 200 × 3 seeds | paired bootstrap, McNemar, Holm over 21 | all Holm p = 1.0 | negative |
-| RFT (SFT + on-policy samples) loses retention (R 20 → 7 / 20) and fails the stop criterion | F15f, ADR-033 | 220 × 1 seed | none (1 seed) | Assistant +4 [−3, 11], n.s. | exploratory, 1 seed, not recommended |
+| SFT data versions v1 / v1.1 / v1.2: no significant difference detected; v1.1 − v1 Δ = −2.0 [−6.7, 2.7], v1.2 − v1 Δ = +1.0 [−4.0, 6.0] (143.7, 141.7, 144.7; seeds 0–2) | F15d, results/data_versions.md, results/arm_differences.md | 200 × 3 seeds | paired bootstrap; McNemar per seed; Holm family m = 8 | Holm p ≥ 0.95; bootstrap p = 0.44 / 0.73 | negative |
+| DPO and SimPO (348 rule pairs) vs their one SFT parent (14B rsLoRA v1.2 seed 0): no significant difference detected; Δ = +0.0 [−2.7, 2.7] and −1.3 [−4.0, 1.3] (145.0, 143.7 vs 145) | F4, F15e, results/preference.md | 200 items; 3 preference seeds each (they vary the preference stage only) vs SFT seed 0 | paired bootstrap; McNemar seed 0; Holm confirmatory family m = 21 (DPO − SFT, SimPO − SFT, DPO − SimPO × 7 rows) | all Holm p = 1.0 | negative |
+| RFT (SFT + on-policy samples) loses retention (R 20 → 7 / 20) and fails the stop criterion | F15f, ADR-033 | 220 × 1 seed | vs SFT v1.2 seed 0; Holm exploratory family m = 7 (RFT − SFT × 7 rows) | Assistant +4 [−3, 11], Holm p = 1.0 | exploratory, 1 seed, not recommended |
+| Independent human inter-annotator agreement | — | — | — | not measured; all hand labels by one annotator (intra-rater re-marking not done) | limitation |
 | GRPO | F5 | — | — | not run (dropped — see limitations) | — |
 
 **Do not claim:**
 
 - **Generalisation to new topics.** T-held is 0–2 / 20; the models recall a trained answer instead.
-- **Preference tuning helped.** DPO and SimPO did not change any block after Holm; DPO's lower red-team rate (0.6 %
-  vs 2.3 %) has overlapping intervals.
-- **LoRA beats full fine-tuning.** Only for these settings; with lr 2e-5 they are close and no seed pair differs.
+- **Equivalence of any two arms.** "No significant difference detected" is not equivalence: the 95 % CIs on
+  Assistant /200 still allow differences of about 4–8 items (results/arm_differences.md, results/preference.md).
+- **Preference tuning helped.** No significant difference detected between DPO or SimPO and their SFT parent (seed 0)
+  in any block after Holm; DPO's red-team rate 0.6 % [0.0, 1.7] vs SFT seed 0 1.7 % [0.0, 5.0] (1/60): the intervals
+  overlap.
+- **LoRA beats full fine-tuning.** Only for these settings; with lr 2e-5 no significant difference detected;
+  Δ = −2.5 [−8.0, 3.0] (full FT − LoRA, seeds 0–1).
 - **Multi-annotator validation.** Every hand check (scorer 60, red-team 30, pairs 60, rewrites 80) is by one author,
-  marked before the marking guideline existed and not re-marked.
+  marked before the marking guideline existed. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
 - **Anything about a real bank.** Chinor Bank and its policies are invented.
 
 ## Limitations
 
 Every hand check (the scorer audits, the red-team check, the pair labels, the rewrite audits) was done by one
-annotator, the project author, who also wrote the eval and red-team sets; no second rater measured agreement. The
-automatic scorer met its accuracy bar only just (0.85) and errs on the lenient side, so the reported scores are upper
-bounds. On banking topics never trained on, the models recall a memorised answer to another topic instead of
+annotator, the project author, who also wrote the eval and red-team sets. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done). The scores
+measure reproduction of one handbook's answers under a lenient rubric: the automatic scorer agreed with one annotator
+on 51/60 = 0.85 [0.74, 0.92] and its errors were lenient (8 of 9), so the reported scores are upper bounds. On banking topics never trained on, the models recall a memorised answer to another topic instead of
 generalising (T-held 0–2 / 20). The preference stage was underpowered: the SFT model already passed 86 % of its own
-samples, leaving only 348 pairs, and DPO and SimPO changed nothing measurable. Rows marked exploratory (RFT, the
+samples, leaving only 348 pairs, and no significant difference was detected between DPO / SimPO and SFT seed 0
+(Δ = +0.0 [−2.7, 2.7] and −1.3 [−4.0, 1.3]); "no significant difference detected" is never a claim of equivalence. Rows marked exploratory (RFT, the
 audit-corrected scores) rest on one seed or one audit. All results are for one invented bank, one language and greedy
 decoding. Details: [docs/limitations.md](docs/limitations.md).
 

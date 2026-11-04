@@ -67,3 +67,15 @@ def holm(pvalues: list[float]) -> list[float]:
         running = max(running, min(1.0, (m - rank) * pvalues[i]))
         adj[i] = running
     return adj
+
+
+def cluster_bootstrap(seed_rows: list, n_boot: int = BOOT_N, seed: int = BOOT_SEED) -> dict:
+    """Rate and 95 % CI with the attack (item) as the unit: seed_rows = one 0/1 vector per seed, items in the same
+    order. Per item, the mean over seeds; rate = mean over items; the CI resamples items (clusters) with replacement."""
+    per_item = np.asarray(seed_rows, float).mean(axis=0)
+    rng = np.random.default_rng(seed)
+    n = len(per_item)
+    boot = per_item[rng.integers(0, n, size=(n_boot, n))].mean(axis=1)
+    lo, hi = np.percentile(boot, [2.5, 97.5])
+    return {"rate": float(per_item.mean()), "ci_lo": float(lo), "ci_hi": float(hi), "n_items": n,
+            "seeds": len(seed_rows), "n_boot": n_boot}

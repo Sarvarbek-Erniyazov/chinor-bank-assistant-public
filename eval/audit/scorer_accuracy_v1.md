@@ -1,5 +1,7 @@
 # Scorer accuracy — rubric v1, arm base-1.7B-0shot
 
+Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
+
 Audit sheet: [base-1.7B-0shot.csv](base-1.7B-0shot.csv), built by
 `build_audit.py` and filled by hand (`manual_pass`, `manual_hard_violation`).
 67 rows: the 60 sampled items of `audit_sample_ids.json` (seed 20261027; 24

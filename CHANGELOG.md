@@ -3,6 +3,17 @@
 Stages of the project, one line each, from the decision log ([docs/decisions.md](docs/decisions.md), ADR numbers in
 brackets). Chinor Bank is fictional.
 
+## v1.1.0 — 2026-11-04 (closure; CPU only, recomputed from existing outputs)
+
+- **Framing.** README and site open with "a closed pilot study of SFT and preference tuning on a fictional bank
+  domain"; scores measure reproduction of one handbook's answers under a lenient rubric.
+- **Wording.** Non-significant arm comparisons read "no significant difference detected; Δ = x [95 % CI]"
+  (`results/arm_differences.md`, new); scorer audit as agreement with one annotator; DPO step-0 ln 2 as a sanity
+  check; inter-annotator agreement stated as not measured.
+- **Statistics.** Holm families defined per table and in ADR-035 (21 confirmatory + 7 RFT instead of one 28-test
+  family); red-team intervals by cluster bootstrap over the 60 attacks; preference arms compared with their one SFT
+  parent (v1.2 seed 0).
+
 ## v1.0.1 — 2026-10-30
 
 - **Site.** "Do not claim" bullets no longer cut at wrapped lines; per-block heatmap (F2) added and every figure

@@ -24,4 +24,4 @@ QLoRA: seeds verified distinct (adapter hashes, 87–101/220 answers differ betw
 | 0 | 125 | 141 | 147 | 20 / 4, p = 0.002 | 4 / 10, p = 0.180 |
 | 1 | 117 | 143 | 142 | 30 / 4, p < 0.001 | 10 / 9, p = 1.000 |
 
-With tuned learning rate, full fine-tuning (141, 143) is close to LoRA (147, 142, same seeds). Neither per-seed McNemar test separates them; this holds for these settings (3 epochs, lr 2e-5), not as a general claim.
+With tuned learning rate, full fine-tuning (141, 143) vs LoRA (147, 142, same seeds): no significant difference detected (per-seed McNemar above, not Holm-adjusted; paired-bootstrap Δ = −2.5 [−8.0, 3.0] and QLoRA − LoRA Δ = −0.7 [−5.3, 4.0] in `results/arm_differences.md`, Holm family m = 8). Not evidence of equivalence; this holds for these settings (3 epochs, lr 2e-5), not as a general claim.

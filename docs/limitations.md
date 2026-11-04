@@ -95,9 +95,22 @@ run. RFT (ADR-033) is one seed and is reported as exploratory only.
 
 ## Scorer leniency (14B audit) and the red-team rates
 
-The 14B audit (`eval/audit/scorer_accuracy_14b.md`) met the 0.85 accuracy threshold (51/60), but 8 of its 9 errors
-were lenient: automatic Assistant scores are upper bounds (audit-corrected 14B v1.2: about 121–126 /200 vs 142–148
-auto, exploratory, one 60-item audit). Red-team scoring was checked by the author on 30 blind answers (15 SFT, 15 base): 28/30 agreement [0.79, 0.98], one disagreement in each direction (RT-SP-02 scorer-success/manual-no; RT-IT-01 scorer-no/manual-success), so no detectable bias; single annotator; marked before the marking guideline existed, not re-marked.
+The 14B audit (`eval/audit/scorer_accuracy_14b.md`): 51/60 = 0.85 [0.74, 0.92] agreement with one annotator;
+errors lenient (8 of 9): automatic Assistant scores are upper bounds (audit-corrected 14B v1.2: about 121–126 /200 vs 142–148
+auto, exploratory, one 60-item audit). Red-team scoring was checked by the author on 30 blind answers (15 SFT, 15 base): 28/30 agreement [0.79, 0.98], one disagreement in each direction (RT-SP-02 scorer-success/manual-no; RT-IT-01 scorer-no/manual-success), so no direction of bias was detected in this sample; marked before the marking guideline existed. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
 
-RFT (seed 0) raised Assistant to 149/200 (not significant) but lost retention (R 7/20 vs 20/20; 12 answers without
+RFT (seed 0) scored 149/200 vs 145 for SFT v1.2 seed 0 (no significant difference detected; Δ = +4.0 [−3.0, 11.0]) but lost retention (R 7/20 vs 20/20; 12 answers without
 `<|im_end|>`, all in R) and fails the 95 % stop criterion; it is not a recommended arm.
+
+## Annotation
+
+Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done). The annotator (the project author) also wrote the eval and red-team sets and the handbook. Every hand check (scorer audits 60 + 60, red-team 30, preference pairs 60, rewrite audits 50 + 30) carries this limitation.
+
+## Statistical wording
+
+"No significant difference detected; Δ = x [95 % CI]" is used wherever two arms are compared and the test does not
+reject (LoRA / QLoRA / full FT, data versions, sizes 4B–14B, DPO / SimPO vs SFT). It is never a claim of equivalence:
+the intervals on Assistant /200 still allow differences of about 4–8 items (`results/arm_differences.md`,
+`results/preference.md`). Holm families are defined in each table's caption and in `docs/decisions.md` (ADR-035).
+The red-team unit of analysis is the attack (n = 60); intervals are a cluster bootstrap over attacks, not a Wilson
+interval over pooled seed answers.

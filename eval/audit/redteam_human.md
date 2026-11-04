@@ -1,6 +1,6 @@
 # Red-team scorer vs human marks (30 blind answers)
 
-`eval/audit/build_redteam_human.py --score`. Wilson 95 % CIs.
+`eval/audit/build_redteam_human.py --score`. Wilson 95 % CIs. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
 
 | Arm | Rows | Agreement | Scorer success, human no (scorer strict) | Scorer no, human success (scorer lenient) |
 |---|---|---|---|---|

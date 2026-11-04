@@ -2,6 +2,8 @@
 
 `eval/pref_results.py`. All runs start from sft-merged (14B rsLoRA v1.2 seed 0 merged in bf16; manifest e4d24cc5…, docs/compute.md) with a fresh rsLoRA (r 16, α 32), lr 1e-5, 2 epochs, effective batch 16, on the rule-labelled pairs (`data/pref/v1/pairs_rules.jsonl`, DATA_CARD). DPO β 0.1 (reference = sft-merged); SimPO β 2.0, γ 1.0. Eval-v1 under Protocol A; red-team = redteam-v1 (60 items). Labels were not checked by the judge (dropped this session); κ(rules, author) on 60 blind pairs follows in `results/judge_calibration.md`.
 
+**One parent.** All six preference runs (DPO s0–s2, SimPO s0–s2) start from the same SFT checkpoint, 14B rsLoRA v1.2 seed 0; their seeds vary the preference stage only, not SFT. The reference row is therefore SFT seed 0, not the 5-seed SFT mean, and SFT seed-to-seed variation is not part of these comparisons.
+
 ## Eval-v1 (pass counts; mean ± SD over seeds)
 
 | Arm | Seeds | Assistant /200 | T-seen /100 | T-held /20 | B1 /20 | B2 /20 | B3 /25 | B4 /15 |
@@ -11,49 +13,51 @@
 | SimPO (rules) | 3 | 143.7 ± 2.3 | 91.3 ± 0.6 | 1.0 ± 0.0 | 1.0 ± 0.0 | 15.3 ± 2.1 | 20.0 ± 0.0 | 15.0 ± 0.0 |
 | RFT (exploratory, ADR-033) | 1 | 149.0 | 94.0 | 1.0 | 1.0 | 16.0 | 22.0 | 15.0 |
 
-## Differences (Δ passes; Holm over the 28 comparisons)
+## Differences (Δ passes)
 
-| Comparison | Block | Δ [95 % CI] | Bootstrap p | McNemar seed 0 (A only / B only) | Holm p |
-|---|---|---|---|---|---|
-| DPO (rules) − SFT (v1.2 seed 0) | Assistant | +0.0 [-2.7, 2.7] | 1.000 | 3 / 2 | 1.000 |
-| DPO (rules) − SFT (v1.2 seed 0) | T-seen | +0.3 [-0.7, 1.3] | 0.783 | 1 / 0 | 1.000 |
-| DPO (rules) − SFT (v1.2 seed 0) | T-held | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | 1.000 |
-| DPO (rules) − SFT (v1.2 seed 0) | B1 | +0.3 [-1.0, 1.7] | 0.836 | 1 / 1 | 1.000 |
-| DPO (rules) − SFT (v1.2 seed 0) | B2 | -1.0 [-2.7, 0.7] | 0.336 | 0 / 1 | 1.000 |
-| DPO (rules) − SFT (v1.2 seed 0) | B3 | +0.3 [0.0, 1.0] | 0.703 | 1 / 0 | 1.000 |
-| DPO (rules) − SFT (v1.2 seed 0) | B4 | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | 1.000 |
-| SimPO (rules) − SFT (v1.2 seed 0) | Assistant | -1.3 [-4.0, 1.3] | 0.406 | 4 / 4 | 1.000 |
-| SimPO (rules) − SFT (v1.2 seed 0) | T-seen | -0.7 [-2.0, 0.7] | 0.436 | 1 / 2 | 1.000 |
-| SimPO (rules) − SFT (v1.2 seed 0) | T-held | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | 1.000 |
-| SimPO (rules) − SFT (v1.2 seed 0) | B1 | +0.0 [-1.7, 1.7] | 1.000 | 1 / 1 | 1.000 |
-| SimPO (rules) − SFT (v1.2 seed 0) | B2 | -0.7 [-2.7, 1.0] | 0.576 | 2 / 1 | 1.000 |
-| SimPO (rules) − SFT (v1.2 seed 0) | B3 | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | 1.000 |
-| SimPO (rules) − SFT (v1.2 seed 0) | B4 | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | 1.000 |
-| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | Assistant | +4.0 [-3.0, 11.0] | 0.313 | 8 / 4 | 1.000 |
-| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | T-seen | +2.0 [-2.0, 6.0] | 0.446 | 3 / 1 | 1.000 |
-| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | T-held | +0.0 [-3.0, 3.0] | 1.000 | 1 / 1 | 1.000 |
-| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | B1 | +0.0 [-3.0, 3.0] | 1.000 | 1 / 1 | 1.000 |
-| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | B2 | +0.0 [-3.0, 3.0] | 1.000 | 1 / 1 | 1.000 |
-| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | B3 | +2.0 [0.0, 5.0] | 0.251 | 2 / 0 | 1.000 |
-| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | B4 | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | 1.000 |
-| DPO (rules) − SimPO (rules) | Assistant | +1.3 [-0.7, 3.3] | 0.264 | 3 / 2 | 1.000 |
-| DPO (rules) − SimPO (rules) | T-seen | +1.0 [0.0, 2.3] | 0.088 | 2 / 0 | 1.000 |
-| DPO (rules) − SimPO (rules) | T-held | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | 1.000 |
-| DPO (rules) − SimPO (rules) | B1 | +0.3 [0.0, 1.0] | 0.717 | 0 / 0 | 1.000 |
-| DPO (rules) − SimPO (rules) | B2 | -0.3 [-1.7, 1.0] | 0.843 | 0 / 2 | 1.000 |
-| DPO (rules) − SimPO (rules) | B3 | +0.3 [0.0, 1.0] | 0.703 | 1 / 0 | 1.000 |
-| DPO (rules) − SimPO (rules) | B4 | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | 1.000 |
+**Holm families.** Confirmatory: 3 comparisons (DPO (rules) − SFT (v1.2 seed 0); SimPO (rules) − SFT (v1.2 seed 0); DPO (rules) − SimPO (rules)) × 7 rows (Assistant + 6 blocks) = 21 tests, adjusted together. Exploratory: RFT − SFT × 7 rows = 7 tests, adjusted separately (one seed, decided after the main runs, ADR-033). SFT = seed 0, the shared parent of all six preference runs. "No significant difference detected" is not equivalence: read Δ and its CI.
+
+| Comparison | Block | Δ [95 % CI] | Bootstrap p | McNemar seed 0 (A only / B only) | Holm family | Holm p |
+|---|---|---|---|---|---|---|
+| DPO (rules) − SFT (v1.2 seed 0) | Assistant | +0.0 [-2.7, 2.7] | 1.000 | 3 / 2 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SFT (v1.2 seed 0) | T-seen | +0.3 [-0.7, 1.3] | 0.783 | 1 / 0 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SFT (v1.2 seed 0) | T-held | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SFT (v1.2 seed 0) | B1 | +0.3 [-1.0, 1.7] | 0.836 | 1 / 1 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SFT (v1.2 seed 0) | B2 | -1.0 [-2.7, 0.7] | 0.336 | 0 / 1 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SFT (v1.2 seed 0) | B3 | +0.3 [0.0, 1.0] | 0.703 | 1 / 0 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SFT (v1.2 seed 0) | B4 | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | confirmatory, m = 21 | 1.000 |
+| SimPO (rules) − SFT (v1.2 seed 0) | Assistant | -1.3 [-4.0, 1.3] | 0.406 | 4 / 4 | confirmatory, m = 21 | 1.000 |
+| SimPO (rules) − SFT (v1.2 seed 0) | T-seen | -0.7 [-2.0, 0.7] | 0.436 | 1 / 2 | confirmatory, m = 21 | 1.000 |
+| SimPO (rules) − SFT (v1.2 seed 0) | T-held | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | confirmatory, m = 21 | 1.000 |
+| SimPO (rules) − SFT (v1.2 seed 0) | B1 | +0.0 [-1.7, 1.7] | 1.000 | 1 / 1 | confirmatory, m = 21 | 1.000 |
+| SimPO (rules) − SFT (v1.2 seed 0) | B2 | -0.7 [-2.7, 1.0] | 0.576 | 2 / 1 | confirmatory, m = 21 | 1.000 |
+| SimPO (rules) − SFT (v1.2 seed 0) | B3 | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | confirmatory, m = 21 | 1.000 |
+| SimPO (rules) − SFT (v1.2 seed 0) | B4 | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | confirmatory, m = 21 | 1.000 |
+| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | Assistant | +4.0 [-3.0, 11.0] | 0.313 | 8 / 4 | exploratory (RFT), m = 7 | 1.000 |
+| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | T-seen | +2.0 [-2.0, 6.0] | 0.446 | 3 / 1 | exploratory (RFT), m = 7 | 1.000 |
+| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | T-held | +0.0 [-3.0, 3.0] | 1.000 | 1 / 1 | exploratory (RFT), m = 7 | 1.000 |
+| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | B1 | +0.0 [-3.0, 3.0] | 1.000 | 1 / 1 | exploratory (RFT), m = 7 | 1.000 |
+| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | B2 | +0.0 [-3.0, 3.0] | 1.000 | 1 / 1 | exploratory (RFT), m = 7 | 1.000 |
+| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | B3 | +2.0 [0.0, 5.0] | 0.251 | 2 / 0 | exploratory (RFT), m = 7 | 1.000 |
+| RFT (exploratory, ADR-033) − SFT (v1.2 seed 0) | B4 | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | exploratory (RFT), m = 7 | 1.000 |
+| DPO (rules) − SimPO (rules) | Assistant | +1.3 [-0.7, 3.3] | 0.264 | 3 / 2 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SimPO (rules) | T-seen | +1.0 [0.0, 2.3] | 0.088 | 2 / 0 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SimPO (rules) | T-held | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SimPO (rules) | B1 | +0.3 [0.0, 1.0] | 0.717 | 0 / 0 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SimPO (rules) | B2 | -0.3 [-1.7, 1.0] | 0.843 | 0 / 2 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SimPO (rules) | B3 | +0.3 [0.0, 1.0] | 0.703 | 1 / 0 | confirmatory, m = 21 | 1.000 |
+| DPO (rules) − SimPO (rules) | B4 | +0.0 [0.0, 0.0] | 1.000 | 0 / 0 | confirmatory, m = 21 | 1.000 |
 
 ## Red-team, output length, stops
 
-| Arm | attack_success (lower better) | safe_and_helpful | Mean tokens (assistant items) | p90 tokens |
-|---|---|---|---|---|
-| SFT (v1.2 seed 0) | 7/300 = 2.3% [1.1%, 4.7%] | 248/300 = 82.7% | 60 | 81 |
-| DPO (rules) | 1/180 = 0.6% [0.1%, 3.1%] | 148/180 = 82.2% | 60 | 81 |
-| SimPO (rules) | 4/180 = 2.2% [0.9%, 5.6%] | 143/180 = 79.4% | 60 | 81 |
-| RFT (exploratory, ADR-033) | 3/60 = 5.0% [1.7%, 13.7%] | 51/60 = 85.0% | 61 | 85 |
+Red-team: the attack is the unit (n = 60); per attack the mean over the arm's seeds; 95 % CI = cluster bootstrap over attacks (figures/stats.py). SFT = seed 0 only (the parent), not the 5-seed mean in `results/redteam.md`.
 
-The SFT red-team row pools the 5 seeds of 14B rsLoRA v1.2 (seed 0 alone is in `results/redteam.md` per seed).
+| Arm | Seeds | attack_success (lower better) | safe_and_helpful | Mean tokens (assistant items) | p90 tokens |
+|---|---|---|---|---|---|
+| SFT (v1.2 seed 0) | 1 | 1.7 % [0.0, 5.0] (1/60) | 81.7 % [71.7, 91.7] (49/60) | 60 | 81 |
+| DPO (rules) | 3 | 0.6 % [0.0, 1.7] (1/180) | 82.2 % [72.8, 91.1] (148/180) | 60 | 81 |
+| SimPO (rules) | 3 | 2.2 % [0.0, 6.1] (4/180) | 79.4 % [68.9, 88.9] (143/180) | 60 | 81 |
+| RFT (exploratory, ADR-033) | 1 | 5.0 % [0.0, 11.7] (3/60) | 85.0 % [75.0, 93.3] (51/60) | 61 | 85 |
 
 ## Training: reward accuracy and margin
 

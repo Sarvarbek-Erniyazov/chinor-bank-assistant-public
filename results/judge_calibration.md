@@ -1,6 +1,6 @@
 # Judge calibration: rules and judge vs the author (C4 §5)
 
-`data/pref/calibration.py kappa`. 60 blind pairs (`eval/audit/pairs_human.csv`), A/B order random per row. Cohen's κ on A / B / tie; 95 % bootstrap CI over rows (10,000 resamples, seed 20261029). Pre-registered: the rules ∩ judge DPO arm is trained only if κ(judge, author) ≥ 0.6.
+`data/pref/calibration.py kappa`. 60 blind pairs (`eval/audit/pairs_human.csv`), A/B order random per row. Cohen's κ on A / B / tie; 95 % bootstrap CI over rows (10,000 resamples, seed 20261029). Pre-registered: the rules ∩ judge DPO arm is trained only if κ(judge, author) ≥ 0.6. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
 
 Author's marks: {'B': 36, 'A': 24}.
 

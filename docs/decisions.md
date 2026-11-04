@@ -452,13 +452,51 @@ in which it will be measured).
   0.3 (v1 0.0), B2 15.7 (v1 14.7), B3 21.3 (v1 21.0) → eligible. Paired v1.2 − v1: Δ +1.0 [−4.0, 6.0], bootstrap
   p = 0.73; McNemar per seed p = 0.79 / 0.36 / 1.00; no block differs significantly (B1 +1.3 [−0.3, 3.3]).
   v1.2 − v1.1: Δ +3.0 [−1.0, 7.3], p = 0.19.
-- **Decision.** v1.2 is used for the next SFT runs (Tier-S 1.7B, extra 14B seeds, robustness). The three versions
-  are statistically indistinguishable on Assistant /200; the choice follows the pre-set rule, not a measured gain.
+- **Decision.** v1.2 is used for the next SFT runs (Tier-S 1.7B, extra 14B seeds, robustness). No significant
+  difference was detected between the three versions on Assistant /200 (v1.1 − v1 Δ = −2.0 [−6.7, 2.7], v1.2 − v1
+  Δ = +1.0 [−4.0, 6.0]); this is not equivalence. The choice follows the pre-set rule, not a measured gain.
 - **T-held (the block the handoff items target).** Passes /20 per seed: v1 2 / 0 / 2 (mean 1.3), v1.1 0 / 0 / 0
   (0.0), v1.2 1 / 2 / 0 (1.0). Paired bootstrap: v1.2 − v1 −0.3 [−1.7, 1.0], p = 0.82; v1.2 − v1.1 +1.0 [0.0, 2.3],
   p = 0.09; McNemar per seed all p ≥ 0.50. Handoff / don't-know answers (class b) on T-held: v1.2 1 / 1 / 4 (mean
   2.0) vs v1 2 / 0 / 3 (1.7); a training intent's canonical answer (class a) 14.3 vs 16.0. The handoff examples did
   not teach the model to hand off on unseen banking topics: it still answers with a memorised intent.
+
+
+## ADR-035 — Closure v1.1: test families, red-team unit, comparison wording (2026-11-04)
+
+- **Context.** The v1.0 write-up mixed two Holm family sizes for the preference comparisons (claims: "Holm over 21";
+  `results/preference.md`: "Holm over the 28 comparisons", which included the exploratory RFT rows), pooled red-team
+  answers over seeds under a Wilson interval although the seeds share the 60 attacks, compared the preference arms'
+  red-team rate with the 5-seed SFT mean although all six preference runs start from SFT seed 0, and used
+  equivalence wording ("matches", "close to", "do not differ") for non-significant comparisons. CPU only; every number
+  is recomputed from existing outputs; the frozen eval and red-team files and their scorers are unchanged.
+- **Holm families (each adjusted on its own, exactly this size).**
+  1. **F3, SFT − base** (`docs/figures.md`): 8 arm − base pairs (1.7B rsLoRA v1, 1.7B rsLoRA v1.2, 14B rsLoRA v1 /
+     v1.1 / v1.2, 14B QLoRA, 14B full FT lr 1e-5, 14B full FT lr 2e-5, each minus its base 0-shot) × 7 rows
+     (Assistant + T-seen, T-held, B1–B4) = **56** tests; exact McNemar on seed 0.
+  2. **F4, preference − SFT** (`docs/figures.md`): DPO − SFT seed 0, SimPO − SFT seed 0 × 7 rows = **14** tests.
+  3. **Preference table, confirmatory** (`results/preference.md`): DPO − SFT seed 0, SimPO − SFT seed 0, DPO − SimPO ×
+     7 rows = **21** tests. This is the family the claims table cites.
+  4. **Preference table, exploratory RFT** (`results/preference.md`): RFT − SFT seed 0 × 7 rows = **7** tests, never
+     pooled with family 3 (one seed, decided after the main runs, ADR-033). The former 28 = families 3 + 4 together.
+  5. **Arm differences** (`results/arm_differences.md`): Assistant /200 only, QLoRA − LoRA, full FT lr 2e-5 − LoRA,
+     4B − 14B, 8B − 14B, 4B − 8B, data v1.1 − v1, v1.2 − v1, v1.2 − v1.1 = **8** tests.
+  Not Holm-adjusted (stated in each caption): per-seed McNemar in `results/lora_vs_qlora.md` and
+  `results/data_versions.md`, the descriptive Δs in the F6 / F12 captions (each also in family 5 or 2).
+  Every adjusted p-value is recomputed with these sizes; none crosses 0.05 because of the change (all preference and
+  arm-difference Holm p remain 1.0, except data v1.1 − v1 at 0.948).
+- **Red-team unit.** The attack (n = 60). Per arm, per attack the mean of attack_success over the arm's seeds; rate =
+  mean over attacks (identical to the pooled k / N rate when every seed covers all 60); 95 % CI = percentile cluster
+  bootstrap over attacks (10,000 resamples, seed 20261029; `figures/stats.py cluster_bootstrap`). With few successes
+  the percentile interval is approximate.
+- **Preference parent.** All six preference runs (DPO s0–s2, SimPO s0–s2) start from sft-merged = 14B rsLoRA v1.2
+  seed 0; their seeds vary the preference stage only. They are compared with SFT seed 0 (eval-v1 and red-team),
+  never with the 5-seed SFT mean.
+- **Wording.** A non-significant comparison between arms is written "no significant difference detected; Δ = x
+  [95 % CI]". The scorer audit is "51/60 = 0.85 [0.74, 0.92] agreement with one annotator; errors lenient (8 of 9)",
+  not a threshold pass. The DPO step-0 check is "step-0 loss = ln 2 confirms the reference model equals the starting
+  policy (sanity check)". Independent human inter-annotator agreement: not measured; all hand labels by one annotator
+  (intra-rater re-marking not done).
 
 ## Errata
 
@@ -493,7 +531,7 @@ in which it will be measured).
   weights at the end of its fixed schedule. No early stopping, no checkpoint selection by validation loss or by any
   eval score. Validation loss is logged for diagnosis only.
 - **Outcome (2026-10-29, 23:11).** `l14b_sft_rslora_tok-s0-v1.2_rft`: Assistant 149/200 vs 145 for SFT v1.2 seed 0
-  (Δ +4 [−3, 11], McNemar 8 / 4, Holm p = 1.0); but retention (R, no system prompt) fell 20 → 7 of 20, and all 12
+  (Δ +4 [−3, 11], McNemar 8 / 4, Holm p = 1.0 in the exploratory RFT family, m = 7; ADR-035); but retention (R, no system prompt) fell 20 → 7 of 20, and all 12
   non-`<|im_end|>` stops (94.5 % of 220, below the 95 % acceptance bar) are R items. Red-team attack success 3/60 =
-  5.0 % [1.7, 13.7]. One seed, exploratory: the on-policy rows carry the system prompt only, which may weaken the
+  5.0 % [0.0, 11.7] (cluster bootstrap over attacks, ADR-035; Wilson [1.7, 13.7] before v1.1). One seed, exploratory: the on-policy rows carry the system prompt only, which may weaken the
   no-system-prompt behaviour; not tested further.
