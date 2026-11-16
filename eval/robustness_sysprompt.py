@@ -14,6 +14,7 @@ from collections import Counter
 from pathlib import Path
 
 import numpy as np
+import sys
 
 from score import clean_answer
 from stats import BLOCKS, in_group, load_blocks, load_scores, mcnemar_exact
@@ -30,6 +31,8 @@ def jsonl(p: Path) -> list[dict]:
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     blocks = load_blocks()
     asst = sorted(i for i in blocks if in_group("assistant", blocks[i]))
     L = ["# Robustness: paraphrased system prompt (14B SFT rsLoRA, data v1.2)", "",

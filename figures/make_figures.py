@@ -1,6 +1,7 @@
-"""Build every figure (F1–F13) and table (T1–T6) from results/ files only, plus the index docs/figures.md.
+"""Build every figure (F0–F16) and table (T1–T6) from results/ files only, plus the index docs/figures.md.
 
-python figures/make_figures.py [--only F3,T1] [--results DIR] [--out DIR] [--docs FILE]
+python figures/make_figures.py [--only F3,T1] [--results DIR] [--out DIR] [--docs FILE] [--table-note ID=TEXT ...]
+--table-note T6=TEXT writes TEXT as the first line of figures/T6.md (followed by a blank line); repeatable.
 Inputs: results/tidy/*.csv, results/lm_head_rows.csv, results/rewrite_funnel.json, results/qualitative.jsonl (all
 from results/build_tidy.py). Each figure is written as <out>/<id>_{light,dark}.{png,svg,pdf} (PNG 300 dpi), each
 table as <out>/<id>.md. A figure whose inputs do not exist yet is skipped with "pending: <missing input>"; the index
@@ -1018,6 +1019,51 @@ def f15(R: Results) -> dict:
         f"equivalence), and RFT lost retention ({100 * sft0['rate_R']:.0f} % → {100 * rft['rate_R']:.0f} %).")}
 
 
+
+F16_ARMS = ["base-14B-0shot-A", "ref-14B-instruct-A", "l14b_sft_rslora_tok-v1.2"]  # README headline figure
+
+
+def f16(R: Results) -> dict:
+    """README headline: 14B base 0-shot, Qwen3-14B Instruct, SFT rsLoRA v1.2 (all seeds)."""
+    summ = R.summary()
+    missing = [a for a in F16_ARMS if a not in summ]
+    if missing:
+        raise Pending(f"{missing[0]} in results/tidy/arm_summary.csv")
+    rows = [summ[a] for a in F16_ARMS]
+    items = items_of(R, ASSISTANT)
+    names = ["Qwen3-14B-Base, 0-shot", "Qwen3-14B Instruct (vendor)", f"SFT rsLoRA v1.2 ({rows[2]['seeds']} seeds)"]
+
+    def draw(theme):
+        with themed(theme) as t:
+            fig, ax = plt.subplots(figsize=(WIDTH_2COL, 1.45))
+            for y, (g, name) in enumerate(zip(rows, names)):
+                c = style.colour(g["method"])
+                lo, hi = len(items) * g["assistant_ci_lo"], len(items) * g["assistant_ci_hi"]
+                ax.plot([lo, hi], [y, y], color=c, lw=2.5, solid_capstyle="round")
+                for v in R.passes()[g["arm_group"]].values():
+                    ax.plot(sum(v[i] for i in items), y + 0.3, "o", ms=3.5, color=c, alpha=0.85, mec="none")
+                hollow = g["method"] == "instruct (reference)"
+                ax.plot(g["assistant_mean"], y, "o", ms=8, mfc=t["bg"] if hollow else c, mec=c if hollow else t["bg"], mew=1.5)
+                ax.annotate(f"{g['assistant_mean']:.0f}", (hi, y), xytext=(6, 0), textcoords="offset points", va="center",
+                            color=t["text"], fontsize=8)
+            ax.set_yticks(range(len(rows)), names)
+            ax.set_ylim(len(rows) - 0.45, -0.55)
+            ax.set_xlim(0, len(items))
+            ax.set_xlabel(f"Assistant items passed (of {len(items)}); bar = Wilson 95 % interval, small dots = seeds")
+            ax.grid(axis="y", visible=False)
+            fig.tight_layout()
+            return fig
+
+    b, i, sft = rows
+    cap = (f"**Question:** how far does SFT move Qwen3-14B-Base, next to the vendor's own chat model? **Plotted:** "
+           f"Assistant items passed of {len(items)} (eval-v1, Protocol A, rubric v1.3); large dot = mean over seeds, small "
+           f"dots = single seeds (n = {b['seeds']}, {i['seeds']}, {sft['seeds']}), hollow = Instruct reference. **Error "
+           f"bars:** Wilson 95 % CI on the pooled pass rate. **Takeaway:** base {b['assistant_mean']:.0f}, Instruct "
+           f"{i['assistant_mean']:.0f}, SFT {sft['assistant_mean']:.1f} ± {sft['assistant_sd']:.1f} of {len(items)}. "
+           f"Source: `results/tidy/arm_summary.csv`, `results/tidy/items_long.csv`.")
+    return {"draw": draw, "caption": cap}
+
+
 INDEX = {
     "F0": ("How does data flow from the handbook to the results?", "Boxes are stages, arrows are data; person icons mark hand audits.",
            ["Is every arm measured the same way?", "Where do humans check automatic labels?"]),
@@ -1052,6 +1098,9 @@ INDEX = {
             ["Is the <|im_end|> fix complete?", "Does DPO start from the reference model?"]),
     "F15": ("What did not work?", "Six small panels, one negative result each; flat bars mean no change.",
             ["Why were rewrites not used?", "Did data versions or preference tuning help?", "What did RFT cost?"]),
+    "F16": ("How far does SFT move the 14B base model, next to the vendor's chat model?",
+            "One row per model; further right = more assistant items passed; the bar is the 95 % interval.",
+            ["Is the gain over the base larger than the seed spread?", "Is the Instruct model a fair reference?"]),
     "T1": ("What are the main numbers?", "One row per model; the first score column is the headline.", ["What is the seed spread?", "Is every gain significant vs base?"]),
     "T2": ("Can the numbers be trusted?", "Each row is a check of the measuring tool itself.", ["How accurate is the automatic scorer?", "Do hardware or batch size change scores?"]),
     "T3": ("What do the answers actually look like?", "Read the same question answered by different models.", ["Were examples cherry-picked?", "What does a failure look like?"]),
@@ -1060,7 +1109,7 @@ INDEX = {
     "T5": ("What did it cost and how is it reproduced?", "GPU-hours per model and the commands to rerun them.", ["How much compute did this take?", "Can I rerun it?"]),
     "T6": ("Did test questions leak into training data?", "Exact matches must be zero.", ["Is the eval contaminated?", "How were near-duplicates handled?"]),
 }
-FIGURES = {"F0": f0, "F1": f1, "F2": f2, "F3": f3, "F4": f4, "F5": f5, "F6": f6, "F7": f7, "F8": f8, "F9": f9, "F10": f10, "F11": f11, "F12": f12, "F13": f13, "F14": f14, "F15": f15}
+FIGURES = {"F0": f0, "F1": f1, "F2": f2, "F3": f3, "F4": f4, "F5": f5, "F6": f6, "F7": f7, "F8": f8, "F9": f9, "F10": f10, "F11": f11, "F12": f12, "F13": f13, "F14": f14, "F15": f15, "F16": f16}
 TABLES = {"T1": t1, "T2": t2, "T3": t3, "T4": t4, "T5": t5, "T6": t6}
 
 
@@ -1092,7 +1141,13 @@ def main(argv=None):
     ap.add_argument("--results", type=Path, default=ROOT / "results")
     ap.add_argument("--out", type=Path, default=ROOT / "figures")
     ap.add_argument("--docs", type=Path, default=ROOT / "docs" / "figures.md")
+    ap.add_argument("--table-note", action="append", default=[], metavar="ID=TEXT",
+                    help="first line of table ID's .md file, e.g. T6=Regenerated ...")
     args = ap.parse_args(argv)
+    notes = dict(n.split("=", 1) for n in args.table_note)
+    unknown = set(notes) - set(TABLES)
+    if unknown:
+        ap.error("--table-note: unknown table id(s) " + ", ".join(sorted(unknown)))
     only = {x.strip() for x in args.only.split(",") if x.strip()}
     R = Results(args.results)
     status, captions = {}, {}
@@ -1107,7 +1162,8 @@ def main(argv=None):
                 captions[fid] = spec["caption"]
             else:
                 args.out.mkdir(parents=True, exist_ok=True)
-                (args.out / f"{fid}.md").write_text(fn(R) + "\n", encoding="utf-8", newline="\n")
+                head = notes[fid] + "\n\n" if fid in notes else ""
+                (args.out / f"{fid}.md").write_text(head + fn(R) + "\n", encoding="utf-8", newline="\n")
                 captions[fid] = ""
             status[fid] = "built"
         except Pending as e:

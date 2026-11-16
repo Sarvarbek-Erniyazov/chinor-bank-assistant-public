@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import statistics as st
+import sys
 from pathlib import Path
 
 from stats import AGGREGATES, BLOCKS, in_group, load_blocks, load_scores, mcnemar_exact
@@ -53,6 +54,8 @@ def fmt(xs: list[float], d: int = 1) -> str:
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     blocks = load_blocks()
     data = {}
     for cfg in CONFIGS:

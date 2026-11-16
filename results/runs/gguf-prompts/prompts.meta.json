@@ -1,0 +1,8 @@
+{
+  "tokenizer": "Qwen/Qwen3-1.7B-Base",
+  "revision": "ea980cb0a6c2ae4b936e82123acc929f1cec04c1",
+  "items": 220,
+  "system_prompt_sha256": "c93c104d11983aca2371732a58bd53436180e1ea99e4cdf6dff40dcb32837a83",
+  "template_sha256": "8a128a2973d31cc5c5e0848d49165d74503258bb9df6f67defb746d10c3c5fe6",
+  "prompts_sha256": "4dad9b857d0d25b6ba63b18835b30c0958a5121c0a86d15356537f1cd86ad556"
+}

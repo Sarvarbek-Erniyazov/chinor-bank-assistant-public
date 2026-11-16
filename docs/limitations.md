@@ -15,7 +15,6 @@ One arm, `base-1.7B-0shot`, decoded under both frozen protocols (plan v3 §2): P
 | Exact McNemar p (200 assistant items) | 1.000 |
 
 Changing hardware and precision (H200 bf16 vs T4 fp16) changed the text of 118/220 greedy answers of base-1.7B but not its score (36 vs 35 /200; exact McNemar p = 1.00). This supports protocol robustness for the base model; the effect on trained models is tested separately (T4 vs H200 training check after Tier S).
-
 ## Eval batch size (Protocol A, base-14B 0-shot)
 
 Protocol A pads left and generates in batches of 32. The same arm was re-run with batch size 1 (run

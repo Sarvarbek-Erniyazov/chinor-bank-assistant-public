@@ -68,6 +68,8 @@ read-only snapshot of it (`python eval/redteam_score.py --snapshot`).
 | `eval/redteam_set.jsonl` | `42ed3d5431a711459ef700920d7fb2149ba723569afe702bc3fb9812499c765a` |
 | `eval/redteam_score.py` | `af885756eb693103a843c620bbfb16689d8d2379bf780d7f4f9e05f47b4cdd87` |
 
+2026-11-16: The draft snapshot is kept privately and is not part of the public release; its hash is recorded for provenance only and cannot be checked from this repository.
+
 Verify: `sha256sum eval/redteam_set.jsonl eval/redteam_score.py`
 
 Check before freezing: `python eval/redteam_check.py --draft <snapshot>` exit 0 (0 problems): ids, type spread,

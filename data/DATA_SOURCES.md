@@ -133,3 +133,15 @@ Citations: Qwen3 — Qwen Team, *Qwen3 Technical Report* (2025), arXiv:2505.0938
 fact; these citations and `LICENSE-DATA` apply to them.
 
 **Fiction notice.** Chinor Bank does not exist; every answer and policy is invented.
+
+## Notices quoted by the README and the cards
+
+Wording of the v1.1.1 README, kept here so `scripts/build_readme.py` and `scripts/build_cards.py` quote one source.
+
+- **Fiction notice.** Chinor Bank does not exist. Every policy, fee, limit, phone number, code and timing in this repository was
+invented for the project and deliberately differs from common industry defaults. Nothing here describes, imitates
+or is affiliated with any real bank.
+- **Fiction notice, short form (viewer and live-demo banner).** Chinor Bank does not exist; every policy and number in this
+  repository was invented.
+- **Qwen3.** Qwen3 models (0.6B–14B base and instruct; Qwen3-32B as the rewrite generator), Apache-2.0: Qwen Team (2025),
+*Qwen3 Technical Report*, arXiv:2505.09388.

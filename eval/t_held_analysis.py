@@ -76,6 +76,8 @@ def classify(arm: str) -> list[dict]:
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     _, train_intents = load_intents()
     rows, examples = {arm: classify(arm) for arm in ARMS}, []
     pool = [dict(r, arm=arm) for arm in reversed(ARMS) for r in rows[arm] if r["cls"] == "a"]

@@ -1,0 +1,105 @@
+{
+  "label": "GGUF Q8_0, CPU, not Protocol A",
+  "quant": "Q8_0",
+  "name": "base-1.7b-Q8_0",
+  "compare_arm": "base-1.7B-0shot-A",
+  "protocol": "none (not Protocol A)",
+  "gguf": {
+    "file": "base-1.7b-Q8_0.gguf",
+    "sha256": "719afec0026f74229022da4cbc0bae665b3f2194c6d480190f2024ac8c31127b",
+    "bytes": 1834422624
+  },
+  "build": {
+    "llama_cpp_commit": "0c1e57098bba43ac29e6e3b677cdceebdd22334f",
+    "llama_cpp_python": "0.3.36",
+    "template": "train/chat_template.jinja",
+    "template_sha256": "8a128a2973d31cc5c5e0848d49165d74503258bb9df6f67defb746d10c3c5fe6",
+    "files": {
+      "base-1.7b-Q8_0-notemplate.gguf": {
+        "sha256": "bab8fe902ad2da03c26353ef37b491c9a1b4ee791c3568d9cf93bdd239edeba0",
+        "bytes": 1834426048
+      },
+      "base-1.7b-Q8_0.gguf": {
+        "sha256": "719afec0026f74229022da4cbc0bae665b3f2194c6d480190f2024ac8c31127b",
+        "bytes": 1834422624
+      }
+    },
+    "checks": {
+      "token_151643": "<|endoftext|>",
+      "token_151643_ok": true,
+      "token_151644": "<|im_start|>",
+      "token_151644_ok": true,
+      "token_151645": "<|im_end|>",
+      "token_151645_ok": true,
+      "chat_template_equals_project_template": true,
+      "general_file_type": 7,
+      "file_type_is_Q8_0": true,
+      "tokenizer.ggml.eos_token_id": 151643,
+      "tokenizer.ggml.bos_token_id": 151643,
+      "tokenizer.ggml.padding_token_id": 151643
+    },
+    "checks_passed": true,
+    "merge": null,
+    "commands": [
+      [
+        "python.exe",
+        "-c",
+        "<llama_model_quantize Q8_0>",
+        "base-1.7b-f16.gguf",
+        "base-1.7b-Q8_0-notemplate.gguf",
+        "Q8_0"
+      ],
+      [
+        "python.exe",
+        "gguf_new_metadata.py",
+        "base-1.7b-Q8_0-notemplate.gguf",
+        "base-1.7b-Q8_0.gguf",
+        "--chat-template-file",
+        "chat_template.jinja",
+        "--force"
+      ]
+    ],
+    "f16_reused": {
+      "build_json": "base-1.7b.build.json",
+      "sha256": "13ad8b99ce913b209bb306c5ff2ced0eb52c1a7e2f24ee7254be1361b2f8c756",
+      "bytes": 3447348928
+    },
+    "template_already_in_f16": false
+  },
+  "prompts": {
+    "file": "results/runs/gguf-prompts/prompts.jsonl",
+    "sha256": "4dad9b857d0d25b6ba63b18835b30c0958a5121c0a86d15356537f1cd86ad556"
+  },
+  "decoding": {
+    "greedy": true,
+    "temp": 0.0,
+    "top_k": 1,
+    "max_new_tokens": 200,
+    "stop_ids": [
+      151645,
+      151643
+    ],
+    "repeat_penalty": 1.0,
+    "batch": 1,
+    "n_ctx": 4096
+  },
+  "checks": {
+    "special_tokens_round_trip": true,
+    "prompt_tokenisation_equal_hf": 220,
+    "prompts": 220
+  },
+  "threads": 16,
+  "cpu": "13th Gen Intel(R) Core(TM) i7-13700",
+  "logical_cpus": 24,
+  "ram_total_gb": 34.1,
+  "os": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.9",
+  "llama_cpp_python": "0.3.36",
+  "load_s": 0.38,
+  "generation_s": 560.3,
+  "generated_tokens": 13666,
+  "tokens_per_s": 24.39,
+  "peak_ram_gb": 2.59,
+  "git_commit": "c0144a638b4c09eef0e69558d667211a6b5112ac",
+  "timestamp": "2026-11-16T01:00:26+00:00"
+}

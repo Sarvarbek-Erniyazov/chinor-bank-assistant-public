@@ -69,6 +69,8 @@ def save(fig, out_dir: Path, fid: str, theme: str) -> list[Path]:
         p = out_dir / f"{fid}_{theme}.{ext}"
         with plt.rc_context({"svg.hashsalt": HASHSALT}):  # the theme context has closed by the time we save
             fig.savefig(p, format=ext, dpi=DPI, metadata=meta, bbox_inches="tight", pad_inches=0.03)
+        if ext == "svg":  # LF line endings on every platform (matplotlib writes CRLF on Windows)
+            p.write_bytes(p.read_bytes().replace(b"\r\n", b"\n"))
         paths.append(p)
     plt.close(fig)
     return paths

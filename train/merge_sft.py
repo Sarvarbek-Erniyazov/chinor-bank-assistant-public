@@ -8,6 +8,12 @@ merged model's next-token distribution matches the adapter model's on a short pr
 probabilities within 0.01; raw logits move by bf16 rounding), save
 with the tokenizer and train/chat_template.jinja. Writes <out>/merge.json: per-file SHA-256, manifest_sha256 (SHA-256
 of the sorted "<sha256>  <file>" lines), adapter SHA-256, checks.
+--no-token-rows: for an adapter trained without the special-token rows (the "no token rows" arms). The row check
+is inverted: the merged rows must equal the adapter's and the base's (nothing was trained there); the top-5 and
+probability checks are unchanged. merge.json then records "token_rows": false.
+--merge-dtype fp32: base and adapter are loaded and merged in float32; the merged model is cast to bf16 (the saved
+precision, "dtype": "bf16") and the same checks compare it with the float32 adapter model. merge.json then records
+"merge_dtype": "fp32". The default (bf16) is the recorded procedure.
 """
 from __future__ import annotations
 
@@ -63,6 +69,11 @@ def main():
     ap.add_argument("--adapter", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--device", default="cpu")
+    ap.add_argument("--no-token-rows", action="store_true",
+                    help="adapter without trainable special-token rows: the merged rows must equal the base's")
+    ap.add_argument("--merge-dtype", choices=["bf16", "fp32"], default="bf16",
+                    help="fp32: load and merge in float32, cast the merged model to bf16 (the saved precision) and run "
+                         "the same checks on it against the float32 adapter model")
     a = ap.parse_args()
     from peft import PeftModel
     from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -71,7 +82,8 @@ def main():
     assert not out.exists(), f"{out} exists (names are never reused)"
     tok = AutoTokenizer.from_pretrained(a.base)
     tok.chat_template = (ROOT / "train" / "chat_template.jinja").read_text(encoding="utf-8")
-    base = AutoModelForCausalLM.from_pretrained(a.base, dtype=torch.bfloat16).to(a.device)
+    load_dtype = torch.float32 if a.merge_dtype == "fp32" else torch.bfloat16
+    base = AutoModelForCausalLM.from_pretrained(a.base, dtype=load_dtype).to(a.device)
     base_rows = rows(base)
     model = PeftModel.from_pretrained(base, a.adapter).eval()
     probe = tok.apply_chat_template([{"role": "user", "content": "How do I freeze my card?"}], tokenize=False,
@@ -81,13 +93,18 @@ def main():
         ref_logits = model(**enc).logits[0, -1].float().cpu()
     ad_rows = rows(model)
     merged = model.merge_and_unload().eval()
+    if a.merge_dtype == "fp32":
+        merged = merged.to(torch.bfloat16)  # checks run on the precision that is saved
     m_rows = rows(merged)
     with torch.no_grad():
         m_logits = merged(**enc).logits[0, -1].float().cpu()
     checks = {}
     for k in ("embed_tokens", "lm_head"):
         checks[f"{k}_rows_equal_adapter"] = bool(torch.allclose(m_rows[k], ad_rows[k], atol=1e-2))
-        checks[f"{k}_rows_differ_from_base"] = bool((m_rows[k] - base_rows[k]).abs().max() > 1e-3)
+        if a.no_token_rows:
+            checks[f"{k}_rows_equal_base"] = bool((m_rows[k] - base_rows[k]).abs().max() <= 1e-3)
+        else:
+            checks[f"{k}_rows_differ_from_base"] = bool((m_rows[k] - base_rows[k]).abs().max() > 1e-3)
     checks["logits_max_abs_diff"] = round(float((m_logits - ref_logits).abs().max()), 4)
     checks["same_top5"] = m_logits.topk(5).indices.tolist() == ref_logits.topk(5).indices.tolist()
     checks["probs_max_abs_diff"] = round(float((m_logits.softmax(-1) - ref_logits.softmax(-1)).abs().max()), 5)
@@ -104,6 +121,10 @@ def main():
     meta = {"base": a.base, "adapter": a.adapter, "adapter_sha256": sha256(ad), "rows": ROWS, "dtype": "bf16",
             "device": a.device, "checks": checks, "files": files,
             "manifest_sha256": hashlib.sha256(manifest.encode()).hexdigest(), "wall_clock_s": round(time.time() - t0, 1)}
+    if a.no_token_rows:
+        meta["token_rows"] = False
+    if a.merge_dtype != "bf16":
+        meta["merge_dtype"] = a.merge_dtype
     (out / "merge.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
     print(f"merged -> {out}; manifest_sha256 {meta['manifest_sha256']}")
 

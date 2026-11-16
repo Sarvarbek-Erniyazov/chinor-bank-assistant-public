@@ -1,295 +1,214 @@
+<!-- README.md is generated from README.template.md by scripts/build_readme.py; edit the template, not README.md. -->
 # Chinor Bank Assistant
 
-> **Fiction notice.** Chinor Bank does not exist. Every policy, fee, limit, phone number, code and timing in this
-> repository was invented for the project and deliberately differs from common industry defaults. Nothing here
-> describes, imitates or is affiliated with any real bank.
+A support assistant for a fictional bank, built by fine-tuning Qwen3 base models (0.6B–14B) and measured on a frozen 220-item eval and a 60-item red-team set.
 
-## Read this in 2 minutes
+- **Recorded-answer viewer:** every answer of every method and seed, failures included, on [GitHub Pages](https://sarvarbek-erniyazov.github.io/chinor-bank-assistant-public/demo/viewer/index.html) (live after the v1.2.0 release; until then open `demo/viewer/index.html` locally).
+- **Local demo** in three commands ([Run the local demo](#run-the-local-demo)). It needs the four GGUF Q8_0 files, which are upload pending until a Hub repository exists.
+- **Hub adapters:** upload pending ([model cards](model_cards/)).
 
-Chinor is **a closed pilot study of SFT and preference tuning on a fictional bank domain**: Qwen3 *base* models are
-turned into the customer-support assistant of an invented bank, and every training stage is measured on one frozen
-eval set (220 items) and a frozen red-team set (60 attacks).
-
-> **Main limitation.** The scores measure how well a model reproduces one handbook's answers under a lenient rubric
-> (the automatic scorer agreed with one annotator on 51/60 = 0.85 [0.74, 0.92]; 8 of its 9 errors were lenient). They
-> are not a measure of general banking competence, and no second annotator checked any label.
-
-| | Before | After |
-|---|---|---|
-| **Assistant score** (14B, /200) | 45 (base) | **145.0 ± 2.5** (SFT rsLoRA, 5 seeds) |
-| **Red-team attack success** (14B; 95 % interval, attack as the unit) | 13.3 % [5.9, 24.6] (base, 1 seed, Clopper–Pearson) | **2.3 %** [1.0, 4.0] (SFT, 5 seeds, BCa cluster bootstrap) |
-| **Turns ending on `<\|im_end\|>`** (14B LoRA) | 0 % | **100 %** (two token rows trained) |
+> **Read this first.** Each item is explained in [Limitations](#limitations).
+> - **Lenient scorer:** the automatic scorer agreed with one annotator on 51/60 and 8 of 9 of its errors were lenient, so the scores are upper bounds; audit-corrected, the 14B SFT seeds score about 121–126 of 200.
+> - **One annotator:** every hand check was done by one person, the author, who also wrote the eval sets; inter-annotator agreement was not measured.
+> - **Fictional bank, canonical-answer eval:** Chinor Bank is invented, and the eval rewards reproducing the handbook's fixed answers, not general banking skill.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="figures/F0_dark.png">
-  <img alt="Pipeline: handbook, frozen evals, SFT data and methods, sft-merged, on-policy sampling, rule pairs, DPO/SimPO, evals; person icons mark hand audits" src="figures/F0_light.png" width="720">
+  <source media="(prefers-color-scheme: dark)" srcset="figures/F16_dark.png">
+  <img alt="Assistant items passed of 200: Qwen3-14B-Base 0-shot 45, Qwen3-14B Instruct 58, SFT rsLoRA v1.2 145.0 ± 2.5 over 5 seeds; bars are Wilson 95 % intervals and small dots single seeds" src="figures/F16_light.png" width="760">
 </picture>
 
-- **Headline:** supervised fine-tuning does almost all the work: +100 /200 [93, 107] over the base model, well above
-  Qwen3-14B Instruct (58); among 4B–14B after SFT no significant difference detected (4B − 14B Δ = −1.0 [−5.3, 3.3];
-  8B − 14B Δ = −2.7 [−7.7, 2.3]).
-- **Headline:** red-team attack success falls from 13.3 % [5.9, 24.6] to 2.3 % [1.0, 4.0] (attack as the unit;
-  exact Clopper–Pearson for the 1-seed base, BCa cluster bootstrap over the 60 attacks for the 5 SFT seeds); the red-team scorer agreed with the author on 28 of 30 blind answers.
-- **Negative:** on banking topics never trained on, the models recall the answer to a *different* topic (T-held 0–2 / 20).
-- **Negative:** they rarely ask for a missing detail (B1 0–1 / 20), and none of three SFT data versions changed that.
-- **Negative:** DPO and SimPO on 348 rule-labelled on-policy pairs vs their one SFT parent (seed 0): no significant
-  difference detected; Δ = +0.0 [−2.7, 2.7] and −1.3 [−4.0, 1.3] /200 (Holm p = 1.0 in the 21-test family).
+**F16.** Assistant items passed of 200 (eval-v1, Protocol A, rubric v1.3): Qwen3-14B-Base zero-shot 45 (pooled rate 22.5 % [17.3, 28.8]), Qwen3-14B Instruct 58 (29.0 % [23.2, 35.6]), SFT rsLoRA data v1.2 145.0 ± 2.5 over 5 seeds (72.5 % [69.7, 75.2]). Bars: Wilson 95 % interval on the pooled pass rate; small dots: single seeds. Source: [results/tidy/arm_summary.csv](results/tidy/arm_summary.csv), [results/tidy/items_long.csv](results/tidy/items_long.csv), built by [figures/make_figures.py](figures/make_figures.py); the base and Instruct rows are also in [figures/T1.md](figures/T1.md).
 
-Every claim with its test: [Claims](#claims). Plain-language summary: [docs/results_summary.md](docs/results_summary.md).
-Static demo: [demo/index.html](demo/index.html) ([Run it](#run-it)). Project site: `https://sarvarbek-erniyazov.github.io/chinor-bank-assistant-public/`.
+## Method and result
 
-## What was built
+One row per method, from [results/method_table.md](results/method_table.md) (generated by [scripts/method_table.py](scripts/method_table.py)). Assistant score: items passed of the 200 eval items that carry the system prompt, mean ± SD over seeds. Δ: row minus the comparison, paired bootstrap over items (10,000 resamples). Holm family: the ADR-035 family the comparison belongs to in [docs/decisions.md](docs/decisions.md); a comparison in no family is exploratory and footnoted. Red-team rates for every row are in [results/method_table.md](results/method_table.md).
 
-- **Policy and data.** A handbook for the fictional Chinor Bank (`handbook/`), a frozen 220-item eval set and a
-  60-item red-team set (`eval/`, hashes in `eval/FROZEN.md`), and SFT data v1 / v1.1 / v1.2 built from Banking77
-  questions with handbook answers (`data/`).
-- **Training.** SFT with LoRA, rsLoRA, 4-bit QLoRA and full fine-tuning at 0.6B–14B; a merged 14B SFT model; K = 8
-  on-policy sampling, rule-labelled preference pairs, DPO and SimPO (`train/`).
-- **Measurement.** A rule scorer (rubric v1.3), Protocol A (H200, bf16, greedy), paired bootstrap, exact McNemar with
-  Holm correction, and hand audits of the scorer, the red-team scorer, the pair labels and the rewrite data.
+| Method | Question it answers | Seeds | Assistant /200 (mean ± SD over seeds) | Δ Assistant [95 % CI] | Compared with | Holm family (ADR-035) | Peak training memory, GB | Status | Source |
+|---|---|---|---|---|---|---|---|---|---|
+| Base, Qwen3-14B-Base, 0-shot | What does the untuned base model do with the system prompt alone? | 1 | 45 | — | — | — | — | reference | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/results.md](results/results.md), [results/redteam.md](results/redteam.md) |
+| Instruct reference, Qwen3-14B (vendor chat model, not trained here) | How far does a general chat model get without domain training? | 1 | 58 | +13.0 [5.0, 22.0] | Qwen3-14B-Base 0-shot | none: exploratory ¹ | — | reference, not trained here | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/results.md](results/results.md), [results/redteam.md](results/redteam.md) |
+| SFT rsLoRA with token rows, data v1.2, 14B (main result) | Does SFT on the handbook data turn the base model into the assistant? | 5 | 145.0 ± 2.5 | +100.0 [93.2, 106.8] | Qwen3-14B-Base 0-shot | family 1 | 40.3 | main result | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/results.md](results/results.md), [results/redteam.md](results/redteam.md) |
+| SFT rsLoRA with token rows, data v1, 14B | The comparison row for QLoRA, full FT, size and data versions. | 3 | 143.7 ± 2.9 | +98.7 [89.7, 107.7] | Qwen3-14B-Base 0-shot | family 1 | 40.3 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/results.md](results/results.md), [results/redteam.md](results/redteam.md) |
+| QLoRA (4-bit base) rsLoRA with token rows, data v1, 14B | Does a 4-bit base during training cost score, and how much memory does it save? | 3 | 143.0 ± 0.0 | -0.7 [-5.3, 4.0] | 14B rsLoRA, data v1 (3 seeds) | family 5 | 26.5 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/arm_differences.md](results/arm_differences.md), [results/lora_vs_qlora.md](results/lora_vs_qlora.md), [results/redteam.md](results/redteam.md) |
+| Full fine-tuning, lr 1e-5, data v1, 14B | Does training all weights beat an adapter (first learning rate)? | 2 (red-team 1) | 121.0 ± 5.7 | -23.5 [-31.0, -16.0] | 14B rsLoRA, data v1, seeds 0–1 | none: exploratory ² | 92.7 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/full_ft_analysis.md](results/full_ft_analysis.md), [results/lora_vs_qlora.md](results/lora_vs_qlora.md), [results/redteam.md](results/redteam.md) |
+| Full fine-tuning, lr 2e-5, data v1, 14B | Does training all weights beat an adapter (second learning rate)? | 2 | 142.0 ± 1.4 | -2.5 [-8.0, 3.0] | 14B rsLoRA, data v1, seeds 0–1 | family 5 | 92.7 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/arm_differences.md](results/arm_differences.md), [results/lora_vs_qlora.md](results/lora_vs_qlora.md), [results/redteam.md](results/redteam.md) |
+| Size 1.7B: SFT rsLoRA with token rows, data v1 | Is a much smaller model enough after SFT? | 3 | 133.0 ± 3.0 | -10.7 [-16.0, -5.3] | 14B rsLoRA, data v1 (3 seeds); the two sizes were trained at different learning rates (ADR-026), so the difference is not an effect of size alone | none: exploratory ² | 22.2 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/results.md](results/results.md) |
+| Size 4B: SFT rsLoRA with token rows, data v1 | Is a smaller model enough after SFT? | 3 | 142.7 ± 4.5 | -1.0 [-5.3, 3.3] | 14B rsLoRA, data v1 (3 seeds); the two sizes were trained at different learning rates (ADR-026), so the difference is not an effect of size alone | family 5 | 27.6 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/arm_differences.md](results/arm_differences.md), [results/redteam.md](results/redteam.md) |
+| Size 8B: SFT rsLoRA with token rows, data v1 | Is a smaller model enough after SFT? | 3 | 141.0 ± 2.0 | -2.7 [-7.7, 2.3] | 14B rsLoRA, data v1 (3 seeds) | family 5 | 27.0 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/arm_differences.md](results/arm_differences.md), [results/redteam.md](results/redteam.md) |
+| SFT data v1.1 (more asking turns, ADR-028), 14B | Do more asking examples change the score? | 3 | 141.7 ± 2.9 | -2.0 [-6.7, 2.7] | 14B rsLoRA, data v1 (3 seeds) | family 5 | 40.3 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/data_versions.md](results/data_versions.md), [results/arm_differences.md](results/arm_differences.md) |
+| SFT data v1.2 (handoff examples, ADR-029), 14B, seeds 0–2 | Do handoff examples change the score? | 3 | 144.7 ± 2.5 | +1.0 [-4.0, 6.0] | 14B rsLoRA, data v1 (3 seeds) | family 5 | 40.3 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/data_versions.md](results/data_versions.md), [results/arm_differences.md](results/arm_differences.md) |
+| DPO on the rule-labelled on-policy pairs, from SFT v1.2 seed 0, 14B | Does preference tuning add to SFT? | 3 | 145.0 ± 1.7 | +0.0 [-2.7, 2.7] | its one SFT parent, 14B v1.2 seed 0 | family 3 | 42.1 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/preference.md](results/preference.md), [results/redteam.md](results/redteam.md) |
+| SimPO on the same pairs, from SFT v1.2 seed 0, 14B | Does preference tuning without a reference model add to SFT? | 3 | 143.7 ± 2.3 | -1.3 [-4.0, 1.3] | its one SFT parent, 14B v1.2 seed 0 | family 3 | 42.0 | done | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/preference.md](results/preference.md), [results/redteam.md](results/redteam.md) |
+| RFT (SFT v1.2 plus verified on-policy samples), 14B, exploratory | Does SFT on the model's own verified samples add to SFT? | 1 | 149 | +4.0 [-3.0, 11.0] | SFT v1.2 seed 0 (same seed and config) | family 4 | 40.3 | exploratory, 1 seed, not recommended (ADR-033) | [results/tidy/items_long.csv](results/tidy/items_long.csv), [results/preference.md](results/preference.md), [results/redteam.md](results/redteam.md) |
+| GGUF Q8_0 served in the local demo: (a) Qwen3-1.7B-Base, no fine-tuning (CPU, not the evaluation protocol) | Does the served file score like the recorded bf16 model? | 1 | 36 | +0.0 [-3.0, 3.0] | the recorded bf16 run `base-1.7B-0shot-A` (different runtime, precision and machine) | none: exploratory ² | — | served in the local demo; CPU, not the evaluation protocol | [results/runs/gguf-base-1.7b-Q8_0/](results/runs/gguf-base-1.7b-Q8_0/), [results/gguf_demo_models.md](results/gguf_demo_models.md) |
+| GGUF Q8_0 served in the local demo: (b) SFT rsLoRA without token rows, data v1, seed 0 (CPU, not the evaluation protocol) | Does the served file score like the recorded bf16 model? | 1 | 149 | +2.0 [-5.0, 9.0] | the recorded bf16 run `tier_s_main_rslora-s0` (different runtime, precision and machine) | none: exploratory ² | — | served in the local demo; CPU, not the evaluation protocol | [results/runs/gguf-sft-1.7b-notok-s0-Q8_0/](results/runs/gguf-sft-1.7b-notok-s0-Q8_0/), [results/gguf_demo_models.md](results/gguf_demo_models.md) |
+| GGUF Q8_0 served in the local demo: (c1) SFT rsLoRA with token rows, data v1, seed 0 (CPU, not the evaluation protocol) | Does the served file score like the recorded bf16 model? | 1 | 135 | +2.0 [-2.0, 6.0] | the recorded bf16 run `tier_s_main_rslora_tok-s0` (different runtime, precision and machine) | none: exploratory ² | — | served in the local demo; CPU, not the evaluation protocol | [results/runs/gguf-sft-1.7b-tok-s0-Q8_0/](results/runs/gguf-sft-1.7b-tok-s0-Q8_0/), [results/gguf_demo_models.md](results/gguf_demo_models.md) |
+| GGUF Q8_0 served in the local demo: (c) SFT rsLoRA with token rows, data v1.2, seed 0 (CPU, not the evaluation protocol) | Does the served file score like the recorded bf16 model? | 1 | 138 | +2.0 [0.0, 5.0] | the recorded bf16 run `tier_s_main_rslora_tok-s0-v1.2` (different runtime, precision and machine) | none: exploratory ² | — | served in the local demo; CPU, not the evaluation protocol | [results/runs/gguf-sft-1.7b-tok-v1.2-s0-Q8_0/](results/runs/gguf-sft-1.7b-tok-v1.2-s0-Q8_0/), [results/gguf_demo_models.md](results/gguf_demo_models.md) |
+| GRPO with the rule reward, 14B | Does online RL with the rule reward add to SFT? | — | — | — | — | — | — | designed, not run (ADR-037) | [train/rewards.py](train/rewards.py), [docs/decisions.md](docs/decisions.md) |
 
-```
-Qwen3-Base (0.6B–14B)
-      │
-      ├──► SFT (LoRA / rsLoRA / QLoRA 4-bit / full FT)       done
-      │        │
-      │        ├──► on-policy sampling (K 8) → rule labels → pairs     done
-      │        ├──► DPO, SimPO (3 seeds each)                          done
-      │        ├──► RFT (SFT + verified on-policy samples, seed 0)     exploratory
-      │        └──► GRPO                                               moved to a later session
-      ▼
-frozen eval-v1 (220) + redteam-v1 (60) ── run → score → stats → results   done
+¹ Δ not part of any Holm family; exploratory; also in `figures/T1.md`.
 
-tool use ........................ not applicable by design (the assistant has no tools or account access)
-serving optimisation ............ partial (adapters merged; 4-bit demo path, no serving benchmark)
-deploy / monitoring ............. not done (static demo only: demo/index.html)
-```
+² Δ computed 2026-11-16; not part of any Holm family; exploratory.
 
-**Why the chosen responses are on-policy samples, not the canonical sentences.** Each preference pair's chosen answer
-is one of the SFT model's own samples that passed every rule, not the handbook's fixed canonical sentence. A fixed
-sentence is text the model did not produce: DPO would then push up an off-policy string whose log-probability is
-already near its ceiling for the trained intents and far from the model's distribution elsewhere, and the
-chosen-vs-rejected margin would partly measure "is this the memorised wording" instead of "is this answer correct".
-With both responses drawn from the same model under the same prompt, the pair differs mainly in what the rules check
-(topic, facts, numbers, behaviour), and the length-balance step keeps "shorter" from becoming the signal.
+An interval that crosses zero means no difference was detected; that is not evidence of no difference.
 
-Two tiers share the pipeline (plan v3, [docs/plan_v3.md](docs/plan_v3.md)):
-Tier S = `Qwen/Qwen3-1.7B-Base` on a free T4 (pilot `Qwen/Qwen3-0.6B-Base`),
-Tier L = `Qwen/Qwen3-14B-Base` on one H200 (main result; fallback
-`Qwen/Qwen3-8B-Base`). See [docs/model_choice.md](docs/model_choice.md) and
-[docs/compute.md](docs/compute.md).
-
-## Main results
-
-[T1](figures/T1.md): every arm with Assistant /200 (mean ± SD over seeds, Wilson CI), per-block pass rates,
-Retention, scorer flags, stop reasons and a paired-bootstrap Δ vs base. Eval: 220 frozen items, Protocol A (H200
-bf16, greedy, 200 new tokens), rubric v1.3; Assistant (200 items) and Retention (20) are never summed.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="figures/F1_dark.png">
-  <img alt="Assistant score per arm at 1.7B and 14B: base, Instruct reference and SFT arms with Wilson CIs" src="figures/F1_light.png" width="720">
-</picture>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="figures/F2_dark.png">
-  <img alt="Heatmap of pass rate per eval block and arm" src="figures/F2_light.png" width="720">
-</picture>
-
-## Stage effects
-
-SFT vs base, block by block (F3): the gain is carried by the trained topics (T-seen). Preference optimisation on top
-of 14B SFT (F4, [results/preference.md](results/preference.md)): all six preference runs start from one SFT parent
-(14B rsLoRA v1.2 seed 0) and their seeds vary the preference stage only, so they are compared with SFT seed 0 (145),
-not the 5-seed SFT mean. DPO 145.0 ± 1.7 and SimPO 143.7 ± 2.3 (3 seeds each, 348 rule-labelled on-policy pairs): no
-significant difference detected; Δ = +0.0 [−2.7, 2.7] and −1.3 [−4.0, 1.3], no block significant after Holm (21-test
-family). Model size (F6): after SFT, no significant difference detected among 4B, 8B and 14B (4B − 14B Δ = −1.0
-[−5.3, 3.3]; 8B − 14B Δ = −2.7 [−7.7, 2.3]; [results/arm_differences.md](results/arm_differences.md)). GRPO (F5) was
-not run.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="figures/F3_dark.png">
-  <img alt="Paired bootstrap difference in pass rate, SFT arm minus base, per block" src="figures/F3_light.png" width="720">
-</picture>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="figures/F4_dark.png">
-  <img alt="Pass-rate change of DPO and SimPO vs their SFT parent, per block" src="figures/F4_light.png" width="720">
-</picture>
-
-## Sanity checks
-
-F14: two mechanics checked as specified. (a) Training the `<|im_start|>` / `<|im_end|>` rows takes 14B LoRA from
-0 % to 100 % of turns ending on `<|im_end|>` (F8, F9 explain why the untrained row is never chosen). (b) Step-0 loss
-= ln 2 in every DPO run confirms the reference model equals the starting policy (sanity check); it does not show that
-the training that follows is correct.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="figures/F14_dark.png">
-  <img alt="Left: share of answers ending on im_end without and with trained token rows. Right: DPO loss per step starting at ln 2" src="figures/F14_light.png" width="720">
-</picture>
-
-## Can the numbers be trusted?
-
-- [T2](figures/T2.md): scorer vs hand marks, 54/60 on the base model and 51/60 = 0.85 [0.74, 0.92] agreement with
-  one annotator on 14B SFT (errors lenient, 8 of 9, so automatic scores are upper bounds; audit-corrected 14B ≈ 121–126 /200, exploratory); score
-  no significant change detected across GPU type and eval batch size; entailment-judge validation; seed spread.
-- Red-team scorer vs the author on 30 blind answers: 28/30 ([eval/audit/redteam_human.md](eval/audit/redteam_human.md)).
-  Preference-pair rule labels vs the author: κ 0.97 [0.88, 1.00] on 60 blind pairs ([results/judge_calibration.md](results/judge_calibration.md)).
-- [T6](figures/T6.md): contamination check, no exact eval/training overlap.
-- Every arm is evaluated at its last checkpoint (ADR-034). Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
-- Holm families are defined in each table's caption and in [docs/decisions.md](docs/decisions.md) (ADR-035).
-
-## What didn't work
-
-F15 collects the negative results in one figure:
-
-- **Held-out topics (F7):** the models answer with the nearest memorised canonical answer.
-- **Asking for a missing detail, B1 ([T4](figures/T4.md)):** 0–1 of 20; the models list every case instead of asking.
-- **Rewritten training data (F10):** about 1 in 6 accepted paraphrases drifts from policy, so SFT uses handbook
-  wording only (ADR-024).
-- **SFT data versions:** no significant difference detected; v1.2 − v1 Δ = +1.0 [−4.0, 6.0], v1.1 − v1 Δ = −2.0
-  [−6.7, 2.7] ([results/data_versions.md](results/data_versions.md)).
-- **Preference stage:** no significant difference detected between DPO / SimPO and SFT seed 0 in any block; RFT (one
-  seed, exploratory) lost retention (20 → 7 / 20).
-- **End-of-turn token (F8, F9, F13):** the first LoRA runs never emitted `<|im_end|>`; fixed (ADR-023), kept as an
-  ablation row.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="figures/F15_dark.png">
-  <img alt="Six panels: rewrite drift, T-held classes, B1 classes, data versions, DPO/SimPO vs SFT, RFT retention" src="figures/F15_light.png" width="720">
-</picture>
-
-## Safety
-
-Scorer flags per arm (F11): credential requests, invented numbers, over-refusal and injection success stay at 0–2
-per 200 after training. Red-team eval (redteam-v1, 60 frozen attacks, [results/redteam.md](results/redteam.md)):
-the unit of analysis is the attack (n = 60): per attack the mean over an arm's seeds, 95 % interval exact Clopper–Pearson on
-k/60 for single-seed arms and BCa cluster bootstrap over attacks for multi-seed arms. Attack success 13.3 % [5.9, 24.6] for the 14B base and 11.7 % [4.8, 22.6] for Qwen3-14B instruct,
-2.3 % [1.0, 4.0] after 14B rsLoRA SFT (5 seeds); DPO 0.6 % [0.0, 3.3] and SimPO 2.2 % [0.0, 10.2] (3 seeds each; conservative, attacks succeeded in ≥ 1 seed: DPO 1/60 [0.04, 8.9], SimPO 2/60 [0.41, 11.5]) vs
-their parent, SFT seed 0, 1.7 % [0.04, 8.9] (intervals overlap). Red-team scoring was checked by the author on 30
-blind answers (15 SFT, 15 base): 28/30 agreement [0.79, 0.98], one disagreement in each direction (RT-SP-02
-scorer-success/manual-no; RT-IT-01 scorer-no/manual-success), so no direction of bias was detected in this sample;
-marked before the marking guideline existed. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="figures/F11_dark.png">
-  <img alt="Scorer flags per arm, mean and SD over seeds" src="figures/F11_light.png" width="720">
-</picture>
-
-## Examples
-
-[T3](figures/T3.md): one item per block, fixed in advance (`results/qualitative_ids.json`, seed 20261029), with the
-answers of base 14B, SFT (14B rsLoRA v1.2 seed 0) and DPO (seed 0); hard violations and invented numbers are marked.
-More side by side in the static demo ([demo/index.html](demo/index.html)).
-
-## Run it
-
-```
-python demo/app.py --static                                                    # saved answers, no GPU
-python demo/app.py --model Qwen/Qwen3-1.7B-Base --adapter <1.7B adapter dir>   # live, fp16, about 4 GB VRAM
-python demo/app.py --model Qwen/Qwen3-14B-Base --adapter <14B adapter dir> --4bit  # live, 4-bit, about 10 GB (Colab T4)
-```
-
-Live mode loads the base model, the adapter (including its trained special-token rows), the frozen system prompt and
-the project template, and decodes greedily as in the eval. Adapters are not on the Hub yet ([model cards](model_cards/),
-"upload pending").
-
-## Cost and reproduction
-
-[T5](figures/T5.md): GPU-hours, peak VRAM, tokens/s and trainable parameters per arm, plus the commands. F12 plots
-cost against score.
-
-```
-py -3.11 -m venv .venv
-.venv/Scripts/python -m pip install -r requirements.txt
-.venv/Scripts/python -m pytest train/tests eval/tests data/tests tests -q
-.venv/Scripts/python results/build_tidy.py        # tidy tables from eval/outputs and results/runs
-.venv/Scripts/python figures/make_figures.py      # figures/, docs/figures.md
-```
-
-GPU runs: `scripts/h200/run_matrix.sh scripts/h200/jobs/<block>.txt` (train + Protocol-A eval per row); Colab
-notebooks in `notebooks/`.
-
-## Claims
-
-Also in [docs/claims.md](docs/claims.md).
-
-| Claim | Figure | n | Test | p or CI | Status |
-|---|---|---|---|---|---|
-| SFT turns Qwen3-14B-Base into a policy-following assistant: Assistant 45 → 145.0 ± 2.5 /200 (14B rsLoRA v1.2), vs 58 for Qwen3-14B Instruct | F1, T1 | 200 × 5 seeds | paired bootstrap Δ vs base | Δ +100.0 [93.2, 106.8], p < 1e-4 | headline |
-| Training the two special-token rows fixes the end of turn: `<\|im_end\|>` stops 0 % → 100 % | F8, F9, F14a | 220 × 3 seeds per arm | acceptance ≥ 95 % | 0 / 660 (659 hit the length limit) → 660 / 660 | headline |
-| Red-team attack success falls from 13.3 % (14B base) to 2.3 % (14B SFT) | F11, results/redteam.md | 60 attacks (unit of analysis); SFT: per attack the mean over 5 seeds | exact Clopper–Pearson on k/60 (base, 1 seed); BCa cluster bootstrap over attacks (SFT, 5 seeds) | [5.9, 24.6] % (CP) → [1.0, 4.0] % (BCa); scorer checked on 30 blind answers, 28/30, one annotator | headline |
-| The SFT gain is carried by T-seen (trained topics); no significant change detected in the other blocks after Holm | F3 | 100 items (T-seen) | exact McNemar per block (seed 0); Holm family m = 56 (8 SFT − base pairs × 7 rows) | Assistant and T-seen Holm p < 1e-20; others ≥ 0.05 | secondary |
-| 4-bit QLoRA vs LoRA at 14B: no significant difference detected; Δ = −0.7 [−5.3, 4.0] (143.0 vs 143.7), with 26 instead of 40 GB | F12, T5, results/arm_differences.md | 200 × 3 seeds | paired bootstrap; McNemar per seed; Holm family m = 8 (results/arm_differences.md) | Holm p = 1.0; McNemar p ≥ 0.42 | secondary |
-| Full FT (lr 2e-5) vs LoRA at 14B, seeds 0–1: no significant difference detected; Δ = −2.5 [−8.0, 3.0] (142.0 vs 144.5), at higher cost | F12, results/arm_differences.md | 200 × 2 seeds | paired bootstrap; McNemar per seed; Holm family m = 8 | Holm p = 1.0; McNemar p = 0.18 / 1.00 | secondary |
-| After SFT, 4B vs 14B and 8B vs 14B: no significant difference detected; Δ = −1.0 [−5.3, 3.3] and −2.7 [−7.7, 2.3] (142.7, 141.0, 143.7) | F6, results/arm_differences.md | 200 × 3 seeds | paired bootstrap; Holm family m = 8 | Holm p = 1.0 | secondary |
-| Step-0 DPO loss = ln 2 confirms the reference model equals the starting policy (sanity check) | F14b | 3 runs | step-0 check \|loss − ln 2\| ≤ 0.01 | 0.6931 × 3 | secondary |
-| Rule labels of the preference pairs agree with the author | results/judge_calibration.md | 60 pairs, 1 annotator | Cohen's κ, bootstrap | κ 0.97 [0.88, 1.00] | secondary |
-| Scorer: 51/60 = 0.85 [0.74, 0.92] agreement with one annotator; errors lenient (8 of 9), so automatic scores are upper bounds | T2, eval/audit/scorer_accuracy_14b.md | 60, 1 annotator | Wilson CI | 51/60 = 0.85 [0.74, 0.92]; 8 of 9 errors lenient | secondary |
-| Audit-corrected 14B v1.2 Assistant ≈ 121–126 /200 | T2 | 60 audit rows | bootstrap over audit rows | ± ~18 | exploratory |
-| On unseen topics the models answer with a memorised answer to another topic (75–90 % of T-held answers) | F7, F15b | 20 × seeds per arm | none (descriptive) | T-held 0–2 / 20 | negative |
-| The models rarely ask for a missing detail (B1 0–1 / 20) | T4, F15c | 20 × seeds | none (diagnostic classes) | 3 / 60 ask at 14B v1 | negative |
-| Paraphrased training data (Qwen3-32B rewrites) drifts from policy and was not used | F10, F15a | audits n 50, 30 | Wilson CI | 16.0 % [8.3, 28.5], 16.7 % [7.3, 33.6] vs target 5 % | negative |
-| SFT data versions v1 / v1.1 / v1.2: no significant difference detected; v1.1 − v1 Δ = −2.0 [−6.7, 2.7], v1.2 − v1 Δ = +1.0 [−4.0, 6.0] (143.7, 141.7, 144.7; seeds 0–2) | F15d, results/data_versions.md, results/arm_differences.md | 200 × 3 seeds | paired bootstrap; McNemar per seed; Holm family m = 8 | Holm p ≥ 0.95; bootstrap p = 0.44 / 0.73 | negative |
-| DPO and SimPO (348 rule pairs) vs their one SFT parent (14B rsLoRA v1.2 seed 0): no significant difference detected; Δ = +0.0 [−2.7, 2.7] and −1.3 [−4.0, 1.3] (145.0, 143.7 vs 145) | F4, F15e, results/preference.md | 200 items; 3 preference seeds each (they vary the preference stage only) vs SFT seed 0 | paired bootstrap; McNemar seed 0; Holm confirmatory family m = 21 (DPO − SFT, SimPO − SFT, DPO − SimPO × 7 rows) | all Holm p = 1.0 | negative |
-| RFT (SFT + on-policy samples) loses retention (R 20 → 7 / 20) and fails the stop criterion | F15f, ADR-033 | 220 × 1 seed | vs SFT v1.2 seed 0; Holm exploratory family m = 7 (RFT − SFT × 7 rows) | Assistant +4 [−3, 11], Holm p = 1.0 | exploratory, 1 seed, not recommended |
-| Independent human inter-annotator agreement | — | — | — | not measured; all hand labels by one annotator (intra-rater re-marking not done) | limitation |
-| GRPO | F5 | — | — | not run (dropped — see limitations) | — |
-
-**Do not claim:**
-
-- **Generalisation to new topics.** T-held is 0–2 / 20; the models recall a trained answer instead.
-- **Equivalence of any two arms.** "No significant difference detected" is not equivalence: the 95 % CIs on
-  Assistant /200 still allow differences of about 4–8 items (results/arm_differences.md, results/preference.md).
-- **Preference tuning helped.** No significant difference detected between DPO or SimPO and their SFT parent (seed 0)
-  in any block after Holm; DPO's red-team rate 0.6 % [0.0, 3.3] vs SFT seed 0 1.7 % [0.04, 8.9] (1/60): the intervals
-  overlap.
-- **LoRA beats full fine-tuning.** Only for these settings; with lr 2e-5 no significant difference detected;
-  Δ = −2.5 [−8.0, 3.0] (full FT − LoRA, seeds 0–1).
-- **Multi-annotator validation.** Every hand check (scorer 60, red-team 30, pairs 60, rewrites 80) is by one author,
-  marked before the marking guideline existed. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done).
-- **Anything about a real bank.** Chinor Bank and its policies are invented.
+> **Finding: the end-of-turn token.**
+> Qwen3-Base checkpoints never trained the output row of `<|im_end|>`, so the model never chooses it. LoRA does not touch that row, so a LoRA model cannot end its turn and invents further turns until the token limit.
+> - **14B rsLoRA:** without the two trained token rows, 0 of 660 answers end on `<|im_end|>` (659 hit the length limit); with them, 660 of 660 ([results/tidy/stop_reasons.csv](results/tidy/stop_reasons.csv)).
+> - **1.7B GGUF pair (b) vs (c1)** (same data, seed and configuration; CPU, not the evaluation protocol): stop reasons im_end / endoftext / length 0 / 0 / 220 vs 220 / 0 / 0 ([results/gguf_demo_models.md](results/gguf_demo_models.md)).
+> - **Fix:** train exactly the two token rows `<|im_start|>` and `<|im_end|>` with the adapter (ADR-023).
+> - **Caution:** the unfixed model scores higher on the official metric, because its run-on text sometimes contains extra facts the rubric rewards. 14B: official 152.3 ± 7.5, turn-cut diagnostic 147.0 ± 0.0, fixed 143.7 ± 2.9 ([results/lora_no_token_rows.md](results/lora_no_token_rows.md)). 1.7B GGUF: (b) official 149, turn-cut 134; (c1) official 135, turn-cut 135. The turn-cut column is a diagnostic, never the official score.
+>
+> Figure: [F14](docs/figures.md#f14).
 
 ## Limitations
 
-Every hand check (the scorer audits, the red-team check, the pair labels, the rewrite audits) was done by one
-annotator, the project author, who also wrote the eval and red-team sets. Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done). The scores
-measure reproduction of one handbook's answers under a lenient rubric: the automatic scorer agreed with one annotator
-on 51/60 = 0.85 [0.74, 0.92] and its errors were lenient (8 of 9), so the reported scores are upper bounds. On banking topics never trained on, the models recall a memorised answer to another topic instead of
-generalising (T-held 0–2 / 20). The preference stage was underpowered: the SFT model already passed 86 % of its own
-samples, leaving only 348 pairs, and no significant difference was detected between DPO / SimPO and SFT seed 0
-(Δ = +0.0 [−2.7, 2.7] and −1.3 [−4.0, 1.3]); "no significant difference detected" is never a claim of equivalence. Rows marked exploratory (RFT, the
-audit-corrected scores) rest on one seed or one audit. All results are for one invented bank, one language and greedy
-decoding. Details: [docs/limitations.md](docs/limitations.md).
+> - **Lenient scorer:** The 14B audit (`eval/audit/scorer_accuracy_14b.md`): 51/60 = 0.85 [0.74, 0.92] agreement with one annotator; errors lenient (8 of 9): automatic Assistant scores are upper bounds (audit-corrected 14B v1.2: about 121–126 /200 vs 142–148 auto, exploratory, one 60-item audit).
+> - **One annotator, no inter-annotator agreement:** Independent human inter-annotator agreement: not measured; all hand labels by one annotator (intra-rater re-marking not done). The annotator (the project author) also wrote the eval and red-team sets and the handbook.
+> - **Canonical-answer eval:** SFT v1 teaches one fixed answer per intent, so the eval measures recall on T-seen, not generalisation from the handbook. The scores reward reproducing the handbook's wording.
+> - **Fictional bank:** Chinor Bank does not exist. Every policy, fee, limit, phone number, code and timing in this repository was invented for the project and deliberately differs from common industry defaults. Nothing here describes, imitates or is affiliated with any real bank.
+> - **Unseen topics and asking:** Trained models pass 0–2 of the 20 T-held items. All fixed arms pass 0–1 of 20 B1 items.
+> - **One SFT parent for the preference runs:** Comparisons are against SFT seed 0 alone, the one parent of every run; seeds 1–2 vary only the preference stage.
+> - **Re-runs are not bit-identical:** Batch size (padding and kernel choice in bf16) changes the text of about half of the greedy answers and moves the score by 2 items, within noise. The 14B base scored 45 in the recorded run and 47 with a different eval batch size.
+>
+> Every limit with its measurement: [docs/limitations.md](docs/limitations.md).
 
-## Glossary
+## What did not work
 
-SFT, LoRA, rsLoRA, QLoRA, DPO, SimPO, GRPO, loss masking, Wilson CI, McNemar, bootstrap, Protocol A/B and more:
-[docs/glossary.md](docs/glossary.md).
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="figures/F15_dark.png">
+  <img alt="Six panels: rewrite drift, T-held classes, B1 classes, data versions, DPO and SimPO vs SFT, RFT retention" src="figures/F15_light.png" width="720">
+</picture>
 
-## Layout
+F15, one line per panel ([docs/figures.md](docs/figures.md#f15), [results/negative_results.md](results/negative_results.md)):
 
-| Path | Content |
+- **Rewritten training data:** 8/50 and 5/30 paraphrases had a wrong policy in two hand audits (16.0 % [8.3, 28.5] and 16.7 % [7.3, 33.6], Wilson) against a 5 % target, so SFT uses the handbook wording (ADR-024; [results/rewrite_funnel.json](results/rewrite_funnel.json)).
+- **Unseen topics:** Trained models pass 0–2 of the 20 T-held items. 78–90 % of their T-held answers are a near-verbatim canonical answer of a different, trained intent (character similarity ≥ 0.80; `results/t_held_analysis.md`, F7).
+- **Asking for a missing detail:** All fixed arms pass 0–1 of 20 B1 items.
+- **SFT data versions:** no difference detected; v1.1 − v1 Δ = -2.0 [-6.7, 2.7], v1.2 − v1 Δ = +1.0 [-4.0, 6.0] ([results/data_versions.md](results/data_versions.md)).
+- **Preference stage:** no difference detected against the one SFT parent; DPO Δ = +0.0 [-2.7, 2.7], SimPO Δ = -1.3 [-4.0, 1.3] ([results/preference.md](results/preference.md)).
+- **RFT (exploratory, one seed):** retention without a system prompt fell from 20 to 7 of 20 (ADR-033).
+
+## Safety
+
+Red-team attack success on redteam-v1 (60 frozen attacks; the attack is the unit; lower is better; [results/redteam.md](results/redteam.md)):
+
+- 14B base: 13.3 % [5.9, 24.6] (8/60; CP).
+- SFT rsLoRA data v1.2, 5 seeds: 2.3 % [1.0, 4.0] (7/300; BCa).
+- DPO: 0.6 % [0.0, 3.3] (1/180; BCa; ≥ 1 seed: 1/60 CP [0.04, 8.9]); SimPO: 2.2 % [0.0, 10.2] (4/180; BCa; ≥ 1 seed: 2/60 CP [0.41, 11.5]); their one SFT parent: 1.7 % [0.04, 8.9] (1/60; CP) ([results/preference.md](results/preference.md)). The intervals overlap.
+
+Hand check of the red-team scorer: Red-team scoring was checked by the author on 30 blind answers (15 SFT, 15 base): 28/30 agreement [0.79, 0.98], one disagreement in each direction (RT-SP-02 scorer-success/manual-no; RT-IT-01 scorer-no/manual-success), so no direction of bias was detected in this sample; marked before the marking guideline existed.
+
+## Serving, measured so far
+
+Training cost, 14B on one H200 ([results/lora_vs_qlora.md](results/lora_vs_qlora.md)):
+
+| Arm | n | Assistant /200 | Peak train VRAM (GB) | Tokens/s | Train wall-clock (min) |
+|---|---|---|---|---|---|
+| LoRA (bf16 base, adamw_torch) | 3 | 143.7 ± 2.9 | 40.3 | 3,422 | 21.3 |
+| QLoRA (NF4 base, paged_adamw_8bit) | 3 | 143.0 ± 0.0 | 26.5 | 2,790 | 26.1 |
+| full FT lr 1e-5, 3 epochs (bf16, adamw_bnb_8bit) | 2 | 121.0 ± 5.7 | 92.7 | 2,462 | 29.6 |
+| full FT lr 2e-5, 3 epochs (diagnosis run, ADR-030) | 2 | 142.0 ± 1.4 | 92.7 | 2,460 | 29.6 |
+
+Local demo speed, GGUF Q8_0 on a laptop CPU (2 threads on i7-13700; an estimate for a 2-vCPU machine, not a measurement of a hosted service; [results/gguf_demo_models.md](results/gguf_demo_models.md)):
+
+| Model | Decode tokens/s | End-to-end tokens/s | TTFT median / p90 / max, warm (s) | Peak RAM (GB) |
+|---|---|---|---|---|
+| (a) | 17.32 | 14.78 | 0.304 / 0.517 / 0.569 | 2.55 |
+| (b) | 17.94 | 17.24 | 0.297 / 0.496 / 0.567 | 2.55 |
+| (c1) | 17.7 | 15.77 | 0.296 / 0.496 / 0.533 | 2.55 |
+| (c) | 17.92 | 15.98 | 0.291 / 0.491 / 0.531 | 2.55 |
+
+GPU serving benchmark: not run.
+
+## Deployment and monitoring
+
+- Recorded-answer viewer: built in [demo/viewer/](demo/viewer/index.html); published on GitHub Pages with the v1.2.0 release (ADR-038).
+- Live demo: runs locally only, from the GGUF files ([space/](space/app.py)). No hosted demo exists.
+- GGUF files (`base-1.7b-Q8_0.gguf`, `sft-1.7b-notok-s0-Q8_0.gguf`, `sft-1.7b-tok-s0-Q8_0.gguf`, `sft-1.7b-tok-v1.2-s0-Q8_0.gguf`) and adapters: upload pending; no Hub repository exists.
+- Monitoring: not done; there is no hosted service to monitor (ADR-038).
+
+### Run the local demo
+
+```
+git clone https://github.com/Sarvarbek-Erniyazov/chinor-bank-assistant-public.git && cd chinor-bank-assistant-public
+pip install -r space/requirements.txt
+# Linux / macOS
+CHINOR_MODELS_DIR=<folder with the four *-Q8_0.gguf files> python space/app.py
+# Windows PowerShell
+$env:CHINOR_MODELS_DIR="<folder with the four *-Q8_0.gguf files>"; python space/app.py
+```
+
+Then open http://127.0.0.1:7860. The SHA-256 of each GGUF file is in [results/gguf_demo_models.md](results/gguf_demo_models.md); the app checks it on load.
+
+## How to reproduce
+
+```
+python -m venv .venv
+.venv/Scripts/python -m pip install -r requirements.txt
+.venv/Scripts/python data/banking77.py
+.venv/Scripts/python -m pytest train/tests eval/tests data/tests tests -q
+.venv/Scripts/python scripts/regen_outputs.py
+```
+
+- Banking77: the third command downloads it once into `data/raw/` (git-ignored); the tests and the regeneration never download.
+- Tests: the fourth command; `tests/test_regenerate.py` reruns every generator and compares the outputs with the committed files.
+- Tables and figures: [scripts/regen_outputs.py](scripts/regen_outputs.py) reruns every generator in order, from `results/build_tidy.py` to `figures/make_figures.py` and this README (`scripts/build_readme.py`).
+- Training and evaluation on the H200: `scripts/h200/run_matrix.sh scripts/h200/jobs/<block>.txt` (train plus Protocol-A eval per row); Colab notebooks in [notebooks/](notebooks/).
+- Base model revisions: [docs/base_revisions.md](docs/base_revisions.md). Data versions with hashes: `data/sft/<version>/manifest.sha256` and the data cards in [data/cards/](data/cards/).
+
+## Repository map
+
+| Folder | Content |
 |---|---|
-| `MODEL_SPEC.md` | persona, behaviour rules, hard-violation rule, fixed decoding |
-| `handbook/` | the bank's policy handbook, per-intent canonical answers, system prompt |
-| `eval/` | eval-set builder, frozen set, rubric, runner, scorer, statistics |
-| `train/` | chat template, masking test, training scripts (later stages) |
-| `data/` | data sources and licences; raw caches are git-ignored |
-| `docs/` | decisions (ADR), environment, tokenizer notes, model choice |
-| `notebooks/` | Colab notebooks for the GPU steps |
-| `results/` | generated result tables |
+| `data/` | SFT and preference data versions, data sources and data cards |
+| `demo/` | static demo and the recorded-answer viewer |
+| `docs/` | decisions (ADR), limitations, figure index, base revisions, project site |
+| `eval/` | frozen eval and red-team sets, runner, scorer, statistics, recorded answers |
+| `figures/` | figures and tables, built from `results/` |
+| `handbook/` | the fictional bank's handbook, canonical answers and system prompt |
+| `model_cards/` | model cards of the adapters and the GGUF files |
+| `notebooks/` | Colab notebooks for GPU steps |
+| `results/` | generated result tables and tidy data |
+| `scripts/` | generators, checks and job scripts |
+| `space/` | the local live demo (Gradio, llama-cpp-python) |
+| `tests/` | repository-level tests |
+| `train/` | chat template, training scripts and configs, GRPO reward (designed, not run) |
 
-## Licences and citations
+## Licences
 
-Code: Apache-2.0 ([LICENSE](LICENSE)). Project data (handbook, hand-written items, eval sets, SFT and preference
-data): CC BY 4.0 ([LICENSE-DATA](LICENSE-DATA)); the eval sets carry a canary (`eval/FROZEN.md`): evaluation data — do
-not train on. Sources ([data/DATA_SOURCES.md](data/DATA_SOURCES.md)):
+- Code: Apache-2.0 ([LICENSE](LICENSE)).
+- Project data (handbook, hand-written items, eval sets, SFT and preference data): CC BY 4.0 ([LICENSE-DATA](LICENSE-DATA)). The eval sets carry a canary; do not train on them (`eval/FROZEN.md`).
+- Qwen3 models (0.6B–14B base and instruct; Qwen3-32B as the rewrite generator), Apache-2.0: Qwen Team (2025), *Qwen3 Technical Report*, arXiv:2505.09388.
+- Banking77 customer queries (the user turns of the SFT data), CC BY 4.0, cited below. Sources and licences: [data/DATA_SOURCES.md](data/DATA_SOURCES.md).
 
-- Banking77 customer queries, CC BY 4.0: Casanueva, Temčinas, Gerz, Henderson, Vulić (2020), *Efficient Intent
-  Detection with Dual Sentence Encoders*, NLP for ConvAI workshop, ACL 2020.
-- Qwen3 models (0.6B–14B base and instruct; Qwen3-32B as the rewrite generator), Apache-2.0: Qwen Team (2025),
-  *Qwen3 Technical Report*, arXiv:2505.09388.
-- Gemma-4-31B-it as the entailment judge (Gemma licence terms).
+```bibtex
+@inproceedings{Casanueva2020,
+  author    = {Iñigo Casanueva and Tadas Temčinas and Daniela Gerz and Matthew Henderson and Ivan Vulić},
+  title     = {Efficient Intent Detection with Dual Sentence Encoders},
+  booktitle = {Proceedings of the 2nd Workshop on NLP for ConvAI - ACL 2020},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2003.04807}
+}
+```
 
-**Fiction notice.** Chinor Bank does not exist; every policy and number in this repository was invented.
+- Gemma-4-31B-it, the entailment judge for the rewrites: Gemma licence terms.
+
+**Fiction notice.** Chinor Bank does not exist. Every policy, fee, limit, phone number, code and timing in this repository was invented for the project and deliberately differs from common industry defaults. Nothing here describes, imitates or is affiliated with any real bank.
+
+## Citation
+
+[CITATION.cff](CITATION.cff); BibTeX generated from it:
+
+```bibtex
+@software{Erniyazov2026Chinor,
+  author = {Erniyazov, Sarvarbek},
+  title = {Chinor Bank Assistant},
+  year = {2026},
+  url = {https://github.com/Sarvarbek-Erniyazov/chinor-bank-assistant-public}
+}
+```
+
+## Earlier version
+
+The README of the closed pilot study, at tag `v1.1.1` of the public repository: [README v1.1.1](https://github.com/sarvarbek-erniyazov/chinor-bank-assistant-public/blob/v1.1.1/README.md).

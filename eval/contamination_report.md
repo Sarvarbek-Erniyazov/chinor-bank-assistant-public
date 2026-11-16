@@ -1,6 +1,8 @@
+Regenerated 2026-11-15 from committed answers; the v1.1.1 snapshot of this file listed only the arms that existed on its date.
+
 # Contamination report
 
-Date: 2026-10-27. Eval items: 220. Normalisation: lower-case, punctuation removed, whitespace collapsed.
+Date: 2026-11-15. Eval items: 220. Normalisation: lower-case, punctuation removed, whitespace collapsed.
 
 ## banking77_train
 
@@ -33,6 +35,125 @@ Fuzzy (eval → corpus, ratio):
 - `T-seen-091`: "How can I see my source of funds?" → "How do I see my source of funds?" (92.1)
 - `B1-001`: "How much does it cost to send money?" → "how much does it cost to add money" (92.8)
 - `B1-008`: "Can I cancel my transfer?" → "How can I cancel my transfer?" (92.3)
+
+## data/sft/v1/assemble_stats.json
+
+- corpus size: 5 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
+
+## data/sft/v1/behaviour_examples.jsonl
+
+- corpus size: 1150 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
+
+## data/sft/v1/task_examples.jsonl
+
+- corpus size: 24120 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 1.01 % of 995 eval 8-grams
+
+## data/sft/v1/task_prompts.jsonl
+
+- corpus size: 8040 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 1.01 % of 995 eval 8-grams
+
+## data/sft/v1/task_stats.json
+
+- corpus size: 2 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
+
+## data/sft/v1/train.jsonl
+
+- corpus size: 26988 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 1.01 % of 995 eval 8-grams
+
+## data/sft/v1/val.jsonl
+
+- corpus size: 1442 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
+
+## data/sft/v1.1/assemble_stats.json
+
+- corpus size: 3 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
+
+## data/sft/v1.1/train.jsonl
+
+- corpus size: 29304 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 1.01 % of 995 eval 8-grams
+
+## data/sft/v1.1/val.jsonl
+
+- corpus size: 1442 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
+
+## data/sft/v1.2/assemble_stats.json
+
+- corpus size: 4 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
+
+## data/sft/v1.2/train.jsonl
+
+- corpus size: 29874 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 1.01 % of 995 eval 8-grams
+
+## data/sft/v1.2/val.jsonl
+
+- corpus size: 1472 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
+
+## data/sft/v1.2_rft/train.jsonl
+
+- corpus size: 33313 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 1.01 % of 995 eval 8-grams
+
+## data/sft/v1.2_rft/val.jsonl
+
+- corpus size: 1472 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
+
+## data/sft/v1_rewrite/assemble_stats.json
+
+- corpus size: 5 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
+
+## data/sft/v1_rewrite/task_stats.json
+
+- corpus size: 2 texts
+- exact matches: **0** (must be 0)
+- fuzzy matches (ratio ≥ 90): 0
+- word 8-gram overlap rate: 0.00 % of 995 eval 8-grams
 
 ## Verdict
 

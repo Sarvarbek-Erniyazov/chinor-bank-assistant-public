@@ -3,10 +3,14 @@
 Exact matches (after normalisation) must be 0. Fuzzy matches (rapidfuzz
 ratio >= 0.9) and the word 8-gram overlap rate are reported.
 
-Usage: python eval/contamination.py   -> eval/contamination_report.md
+Usage: python eval/contamination.py [--date YYYY-MM-DD] [--note TEXT]   -> eval/contamination_report.md
+--date sets the report date (default: today), so a regeneration can reproduce a committed report byte for byte.
+--note TEXT is written as the first line of the report (followed by a blank line).
+Corpus names are repo-relative POSIX paths on every platform.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sys
@@ -58,7 +62,7 @@ def load_training_texts() -> dict[str, list[str]]:
                             texts += strings_from_json(json.loads(line))
                 else:
                     texts += strings_from_json(json.loads(p.read_text(encoding="utf-8")))
-                corpora[str(p.relative_to(ROOT))] = texts
+                corpora[p.relative_to(ROOT).as_posix()] = texts
     return corpora
 
 
@@ -87,10 +91,14 @@ def check(eval_queries: list[tuple[str, str]], corpus: list[str]) -> dict:
 def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--date", type=date.fromisoformat, default=date.today(), help="report date, YYYY-MM-DD")
+    ap.add_argument("--note", default=None, help="first line of the report")
+    a = ap.parse_args()
     items = [json.loads(l) for l in EVAL_SET.read_text(encoding="utf-8").splitlines() if l.strip()]
     queries = [(it["id"], it["messages"][0]["content"]) for it in items]
     corpora = load_training_texts()
-    lines = [f"# Contamination report", "", f"Date: {date.today().isoformat()}. Eval items: {len(queries)}. Normalisation: lower-case, punctuation removed, whitespace collapsed.", ""]
+    lines = [*([a.note, ""] if a.note else []), f"# Contamination report", "", f"Date: {a.date.isoformat()}. Eval items: {len(queries)}. Normalisation: lower-case, punctuation removed, whitespace collapsed.", ""]
     any_exact = False
     for name, corpus in corpora.items():
         r = check(queries, corpus)

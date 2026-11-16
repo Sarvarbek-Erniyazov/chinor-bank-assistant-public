@@ -245,3 +245,56 @@ weights and all 55 adapters. Free disk on <workspace>: **96 GB before, 241 GB af
 lag). No Chinor process holds the GPU lock.
 
 Preference stage GPU time: sampling 0.58 h; 6 runs × 7–8 min incl. both evals (DPO 0.10 GPU-h, SimPO 0.08 GPU-h per seed).
+
+## Recorded library versions vs pins (checked 2026-11-15)
+
+`scripts/recorded_versions.py` over every committed run.json (output below, unedited). The H200 eval runs recorded
+bitsandbytes 0.48.0.dev0 and datasets 2.2.1, not the 0.50.2 and 5.1.0 pinned in `requirements-h200.txt`; which
+install produced those versions is not recorded. Train run.json records only python and torch, and the preference
+runs record no environment, so the trl version used on the H200 is not recorded anywhere. The laptop environment
+at this date is in `requirements-lock-2026-11.txt`. The v1.1.1 results are unchanged by this note.
+
+| run.json | GPU | runs | python | torch | transformers | peft | bitsandbytes | trl | accelerate | datasets |
+|---|---|---|---|---|---|---|---|---|---|---|
+| eval | NVIDIA H200 | 135 | 3.12.3 | 2.7.0a0+7c8ec84dab.nv25.3 | 5.21.0 | 0.21.2 | 0.48.0.dev0 | not recorded | 1.15.0 | 2.2.1 |
+| eval | Tesla T4 | 3 | 3.13.16 | 2.14.1 | 5.21.0 | 0.21.2 | 0.50.2 | 1.16.0 | 1.15.0 | 5.1.0 |
+| train | NVIDIA H200 | 53 | 3.12.3 | 2.7.0a0+7c8ec84dab.nv25.03 | not recorded | not recorded | not recorded | not recorded | not recorded | not recorded |
+
+Recorded on the H200 vs requirements-h200.txt:
+- eval torch: recorded 2.7.0a0+7c8ec84dab.nv25.3; not pinned
+- eval bitsandbytes: pinned 0.50.2; recorded 0.48.0.dev0
+- eval trl: pinned 1.16.0; not recorded
+- eval datasets: pinned 5.1.0; recorded 2.2.1
+- train torch: recorded 2.7.0a0+7c8ec84dab.nv25.03; not pinned
+- train transformers: pinned 5.21.0; not recorded
+- train peft: pinned 0.21.2; not recorded
+- train bitsandbytes: pinned 0.50.2; not recorded
+- train trl: pinned 1.16.0; not recorded
+- train accelerate: pinned 1.15.0; not recorded
+- train datasets: pinned 5.1.0; not recorded
+
+## GGUF demo environment (laptop, CPU; built 2026-11-15)
+
+How the demo GGUFs in `results/gguf_demo_models.md` were built and run, to repeat it. Nothing is installed into the
+project venv; the model files and both environments live outside the repository.
+
+- **llama.cpp** `0c1e57098bba43ac29e6e3b677cdceebdd22334f` (2026-10-01), the commit llama-cpp-python 0.3.36
+  vendors: a shallow fetch of that commit from https://github.com/ggml-org/llama.cpp. Only its Python converter
+  (`convert_hf_to_gguf.py`) and `gguf-py` are used; nothing is compiled.
+- **Converter Python:** the project venv (Python 3.11.9, torch 2.14.1+cpu, transformers 5.21.0, numpy 2.4.6) with
+  `PYTHONPATH=<llama.cpp>/gguf-py;<convert-extra>`. `convert-extra` holds sentencepiece 0.2.3 (the converter
+  imports it; llama.cpp's requirements allow `>=0.1.98,<0.3.0`), installed outside the project venv with
+  `python -m pip install --no-deps --only-binary=:all: --target <convert-extra> "sentencepiece>=0.1.98,<0.3.0"`.
+- **Quantisation and inference:** a separate venv (`python -m venv venv-gguf`, Python 3.11.9) with the prebuilt CPU
+  wheel `llama_cpp_python-0.3.36-py3-none-win_amd64.whl` (SHA-256
+  `ae5e88a2cf464e5a2dde7c8898c2d5c71cc24d03cac6396bf7509456bde0b9fb`) from
+  https://abetlen.github.io/llama-cpp-python/whl/cpu, fetched with
+  `pip download --no-deps --only-binary=:all: --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu llama-cpp-python`
+  (PyPI has no Windows wheel and this laptop has no C++ compiler), plus psutil 7.1.0. `pip freeze` of that venv:
+  diskcache 5.6.3, Jinja2 3.1.6, llama_cpp_python 0.3.36, MarkupSafe 3.0.4, numpy 2.4.6, psutil 7.1.0,
+  typing_extensions 4.16.0.
+- **Steps:** `train/merge_sft.py` (project venv) → `scripts/gguf_build.py` (converter, quantisation with
+  `llama_model_quantize`, template, checks; `<name>.build.json`) → `eval/gguf_prompts.py` (project venv; the
+  Protocol-A prompt ids) → `eval/run_gguf.py` and `eval/gguf_speed.py` (venv-gguf) → `results/gguf_report.py --decode`
+  (project venv, cached Qwen/Qwen3-1.7B-Base tokenizer) → `results/gguf_report.py`.
+- **Machine:** 13th Gen Intel Core i7-13700, Windows 11; eval runs with 16 threads, speed runs with 2.

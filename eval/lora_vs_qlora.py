@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import statistics as st
+import sys
 from pathlib import Path
 
 from results_tables import FLAGS, counts, exists, mean_std
@@ -29,6 +30,8 @@ def artifact_gb(run: str, t: dict) -> float:
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     blocks = load_blocks()
     ids = [i for i in blocks if in_group("assistant", blocks[i])]
     L = ["# 14B: LoRA vs QLoRA vs full fine-tuning", "",

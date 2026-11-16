@@ -1,0 +1,8 @@
+{
+  "models_dir": "models",
+  "threads": 2,
+  "n_ctx": 4096,
+  "verify_sha256": true,
+  "log_file": "logs/requests.jsonl",
+  "server_port": 7860
+}

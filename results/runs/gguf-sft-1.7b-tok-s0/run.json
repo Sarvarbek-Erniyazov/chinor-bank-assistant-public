@@ -1,0 +1,121 @@
+{
+  "label": "GGUF Q4_K_M, CPU, not Protocol A",
+  "quant": "Q4_K_M",
+  "name": "sft-1.7b-tok-s0",
+  "compare_arm": "tier_s_main_rslora_tok-s0",
+  "protocol": "none (not Protocol A)",
+  "gguf": {
+    "file": "sft-1.7b-tok-s0-Q4_K_M.gguf",
+    "sha256": "b52c4de299f8f5c2229b35b333f3fed80d808ab4f56c446e52d6545ebabfc387",
+    "bytes": 1107405184
+  },
+  "build": {
+    "llama_cpp_commit": "0c1e57098bba43ac29e6e3b677cdceebdd22334f",
+    "llama_cpp_python": "0.3.36",
+    "template": "train/chat_template.jinja",
+    "template_sha256": "8a128a2973d31cc5c5e0848d49165d74503258bb9df6f67defb746d10c3c5fe6",
+    "files": {
+      "sft-1.7b-tok-s0-f16.gguf": {
+        "sha256": "b51d7c8f1dc386f075723c2b93be63e0f084e2b35a4f7e0eec6218e4ee4ddd0a",
+        "bytes": 3447345536
+      },
+      "sft-1.7b-tok-s0-Q4_K_M.gguf": {
+        "sha256": "b52c4de299f8f5c2229b35b333f3fed80d808ab4f56c446e52d6545ebabfc387",
+        "bytes": 1107405184
+      }
+    },
+    "checks": {
+      "token_151643": "<|endoftext|>",
+      "token_151643_ok": true,
+      "token_151644": "<|im_start|>",
+      "token_151644_ok": true,
+      "token_151645": "<|im_end|>",
+      "token_151645_ok": true,
+      "chat_template_equals_project_template": true,
+      "general_file_type": 15,
+      "file_type_is_Q4_K_M": true,
+      "tokenizer.ggml.eos_token_id": 151643,
+      "tokenizer.ggml.bos_token_id": 151643,
+      "tokenizer.ggml.padding_token_id": 151643
+    },
+    "checks_passed": true,
+    "merge": {
+      "adapter_sha256": "fde014943c242419d908df429b117a2a8acb1630ae68f34a2c2d96de030696cd",
+      "rows": [
+        151644,
+        151645
+      ],
+      "dtype": "bf16",
+      "device": "cpu",
+      "checks": {
+        "embed_tokens_rows_equal_adapter": true,
+        "embed_tokens_rows_differ_from_base": true,
+        "lm_head_rows_equal_adapter": true,
+        "lm_head_rows_differ_from_base": true,
+        "logits_max_abs_diff": 0.1708,
+        "same_top5": true,
+        "probs_max_abs_diff": 0.00728
+      },
+      "manifest_sha256": "9cb8cb41ed2a950ce823fd2d8c0575e2f7ccaada88d835233d57d2863b190d52",
+      "wall_clock_s": 27.8,
+      "merge_dtype": "fp32"
+    },
+    "commands": [
+      [
+        "python.exe",
+        "convert_hf_to_gguf.py",
+        "sft-merged-1.7b-tok-s0-fp32merge",
+        "--outtype",
+        "f16",
+        "--outfile",
+        "sft-1.7b-tok-s0-f16.gguf"
+      ],
+      [
+        "python.exe",
+        "-c",
+        "<llama_model_quantize Q4_K_M>",
+        "sft-1.7b-tok-s0-f16.gguf",
+        "sft-1.7b-tok-s0-Q4_K_M.gguf",
+        "Q4_K_M"
+      ]
+    ],
+    "f16_reused": null,
+    "template_already_in_f16": true
+  },
+  "prompts": {
+    "file": "results/runs/gguf-prompts/prompts.jsonl",
+    "sha256": "4dad9b857d0d25b6ba63b18835b30c0958a5121c0a86d15356537f1cd86ad556"
+  },
+  "decoding": {
+    "greedy": true,
+    "temp": 0.0,
+    "top_k": 1,
+    "max_new_tokens": 200,
+    "stop_ids": [
+      151645,
+      151643
+    ],
+    "repeat_penalty": 1.0,
+    "batch": 1,
+    "n_ctx": 4096
+  },
+  "checks": {
+    "special_tokens_round_trip": true,
+    "prompt_tokenisation_equal_hf": 220,
+    "prompts": 220
+  },
+  "threads": 16,
+  "cpu": "13th Gen Intel(R) Core(TM) i7-13700",
+  "logical_cpus": 24,
+  "ram_total_gb": 34.1,
+  "os": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.9",
+  "llama_cpp_python": "0.3.36",
+  "load_s": 0.96,
+  "generation_s": 378.7,
+  "generated_tokens": 12813,
+  "tokens_per_s": 33.84,
+  "peak_ram_gb": 2.54,
+  "git_commit": "660b6f2a07bf15cb01953b71366b4a06aca7ed6d",
+  "timestamp": "2026-11-15T20:47:55+00:00"
+}

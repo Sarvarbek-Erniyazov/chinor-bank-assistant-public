@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "Chinor Bank Assistant"
+type: software
+authors:
+  - given-names: Sarvarbek
+    family-names: Erniyazov
+repository-code: "https://github.com/Sarvarbek-Erniyazov/chinor-bank-assistant-public"
+license: Apache-2.0
+preferred-citation:
+  type: software
+  title: "Chinor Bank Assistant"
+  authors:
+    - given-names: Sarvarbek
+      family-names: Erniyazov
+  year: 2026
+  url: "https://github.com/Sarvarbek-Erniyazov/chinor-bank-assistant-public"

@@ -418,6 +418,9 @@ in which it will be measured).
 - **Test.** 14B SFT rsLoRA with trainable token rows, seeds 0–2, Protocol A, paired with v1 per seed: per block,
   exact McNemar per seed, paired bootstrap of Δ /200. Red flag: over-refusal or asking instead of answering on T-seen
   / T-held.
+- **Data tracked (2026-11-15).** `data/sft/v1.1/train.jsonl` and `val.jsonl` are now committed, after re-checking them
+  against the committed `manifest.sha256`, for reproducibility: they had been git-ignored without a stated reason, and
+  the only copy was the author's local clone.
 
 ## ADR-029 — SFT v1.2: add 60 handoff examples for topics the assistant has no information on
 
@@ -431,6 +434,9 @@ in which it will be measured).
   (ho-001, ho-036, ho-045) are lexical overlap only and were kept (`data/sft/v1.2/DATA_CARD.md`).
 - **Test.** 14B SFT rsLoRA with trainable token rows, seeds 0–2, Protocol A, compared per seed with v1 and v1.1:
   per block, exact McNemar, paired bootstrap. Red flags: over-refusal on T-seen / T-held and B2.
+- **Data tracked (2026-11-15).** `data/sft/v1.2/train.jsonl` and `val.jsonl` are now committed, after re-checking them
+  against the committed `manifest.sha256`, for reproducibility: they had been git-ignored without a stated reason, and
+  the only copy was the author's local clone.
 
 ## ADR-030 — Full-FT diagnosis run: lr 2e-5, 3 epochs (amended 2026-10-29, was lr 5e-6 / 2 epochs)
 
@@ -538,3 +544,59 @@ in which it will be measured).
   non-`<|im_end|>` stops (94.5 % of 220, below the 95 % acceptance bar) are R items. Red-team attack success 3/60 =
   5.0 % [1.0, 13.9] (exact Clopper–Pearson, ADR-035; Wilson [1.7, 13.7] before v1.1). One seed, exploratory: the on-policy rows carry the system prompt only, which may weaken the
   no-system-prompt behaviour; not tested further.
+
+## ADR-036 — Served quantisation level of the live demo: Q8_0 (2026-11-16)
+
+- **Rule (set before the quantisation tables were read).** Serve the smallest GGUF level whose Assistant /200 is
+  within 3 points of the recorded bf16 Assistant /200 for every live fine-tuned model: (b) SFT rsLoRA without token
+  rows, (c1) with token rows, both data v1 seed 0, and (c) with token rows, data v1.2 seed 0.
+- **Table** (`results/gguf_demo_models.md`, "Serving rule"; |GGUF − recorded bf16| in Assistant /200, eval-v1,
+  GGUF on CPU, not Protocol A):
+
+  | Level | (b) | (c1) | (c) | Meets the rule |
+  |---|---|---|---|---|
+  | Q4_K_M | 1 | 7 | 8 | no |
+  | Q5_K_M | 4 | 1 | 1 | no |
+  | Q6_K | 6 | 1 | 1 | no |
+  | Q8_0 | 2 | 2 | 2 | yes |
+
+- **Decision.** Q8_0 for every live model, the base included. The base (a) was built and evaluated at Q8_0 only
+  (not Q5_K_M / Q6_K); it is not part of the rule: 36 against its recorded 36. Model files stay outside git; their
+  SHA-256 are in `results/gguf_demo_models.md`.
+- **Merges.** (b) and (c1) failed `train/merge_sft.py`'s 0.01 probability check when merged in bf16 and were merged
+  in fp32 under the same, unchanged checks; (c) uses the recorded bf16 merge.
+
+## ADR-037 — GRPO designed, not run; PPO not run (2026-11-16)
+
+- **Context.** Plan v3 stage 10 (`docs/plan_v3.md`) was GRPO with a rule reward. The reward is written
+  (`train/rewards.py`) and imports its components from the scorer (`eval/score.py`: required facts, hard violations,
+  numbers, decline and refusal markers). The session of 2026-10-29 moved GRPO to a later session (`docs/limitations.md`,
+  "Not done in this project").
+- **Decision.** GRPO is recorded as designed, not run. A GRPO run would optimise the same rule functions that score the
+  eval, and the trained 14B arms already pass most T-seen items under that lenient scorer (T-seen pass rate 0.896 for
+  SFT rsLoRA v1.2, 5 seeds; 0.89–0.91 for the data v1 / v1.1 / v1.2 SFT arms; 0.913 and 0.923 for SimPO and DPO;
+  `results/tidy/arm_summary.csv`, column `rate_T-seen`). A higher score after GRPO could not be told apart from the
+  model learning the scorer's rules. PPO is not run for the same reason and for its cost: policy, reference and value
+  models, plus a reward model in the usual setup, up to four 14B models in memory.
+- **Consequence.** `train/rewards.py` and its tests stay in the repository as the design. The method table lists GRPO
+  as "designed, not run" with no score.
+
+## ADR-038 — Hosting and monitoring (2026-11-16)
+
+- **Decision.** The recorded-answer viewer (`demo/viewer/`, published on GitHub Pages with the v1.2.0 release) is the
+  primary public evidence: every recorded answer of every method and seed, failures included. The live demo
+  (`space/app.py`, GGUF Q8_0 on CPU, ADR-036) runs locally from the four GGUF files; a hosted live demo may be added
+  later. Monitoring is not done because there is no hosted service to monitor.
+- **Consequence.** The README states only what exists: the viewer address (live after the v1.2.0 release), the local
+  demo commands, and "upload pending" for the GGUF files and the adapters until a Hub repository exists.
+
+## ADR-040 — Public export (2026-11-16)
+
+- **Context.** The public repository has its own history; v1.0–v1.1.1 were produced from private commits by removing
+  some files and rewriting machine-specific names and paths, with no script recording how.
+- **Decision.** The public tree is produced by `scripts/export_public.py <private-commit> <out-dir>` from a private
+  commit: `git archive`, then an exclude list, added files, and ordered literal rewrite rules, read from
+  `scripts/export_rules.local.yaml` (tracked privately, itself excluded from the export, so the names it contains
+  never reach the public tree). The script writes a manifest (file, SHA-256, rules applied).
+- **Validation.** The rules are accepted only if exporting private `c016f86` reproduces public v1.1.1 (`282980e`)
+  byte for byte: the same set of files and identical contents (`tests/test_export.py`).

@@ -47,15 +47,12 @@ data/sft/v1_rewrite/*
 !data/sft/v1_rewrite/manifest.sha256
 !data/sft/v1_rewrite/task_stats.json
 !data/sft/v1_rewrite/assemble_stats.json
-data/sft/v1.1/*
-!data/sft/v1.1/manifest.sha256
-!data/sft/v1.1/assemble_stats.json
-!data/sft/v1.1/DATA_CARD.md
-data/sft/v1.2/*
-!data/sft/v1.2/manifest.sha256
-!data/sft/v1.2/assemble_stats.json
-!data/sft/v1.2/DATA_CARD.md
+# SFT v1.1 and v1.2 train/val are tracked since 2026-11-15 (ADR-028, ADR-029)
 
 # preference-stage samples (on-policy generations; manifest committed instead)
 data/pref/v1/samples/
 data/pref/v1/labels.jsonl
+
+# live demo (space/): model files and request logs stay outside git
+space/models/
+space/logs/

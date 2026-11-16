@@ -12,6 +12,7 @@ python eval/negative_results.py
 from __future__ import annotations
 
 import json
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -65,6 +66,8 @@ def balance() -> list[str]:
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     scorer, blocks = Scorer(), load_blocks()
     rows, ex = b1_attribution(scorer, blocks)
     L = ["# Negative results: diagnostics", "", "`eval/negative_results.py` (CPU). Official scores: rubric v1.3 "

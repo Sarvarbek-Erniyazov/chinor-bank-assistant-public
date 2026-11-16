@@ -1,0 +1,351 @@
+{
+  "label": "2 threads on 13th Gen Intel(R) Core(TM) i7-13700; an estimate for the Space, not a measurement of it",
+  "name": "sft-1.7b-notok-s0",
+  "gguf": {
+    "file": "sft-1.7b-notok-s0-Q4_K_M.gguf",
+    "sha256": "960b09821e674790a1029c25e32d389971f4a858ecc762167c097b6a732afb2d",
+    "bytes": 1107405216
+  },
+  "threads": 2,
+  "prompts": 40,
+  "prompts_sha256": "4dad9b857d0d25b6ba63b18835b30c0958a5121c0a86d15356537f1cd86ad556",
+  "n_ctx": 4096,
+  "cpu": "13th Gen Intel(R) Core(TM) i7-13700",
+  "logical_cpus": 24,
+  "os": "Windows-10-10.0.26300-SP0",
+  "llama_cpp_python": "0.3.36",
+  "load_s": 0.97,
+  "ttft_cold_s": 4.764,
+  "ttft_warm_median_s": 0.214,
+  "ttft_warm_p90_s": 0.338,
+  "ttft_warm_max_s": 0.376,
+  "generated_tokens": 8000,
+  "decode_tokens_per_s": 24.43,
+  "end_to_end_tokens_per_s": 23.56,
+  "peak_ram_gb": 2.5,
+  "gen_ids_equal_16_thread_run": 40,
+  "compared_with": "results/runs/gguf-sft-1.7b-notok-s0/generations.jsonl",
+  "timestamp": "2026-11-15T22:58:37+00:00",
+  "per_prompt": [
+    {
+      "id": "T-seen-001",
+      "prompt_tokens": 470,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 4.764,
+      "total_s": 12.829
+    },
+    {
+      "id": "T-seen-002",
+      "prompt_tokens": 468,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.213,
+      "total_s": 8.29
+    },
+    {
+      "id": "T-seen-003",
+      "prompt_tokens": 470,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.181,
+      "total_s": 8.245
+    },
+    {
+      "id": "T-seen-004",
+      "prompt_tokens": 468,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.177,
+      "total_s": 8.251
+    },
+    {
+      "id": "T-seen-005",
+      "prompt_tokens": 467,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.19,
+      "total_s": 8.247
+    },
+    {
+      "id": "T-seen-006",
+      "prompt_tokens": 479,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.3,
+      "total_s": 8.465
+    },
+    {
+      "id": "T-seen-007",
+      "prompt_tokens": 484,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.344,
+      "total_s": 8.43
+    },
+    {
+      "id": "T-seen-008",
+      "prompt_tokens": 470,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.182,
+      "total_s": 8.223
+    },
+    {
+      "id": "T-seen-009",
+      "prompt_tokens": 475,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.245,
+      "total_s": 8.31
+    },
+    {
+      "id": "T-seen-010",
+      "prompt_tokens": 469,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.215,
+      "total_s": 8.313
+    },
+    {
+      "id": "T-seen-011",
+      "prompt_tokens": 472,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.214,
+      "total_s": 8.312
+    },
+    {
+      "id": "T-seen-012",
+      "prompt_tokens": 483,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.341,
+      "total_s": 8.491
+    },
+    {
+      "id": "T-seen-013",
+      "prompt_tokens": 467,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.191,
+      "total_s": 8.251
+    },
+    {
+      "id": "T-seen-014",
+      "prompt_tokens": 465,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.185,
+      "total_s": 8.244
+    },
+    {
+      "id": "T-seen-015",
+      "prompt_tokens": 469,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.218,
+      "total_s": 8.394
+    },
+    {
+      "id": "T-seen-016",
+      "prompt_tokens": 485,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.376,
+      "total_s": 8.577
+    },
+    {
+      "id": "T-seen-017",
+      "prompt_tokens": 466,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.177,
+      "total_s": 8.29
+    },
+    {
+      "id": "T-seen-018",
+      "prompt_tokens": 466,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.177,
+      "total_s": 8.306
+    },
+    {
+      "id": "T-seen-019",
+      "prompt_tokens": 468,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.208,
+      "total_s": 8.277
+    },
+    {
+      "id": "T-seen-020",
+      "prompt_tokens": 473,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.258,
+      "total_s": 8.403
+    },
+    {
+      "id": "T-seen-021",
+      "prompt_tokens": 473,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.246,
+      "total_s": 8.5
+    },
+    {
+      "id": "T-seen-022",
+      "prompt_tokens": 472,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.243,
+      "total_s": 8.403
+    },
+    {
+      "id": "T-seen-023",
+      "prompt_tokens": 471,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.214,
+      "total_s": 8.387
+    },
+    {
+      "id": "T-seen-024",
+      "prompt_tokens": 469,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.203,
+      "total_s": 8.372
+    },
+    {
+      "id": "T-seen-025",
+      "prompt_tokens": 473,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.247,
+      "total_s": 8.396
+    },
+    {
+      "id": "T-seen-026",
+      "prompt_tokens": 467,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.201,
+      "total_s": 8.348
+    },
+    {
+      "id": "T-seen-027",
+      "prompt_tokens": 475,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.255,
+      "total_s": 8.406
+    },
+    {
+      "id": "T-seen-028",
+      "prompt_tokens": 476,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.279,
+      "total_s": 8.406
+    },
+    {
+      "id": "T-seen-029",
+      "prompt_tokens": 472,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.228,
+      "total_s": 8.309
+    },
+    {
+      "id": "T-seen-030",
+      "prompt_tokens": 466,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.189,
+      "total_s": 8.418
+    },
+    {
+      "id": "T-seen-031",
+      "prompt_tokens": 471,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.224,
+      "total_s": 8.461
+    },
+    {
+      "id": "T-seen-032",
+      "prompt_tokens": 482,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.338,
+      "total_s": 8.55
+    },
+    {
+      "id": "T-seen-033",
+      "prompt_tokens": 467,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.204,
+      "total_s": 8.429
+    },
+    {
+      "id": "T-seen-034",
+      "prompt_tokens": 466,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.179,
+      "total_s": 8.381
+    },
+    {
+      "id": "T-seen-035",
+      "prompt_tokens": 469,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.229,
+      "total_s": 8.471
+    },
+    {
+      "id": "T-seen-036",
+      "prompt_tokens": 466,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.183,
+      "total_s": 8.56
+    },
+    {
+      "id": "T-seen-037",
+      "prompt_tokens": 475,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.248,
+      "total_s": 8.544
+    },
+    {
+      "id": "T-seen-038",
+      "prompt_tokens": 471,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.227,
+      "total_s": 8.38
+    },
+    {
+      "id": "T-seen-039",
+      "prompt_tokens": 464,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.181,
+      "total_s": 8.335
+    },
+    {
+      "id": "T-seen-040",
+      "prompt_tokens": 468,
+      "n_tokens": 200,
+      "stop_reason": "length",
+      "ttft_s": 0.208,
+      "total_s": 8.367
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "label": "GGUF Q8_0, CPU, not Protocol A",
+  "quant": "Q8_0",
+  "name": "sft-1.7b-tok-v1.2-s0-Q8_0",
+  "compare_arm": "tier_s_main_rslora_tok-s0-v1.2",
+  "protocol": "none (not Protocol A)",
+  "gguf": {
+    "file": "sft-1.7b-tok-v1.2-s0-Q8_0.gguf",
+    "sha256": "70537c37c6c0493d95dfb3781455200dfb58a34da3195b274a39443839c43291",
+    "bytes": 1834422688
+  },
+  "build": {
+    "llama_cpp_commit": "0c1e57098bba43ac29e6e3b677cdceebdd22334f",
+    "llama_cpp_python": "0.3.36",
+    "template": "train/chat_template.jinja",
+    "template_sha256": "8a128a2973d31cc5c5e0848d49165d74503258bb9df6f67defb746d10c3c5fe6",
+    "files": {
+      "sft-1.7b-tok-v1.2-s0-Q8_0.gguf": {
+        "sha256": "70537c37c6c0493d95dfb3781455200dfb58a34da3195b274a39443839c43291",
+        "bytes": 1834422688
+      }
+    },
+    "checks": {
+      "token_151643": "<|endoftext|>",
+      "token_151643_ok": true,
+      "token_151644": "<|im_start|>",
+      "token_151644_ok": true,
+      "token_151645": "<|im_end|>",
+      "token_151645_ok": true,
+      "chat_template_equals_project_template": true,
+      "general_file_type": 7,
+      "file_type_is_Q8_0": true,
+      "tokenizer.ggml.eos_token_id": 151643,
+      "tokenizer.ggml.bos_token_id": 151643,
+      "tokenizer.ggml.padding_token_id": 151643
+    },
+    "checks_passed": true,
+    "merge": {
+      "adapter_sha256": "64911a9a1c0963a4f3c154e4f6f777a1d7d5ce9cbdc19e311704b73ccb244a02",
+      "rows": [
+        151644,
+        151645
+      ],
+      "dtype": "bf16",
+      "device": "cpu",
+      "checks": {
+        "embed_tokens_rows_equal_adapter": true,
+        "embed_tokens_rows_differ_from_base": true,
+        "lm_head_rows_equal_adapter": true,
+        "lm_head_rows_differ_from_base": true,
+        "logits_max_abs_diff": 0.2812,
+        "same_top5": true,
+        "probs_max_abs_diff": 0.00309
+      },
+      "manifest_sha256": "26f10db983448c78325a4fc75c92cc6fcf35f44c6e544d4ae9c1ece4188bebf8",
+      "wall_clock_s": 71.5
+    },
+    "commands": [
+      [
+        "python.exe",
+        "-c",
+        "<llama_model_quantize Q8_0>",
+        "sft-1.7b-tok-v1.2-s0-f16.gguf",
+        "sft-1.7b-tok-v1.2-s0-Q8_0.gguf",
+        "Q8_0"
+      ]
+    ],
+    "f16_reused": {
+      "build_json": "sft-1.7b-tok-v1.2-s0.build.json",
+      "sha256": "114b54269d08d65c922172987f3ceab87c3ca8468446af3c60464e386bc1cf58",
+      "bytes": 3447345568
+    },
+    "template_already_in_f16": true
+  },
+  "prompts": {
+    "file": "results/runs/gguf-prompts/prompts.jsonl",
+    "sha256": "4dad9b857d0d25b6ba63b18835b30c0958a5121c0a86d15356537f1cd86ad556"
+  },
+  "decoding": {
+    "greedy": true,
+    "temp": 0.0,
+    "top_k": 1,
+    "max_new_tokens": 200,
+    "stop_ids": [
+      151645,
+      151643
+    ],
+    "repeat_penalty": 1.0,
+    "batch": 1,
+    "n_ctx": 4096
+  },
+  "checks": {
+    "special_tokens_round_trip": true,
+    "prompt_tokenisation_equal_hf": 220,
+    "prompts": 220
+  },
+  "threads": 16,
+  "cpu": "13th Gen Intel(R) Core(TM) i7-13700",
+  "logical_cpus": 24,
+  "ram_total_gb": 34.1,
+  "os": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.9",
+  "llama_cpp_python": "0.3.36",
+  "load_s": 0.45,
+  "generation_s": 523.9,
+  "generated_tokens": 12725,
+  "tokens_per_s": 24.29,
+  "peak_ram_gb": 2.59,
+  "git_commit": "660b6f2a07bf15cb01953b71366b4a06aca7ed6d",
+  "timestamp": "2026-11-15T21:11:30+00:00"
+}

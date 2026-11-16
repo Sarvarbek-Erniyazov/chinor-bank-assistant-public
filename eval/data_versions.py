@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import statistics as st
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -50,6 +51,8 @@ def t_overrefusal(r: str, blocks: dict[str, str]) -> int:
 
 def main():
     global PREFIX
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     ap.add_argument("--prefix", default=PREFIX)
     ap.add_argument("--out", default="results/data_versions.md")

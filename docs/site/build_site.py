@@ -14,7 +14,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 REPO = "../../"  # from docs/site/ to the repository root (figures, demo: served by Pages)
-SRC = "<repo-url>/blob/main/"  # markdown files: rendered on GitHub, not by Pages; set by --repo-url
+SRC = "https://github.com/Sarvarbek-Erniyazov/chinor-bank-assistant-public/blob/main/"  # markdown files: rendered on GitHub, not by Pages; set by --repo-url
+OLD_README = "https://github.com/sarvarbek-erniyazov/chinor-bank-assistant-public/blob/v1.1.1/README.md"  # the v1.1.1 README this site describes
 FIGS = [("F0", "Pipeline and hand audits"), ("F1", "Assistant score per arm"), ("F2", "Pass rate per eval block and arm"),
         ("F3", "What SFT changes, per block"), ("F14", "Sanity checks: end-of-turn fix and DPO step 0"),
         ("F11", "Safety flags per arm"), ("F15", "What did not work")]
@@ -54,15 +55,15 @@ def picture(fid: str, alt: str) -> str:
 def main():
     global SRC
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo-url", default="<repo-url>")
+    ap.add_argument("--repo-url", default="https://github.com/Sarvarbek-Erniyazov/chinor-bank-assistant-public")
     SRC = ap.parse_args().repo_url.rstrip("/") + "/blob/main/"
     table, dont = claims_table()
     figs = "".join(picture(f, a) for f, a in FIGS)
     sections = [("what-was-built", "What was built"), ("main-results", "Main results"), ("stage-effects", "Stage effects"),
                 ("sanity-checks", "Sanity checks"), ("can-the-numbers-be-trusted", "Trust"), ("what-didnt-work", "What didn't work"),
                 ("safety", "Safety"), ("run-it", "Run it"), ("limitations", "Limitations")]
-    links = " · ".join(f'<a href="{SRC}README.md#{a}">{t}</a>' for a, t in sections)
-    page = TEMPLATE.format(R=REPO, S=SRC, figs=figs, table=table, dont=dont, links=links)
+    links = " · ".join(f'<a href="{OLD_README}#{a}">{t}</a>' for a, t in sections)
+    page = TEMPLATE.format(R=REPO, S=SRC, O=OLD_README, figs=figs, table=table, dont=dont, links=links)
     (ROOT / "docs" / "site" / "index.html").write_text(page, encoding="utf-8", newline="\n")
     print(f"docs/site/index.html: {len(FIGS)} figures, claims table {table.count('<tr>') - 1} rows")
 
@@ -95,7 +96,7 @@ or is affiliated with any real bank.</p>
 <p class="lead">Chinor is <strong>a closed pilot study of SFT and preference tuning on a fictional bank domain</strong>:
 Qwen3 <em>base</em> models are turned into the customer-support assistant of an invented bank, and every training stage
 is measured on one frozen eval set (220 items) and a frozen red-team set (60 attacks). Code, data and every number:
-<a href="{S}README.md">README</a>.</p>
+<a href="{O}">README (v1.1.1)</a>.</p>
 <p class="notice"><strong>Main limitation.</strong> The scores measure how well a model reproduces one handbook's
 answers under a lenient rubric (the automatic scorer agreed with one annotator on 51/60 = 0.85 [0.74, 0.92]; 8 of its 9
 errors were lenient). They are not a measure of general banking competence. Independent human inter-annotator
@@ -127,7 +128,7 @@ agreement: not measured; all hand labels by one annotator (intra-rater re-markin
 <h2 id="demo">Demo (saved answers, side by side)</h2>
 <p class="lead">Static: answers of the four arms (base, SFT, DPO, SimPO) generated once on the frozen eval set
 (greedy), with the scorer's verdict. <a href="{R}demo/index.html">Open the demo full page</a>. Live option, on your
-own GPU: <code>python demo/app.py --model … --adapter …</code> (<a href="{S}README.md#run-it">Run it</a>).</p>
+own GPU: <code>python demo/app.py --model … --adapter …</code> (<a href="{O}#run-it">Run it</a>).</p>
 <iframe src="{R}demo/index.html" title="Chinor demo: saved answers of base, SFT, DPO and SimPO"></iframe>
 
 <h2 id="licence">Licence</h2>

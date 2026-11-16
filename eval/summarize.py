@@ -1,6 +1,7 @@
 """Write results/results.md and results/per_category.md from scored arms.
 
-Usage: python eval/summarize.py [--arms a b c]   (default: every arm with scores.jsonl)
+Usage: python eval/summarize.py [--arms a b c] [--note TEXT]   (default: every arm with scores.jsonl)
+--note TEXT is written as the first line of both files (followed by a blank line).
 """
 from __future__ import annotations
 
@@ -70,7 +71,9 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     ap.add_argument("--arms", nargs="*", default=None)
+    ap.add_argument("--note", default=None, help="first line of results.md and per_category.md")
     args = ap.parse_args()
+    note = [args.note, ""] if args.note else []
     arms = args.arms or sorted(p.parent.name for p in OUT_DIR.glob("*/scores.jsonl"))
     RESULTS.mkdir(exist_ok=True)
 
@@ -89,7 +92,7 @@ def main():
         stop_rows.append(f"| {arm} | {sr.get('im_end', 0)} ({100 * sr.get('im_end', 0) / n:.0f} %) | {sr.get('endoftext', 0)} ({100 * sr.get('endoftext', 0) / n:.0f} %) | {sr.get('length', 0)} ({100 * sr.get('length', 0) / n:.0f} %) | {run.get('model', '')} | {run.get('git_commit', '')[:8]} |")
         detail.append((arm, s, run))
 
-    md = ["# Results", "",
+    md = [*note, "# Results", "",
           "**Assistant score** = passes over the 200 items of T-seen, T-held and B1–B4 (system prompt `handbook/system_prompt.txt`). "
           "**Retention** = passes over the 20 block-R items (no system prompt) and is reported separately; the two are never added. "
           "Rates are shown with Wilson 95 % CI. Flags are counts over the 200 assistant items. "
@@ -109,7 +112,7 @@ def main():
     # per category: per block and per intent section / attack type
     blocks = load_blocks()
     items = {json.loads(l)["id"]: json.loads(l) for l in (ROOT / "eval" / "eval_set.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()}
-    pc = ["# Per-category results", ""]
+    pc = [*note, "# Per-category results", ""]
     for arm, s, run in detail:
         scores = {r["id"]: r for r in (json.loads(l) for l in (OUT_DIR / arm / "scores.jsonl").read_text(encoding="utf-8").splitlines() if l.strip())}
         pc += [f"## {arm}", "", "| Category | pass | n | rate [Wilson 95 %] |", "|---|---|---|---|"]

@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import json
 import statistics as st
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -49,6 +50,8 @@ def classify(item: dict, text: str, score: dict, canon: dict[str, str]) -> tuple
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     blocks = load_blocks()
     items = {it["id"]: it for it in jsonl(ROOT / "eval" / "eval_set.jsonl")}
     canon, _ = load_intents()

@@ -1,0 +1,6 @@
+{
+  "tokenizer": "Qwen/Qwen3-1.7B-Base",
+  "skip_special_tokens": false,
+  "answers": 220,
+  "raw_equals_llama_detokenize": 220
+}
